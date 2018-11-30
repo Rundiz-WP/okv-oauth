@@ -1,0 +1,1 @@
+<div class="error-message" id="login_error"><p><?php echo \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('originalforgotpwdisabled'); ?></p></div>

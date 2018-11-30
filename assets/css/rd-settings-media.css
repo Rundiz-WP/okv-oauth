@@ -1,0 +1,18 @@
+/*
+Style that is working on media fields
+*/
+
+
+.image-preview {
+	margin-left: 1px;
+}
+.image-preview img {
+	border: 1px solid #ccc;
+	padding: 3px;
+}
+
+
+.remove-media-button,
+.wp-core-ui .remove-media-button {
+	color: #f00;
+}

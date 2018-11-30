@@ -1,0 +1,451 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: okv-oauth 1.0\n"
+"POT-Creation-Date: 2018-03-08 14:45+0700\n"
+"PO-Revision-Date: 2018-03-08 15:25+0700\n"
+"Last-Translator: Vee W.\n"
+"Language-Team: \n"
+"Language: th\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.0.5\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;__ngettext;_n;__ngettext_noop;_n_noop;_x;_nx;_nx_noop;_ex;esc_attr__;"
+"esc_attr_e;esc_attr_x;esc_html__;esc_html_e;esc_html_x;_e;_nc\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: ..\n"
+
+#: ../App/Controllers/Admin/Activation.php:44
+msgid "Settings"
+msgstr "การตั้งค่า"
+
+#: ../App/Controllers/Admin/Activation.php:74
+#, php-format
+msgid ""
+"You are using PHP %s which does not meet minimum requirement. Please consider upgrade PHP version or contact plugin author for "
+"this help.<br><br>Minimum requirement:<br>PHP %s"
+msgstr ""
+"คุณกำลังใช้ PHP %s ซึ่งไม่ตรงตามความต้องการขั้นต่ำ. โปรดอัพเกรดรุ่น PHP หรือติดต่อผู้พัฒนาปลั๊กอินนี้เพื่อขอความช่วยเหลือ.<br><br>ความต้องการขั้นต่ำ:<br>PHP %s"
+
+#: ../App/Controllers/Admin/Activation.php:74
+msgid "Minimum requirement of PHP version does not meet."
+msgstr "รุ่นของ PHP ไม่ตรงตามความต้องการขั้นต่ำ."
+
+#: ../App/Controllers/Admin/Activation.php:78
+#, php-format
+msgid "Your WordPress version does not meet the requirement. (%s < %s)."
+msgstr "รุ่นเวิร์ดเพรสของคุณไม่ตรงตามความต้องการขั้นต่ำ. (%s < %s)."
+
+#: ../App/Controllers/Admin/Activation.php:248
+msgid "Donate"
+msgstr "บริจาค"
+
+#: ../App/Controllers/Admin/Settings.php:51 ../App/Views/admin/settings_v.php:2
+msgid "Rundiz OAuth settings"
+msgstr "การตั้งค่า Rundiz OAuth"
+
+#: ../App/Controllers/Admin/Settings.php:51 ../App/Controllers/Front/RdOauth/Index.php:73
+#: ../App/Controllers/Front/RdOauth/Register.php:88 ../App/Views/admin/editOwnProfilePersonalOptions_v.php:2
+#: ../templates/okv-oauth/index_v.php:9
+msgid "Rundiz OAuth"
+msgstr "Rundiz OAuth"
+
+#: ../App/Controllers/Admin/Settings.php:64
+msgid "You do not have permission to access this page."
+msgstr "คุณไม่ได้รับสิทธิ์ให้เข้าถึงหน้านี้."
+
+#: ../App/Controllers/Admin/Settings.php:99 ../App/Controllers/Admin/Settings.php:102
+msgid "Settings saved."
+msgstr "บันทึกการตั้งค่าแล้ว."
+
+#: ../App/Controllers/Front/HookLoginPage.php:220
+msgid "Your email has been changed."
+msgstr "อีเมลของคุณได้เปลี่ยนแปลงแล้ว."
+
+#: ../App/Controllers/Front/RdOauth/Register.php:93
+#, php-format
+msgid "Registration completed. You can now %slogin%s using selected OAuth provider."
+msgstr "ลงทะเบียนเรียบร้อยแล้ว. คุณสามารถ%sเข้าสู่ระบบ%sโดยใช้ OAuth ที่เลือกไว้ได้."
+
+#: ../App/Libraries/ErrorsCollection.php:33
+msgid ""
+"Do not manually change email while the settings is using OAuth only. Please try to change the email via OAuth button instead."
+msgstr "กรุณาอย่าเปลี่ยนอีเมลในช่องอีเมลในขณะที่การตั้งค่านั้นกำหนดให้ใช้ OAuth เท่านั้น. กรุณาเปลี่ยนอีเมลผ่านปุ่ม OAuth."
+
+#: ../App/Libraries/ErrorsCollection.php:35
+#, php-format
+msgid "Your email is already in use or registered, please try to %slogin%s instead."
+msgstr "อีเมลล์นี้มีผู้ใช้อยู่แล้ว, กรุณาลอง%sเข้าสู่ระบบ%s."
+
+#: ../App/Libraries/ErrorsCollection.php:37
+msgid "Your email is already in use or registered, please try another OAuth account that register with different email."
+msgstr "อีเมลล์นี้มีผู้ใช้อยู่แล้ว, กรุณาลองลงชื่อเข้าใช้บัญชี OAuth อื่นๆที่คุณได้ลงทะเบียนอีเมลอื่นเอาไว้."
+
+#: ../App/Libraries/ErrorsCollection.php:39
+#, php-format
+msgid "Not found this email on the system. Please try to %sregister%s your account."
+msgstr "ไม่พบอีเมลล์นี้ในระบบ. โปรด%sลงทะเบียนผู้ใช้%s."
+
+#: ../App/Libraries/ErrorsCollection.php:41
+msgid "Your email has not been verified or your user on OAuth provider was not found."
+msgstr "อีเมลของคุณยังไม่ได้ยืนยันกับผู้ให้บริการ OAuth หรือไม่พบอีเมลของคุณกับผู้ให้บริการ."
+
+#: ../App/Libraries/ErrorsCollection.php:43
+#, php-format
+msgid "Invalid OAuth settings, please contact administrator to verify OAuth settings. Error code: %s."
+msgstr "การตั้งค่า OAuth ไม่ถูกต้อง, โปรดติดต่อผู้ดูแลเพื่อตรวจสอบการตั้งค่า  OAuth. รหัสข้อผิดพลาด: %s."
+
+#: ../App/Libraries/ErrorsCollection.php:45
+msgid "The token has been expired or invalid, please try again."
+msgstr "Token หมดอายุหรือไม่ถูกต้อง, โปรดลองอีกครั้ง."
+
+#: ../App/Libraries/ErrorsCollection.php:47
+msgid "No required scope. Please allow us to access an email, public profile to use with WordPress user system."
+msgstr "ไม่พบขอบเขตการอนุญาตที่ต้องการ. โปรดให้เราเข้าถึงอีเมล, โปรไฟล์ผู้ใช้สาธารณะ เพื่อนำมาใช้กับระบบผู้ใช้ของ WordPress."
+
+#: ../App/Libraries/ErrorsCollection.php:49
+msgid "The original forgot password process has been disabled, please use OAuth only."
+msgstr "ขั้นตอนการลืมรหัสผ่านของเดิมได้ถูกยกเลิกการใช้งาน, โปรดใช้ OAuth เท่านั้น."
+
+#: ../App/Libraries/ErrorsCollection.php:51
+msgid "The original login process has been disabled, please use OAuth only."
+msgstr "ขั้นตอนเข้าสู่ระบบของเดิมได้ถูกยกเลิกใช้งาน, โปรดใช้ OAuth เท่านั้น."
+
+#: ../App/Libraries/ErrorsCollection.php:53
+msgid "The original registration process has been disabled, please use OAuth only."
+msgstr "ฟอร์มลงทะเบียนแบบดั้งเดิมถูกปิดใช้งาน, โปรดใช้ OAuth เท่านั้น."
+
+#: ../App/Libraries/ErrorsCollection.php:55
+msgid "Sorry, please try again."
+msgstr "ขออภัย, โปรดลองอีกครั้ง."
+
+#: ../App/Libraries/ErrorsCollection.php:57
+msgid "Unable to register, please contact the administrator."
+msgstr "ไม่สามารถลงทะเบียนสมาชิก, โปรดติดต่อผู้ดูแล."
+
+#: ../App/Libraries/ErrorsCollection.php:59
+msgid "Your user account on OAuth provider was not verified, please verify your account before continue."
+msgstr "บัญชีผู้ใช้ของคุณบนผู้ให้บริการ OAuth นั้นยังไม่ได้ผ่านการยืนยัน, โปรดยืนยันผู้ใช้ก่อนดำเนินการต่อไป."
+
+#: ../App/Libraries/Loader.php:96
+#, php-format
+msgid "The template file was not found. (%s)"
+msgstr ""
+
+#: ../App/Libraries/RundizSettings.php:658
+msgid "Upload"
+msgstr ""
+
+#: ../App/Libraries/RundizSettings.php:659
+msgid "Remove"
+msgstr ""
+
+#: ../App/Views/admin/editOwnProfilePersonalOptions_v.php:3 ../templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:2
+#: ../templates/okv-oauth/partials/loginForm_v.php:5 ../templates/okv-oauth/partials/registerForm_v.php:6
+msgid "Please enable javascript."
+msgstr "โปรดเปิดใช้งานจาวาสคริปต์."
+
+#: ../App/Views/admin/editOwnProfilePersonalOptions_v.php:18 ../App/Views/admin/editOwnProfilePersonalOptions_v.php:28
+#: ../templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:28
+#: ../templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:39
+msgid "Change email"
+msgstr "เปลี่ยนอีเมล"
+
+#: ../App/Views/admin/editOwnProfilePersonalOptions_v.php:37 ../templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:48
+#: ../templates/okv-oauth/partials/loginForm_v.php:36 ../templates/okv-oauth/partials/registerForm_v.php:44
+msgid "OR"
+msgstr "หรือ"
+
+#: ../App/Views/admin/readsettings_v.php:2
+msgid "Example of how to access settings values in option db."
+msgstr ""
+
+#: ../App/Views/admin/readsettings_v.php:5
+#, php-format
+msgid "Call to <code>%s</code>"
+msgstr ""
+
+#: ../App/Views/admin/readsettings_v.php:6
+#, php-format
+msgid "Access this variable as global <code>%s</code>. This variable will be change, up to config in AppTrait."
+msgstr ""
+
+#: ../App/Views/admin/readsettings_v.php:7
+msgid "Now, you can use this variable to access its array key anywhere."
+msgstr ""
+
+#: ../App/Views/admin/settings_v.php:9
+msgid "Dismiss this notice."
+msgstr "ปิดการแจ้งเตือนนี้."
+
+#: ../App/config/settings_rdoauth.php:10
+msgid "Use default"
+msgstr "ใช้ค่าเดิมของ WordPress"
+
+#: ../App/config/settings_rdoauth.php:12 ../App/config/settings_rdoauth.php:15
+#, php-format
+msgid "%s day"
+msgstr "%s วัน"
+
+#: ../App/config/settings_rdoauth.php:23
+#, php-format
+msgid "Please visit %sGoogle Projects%s and create or open your project."
+msgstr "โปรดไปที่หน้า %sGoogle Projects%s แล้วสร้างหรือเปิดโปรเจ็คของคุณ."
+
+#: ../App/config/settings_rdoauth.php:30
+#, php-format
+msgid "From the menu, go to APIs &amp; service &gt; Library and enable %sGoogle+ API%s."
+msgstr "ไปยัง APIs &amp; service &gt; Library และเปิดใช้งาน and enable %sGoogle+ API%s."
+
+#: ../App/config/settings_rdoauth.php:35
+msgid "Go to APIs &amp; service &gt; Credentials."
+msgstr "ไปยัง APIs &amp; service &gt; Credentials."
+
+#: ../App/config/settings_rdoauth.php:36
+msgid "Click on Create credentials &gt; OAuth client ID."
+msgstr "คลิกที่ Create credentials &gt; OAuth client ID."
+
+#: ../App/config/settings_rdoauth.php:37
+msgid "Select Web application"
+msgstr "เลือกเว็บแอปพลิเคชั่น"
+
+#: ../App/config/settings_rdoauth.php:40
+#, php-format
+msgid "Authorized JavaScript origins: enter %s"
+msgstr "Authorized JavaScript origins: กรอก %s"
+
+#: ../App/config/settings_rdoauth.php:44 ../App/config/settings_rdoauth.php:55 ../App/config/settings_rdoauth.php:92
+msgid "You may insert one more copy by include both http and https."
+msgstr "คุณอาจเพิ่มอีกรายการหรือมากกว่าโดยรวมโปรโตคอล http และ https เข้าไป."
+
+#: ../App/config/settings_rdoauth.php:48
+#, php-format
+msgid "Authorized redirect URIs: enter %s"
+msgstr "Authorized redirect URIs: กรอก %s"
+
+#: ../App/config/settings_rdoauth.php:57
+msgid "Use Client ID and Client secret generated from there."
+msgstr "ใช้ Client ID และ Client secret ที่ถูกสร้างจากที่นี่."
+
+#: ../App/config/settings_rdoauth.php:59
+msgid "Go to APIs &amp; service &gt; Credentials &gt; click on OAuth consent screen tab and enter your website information there."
+msgstr "ไปยัง APIs &amp; service &gt; Credentials &gt; คลิกบนแท็บ OAuth consent screen แล้วกรอกข้อมูลของคุณที่นั่น."
+
+#: ../App/config/settings_rdoauth.php:68
+#, php-format
+msgid "Please visit %sFacebook for developers%s and add or open your app."
+msgstr "โปรดไปที่หน้า %sFacebook for developers%s และเพิ่มหรือเปิดแอพของคุณ."
+
+#: ../App/config/settings_rdoauth.php:75
+#, php-format
+msgid "From products menu, click +Add Products and click Set Up on %sFacebook Login%s."
+msgstr "จากเมนู products, คลิก +Add Products และคลิก Set Up บนหน้า %sFacebook Login%s."
+
+#: ../App/config/settings_rdoauth.php:81
+msgid "Enable or select Yes for Client OAuth Login, Web OAuth Login, Use Strict Mode for Redirect URIs."
+msgstr "เปิดใช้งานหรือเลือก Yes สำหรับ Client OAuth Login, Web OAuth Login, Use Strict Mode for Redirect URIs."
+
+#: ../App/config/settings_rdoauth.php:85
+#, php-format
+msgid "Valid OAuth redirect URIs: enter %s"
+msgstr "Valid OAuth redirect URIs: กรอก %s"
+
+#: ../App/config/settings_rdoauth.php:96
+#, php-format
+msgid "Deauthorize Callback URL: enter %s"
+msgstr "Deauthorize Callback URL: กรอก %s"
+
+#: ../App/config/settings_rdoauth.php:100
+msgid "Click on Save Changes"
+msgstr "คลิกที่ปุ่ม Save Changes"
+
+#: ../App/config/settings_rdoauth.php:101
+msgid "Go to Settings menu"
+msgstr "ไปยังเมนู Settings"
+
+#: ../App/config/settings_rdoauth.php:102
+msgid "Use App ID and App Secret generated from there."
+msgstr "ใช้ App ID และ App secret ที่ถูกสร้างจากที่นี่."
+
+#: ../App/config/settings_rdoauth.php:103
+msgid "You may setup your app info here such as name, icon."
+msgstr "คุณอาจตั้งค่าข้อมูลแอพของคุณที่นี่เช่น ชื่อ, ไอคอน."
+
+#: ../App/config/settings_rdoauth.php:104
+msgid "To make your app ready for public use, please go to App Review menu and change the option there."
+msgstr "การทำให้แอพของคุณพร้อมใช้งานสาธารณะ, ให้ไปที่เมนู App Review และเปลี่ยนตัวเลือกที่นั่น."
+
+#: ../App/config/settings_rdoauth.php:114
+#, php-format
+msgid "This is multi-site WordPress and the registration page may not work perfectly with method %s."
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:115 ../App/config/settings_rdoauth.php:144
+msgid "Use OAuth only"
+msgstr "ใช้ OAuth เท่านั้น"
+
+#: ../App/config/settings_rdoauth.php:119
+#, php-format
+msgid "It is recommended that you change the network settings for %s to %s."
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:120
+msgid "Allow new registrations"
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:121
+msgid "User accounts may be registered"
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:123
+msgid "Multi-site"
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:135
+msgid "Plugin settings"
+msgstr "ตั้งค่าปลั๊กอิน"
+
+#: ../App/config/settings_rdoauth.php:139
+msgid ""
+"If you choose to use OAuth only, please make sure that you have at least one of them enabled and correct setting values otherwise "
+"you will be unable to login."
+msgstr "ถ้าคุณเลือกใช้ OAuth เท่านั้น, โปรดแน่ใจว่าคุณได้เปิดใช้งานและระบุค่าต่างๆอย่างถูกต้องอย่างน้อย 1 ผู้ให้บริการ มิฉะนั้นคุณจะไม่สามารถเข้าสู่ระบบได้."
+
+#: ../App/config/settings_rdoauth.php:142
+msgid "Do not use (use WordPress login)"
+msgstr "ไม่ใช้งาน (ใช้เวิร์ดเพรสเข้าสู่ระบบตามปกติ)"
+
+#: ../App/config/settings_rdoauth.php:143
+msgid "Use WordPress login with OAuth"
+msgstr "ใช้เวิร์ดเพรสควบคู่กับ OAuth"
+
+#: ../App/config/settings_rdoauth.php:146
+msgid "Login/Register method"
+msgstr "วิธีการเข้าสู่ระบบหรือลงทะเบียน"
+
+#: ../App/config/settings_rdoauth.php:152
+#, php-format
+msgid "This setting can be override by any plugins that hook into %s."
+msgstr "การตั้งค่านี้สามารถเขียนทับโดยปลั๊กอินอื่นๆที่ฮุคไปยัง %s ได้."
+
+#: ../App/config/settings_rdoauth.php:152
+msgid "This setting will be use when user remember login or use OAuth only for login method."
+msgstr "การตั้งค่านี้จะใช้เมื่อผู้ใช้จดจำการเข้าสู่ระบบหรือเลือกวิธีการเข้าสู่ระบบเป็น ใช้ OAuth เท่านั้น."
+
+#: ../App/config/settings_rdoauth.php:155
+msgid "Login expiration"
+msgstr "วันหมดอายุหลังการเข้าสู่ระบบ"
+
+#: ../App/config/settings_rdoauth.php:162
+msgid "Google login"
+msgstr "เข้าสู่ระบบด้วย Google"
+
+#: ../App/config/settings_rdoauth.php:169
+msgid "Enable Google login"
+msgstr "เปิดใช้งานเข้าสู่ระบบด้วย Google"
+
+#: ../App/config/settings_rdoauth.php:173 ../App/config/settings_rdoauth.php:209
+msgid "Enable"
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:180
+msgid "Client ID"
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:187
+msgid "Client secret"
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:198
+msgid "Facebook login"
+msgstr "เข้าสู่ระบบด้วย Facebook"
+
+#: ../App/config/settings_rdoauth.php:205
+msgid "Enable Facebook login"
+msgstr "เปิดใช้งานเข้าสู่ระบบด้วย Facebook"
+
+#: ../App/config/settings_rdoauth.php:216
+msgid "App ID"
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:223
+msgid "App secret"
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:234
+msgid "Design pages"
+msgstr ""
+
+#: ../App/config/settings_rdoauth.php:237
+#, php-format
+msgid "To design your login and register result page, please read %s file inside the %s folder."
+msgstr ""
+
+#: ../templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:17
+msgid "Change an email by click on the OAuth button and login to OAuth provider with the email you want."
+msgstr "เปลี่ยนอีเมลโดยคลิกบนปุ่ม OAuth และเข้าสู่ระบบกับผู้ให้บริการ OAuth ด้วยอีเมลที่คุณต้องการ."
+
+#: ../templates/okv-oauth/partials/loginForm_v.php:14 ../templates/okv-oauth/partials/loginForm_v.php:26
+msgid "Login"
+msgstr "เข้าสู่ระบบ"
+
+#: ../templates/okv-oauth/partials/registerForm_v.php:22 ../templates/okv-oauth/partials/registerForm_v.php:34
+msgid "Register"
+msgstr "ลงทะเบียน"
+
+#, fuzzy
+#~| msgid "Use WordPress login with OAuth"
+#~ msgid "Use WordPress editor to edit text/html"
+#~ msgstr "ใช้เวิร์ดเพรสควบคู่กับ OAuth"
+
+#~ msgid ""
+#~ "Authorized JavaScript origins: enter <strong>%s</strong> where your WordPress installed. You may insert one more copy by "
+#~ "include both http and https."
+#~ msgstr ""
+#~ "ที่ช่อง Authorized JavaScript origins: กรอก <strong>%s</strong> ซึ่งมันเป็นที่ๆเวิร์ดเพรสของคุณติดตั้งอยู่. คุณอาจแทรกเพิ่มเติมลงไปอีกโดยมีทั้ง http "
+#~ "และ https."
+
+#~ msgid ""
+#~ "Authorized redirect URIs: enter <strong>%s</strong>, <strong>%s</strong>, <strong>%s</strong>. You may insert one more copy by "
+#~ "include both http and https."
+#~ msgstr ""
+#~ "ที่ช่อง Authorized redirect URIs: กรอก <strong>%s</strong>, <strong>%s</strong>, <strong>%s</strong>. คุณอาจแทรกลงไปทั้ง URL ที่มี http "
+#~ "และ https."
+
+#~ msgid ""
+#~ "The required form field was not found. This maybe because you were tricked by an attacker or some hack attempt. Please try "
+#~ "again from the registration link."
+#~ msgstr "ไม่พบฟอร์มที่ต้องการ. นี่อาจจะเป็นเพราะคุณถูกหลอกให้ทำงานจากผู้โจมตีหรือมีความพยายามในการแฮํค. กรุณาลองอีกครั้งจากลิ้งค์สมัครสมาชิก."
+
+#~ msgid "The email that have got from OAuth has been changed"
+#~ msgstr "อีเมลที่ได้จาก OAuth นั้นถูกเปลี่ยนแปลงไป"
+
+#~ msgid "Log in with Google"
+#~ msgstr "เข้าสู่ระบบด้วย Google"
+
+#~ msgid "Register with Google"
+#~ msgstr "ลงทะเบียนด้วย Google"
+
+#~ msgid "You have to verify your email on Google account."
+#~ msgstr "คุณต้องยืนยันอีเมลล์บนบัญชีผู้ใช้ของ Google."
+
+#~ msgid "Unable to fetch user detail from Google."
+#~ msgstr "ไม่สามารถดึงข้อมูลจาก Google."
+
+#~ msgid "Incorrect Client secret. Administrator needs to settings Google login."
+#~ msgstr "Client secret ไม่ถูกต้อง. ผู้ดูแลต้องตั้งค่าการเข้าสู่ระบบด้วย Google."
+
+#~ msgid "Unable to reload. Please click Log In button and try again."
+#~ msgstr "ไม่สามารถโหลดใหม่ได้. โปรดคลิกเข้าสู่ระบบแล้วลองอีกครั้ง."
+
+#~ msgid "You did not grant access."
+#~ msgstr "คุณไม่ได้รับอนุญาตให้เข้าถึง."
+
+#~ msgid "Administrator needs to settings Google login."
+#~ msgstr "ผู้ดูแลต้องตั้งค่าการเข้าสู่ระบบด้วย Google."
+
+#~ msgid "Go to Credentials."
+#~ msgstr "ไปยัง Credentials."

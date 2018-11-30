@@ -1,0 +1,276 @@
+<?php
+/**
+ * RundizSettings configuration file.
+ * 
+ * @package rundiz-oauth
+ */
+
+
+// generate login expiration values.
+$login_expiration_values[''] = __('Use default', 'okv-oauth');
+for ($i = 1; $i <= 20; $i++) {
+    $login_expiration_values[$i] = sprintf(_n('%s day', '%s days', $i, 'okv-oauth'), $i);
+}
+for ($i = 30; $i <= 200; $i+=10) {
+    $login_expiration_values[$i] = sprintf(_n('%s day', '%s days', $i, 'okv-oauth'), $i);
+}
+unset($i);
+
+
+// generate google login help message.
+$google_project_url = 'https://console.developers.google.com/cloud-resource-manager';
+$google_login_help_msg = sprintf(
+        __('Please visit %sGoogle Projects%s and create or open your project.', 'okv-oauth'), 
+        '<a href="' . $google_project_url . '" target="gg_project">', 
+        '</a>'
+    ) . "\n" .
+    '<ul class="rd-settings-ul">' . "\n" .
+        '<li>' .
+            sprintf(
+                __('From the menu, go to APIs &amp; services &gt; Library and enable %sGoogle+ API%s.', 'okv-oauth'), 
+                '<strong>', 
+                '</strong>'
+            ) .
+        '</li>' . "\n" .
+        '<li>' . __('Go to APIs &amp; services &gt; Credentials.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . __('Click on Create credentials &gt; OAuth client ID.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . __('Select Web application', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' .
+            sprintf(
+                __('Authorized JavaScript origins: enter %s', 'okv-oauth'), 
+                '<strong>' . (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . '</strong>'
+            ) .
+            '<br>' .
+            __('You may insert one more copy by include both http and https.', 'okv-oauth') .
+        '</li>' . "\n" .
+        '<li>' .
+            sprintf(
+                __('Authorized redirect URIs: enter %s', 'okv-oauth'), 
+                '<strong>' . home_url('rd-oauth?rdoauth=google') . '</strong><br>' .
+                '<strong>' . home_url('rd-oauth?rdoauth_subpage=register&rdoauth=google') . '</strong><br>' .
+                '<strong>' . admin_url('profile.php') . '?rdoauth=google</strong><br>' .
+                '<strong>' . admin_url('user/profile.php') . '?rdoauth=google</strong>'
+            ) .
+            '<br>' .
+            __('You may insert one more copy by include both http and https.', 'okv-oauth') .
+        '</li>' . "\n" .
+        '<li>' . __('Use Client ID and Client secret generated from there.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' .
+            __('Go to APIs &amp; service &gt; Credentials &gt; click on OAuth consent screen tab and enter your website information there.', 'okv-oauth') .
+        '</li>' . "\n" .
+    '</ul>' . "\n";
+unset($google_project_url);
+
+
+// generate facebook login help message.
+$facebook_apps_url = 'https://developers.facebook.com/apps';
+$facebook_login_help_msg = sprintf(
+        __('Please visit %sFacebook for developers%s and add or open your app.', 'okv-oauth'),
+        '<a href="https://developers.facebook.com/apps" target="fb_fordev">',
+        '</a>'
+    ) . "\n" .
+    '<ul class="rd-settings-ul">' . "\n" .
+        '<li>' . __('Click +Add a New App, enter the Display Name and click on Create App ID.', 'okv-oauth') . '</li>' .
+        '<li>' .
+            sprintf(
+                __('From Add a product section, click Set Up on %sFacebook Login%s.', 'okv-oauth'), 
+                '<strong>', 
+                '</strong>'
+            ) .
+        '</li>' . "\n" .
+        '<li>' .
+            __('Enable or select Yes for Client OAuth Login, Web OAuth Login, Use Strict Mode for Redirect URIs.', 'okv-oauth') .
+        '</li>' . "\n" .
+        '<li>' .
+            sprintf(
+                __('Valid OAuth redirect URIs: enter %s', 'okv-oauth'), 
+                '<strong>' . home_url('rd-oauth?rdoauth=facebook') . '</strong><br>' .
+                '<strong>' . home_url('rd-oauth?rdoauth_subpage=register&rdoauth=facebook') . '</strong><br>' .
+                '<strong>' . admin_url('profile.php') . '?rdoauth=facebook</strong><br>' .
+                '<strong>' . admin_url('user/profile.php') . '?rdoauth=facebook</strong>'
+            ) .
+            '<br>' .
+            __('You may insert one more copy by include both http and https.', 'okv-oauth') .
+        '</li>' . "\n" .
+        '<li>' .
+            sprintf(
+                __('Deauthorize Callback URL: enter %s', 'okv-oauth'), 
+                '<strong>' . (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . '</strong>'
+            ) .
+        '</li>' . "\n" .
+        '<li>' . __('Click on Save Changes', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . __('Go to Settings &gt; Basic', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . __('Use App ID and App Secret generated from there.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . __('You may setup your app info here such as name, icon.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . __('To make your app ready for public use, please go to App Review menu and change the option there.', 'okv-oauth') . '</li>' . "\n" .
+    '</ul>' . "\n";
+unset($facebook_apps_url);
+
+
+$active_signup = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
+$wpsignup_field = [];
+if (is_multisite() && $active_signup === 'all') {
+    $wpsignup_field = [
+        'content' => sprintf(
+                __('This is multi-site WordPress and the registration page may not work perfectly with method %s.', 'okv-oauth'),
+                '<strong>' . __('Use OAuth only', 'okv-oauth') . '</strong>'
+            ) .
+            '<br>' .
+            sprintf(
+                __('It is recommended that you change the network settings for %s to %s.', 'okv-oauth'),
+                '<strong>' . __('Allow new registrations') . '</strong>',
+                '<strong>' . __('User accounts may be registered') . '</strong>'
+            ),
+        'title' => __('Multi-site', 'okv-oauth'),
+        'type' => 'html',
+    ];
+}
+unset($active_signup);
+
+
+return [
+    'tab_style' => 'vertical',// vertical or horizontal
+    'setting_tabs' => [
+        [
+            'icon' => 'fa fa-sign-in fa-fw',
+            'title' => __('Plugin settings', 'okv-oauth'),
+            'fields' => [
+                [
+                    'default' => '0',
+                    'description' => __('If you choose to use OAuth only, please make sure that you have at least one of them enabled and correct setting values otherwise you will be unable to login.', 'okv-oauth'),
+                    'id' => 'login_method',
+                    'options' => [
+                        '0' => __('Do not use (use WordPress login)', 'okv-oauth'),
+                        '1' => __('Use WordPress login with OAuth', 'okv-oauth'),
+                        '2' => __('Use OAuth only', 'okv-oauth'),
+                    ],
+                    'title' => __('Login/Register method', 'okv-oauth'),
+                    'type' => 'select',
+                ],
+                $wpsignup_field,
+                [
+                    'default' => '',
+                    'description' => sprintf(__('This setting can be override by any plugins that hook into %s.', 'okv-oauth'), '<code>auth_cookie_expiration</code>').' '.__('This setting will be use when user remember login or use OAuth only for login method.', 'okv-oauth'),
+                    'id' => 'login_expiration',
+                    'options' => $login_expiration_values,
+                    'title' => __('Login expiration', 'okv-oauth'),
+                    'type' => 'select',
+                ],
+            ],
+        ],// end login settings tab.
+        [
+            'icon' => 'fa fa-google fa-fw',
+            'title' => __('Google login', 'okv-oauth'),
+            'fields' => [
+                [
+                    'options' => [
+                        [
+                            'default' => '',
+                            'id' => 'google_login_enable',
+                            'title' => __('Enable Google login', 'okv-oauth'),
+                            'value' => '1',
+                        ],
+                    ],
+                    'title' => __('Enable', 'okv-oauth'),
+                    'type' => 'checkbox',
+                ],
+                [
+                    'default' => '',
+                    'id' => 'google_client_id',
+                    'input_attributes' => ['autocomplete' => 'off'],
+                    'title' => __('Client ID', 'okv-oauth'),
+                    'type' => 'text',
+                ],
+                [
+                    'default' => '',
+                    'id' => 'google_client_secret',
+                    'input_attributes' => ['autocomplete' => 'off'],
+                    'title' => __('Client secret', 'okv-oauth'),
+                    'type' => 'text',
+                ],
+                [
+                    'content' => '<h3>' . __('Auth parameters', 'okv-oauth') . ' <small>(<a href="https://developers.google.com/identity/protocols/OpenIDConnect#authenticationuriparameters" target="google_ref">' . __('Reference', 'okv-oauth') . '</a>)</small></h3>',
+                    'type' => 'html_full',
+                ],
+                [
+                    'default' => 'select_account+consent',
+                    'id' => 'google_auth_param_prompt',
+                    'options' => [
+                        '' => __('Not set', 'okv-oauth'),
+                        'consent' => 'consent',
+                        'select_account' => 'select_account',
+                        'select_account+consent' => 'select_account+consent (' . __('Default', 'okv-oauth') . ')',
+                    ],
+                    'title' => __('Prompt', 'okv-oauth'),
+                    'type' => 'select',
+                ],
+                [
+                    'default' => '',
+                    'description' => sprintf(
+                        __('Alway start with %s For example: %s.', 'okv-oauth'), 
+                        '<code>&amp;</code>', 
+                        '<code>&amp;include_granted_scopes=true&amp;hd=mydomain.com</code>'
+                    ) . '<br>' .
+                    sprintf(
+                        __('These pamateters will be skipped: %s', 'okv-oauth'),
+                        '<code>client_id</code>, <code>response_type</code>, <code>scope</code>, <code>redirect_uri</code>, <code>access_type</code>, <code>state</code>, <code>prompt</code>'
+                    ),
+                    'id' => 'google_auth_param_other',
+                    'input_attributes' => ['autocomplete' => 'off'],
+                    'title' => __('Other parameters', 'okv-oauth'),
+                    'type' => 'text',
+                ],
+                [
+                    'content' => $google_login_help_msg,
+                    'type' => 'html_full',
+                ],
+            ],
+        ],// end google login settings tab.
+        [
+            'icon' => 'fa fa-facebook fa-fw',
+            'title' => __('Facebook login', 'okv-oauth'),
+            'fields' => [
+                [
+                    'options' => [
+                        [
+                            'default' => '',
+                            'id' => 'facebook_login_enable',
+                            'title' => __('Enable Facebook login', 'okv-oauth'),
+                            'value' => '1',
+                        ],
+                    ],
+                    'title' => __('Enable', 'okv-oauth'),
+                    'type' => 'checkbox',
+                ],
+                [
+                    'default' => '',
+                    'id' => 'facebook_app_id',
+                    'input_attributes' => ['autocomplete' => 'off'],
+                    'title' => __('App ID', 'okv-oauth'),
+                    'type' => 'text',
+                ],
+                [
+                    'default' => '',
+                    'id' => 'facebook_app_secret',
+                    'input_attributes' => ['autocomplete' => 'off'],
+                    'title' => __('App secret', 'okv-oauth'),
+                    'type' => 'text',
+                ],
+                [
+                    'content' => $facebook_login_help_msg,
+                    'type' => 'html_full',
+                ],
+            ],
+        ],// end facebook login settings tab.
+        [
+            'icon' => 'fa fa-paint-brush fa-fw',
+            'title' => __('Design pages', 'okv-oauth'),
+            'fields' => [
+                [
+                    'content' => sprintf(__('To design your login and register result page, please read %s file inside the %s folder.', 'okv-oauth'), '<strong>design-guide.txt</strong>', '<strong>' . realpath(plugin_dir_path(RUNDIZOAUTH_FILE) . 'templates') . '</strong>'),
+                    'type' => 'html_full',
+                ],
+            ],
+        ],// end design help tab.
+    ],
+];

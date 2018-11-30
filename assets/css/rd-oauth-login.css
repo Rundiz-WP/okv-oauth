@@ -1,0 +1,66 @@
+/**
+ * Rundiz Oauth (register+login page).
+ */
+
+
+.rd-oauth-alert {
+    background-color: #fff;
+    border-left-style: solid;
+    border-left-width: 4px;
+    padding: 12px;
+}
+.rd-oauth-alert-error {
+    border-left-color: #dc3232;
+}
+.rd-oauth-alert-success {
+    border-left-color: #40a407;
+}
+
+
+.rd-oauth-button {
+    background-color: #fff;
+    border-radius: 3px;
+    display: inline-block;
+    padding: 8px 10px;
+    text-decoration: none;
+}
+.rd-oauth-button:active,
+.rd-oauth-button:focus,
+.rd-oauth-button:hover {
+    text-decoration: none;
+}
+.rd-oauth-button.google {
+    background-color: #DE4932;
+    color: #fff;
+}
+.rd-oauth-button.facebook {
+    background-color: #3b5998;
+    color: #fff;
+}
+
+
+.rd-oauth-link {
+    margin-bottom: 5px;
+}
+.rd-oauth-links {
+    text-align: center;
+}
+
+
+.rd-oauth-or-original-wp-login {
+    font-weight: bold;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    text-align: center;
+}
+
+
+#loginform.oauth-only,
+#registerform.oauth-only {
+	padding-bottom: 26px;
+}
+
+
+#user_email.readonly {
+    cursor: not-allowed;
+}

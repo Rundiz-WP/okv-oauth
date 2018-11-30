@@ -1,0 +1,3 @@
+2017-12-08 Beginning to write new code to v1.0. These options must be group into new one option name and delete the old options.
+ * okvoauth_login_method, okvoauth_login_cookie_expiration, okvoauth_google_client_id, okvoauth_google_client_secret
+

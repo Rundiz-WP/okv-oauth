@@ -1,0 +1,15 @@
+/*
+Styling editor that is running Ace editor (div, pre).
+All element for "display" Ace editor must have class "ace-editor-display-element"
+*/
+
+
+.ace-editor-display-element {
+	bottom: 0;
+	height: 200px;
+	left: 0;
+	min-height: 200px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}

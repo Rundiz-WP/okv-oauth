@@ -1,0 +1,8 @@
+You can override login and register result page for OAuth by copy everything (except this file) in this folder into wp-content/themes/%your theme%/okv-oauth/templates
+
+For example: If your current active theme is bootstrap-basic then you can copy everything here into wp-content/themes/bootstrap-basic/okv-oauth/templates
+
+Your folder structure will look like:
+wp-content/themes/bootstrap-basic/okv-oauth/templates/okv-oauth
+wp-content/themes/bootstrap-basic/okv-oauth/templates/okv-oauth/index_v.php
+wp-content/themes/bootstrap-basic/okv-oauth/templates/okv-oauth/register_v.php

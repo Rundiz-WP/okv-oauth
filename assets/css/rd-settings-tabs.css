@@ -1,0 +1,112 @@
+/*
+rundiz settings page (wp plugin).
+tabs style
+*/
+
+
+.rd-settings-tabs {
+	padding-top: 9px;
+}
+.rd-settings-tabs > .tab-content > div:not(.active) {
+	display: none;
+}
+.rd-settings-tabs > .tab-pane {
+	border-bottom: 1px solid #ccc;
+	list-style: none;
+	margin: 0 0 6px;
+	padding: 0;
+}
+.rd-settings-tabs > .tab-pane:after {
+	clear: both;
+	content: '';
+	display: table;
+}
+.rd-settings-tabs > .tab-pane > li {
+	background-color: #e4e4e4;
+	border: 1px solid #ccc;
+	color: #555;
+	font-size: 15px;
+	font-weight: 700;
+	line-height: 24px;
+}
+.rd-settings-tabs > .tab-pane > li.active {
+	background-color: #f1f1f1;
+	color: #000;
+}
+.rd-settings-tabs > .tab-pane > li > a {
+	color: inherit;
+	display: block;
+	padding: 6px 10px;
+	text-decoration: none;
+}
+.rd-settings-tabs > .tab-pane > li > a:active,
+.rd-settings-tabs > .tab-pane > li > a:focus {
+	box-shadow: none;
+	outline: none;
+}
+@media (min-width: 783px) {
+	.rd-settings-tabs.tabs-horizontal > .tab-content,
+	.rd-settings-tabs.tabs-horizontal > .tab-pane {
+		padding: 0 10px;
+	}
+	.rd-settings-tabs.tabs-horizontal > .tab-pane {
+		overflow-x: auto;
+		overflow-y: hidden;
+		white-space: nowrap;
+	}
+	.rd-settings-tabs.tabs-horizontal > .tab-pane > li {
+		display: inline-block;
+		margin: 0 4px -1px 0;
+	}
+	.rd-settings-tabs.tabs-horizontal > .tab-pane > li.active {
+		border-bottom: 1px solid #f1f1f1;
+	}
+	
+	.rd-settings-tabs.tabs-vertical {
+		display: table;
+		width: 100%;
+	}
+	.rd-settings-tabs.tabs-vertical > .tab-content {
+		border-left: 1px solid #ccc;
+		display: table-cell;
+		padding-left: 15px;
+		vertical-align: top;
+	}
+	.rd-settings-tabs.tabs-vertical > .tab-pane {
+		border: none;
+		display: table-cell;
+		padding: 10px 0;
+		position: relative;
+		vertical-align: top;
+		width: 40px;
+	}
+	.rd-settings-tabs.tabs-vertical > .tab-pane > li {
+		margin-right: -1px;
+	}
+	.rd-settings-tabs.tabs-vertical > .tab-pane > li.active {
+		border-right: 1px solid #f1f1f1;
+	}
+}
+@media (min-width: 783px) and (max-width: 960px) {
+	.rd-settings-tabs.tabs-vertical > .tab-pane > li .tab-text {
+		display: none;
+	}
+	.rd-settings-tabs.tabs-vertical > .tab-pane:hover .tab-text {
+		display: inline;
+	}
+	.rd-settings-tabs.tabs-vertical > .tab-pane:hover a {
+		width: 150px;
+	}
+}
+@media (min-width: 961px) {
+	.rd-settings-tabs.tabs-vertical > .tab-pane {
+		width: 150px;
+	}
+}
+
+
+.rd-settings-ul,
+.rd-settings-ul ul {
+    list-style: disc;
+    margin-left: 20px;
+}
