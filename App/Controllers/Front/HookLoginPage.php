@@ -23,7 +23,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             if (is_admin() && $hook === 'profile.php') {
                 wp_enqueue_style('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-oauth-login.css' );
-                wp_enqueue_style('font-awesome-4', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/font-awesome.min.css', [], '4.7.0');
+                wp_enqueue_style('rd-oauth-font-awesome4', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/font-awesome.min.css', [], '4.7.0');
             }
         }// adminEnqueueScripts
 
@@ -267,7 +267,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     case 'login':
                     default:
                         wp_enqueue_style('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-oauth-login.css' );
-                        wp_enqueue_style('font-awesome-4', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/font-awesome.min.css', [], '4.7.0');
+                        wp_enqueue_style('rd-oauth-font-awesome4', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/font-awesome.min.css', [], '4.7.0');
                 }
 
                 if (isset($action) && $action === 'register') {
@@ -671,7 +671,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
             $this->init();
 
             wp_enqueue_style('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-oauth-login.css');
-            wp_enqueue_style('font-awesome-4', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/font-awesome.min.css', [], '4.7.0');
+            wp_enqueue_style('rd-oauth-font-awesome4', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/font-awesome.min.css', [], '4.7.0');
             wp_enqueue_script('rd-oauth-wpsignup', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-wpsignup.js', ['jquery'], false, true);
             $active_signup = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
             wp_localize_script(
