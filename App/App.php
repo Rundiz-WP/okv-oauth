@@ -31,9 +31,16 @@ if (!class_exists('\\RundizOauth\\App\\App')) {
         {
             add_action('plugins_loaded', function() {
                 // @link https://codex.wordpress.org/Function_Reference/load_plugin_textdomain Reference.
+                // @link https://developer.wordpress.org/reference/functions/load_plugin_textdomain/ Reference.
+                // @link https://wordpress.stackexchange.com/questions/245250/override-plugin-text-domain-in-child-theme Override text domain, translation by other themes, plugins.
                 // load language of this plugin.
                 $this->loadLanguage();
             });
+
+            // Any method that must be called before auto register controllers must be manually write it down here, below this line.
+            $StylesAndScripts = new Libraries\StylesAndScripts();
+            $StylesAndScripts->manualRegisterHooks();
+            unset($StylesAndScripts);
 
             // Initialize the loader class.
             $this->Loader = new \RundizOauth\App\Libraries\Loader();

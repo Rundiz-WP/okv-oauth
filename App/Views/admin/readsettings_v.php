@@ -1,4 +1,4 @@
-<div class="wrap">
+<?php /*<div class="wrap">
     <h1><?php _e('Example of how to access settings values in option db.', 'okv-oauth'); ?></h1>
 
     <ol>
@@ -12,4 +12,4 @@
             echo htmlspecialchars(print_r($rundizoauth_options, true), ENT_QUOTES, get_option('blog_charset')); 
         }
     ?></pre>
-</div>
+</div>*/ ?>

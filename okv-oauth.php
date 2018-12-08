@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Rundiz OAuth
- * Plugin URI: http://rundiz.com
+ * Plugin URI: https://rundiz.com/?p=319
  * Description: Use OAuth such as Google, Facebook to login and register.
- * Version: 1.3.3
+ * Version: 1.4
  * Author: Vee Winch
  * Author URI: http://rundiz.com
  * License: MIT

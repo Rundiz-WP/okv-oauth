@@ -9,9 +9,11 @@
 // generate login expiration values.
 $login_expiration_values[''] = __('Use default', 'okv-oauth');
 for ($i = 1; $i <= 20; $i++) {
+    /* translators: %s: number of days. */
     $login_expiration_values[$i] = sprintf(_n('%s day', '%s days', $i, 'okv-oauth'), $i);
 }
 for ($i = 30; $i <= 200; $i+=10) {
+    /* translators: %s: number of days. */
     $login_expiration_values[$i] = sprintf(_n('%s day', '%s days', $i, 'okv-oauth'), $i);
 }
 unset($i);
@@ -20,14 +22,16 @@ unset($i);
 // generate google login help message.
 $google_project_url = 'https://console.developers.google.com/cloud-resource-manager';
 $google_login_help_msg = sprintf(
-        __('Please visit %sGoogle Projects%s and create or open your project.', 'okv-oauth'), 
+        /* translators: %1$s: Open link, %2$s Close link. */
+        __('Please visit %1$sGoogle Projects%2$s and create or open your project.', 'okv-oauth'), 
         '<a href="' . $google_project_url . '" target="gg_project">', 
         '</a>'
     ) . "\n" .
     '<ul class="rd-settings-ul">' . "\n" .
         '<li>' .
             sprintf(
-                __('From the menu, go to APIs &amp; services &gt; Library and enable %sGoogle+ API%s.', 'okv-oauth'), 
+                /* translators: %1$s: Open strong tag, %2$s: Close strong tag. */
+                __('From the menu, go to APIs &amp; services &gt; Library and enable %1$sGoogle+ API%2$s.', 'okv-oauth'), 
                 '<strong>', 
                 '</strong>'
             ) .
@@ -37,6 +41,7 @@ $google_login_help_msg = sprintf(
         '<li>' . __('Select Web application', 'okv-oauth') . '</li>' . "\n" .
         '<li>' .
             sprintf(
+                /* translators: %s: URL. */
                 __('Authorized JavaScript origins: enter %s', 'okv-oauth'), 
                 '<strong>' . (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . '</strong>'
             ) .
@@ -45,6 +50,7 @@ $google_login_help_msg = sprintf(
         '</li>' . "\n" .
         '<li>' .
             sprintf(
+                /* translators: %s: URLs. */
                 __('Authorized redirect URIs: enter %s', 'okv-oauth'), 
                 '<strong>' . home_url('rd-oauth?rdoauth=google') . '</strong><br>' .
                 '<strong>' . home_url('rd-oauth?rdoauth_subpage=register&rdoauth=google') . '</strong><br>' .
@@ -65,7 +71,8 @@ unset($google_project_url);
 // generate facebook login help message.
 $facebook_apps_url = 'https://developers.facebook.com/apps';
 $facebook_login_help_msg = sprintf(
-        __('Please visit %sFacebook for developers%s and add or open your app.', 'okv-oauth'),
+        /* translators: %1$s: Open link, %2$s: Close link */
+        __('Please visit %1$sFacebook for developers%2$s and add or open your app.', 'okv-oauth'),
         '<a href="https://developers.facebook.com/apps" target="fb_fordev">',
         '</a>'
     ) . "\n" .
@@ -73,7 +80,8 @@ $facebook_login_help_msg = sprintf(
         '<li>' . __('Click +Add a New App, enter the Display Name and click on Create App ID.', 'okv-oauth') . '</li>' .
         '<li>' .
             sprintf(
-                __('From Add a product section, click Set Up on %sFacebook Login%s.', 'okv-oauth'), 
+                /* translators: %1$s: Open strong tag, %2$s: Close strong tag. */
+                __('From Add a product section, click Set Up on %1$sFacebook Login%2$s.', 'okv-oauth'), 
                 '<strong>', 
                 '</strong>'
             ) .
@@ -83,6 +91,7 @@ $facebook_login_help_msg = sprintf(
         '</li>' . "\n" .
         '<li>' .
             sprintf(
+                /* translators: %s: URLs. */
                 __('Valid OAuth redirect URIs: enter %s', 'okv-oauth'), 
                 '<strong>' . home_url('rd-oauth?rdoauth=facebook') . '</strong><br>' .
                 '<strong>' . home_url('rd-oauth?rdoauth_subpage=register&rdoauth=facebook') . '</strong><br>' .
@@ -94,6 +103,7 @@ $facebook_login_help_msg = sprintf(
         '</li>' . "\n" .
         '<li>' .
             sprintf(
+                /* translators: %s: URL. */
                 __('Deauthorize Callback URL: enter %s', 'okv-oauth'), 
                 '<strong>' . (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . '</strong>'
             ) .
@@ -112,12 +122,14 @@ $wpsignup_field = [];
 if (is_multisite() && $active_signup === 'all') {
     $wpsignup_field = [
         'content' => sprintf(
+                /* translators: %s: Use OAuth only option text. */
                 __('This is multi-site WordPress and the registration page may not work perfectly with method %s.', 'okv-oauth'),
                 '<strong>' . __('Use OAuth only', 'okv-oauth') . '</strong>'
             ) .
             '<br>' .
             sprintf(
-                __('It is recommended that you change the network settings for %s to %s.', 'okv-oauth'),
+                /* translators: %1$s: Allow new registrations text, %2$s: User accounts may be registered text. */
+                __('It is recommended that you change the network settings for %1$s to %2$s.', 'okv-oauth'),
                 '<strong>' . __('Allow new registrations') . '</strong>',
                 '<strong>' . __('User accounts may be registered') . '</strong>'
             ),
@@ -150,6 +162,7 @@ return [
                 $wpsignup_field,
                 [
                     'default' => '',
+                    /* translators: %s: auth_cookie_expiration hook. */
                     'description' => sprintf(__('This setting can be override by any plugins that hook into %s.', 'okv-oauth'), '<code>auth_cookie_expiration</code>').' '.__('This setting will be use when user remember login or use OAuth only for login method.', 'okv-oauth'),
                     'id' => 'login_expiration',
                     'options' => $login_expiration_values,
@@ -207,12 +220,14 @@ return [
                 [
                     'default' => '',
                     'description' => sprintf(
-                        __('Alway start with %s For example: %s.', 'okv-oauth'), 
+                        /* translators: %1$s &amp; text, %2$s: &amp;include_granted_scopes=true&amp;hd=mydomain.com text */
+                        __('Alway start with %1$s For example: %2$s.', 'okv-oauth'), 
                         '<code>&amp;</code>', 
                         '<code>&amp;include_granted_scopes=true&amp;hd=mydomain.com</code>'
                     ) . '<br>' .
                     sprintf(
-                        __('These pamateters will be skipped: %s', 'okv-oauth'),
+                        /* translators: %s: The parameters that will be skipped. */
+                        __('These parameters will be skipped: %s', 'okv-oauth'),
                         '<code>client_id</code>, <code>response_type</code>, <code>scope</code>, <code>redirect_uri</code>, <code>access_type</code>, <code>state</code>, <code>prompt</code>'
                     ),
                     'id' => 'google_auth_param_other',
@@ -267,7 +282,8 @@ return [
             'title' => __('Design pages', 'okv-oauth'),
             'fields' => [
                 [
-                    'content' => sprintf(__('To design your login and register result page, please read %s file inside the %s folder.', 'okv-oauth'), '<strong>design-guide.txt</strong>', '<strong>' . realpath(plugin_dir_path(RUNDIZOAUTH_FILE) . 'templates') . '</strong>'),
+                    /* translators: %1$s: Text file to read, %2$s: Path to folder. */
+                    'content' => sprintf(__('To design your login and register result page, please read %1$s file inside the %2$s folder.', 'okv-oauth'), '<strong>design-guide.txt</strong>', '<strong>' . realpath(plugin_dir_path(RUNDIZOAUTH_FILE) . 'templates') . '</strong>'),
                     'type' => 'html_full',
                 ],
             ],

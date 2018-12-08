@@ -86,7 +86,13 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Index')) {
          */
         public function registerScripts()
         {
-            wp_enqueue_style('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-oauth-login.css' );
+            if (!wp_script_is('rd-oauth-login', 'registered')) {
+                $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
+                $StylesAndScripts->registerStylesAndScripts();
+                unset($StylesAndScripts);
+            }
+
+            wp_enqueue_style('rd-oauth-login');
         }// registerScripts
 
 

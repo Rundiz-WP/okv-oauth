@@ -128,8 +128,14 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
          */
         public function registerScripts()
         {
+            if (!wp_script_is('rd-oauth-font-awesome4', 'registered')) {
+                $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
+                $StylesAndScripts->registerStylesAndScripts();
+                unset($StylesAndScripts);
+            }
+
             // to name font awesome handle as `plugin-name-prefix-font-awesome4` is to prevent conflict with other plugins that maybe use older version but same handle that cause some newer icons in this plugin disappears.
-            wp_enqueue_style('rd-oauth-font-awesome4', plugin_dir_url(RUNDIZOAUTH_FILE).'assets/css/font-awesome.min.css', [], '4.7.0');
+            wp_enqueue_style('rd-oauth-font-awesome4');
             wp_enqueue_style('rd-oauth-rd-settings-tabs-css', plugin_dir_url(RUNDIZOAUTH_FILE).'assets/css/rd-settings-tabs.css');
             wp_enqueue_script('rd-oauth-rd-settings-tabs-js', plugin_dir_url(RUNDIZOAUTH_FILE).'assets/js/rd-settings-tabs.js', ['jquery'], false, true);
         }// registerScripts

@@ -93,6 +93,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\Loader')) {
                 if (!is_file($template_path)) {
                     // if not found the template file in plugin itself.
                     // throw the error to notice the developers.
+                    /* translators: %s: Template path. */
                     throw new \Exception(sprintf(__('The template file was not found. (%s)', 'okv-oauth'), $template_path));
                     // remove the variable.
                     unset($template_path);

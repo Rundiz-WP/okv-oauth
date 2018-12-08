@@ -90,7 +90,8 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
             });
 
             if (isset($_REQUEST['rdoauth_result']) && $_REQUEST['rdoauth_result'] === 'success') {
-                $output['form_success_msg'] = sprintf(__('Registration completed. You can now %slogin%s using selected OAuth provider.', 'okv-oauth'), '<a href="' . wp_login_url() . '">', '</a>');
+                /* translators: %1$s: Open link, %2$s: Close link */
+                $output['form_success_msg'] = sprintf(__('Registration completed. You can now %1$slogin%2$s using selected OAuth provider.', 'okv-oauth'), '<a href="' . wp_login_url() . '">', '</a>');
             }
 
             $Loader = new \RundizOauth\App\Libraries\Loader();
@@ -105,7 +106,13 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
          */
         public function registerScripts()
         {
-            wp_enqueue_style('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-oauth-login.css' );
+            if (!wp_script_is('rd-oauth-login', 'registered')) {
+                $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
+                $StylesAndScripts->registerStylesAndScripts();
+                unset($StylesAndScripts);
+            }
+
+            wp_enqueue_style('rd-oauth-login');
         }// registerScripts
 
 

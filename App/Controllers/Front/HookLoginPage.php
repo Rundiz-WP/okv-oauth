@@ -22,8 +22,8 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         public function adminEnqueueScripts($hook)
         {
             if (is_admin() && $hook === 'profile.php') {
-                wp_enqueue_style('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-oauth-login.css' );
-                wp_enqueue_style('rd-oauth-font-awesome4', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/font-awesome.min.css', [], '4.7.0');
+                wp_enqueue_style('rd-oauth-login');
+                wp_enqueue_style('rd-oauth-font-awesome4');
             }
         }// adminEnqueueScripts
 
@@ -237,6 +237,12 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
+            if (!wp_script_is('rd-oauth-font-awesome4', 'registered')) {
+                $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
+                $StylesAndScripts->registerStylesAndScripts();
+                unset($StylesAndScripts);
+            }
+
             if ($this->useOauth === true) {
                 // if choose login method as wp login with oauth or oauth only.
                 $action = (isset($_REQUEST['action']) ? $_REQUEST['action'] : '');
@@ -266,8 +272,8 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     case 'register':
                     case 'login':
                     default:
-                        wp_enqueue_style('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-oauth-login.css' );
-                        wp_enqueue_style('rd-oauth-font-awesome4', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/font-awesome.min.css', [], '4.7.0');
+                        wp_enqueue_style('rd-oauth-login');
+                        wp_enqueue_style('rd-oauth-font-awesome4');
                 }
 
                 if (isset($action) && $action === 'register') {
@@ -670,8 +676,14 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            wp_enqueue_style('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-oauth-login.css');
-            wp_enqueue_style('rd-oauth-font-awesome4', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/font-awesome.min.css', [], '4.7.0');
+            if (!wp_script_is('rd-oauth-font-awesome4', 'registered')) {
+                $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
+                $StylesAndScripts->registerStylesAndScripts();
+                unset($StylesAndScripts);
+            }
+
+            wp_enqueue_style('rd-oauth-login');
+            wp_enqueue_style('rd-oauth-font-awesome4');
             wp_enqueue_script('rd-oauth-wpsignup', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-wpsignup.js', ['jquery'], false, true);
             $active_signup = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
             wp_localize_script(
