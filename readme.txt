@@ -7,7 +7,7 @@ Tested up to: 5.0
 Requires PHP: 5.4
 Stable tag: 1.4
 License: MIT
-License URI: http://opensource.org/licenses/MIT
+License URI: https://opensource.org/licenses/MIT
 
 Use OAuth such as Google, Facebook to login and register.
 
@@ -22,7 +22,7 @@ Since v 1.0 your users can register using OAuth in one click from your website a
 
 You can also change login expiration by using remember login or use OAuth only for login method.
 
-This project is maintain by <a href="http://rundiz.com" target="author_site">Rundiz.com</a>. Feel free to rate and comments.<br>
+This project is maintain by <a href="https://rundiz.com" target="author_site">Rundiz.com</a>. Feel free to rate and comments.<br>
 
 = System requirement =
 PHP 5.4 or higher<br>
