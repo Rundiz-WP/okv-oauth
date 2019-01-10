@@ -3,7 +3,7 @@ Contributors: okvee
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HQE4GVV4KTZE
 Tags: oauth, google, google login, google register, facebook, facebook login, facebook register, social login, social connect
 Requires at least: 4.0
-Tested up to: 5.0
+Tested up to: 5.0.3
 Stable tag: 1.4
 Requires PHP: 5.4
 License: MIT
