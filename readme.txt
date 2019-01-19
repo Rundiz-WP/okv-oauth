@@ -2,7 +2,7 @@
 Contributors: okvee
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HQE4GVV4KTZE
 Tags: oauth, google, google login, google register, facebook, facebook login, facebook register, social login, social connect
-Requires at least: 4.0
+Requires at least: 4.6.0
 Tested up to: 5.0.3
 Stable tag: 1.4
 Requires PHP: 5.4
@@ -27,7 +27,7 @@ This project is maintain by <a href="https://rundiz.com" target="author_site">Ru
 = System requirement =
 PHP 5.4 or higher<br>
 Open SSL PHP extension.<br>
-WordPress 4.0 or higher
+WordPress 4.6.0 or higher
 
 == Installation ==
 1. Upload "okv-oauth" folder to the "/wp-content/plugins/" directory.

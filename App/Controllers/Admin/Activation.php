@@ -57,7 +57,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
         public function activation()
         {
             // do something that will happens on activate plugin.
-            $wordpress_required_version = '4.0';
+            $wordpress_required_version = '4.6.0';
             $phpversion_required = '5.4';
             if (function_exists('phpversion')) {
                 $phpversion = phpversion();
