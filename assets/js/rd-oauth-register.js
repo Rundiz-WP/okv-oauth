@@ -13,14 +13,23 @@ jQuery(function($) {
         // use wp login + oauth.
     } else if (RdOauthRegister.loginMethod === '2') {
         // use oauth only.
+        $('#registerform').addClass('oauth-only');
         // remove register form
         $('#registerform').find('p:has(label)').remove();
         // remove register message (register confirmation will be ...), button.
         $('#registerform').find('#reg_passmail, .clear, .submit').remove();
-        // remove forgot password link.
-        $('#nav a:last-child').remove();
-        $('#nav').html($('#nav a')[0].outerHTML);
 
-        $('#registerform').addClass('oauth-only');
+        // remove forgot password link.
+        $('#nav a').each(function() {
+            if (this.href && this.href.indexOf('lostpassword') !== -1) {
+                this.remove();
+            }
+        });
+        // trim last character.
+        // example: "Login |" will be "Login"
+        // https://stackoverflow.com/a/32516190/128761 original source code.
+        let navHtml = ($('#nav').html()).trim();
+        let trimLastSep = navHtml.replace(/^\|+|\|+$/g, '');
+        $('#nav').html(trimLastSep);
     }
 });

@@ -3,8 +3,8 @@ Contributors: okvee
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HQE4GVV4KTZE
 Tags: oauth, google, google login, google register, facebook, facebook login, facebook register, social login, social connect
 Requires at least: 4.6.0
-Tested up to: 5.1
-Stable tag: 1.4
+Tested up to: 5.3
+Stable tag: 1.4.1
 Requires PHP: 5.4
 License: MIT
 License URI: https://opensource.org/licenses/MIT
@@ -59,6 +59,12 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.4.1 =
+2019-12-05
+
+* Fix remove login password field (for OAuth only option) to compatible with WordPress 5.3
+* Add filter to not allow "Both sites and user accounts can be registered" register option on network settings (multi-site).
+
 = 1.4 =
 2018-12-08
 

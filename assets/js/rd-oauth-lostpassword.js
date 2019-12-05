@@ -17,8 +17,18 @@ jQuery(function($) {
         $('#lostpasswordform').find('p:has(label)').remove();
         // remove submit btn
         $('#lostpasswordform').find('.submit').remove();
-        // remove register btn
-        $('#nav a:last-child').remove();
-        $('#nav').html($('#nav a')[0].outerHTML);
+
+        // remove register link
+        /*$('#nav a').each(function() {
+            if (this.href && this.href.indexOf('register') !== -1) {
+                this.remove();
+            }
+        });
+        // trim last character.
+        // example: "Login |" will be "Login"
+        // https://stackoverflow.com/a/32516190/128761 original source code.
+        let navHtml = ($('#nav').html()).trim();
+        let trimLastSep = navHtml.replace(/^\|+|\|+$/g, '');
+        $('#nav').html(trimLastSep);*/// register link will be remove only from WP admin settings.
     }
 });

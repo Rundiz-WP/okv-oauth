@@ -28,11 +28,23 @@ jQuery(function($) {
             $('#loginform').addClass('oauth-only');
             // remove login form.
             $('#loginform').find('p:has(label)').remove();
+            // remove password form.
+            $('#loginform .user-pass-wrap').remove();
             // remove remember me form and submit btn
             $('#loginform').find('.forgetmenot, .submit').remove();
         }
+
         // remove forgot password link.
-        $('#nav a:last-child').remove();
-        $('#nav').html($('#nav a')[0].outerHTML);
+        $('#nav a').each(function() {
+            if (this.href && this.href.indexOf('lostpassword') !== -1) {
+                this.remove();
+            }
+        });
+        // trim last character.
+        // example: "Login |" will be "Login"
+        // https://stackoverflow.com/a/32516190/128761 original source code.
+        let navHtml = ($('#nav').html()).trim();
+        let trimLastSep = navHtml.replace(/^\|+|\|+$/g, '');
+        $('#nav').html(trimLastSep);
     }
 });
