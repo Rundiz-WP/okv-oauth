@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2020-05-01T13:20:37+07:00\n"
+"POT-Creation-Date: 2020-05-01T17:04:20+07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: okv-oauth\n"
@@ -56,229 +56,224 @@ msgstr[1] ""
 msgid "Please visit %1$sGoogle Projects%2$s and create or open your project."
 msgstr ""
 
-#. translators: %1$s: Open strong tag, %2$s: Close strong tag.
-#: App/config/settings_rdoauth.php:34
-msgid "From the menu, go to APIs &amp; services &gt; Library and enable %1$sGoogle+ API%2$s."
-msgstr ""
-
-#: App/config/settings_rdoauth.php:39
+#: App/config/settings_rdoauth.php:31
 msgid "Go to APIs &amp; services &gt; Credentials."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:40
+#: App/config/settings_rdoauth.php:32
 msgid "Click on Create credentials &gt; OAuth client ID."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:41
+#: App/config/settings_rdoauth.php:33
 msgid "Select Web application"
 msgstr ""
 
 #. translators: %s: URL.
-#: App/config/settings_rdoauth.php:45
+#: App/config/settings_rdoauth.php:37
 msgid "Authorized JavaScript origins: enter %s"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:49
-#: App/config/settings_rdoauth.php:61
-#: App/config/settings_rdoauth.php:102
+#: App/config/settings_rdoauth.php:41
+#: App/config/settings_rdoauth.php:53
+#: App/config/settings_rdoauth.php:94
 msgid "You may insert one more copy by include both http and https."
 msgstr ""
 
 #. translators: %s: URLs.
-#: App/config/settings_rdoauth.php:54
+#: App/config/settings_rdoauth.php:46
 msgid "Authorized redirect URIs: enter %s"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:63
+#: App/config/settings_rdoauth.php:55
 msgid "Use Client ID and Client secret generated from there."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:65
-msgid "Go to APIs &amp; service &gt; Credentials &gt; click on OAuth consent screen tab and enter your website information there."
+#: App/config/settings_rdoauth.php:57
+msgid "Go to APIs &amp; service &gt; OAuth consent screen and enter your website information there."
 msgstr ""
 
 #. translators: %1$s: Open link, %2$s: Close link
-#: App/config/settings_rdoauth.php:75
+#: App/config/settings_rdoauth.php:67
 msgid "Please visit %1$sFacebook for developers%2$s and add or open your app."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:80
+#: App/config/settings_rdoauth.php:72
 msgid "Click +Add a New App, enter the Display Name and click on Create App ID."
 msgstr ""
 
 #. translators: %1$s: Open strong tag, %2$s: Close strong tag.
-#: App/config/settings_rdoauth.php:84
+#: App/config/settings_rdoauth.php:76
 msgid "From Add a product section, click Set Up on %1$sFacebook Login%2$s."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:90
+#: App/config/settings_rdoauth.php:82
 msgid "Enable or select Yes for Client OAuth Login, Web OAuth Login, Use Strict Mode for Redirect URIs."
 msgstr ""
 
 #. translators: %s: URLs.
-#: App/config/settings_rdoauth.php:95
+#: App/config/settings_rdoauth.php:87
 msgid "Valid OAuth redirect URIs: enter %s"
 msgstr ""
 
 #. translators: %s: URL.
-#: App/config/settings_rdoauth.php:107
+#: App/config/settings_rdoauth.php:99
 msgid "Deauthorize Callback URL: enter %s"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:111
+#: App/config/settings_rdoauth.php:103
 msgid "Click on Save Changes"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:112
+#: App/config/settings_rdoauth.php:104
 msgid "Go to Settings &gt; Basic"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:113
+#: App/config/settings_rdoauth.php:105
 msgid "Use App ID and App Secret generated from there."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:114
+#: App/config/settings_rdoauth.php:106
 msgid "You may setup your app info here such as name, icon."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:115
+#: App/config/settings_rdoauth.php:107
 msgid "To make your app ready for public use, please go to App Review menu and change the option there."
 msgstr ""
 
 #. translators: %s: Use OAuth only option text.
-#: App/config/settings_rdoauth.php:126
+#: App/config/settings_rdoauth.php:118
 msgid "This is multi-site WordPress and the registration page may not work perfectly with method %s."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:127
-#: App/config/settings_rdoauth.php:175
+#: App/config/settings_rdoauth.php:119
+#: App/config/settings_rdoauth.php:167
 msgid "Use OAuth only"
 msgstr ""
 
 #. translators: %1$s: Allow new registrations text, %2$s: User accounts may be registered text.
-#: App/config/settings_rdoauth.php:132
+#: App/config/settings_rdoauth.php:124
 msgid "It is recommended that you change the network settings for %1$s to %2$s."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:136
+#: App/config/settings_rdoauth.php:128
 msgid "Multi-site"
 msgstr ""
 
 #. translators: %1$s: The design guide text file name, %2$s: The design guide file location.
-#: App/config/settings_rdoauth.php:146
+#: App/config/settings_rdoauth.php:138
 msgid "To design your login and register result page, please read %1$s file inside the %2$s folder."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:156
+#: App/config/settings_rdoauth.php:148
 msgid "Here is the content on text file."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:166
+#: App/config/settings_rdoauth.php:158
 msgid "Plugin settings"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:170
+#: App/config/settings_rdoauth.php:162
 msgid "If you choose to use OAuth only, please make sure that you have at least one of them enabled and correct setting values otherwise you will be unable to login."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:173
+#: App/config/settings_rdoauth.php:165
 msgid "Do not use (use WordPress login)"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:174
+#: App/config/settings_rdoauth.php:166
 msgid "Use WordPress login with OAuth"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:177
+#: App/config/settings_rdoauth.php:169
 msgid "Login/Register method"
 msgstr ""
 
 #. translators: %s: auth_cookie_expiration hook.
-#: App/config/settings_rdoauth.php:184
+#: App/config/settings_rdoauth.php:176
 msgid "This setting can be override by any plugins that hook into %s."
 msgstr ""
 
 #. translators: %s: auth_cookie_expiration hook.
-#: App/config/settings_rdoauth.php:184
+#: App/config/settings_rdoauth.php:176
 msgid "This setting will be use when user remember login or use OAuth only for login method."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:187
+#: App/config/settings_rdoauth.php:179
 msgid "Login expiration"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:194
+#: App/config/settings_rdoauth.php:186
 msgid "Google login"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:201
+#: App/config/settings_rdoauth.php:193
 msgid "Enable Google login"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:205
-#: App/config/settings_rdoauth.php:275
+#: App/config/settings_rdoauth.php:197
+#: App/config/settings_rdoauth.php:267
 msgid "Enable"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:212
+#: App/config/settings_rdoauth.php:204
 msgid "Client ID"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:219
+#: App/config/settings_rdoauth.php:211
 msgid "Client secret"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:223
+#: App/config/settings_rdoauth.php:215
 msgid "Auth parameters"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:223
+#: App/config/settings_rdoauth.php:215
 msgid "Reference"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:230
+#: App/config/settings_rdoauth.php:222
 msgid "Not set"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:233
+#: App/config/settings_rdoauth.php:225
 msgid "Default"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:235
+#: App/config/settings_rdoauth.php:227
 msgid "Prompt"
 msgstr ""
 
 #. translators: %1$s &amp; text, %2$s: &amp;include_granted_scopes=true&amp;hd=mydomain.com text
-#: App/config/settings_rdoauth.php:242
+#: App/config/settings_rdoauth.php:234
 msgid "Alway start with %1$s For example: %2$s."
 msgstr ""
 
 #. translators: %s: The parameters that will be skipped.
-#: App/config/settings_rdoauth.php:248
+#: App/config/settings_rdoauth.php:240
 msgid "These parameters will be skipped: %s"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:253
+#: App/config/settings_rdoauth.php:245
 msgid "Other parameters"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:264
+#: App/config/settings_rdoauth.php:256
 msgid "Facebook login"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:271
+#: App/config/settings_rdoauth.php:263
 msgid "Enable Facebook login"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:282
+#: App/config/settings_rdoauth.php:274
 msgid "App ID"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:289
+#: App/config/settings_rdoauth.php:281
 msgid "App secret"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:300
+#: App/config/settings_rdoauth.php:292
 msgid "Design pages"
 msgstr ""
 

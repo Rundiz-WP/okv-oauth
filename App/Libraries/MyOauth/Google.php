@@ -16,7 +16,6 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
      * @link http://usefulangle.com/post/9/google-login-api-with-php-curl Reference.
      * @link https://developers.google.com/identity/protocols/OpenIDConnect Reference.
      * @link https://developers.google.com/identity/protocols/OAuth2WebServer Reference.
-     * @link https://developers.google.com/+/web/api/rest/?hl=en_US Reference.
      */
     class Google
     {
@@ -45,6 +44,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
         /**
          * Verify code and get access token.
          * 
+         * @link https://developers.google.com/identity/protocols/oauth2/web-server#exchange-authorization-code Reference
          * @param string $code The code got from Google.
          * @param string $redirect_uri Redirect URL.
          * @return mixed Return false on failure.
@@ -63,19 +63,20 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                     array_key_exists('google_client_secret', $rundizoauth_options)
                 ) {
                     $this->curlInit();
-                    curl_setopt($this->ch, CURLOPT_URL, 'https://www.googleapis.com/oauth2/v4/token');
+                    curl_setopt($this->ch, CURLOPT_URL, 'https://oauth2.googleapis.com/token');
                     curl_setopt($this->ch, CURLOPT_HTTPHEADER, ['Content-type: application/x-www-form-urlencoded']);
                     curl_setopt($this->ch, CURLOPT_POST, true);
 
-                    $postData = 'code=' . urlencode($code) .
-                        '&client_id=' . urlencode($rundizoauth_options['google_client_id']) .
-                        '&client_secret=' . urlencode($rundizoauth_options['google_client_secret']) .
-                        '&redirect_uri=' . urlencode($redirect_uri) .
+                    $postData = 'code=' . rawurlencode($code) .
+                        '&client_id=' . rawurlencode($rundizoauth_options['google_client_id']) .
+                        '&client_secret=' . rawurlencode($rundizoauth_options['google_client_secret']) .
+                        '&redirect_uri=' . rawurlencode($redirect_uri) .
                         '&grant_type=authorization_code';
                     curl_setopt($this->ch, CURLOPT_POSTFIELDS, $postData);
                     unset($postData);
 
                     $result = curl_exec($this->ch);
+                    \RundizOauth\App\Libraries\Logger::writeLog('Google OAuth token result:' . PHP_EOL . $result);
                     $result = json_decode($result);
 
                     curl_close($this->ch);
@@ -91,6 +92,8 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
         /**
          * Get authenticate URL.
          * 
+         * @link https://developers.google.com/identity/protocols/oauth2/web-server#creatingclient Reference
+         * @link https://developers.google.com/identity/protocols/oauth2/scopes Available scopes
          * @global array $rundizoauth_options
          * @param string Redirect URL.
          * @return string Return generated URL.
@@ -109,12 +112,12 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                     array_key_exists('google_client_secret', $rundizoauth_options)
                 ) {
                     $oauth_url = 'https://accounts.google.com/o/oauth2/v2/auth' .
-                        '?client_id=' . urlencode($rundizoauth_options['google_client_id']) .
+                        '?client_id=' . rawurlencode($rundizoauth_options['google_client_id']) .
                         '&response_type=code' .
-                        '&scope=' . urlencode('openid https://www.googleapis.com/auth/plus.login email') .
-                        '&redirect_uri=' . urlencode($redirect_url) .
+                        '&scope=' . rawurlencode('openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile') .
+                        '&redirect_uri=' . rawurlencode($redirect_url) .
                         '&access_type=online' .
-                        '&state=' . urlencode(wp_create_nonce('google-login'));
+                        '&state=' . rawurlencode(wp_create_nonce('google-login'));
                     if (isset($rundizoauth_options['google_auth_param_prompt']) && !empty($rundizoauth_options['google_auth_param_prompt'])) {
                         $oauth_url .= '&prompt=' . $rundizoauth_options['google_auth_param_prompt'];
                     }
@@ -147,6 +150,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
         /**
          * Get user profile info.
          * 
+         * @link https://developers.google.com/oauthplayground/ OAuth API endpoint playground.
          * @param string $access_token The access token got from Google.
          * @return object Return google result object.
          */
@@ -154,7 +158,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
         {
             $this->curlInit();
 
-            curl_setopt($this->ch, CURLOPT_URL, 'https://www.googleapis.com/plus/v1/people/me?access_token=' . urlencode($access_token));
+            curl_setopt($this->ch, CURLOPT_URL, 'https://www.googleapis.com/oauth2/v2/userinfo?access_token=' . rawurlencode($access_token));
 
             $result = curl_exec($this->ch);
             $result = json_decode($result);
@@ -375,6 +379,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
         /**
          * Validate token and get attributes.
          * 
+         * @link https://developers.google.com/identity/protocols/oauth2/openid-connect#validatinganidtoken Reference
          * @global array $rundizoauth_options
          * @param string $access_token The access token got from Google.
          * @param string $id_token The token ID got from Google.
@@ -396,9 +401,10 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                     array_key_exists('google_client_secret', $rundizoauth_options)
                 ) {
                     $this->curlInit();
-                    curl_setopt($this->ch, CURLOPT_URL, 'https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=' . urlencode($id_token));
+                    curl_setopt($this->ch, CURLOPT_URL, 'https://oauth2.googleapis.com/tokeninfo?id_token=' . rawurlencode($id_token));
 
                     $result = curl_exec($this->ch);
+                    \RundizOauth\App\Libraries\Logger::writeLog('Google OAuth validate token: ' . PHP_EOL . $result);
                     $result = json_decode($result);
 
                     curl_close($this->ch);
@@ -412,6 +418,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                         $output['result'] = true;
                         $output['data'] = $result;
                         $output['profileInfo'] = $this->getUserProfileInfo($access_token);
+                        \RundizOauth\App\Libraries\Logger::writeLog('Google OAuth get attributes: ' . PHP_EOL . print_r($output['profileInfo'], true));
                     } else {
                         $output['result'] = false;
                     }

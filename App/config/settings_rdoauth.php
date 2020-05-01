@@ -28,14 +28,6 @@ $google_login_help_msg = sprintf(
         '</a>'
     ) . "\n" .
     '<ul class="rd-settings-ul">' . "\n" .
-        '<li>' .
-            sprintf(
-                /* translators: %1$s: Open strong tag, %2$s: Close strong tag. */
-                __('From the menu, go to APIs &amp; services &gt; Library and enable %1$sGoogle+ API%2$s.', 'okv-oauth'), 
-                '<strong>', 
-                '</strong>'
-            ) .
-        '</li>' . "\n" .
         '<li>' . __('Go to APIs &amp; services &gt; Credentials.', 'okv-oauth') . '</li>' . "\n" .
         '<li>' . __('Click on Create credentials &gt; OAuth client ID.', 'okv-oauth') . '</li>' . "\n" .
         '<li>' . __('Select Web application', 'okv-oauth') . '</li>' . "\n" .
@@ -62,7 +54,7 @@ $google_login_help_msg = sprintf(
         '</li>' . "\n" .
         '<li>' . __('Use Client ID and Client secret generated from there.', 'okv-oauth') . '</li>' . "\n" .
         '<li>' .
-            __('Go to APIs &amp; service &gt; Credentials &gt; click on OAuth consent screen tab and enter your website information there.', 'okv-oauth') .
+            __('Go to APIs &amp; service &gt; OAuth consent screen and enter your website information there.', 'okv-oauth') .
         '</li>' . "\n" .
     '</ul>' . "\n";
 unset($google_project_url);
