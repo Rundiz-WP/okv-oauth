@@ -25,7 +25,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\Logger')) {
             if (defined('WP_DEBUG') && WP_DEBUG === true) {
                 if (is_array($message) || is_object($message)) {
                     $message = print_r($message, true);
-                } elseif (is_bool($message) || is_null($message)) {
+                } elseif (is_bool($message) || is_null($message) || trim($message) === '') {
                     $message = var_export($message, true) . ' (value type ' . gettype($message) . ').';
                 } elseif (is_callable($message) || is_resource($message)) {
                     $message = 'value type ' . gettype($message) . '.';
@@ -43,7 +43,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\Logger')) {
                 }
                 unset($trace);
 
-                error_log($messagePrefix . $message);
+                error_log($messagePrefix . $message . PHP_EOL);
                 unset($messagePrefix);
             }
         }// writeLog
