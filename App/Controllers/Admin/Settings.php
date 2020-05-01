@@ -138,6 +138,8 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
             wp_enqueue_style('rd-oauth-font-awesome4');
             wp_enqueue_style('rd-oauth-rd-settings-tabs-css', plugin_dir_url(RUNDIZOAUTH_FILE).'assets/css/rd-settings-tabs.css');
             wp_enqueue_script('rd-oauth-rd-settings-tabs-js', plugin_dir_url(RUNDIZOAUTH_FILE).'assets/js/rd-settings-tabs.js', ['jquery'], false, true);
+
+            wp_enqueue_style('rd-oauth-rd-settings-customstyle-css', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-settings-customstyle.css');
         }// registerScripts
 
 

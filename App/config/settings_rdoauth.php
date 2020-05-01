@@ -140,6 +140,24 @@ if (is_multisite() && $active_signup === 'all') {
 unset($active_signup);
 
 
+$design_pages_realpath = realpath(plugin_dir_path(RUNDIZOAUTH_FILE) . 'templates');
+$design_pages_content = '<p>' . sprintf(
+    /* translators: %1$s: The design guide text file name, %2$s: The design guide file location. */
+    __('To design your login and register result page, please read %1$s file inside the %2$s folder.', 'okv-oauth'), 
+    '<strong>design-guide.txt</strong>', 
+    '<strong>' . $design_pages_realpath . '</strong>'
+) . '</p>' . PHP_EOL;
+if (is_file($design_pages_realpath . DIRECTORY_SEPARATOR . 'design-guide.txt')) {
+    $design_pages_textcontent = file_get_contents($design_pages_realpath . DIRECTORY_SEPARATOR . 'design-guide.txt');
+} else {
+    $design_pages_textcontent = __('File was not found!');
+}
+unset($design_pages_realpath);
+$design_pages_content .= '<p>' . __('Here is the content on text file.', 'okv-oauth') . '</p>' . PHP_EOL;
+$design_pages_content .= '<blockquote>' . nl2br(esc_html($design_pages_textcontent)) . '</blockquote>' . PHP_EOL;
+unset($design_pages_textcontent);
+
+
 return [
     'tab_style' => 'vertical',// vertical or horizontal
     'setting_tabs' => [
@@ -283,7 +301,7 @@ return [
             'fields' => [
                 [
                     /* translators: %1$s: Text file to read, %2$s: Path to folder. */
-                    'content' => sprintf(__('To design your login and register result page, please read %1$s file inside the %2$s folder.', 'okv-oauth'), '<strong>design-guide.txt</strong>', '<strong>' . realpath(plugin_dir_path(RUNDIZOAUTH_FILE) . 'templates') . '</strong>'),
+                    'content' => $design_pages_content,
                     'type' => 'html_full',
                 ],
             ],
