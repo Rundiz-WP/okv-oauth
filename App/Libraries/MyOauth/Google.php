@@ -44,7 +44,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
         /**
          * Verify code and get access token.
          * 
-         * @link https://developers.google.com/identity/protocols/oauth2/web-server#exchange-authorization-code Reference
+         * @link https://developers.google.com/identity/protocols/oauth2/web-server#exchange-authorization-code Reference.
          * @param string $code The code got from Google.
          * @param string $redirect_uri Redirect URL.
          * @return mixed Return false on failure.
@@ -92,8 +92,8 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
         /**
          * Get authenticate URL.
          * 
-         * @link https://developers.google.com/identity/protocols/oauth2/web-server#creatingclient Reference
-         * @link https://developers.google.com/identity/protocols/oauth2/scopes Available scopes
+         * @link https://developers.google.com/identity/protocols/oauth2/web-server#creatingclient Reference.
+         * @link https://developers.google.com/identity/protocols/oauth2/scopes Available scopes.
          * @global array $rundizoauth_options
          * @param string Redirect URL.
          * @return string Return generated URL.
@@ -379,7 +379,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
         /**
          * Validate token and get attributes.
          * 
-         * @link https://developers.google.com/identity/protocols/oauth2/openid-connect#validatinganidtoken Reference
+         * @link https://developers.google.com/identity/protocols/oauth2/openid-connect#validatinganidtoken Reference.
          * @global array $rundizoauth_options
          * @param string $access_token The access token got from Google.
          * @param string $id_token The token ID got from Google.
