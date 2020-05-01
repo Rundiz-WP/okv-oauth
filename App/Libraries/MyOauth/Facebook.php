@@ -12,12 +12,12 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
     /**
      * Facebook OAuth class.
      * 
-     * @link https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow Reference.
+     * @link https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow Manual build reference.
      * @link https://developers.facebook.com/docs/graph-api/securing-requests Reference.
-     * @link https://developers.facebook.com/docs/facebook-login/security Reference.
+     * @link https://developers.facebook.com/docs/facebook-login/security Security guide.
      * @link https://developers.facebook.com/docs/facebook-login/web Reference.
-     * @link https://developers.facebook.com/docs/facebook-login/handling-declined-permissions Reference.
-     * @link https://developers.facebook.com/docs/facebook-login/reauthentication Reference.
+     * @link https://developers.facebook.com/docs/facebook-login/handling-declined-permissions Handling declined reference.
+     * @link https://developers.facebook.com/docs/facebook-login/reauthentication Re-authentication reference.
      * @link https://developers.facebook.com/tools/explorer/145634995501895/ Tools.
      */
     class Facebook
@@ -54,6 +54,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
         /**
          * Verify code and get access token.
          * 
+         * @link https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow#exchangecode Reference.
          * @global array $rundizoauth_options
          * @param string $code The code got from Facebook.
          * @param string $redirect_uri Redirect URI.
@@ -73,15 +74,16 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                     array_key_exists('facebook_app_secret', $rundizoauth_options)
                 ) {
                     $this->curlInit();
-                    $oauth_url = 'https://graph.facebook.com/v3.1/oauth/access_token' .
-                        '?client_id=' . urlencode($rundizoauth_options['facebook_app_id']) .
-                        '&redirect_uri=' . urlencode($redirect_uri) .
-                        '&client_secret=' . urlencode($rundizoauth_options['facebook_app_secret']) .
-                        '&code=' . urlencode($code);
+                    $oauth_url = 'https://graph.facebook.com/v6.0/oauth/access_token' .
+                        '?client_id=' . rawurlencode($rundizoauth_options['facebook_app_id']) .
+                        '&redirect_uri=' . rawurlencode($redirect_uri) .
+                        '&client_secret=' . rawurlencode($rundizoauth_options['facebook_app_secret']) .
+                        '&code=' . rawurlencode($code);
                     curl_setopt($this->ch, CURLOPT_URL, $oauth_url);
                     unset($oauth_url);
 
                     $result = curl_exec($this->ch);
+                    \RundizOauth\App\Libraries\Logger::writeLog('Facebook OAuth access token result:' . PHP_EOL . $result);
                     $result = json_decode($result);
 
                     curl_close($this->ch);
@@ -128,6 +130,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
         /**
          * Get authenticate URL.
          * 
+         * @link https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow#logindialog Reference
          * @global array $rundizoauth_options
          * @param string $redirect_uri Redirect URL.
          * @return string Return generated URL.
@@ -145,13 +148,13 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                     array_key_exists('facebook_app_id', $rundizoauth_options) &&
                     array_key_exists('facebook_app_secret', $rundizoauth_options)
                 ) {
-                    $oauth_url = 'https://www.facebook.com/v3.1/dialog/oauth' .
-                        '?client_id=' . urlencode($rundizoauth_options['facebook_app_id']) .
+                    $oauth_url = 'https://www.facebook.com/v6.0/dialog/oauth' .
+                        '?client_id=' . rawurlencode($rundizoauth_options['facebook_app_id']) .
                         '&auth_type=rerequest' .
                         '&response_type=code' .
                         '&scope=email' .
-                        '&redirect_uri=' . urlencode($redirect_uri) .
-                        '&state=' . urlencode(wp_create_nonce('facebook-login'));
+                        '&redirect_uri=' . rawurlencode($redirect_uri) .
+                        '&state=' . rawurlencode(wp_create_nonce('facebook-login'));
                     return $oauth_url;
                 }
             }
@@ -165,6 +168,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
          * 
          * This method was called from `getAccessToken()`.
          * 
+         * @link https://developers.facebook.com/docs/facebook-login/permissions Permissions reference.
          * @param string $access_token
          * @param string $app_secret
          * @return object
@@ -174,12 +178,13 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
             $this->curlInit();
 
             $oauth_url = 'https://graph.facebook.com/me/permissions' .
-                '?access_token=' . urlencode($access_token) .
-                '&appsecret_proof=' . urlencode(hash_hmac('sha256', $access_token, $app_secret));
+                '?access_token=' . rawurlencode($access_token) .
+                '&appsecret_proof=' . rawurlencode(hash_hmac('sha256', $access_token, $app_secret));
             curl_setopt($this->ch, CURLOPT_URL, $oauth_url);
             unset($oauth_url);
 
             $result = curl_exec($this->ch);
+            \RundizOauth\App\Libraries\Logger::writeLog('Facebook get permissions:' . PHP_EOL . $result);
             $result = json_decode($result);
 
             curl_close($this->ch);
@@ -191,6 +196,8 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
         /**
          * Get user profile info.
          * 
+         * @link https://developers.facebook.com/docs/graph-api/using-graph-api/ Using Graph reference.
+         * @link https://developers.facebook.com/docs/graph-api/advanced Graph advanced use reference.
          * @global array $rundizoauth_options
          * @param string $access_token The access token got from Facebook.
          * @return object Return Facebook object result.
@@ -204,15 +211,16 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
 
             $this->curlInit();
 
-            $oauth_url = 'https://graph.facebook.com/v3.1/me' .
+            $oauth_url = 'https://graph.facebook.com/me' .
                 '?fields=id,name,email,picture.width(2000).height(2000)' .
-                '&access_token=' . urlencode($access_token) .
-                '&appsecret_proof=' . urlencode(hash_hmac('sha256', $access_token, (isset($rundizoauth_options['facebook_app_secret']) ? $rundizoauth_options['facebook_app_secret'] : '')));
+                '&access_token=' . rawurlencode($access_token) .
+                '&appsecret_proof=' . rawurlencode(hash_hmac('sha256', $access_token, (isset($rundizoauth_options['facebook_app_secret']) ? $rundizoauth_options['facebook_app_secret'] : '')));
             // fields that were removed due to deprecated: verified.
             curl_setopt($this->ch, CURLOPT_URL, $oauth_url);
             unset($oauth_url);
 
             $result = curl_exec($this->ch);
+            \RundizOauth\App\Libraries\Logger::writeLog('Facebook get user profile info:' . PHP_EOL . $result);
             $result = json_decode($result);
 
             curl_close($this->ch);
