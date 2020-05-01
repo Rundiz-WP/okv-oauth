@@ -1,25 +1,25 @@
-# Copyright (C) 2018 Vee Winch
+# Copyright (C) 2020 Vee Winch
 # This file is distributed under the same license as the Rundiz OAuth plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rundiz OAuth 1.3.3\n"
+"Project-Id-Version: Rundiz OAuth 1.4.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2018-12-08T13:14:47+07:00\n"
-"PO-Revision-Date: 2018-12-08T13:14:47+07:00\n"
-"X-Generator: WP-CLI 2.0.1\n"
+"POT-Creation-Date: 2020-05-01T13:20:37+07:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: okv-oauth\n"
 
 #. Plugin Name of the plugin
-#: \App\Controllers\Admin\Settings.php:51
-#: \App\Controllers\Front\RdOauth\Index.php:73
-#: \App\Controllers\Front\RdOauth\Register.php:88
-#: \App\Views\admin\editOwnProfilePersonalOptions_v.php:2
-#: \templates\okv-oauth\index_v.php:9
+#: App/Controllers/Admin/Settings.php:51
+#: App/Controllers/Front/RdOauth/Index.php:73
+#: App/Controllers/Front/RdOauth/Register.php:88
+#: App/Views/admin/editOwnProfilePersonalOptions_v.php:2
+#: templates/okv-oauth/index_v.php:9
 msgid "Rundiz OAuth"
 msgstr ""
 
@@ -39,375 +39,380 @@ msgstr ""
 msgid "http://rundiz.com"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:10
+#: App/config/settings_rdoauth.php:10
 msgid "Use default"
 msgstr ""
 
 #. translators: %s: number of days.
-#: \App\config\settings_rdoauth.php:13
-#: \App\config\settings_rdoauth.php:17
+#: App/config/settings_rdoauth.php:13
+#: App/config/settings_rdoauth.php:17
 msgid "%s day"
 msgid_plural "%s days"
 msgstr[0] ""
+msgstr[1] ""
 
 #. translators: %1$s: Open link, %2$s Close link.
-#: \App\config\settings_rdoauth.php:26
+#: App/config/settings_rdoauth.php:26
 msgid "Please visit %1$sGoogle Projects%2$s and create or open your project."
 msgstr ""
 
 #. translators: %1$s: Open strong tag, %2$s: Close strong tag.
-#: \App\config\settings_rdoauth.php:34
+#: App/config/settings_rdoauth.php:34
 msgid "From the menu, go to APIs &amp; services &gt; Library and enable %1$sGoogle+ API%2$s."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:39
+#: App/config/settings_rdoauth.php:39
 msgid "Go to APIs &amp; services &gt; Credentials."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:40
+#: App/config/settings_rdoauth.php:40
 msgid "Click on Create credentials &gt; OAuth client ID."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:41
+#: App/config/settings_rdoauth.php:41
 msgid "Select Web application"
 msgstr ""
 
 #. translators: %s: URL.
-#: \App\config\settings_rdoauth.php:45
+#: App/config/settings_rdoauth.php:45
 msgid "Authorized JavaScript origins: enter %s"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:49
-#: \App\config\settings_rdoauth.php:61
-#: \App\config\settings_rdoauth.php:102
+#: App/config/settings_rdoauth.php:49
+#: App/config/settings_rdoauth.php:61
+#: App/config/settings_rdoauth.php:102
 msgid "You may insert one more copy by include both http and https."
 msgstr ""
 
 #. translators: %s: URLs.
-#: \App\config\settings_rdoauth.php:54
+#: App/config/settings_rdoauth.php:54
 msgid "Authorized redirect URIs: enter %s"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:63
+#: App/config/settings_rdoauth.php:63
 msgid "Use Client ID and Client secret generated from there."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:65
+#: App/config/settings_rdoauth.php:65
 msgid "Go to APIs &amp; service &gt; Credentials &gt; click on OAuth consent screen tab and enter your website information there."
 msgstr ""
 
 #. translators: %1$s: Open link, %2$s: Close link
-#: \App\config\settings_rdoauth.php:75
+#: App/config/settings_rdoauth.php:75
 msgid "Please visit %1$sFacebook for developers%2$s and add or open your app."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:80
+#: App/config/settings_rdoauth.php:80
 msgid "Click +Add a New App, enter the Display Name and click on Create App ID."
 msgstr ""
 
 #. translators: %1$s: Open strong tag, %2$s: Close strong tag.
-#: \App\config\settings_rdoauth.php:84
+#: App/config/settings_rdoauth.php:84
 msgid "From Add a product section, click Set Up on %1$sFacebook Login%2$s."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:90
+#: App/config/settings_rdoauth.php:90
 msgid "Enable or select Yes for Client OAuth Login, Web OAuth Login, Use Strict Mode for Redirect URIs."
 msgstr ""
 
 #. translators: %s: URLs.
-#: \App\config\settings_rdoauth.php:95
+#: App/config/settings_rdoauth.php:95
 msgid "Valid OAuth redirect URIs: enter %s"
 msgstr ""
 
 #. translators: %s: URL.
-#: \App\config\settings_rdoauth.php:107
+#: App/config/settings_rdoauth.php:107
 msgid "Deauthorize Callback URL: enter %s"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:111
+#: App/config/settings_rdoauth.php:111
 msgid "Click on Save Changes"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:112
+#: App/config/settings_rdoauth.php:112
 msgid "Go to Settings &gt; Basic"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:113
+#: App/config/settings_rdoauth.php:113
 msgid "Use App ID and App Secret generated from there."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:114
+#: App/config/settings_rdoauth.php:114
 msgid "You may setup your app info here such as name, icon."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:115
+#: App/config/settings_rdoauth.php:115
 msgid "To make your app ready for public use, please go to App Review menu and change the option there."
 msgstr ""
 
 #. translators: %s: Use OAuth only option text.
-#: \App\config\settings_rdoauth.php:126
+#: App/config/settings_rdoauth.php:126
 msgid "This is multi-site WordPress and the registration page may not work perfectly with method %s."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:127
-#: \App\config\settings_rdoauth.php:157
+#: App/config/settings_rdoauth.php:127
+#: App/config/settings_rdoauth.php:175
 msgid "Use OAuth only"
 msgstr ""
 
 #. translators: %1$s: Allow new registrations text, %2$s: User accounts may be registered text.
-#: \App\config\settings_rdoauth.php:132
+#: App/config/settings_rdoauth.php:132
 msgid "It is recommended that you change the network settings for %1$s to %2$s."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:136
+#: App/config/settings_rdoauth.php:136
 msgid "Multi-site"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:148
+#. translators: %1$s: The design guide text file name, %2$s: The design guide file location.
+#: App/config/settings_rdoauth.php:146
+msgid "To design your login and register result page, please read %1$s file inside the %2$s folder."
+msgstr ""
+
+#: App/config/settings_rdoauth.php:156
+msgid "Here is the content on text file."
+msgstr ""
+
+#: App/config/settings_rdoauth.php:166
 msgid "Plugin settings"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:152
+#: App/config/settings_rdoauth.php:170
 msgid "If you choose to use OAuth only, please make sure that you have at least one of them enabled and correct setting values otherwise you will be unable to login."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:155
+#: App/config/settings_rdoauth.php:173
 msgid "Do not use (use WordPress login)"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:156
+#: App/config/settings_rdoauth.php:174
 msgid "Use WordPress login with OAuth"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:159
+#: App/config/settings_rdoauth.php:177
 msgid "Login/Register method"
 msgstr ""
 
 #. translators: %s: auth_cookie_expiration hook.
-#: \App\config\settings_rdoauth.php:166
+#: App/config/settings_rdoauth.php:184
 msgid "This setting can be override by any plugins that hook into %s."
 msgstr ""
 
 #. translators: %s: auth_cookie_expiration hook.
-#: \App\config\settings_rdoauth.php:166
+#: App/config/settings_rdoauth.php:184
 msgid "This setting will be use when user remember login or use OAuth only for login method."
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:169
+#: App/config/settings_rdoauth.php:187
 msgid "Login expiration"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:176
+#: App/config/settings_rdoauth.php:194
 msgid "Google login"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:183
+#: App/config/settings_rdoauth.php:201
 msgid "Enable Google login"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:187
-#: \App\config\settings_rdoauth.php:257
+#: App/config/settings_rdoauth.php:205
+#: App/config/settings_rdoauth.php:275
 msgid "Enable"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:194
+#: App/config/settings_rdoauth.php:212
 msgid "Client ID"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:201
+#: App/config/settings_rdoauth.php:219
 msgid "Client secret"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:205
+#: App/config/settings_rdoauth.php:223
 msgid "Auth parameters"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:205
+#: App/config/settings_rdoauth.php:223
 msgid "Reference"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:212
+#: App/config/settings_rdoauth.php:230
 msgid "Not set"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:215
+#: App/config/settings_rdoauth.php:233
 msgid "Default"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:217
+#: App/config/settings_rdoauth.php:235
 msgid "Prompt"
 msgstr ""
 
 #. translators: %1$s &amp; text, %2$s: &amp;include_granted_scopes=true&amp;hd=mydomain.com text
-#: \App\config\settings_rdoauth.php:224
+#: App/config/settings_rdoauth.php:242
 msgid "Alway start with %1$s For example: %2$s."
 msgstr ""
 
 #. translators: %s: The parameters that will be skipped.
-#: \App\config\settings_rdoauth.php:230
+#: App/config/settings_rdoauth.php:248
 msgid "These parameters will be skipped: %s"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:235
+#: App/config/settings_rdoauth.php:253
 msgid "Other parameters"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:246
+#: App/config/settings_rdoauth.php:264
 msgid "Facebook login"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:253
+#: App/config/settings_rdoauth.php:271
 msgid "Enable Facebook login"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:264
+#: App/config/settings_rdoauth.php:282
 msgid "App ID"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:271
+#: App/config/settings_rdoauth.php:289
 msgid "App secret"
 msgstr ""
 
-#: \App\config\settings_rdoauth.php:282
+#: App/config/settings_rdoauth.php:300
 msgid "Design pages"
 msgstr ""
 
-#. translators: %1$s: Text file to read, %2$s: Path to folder.
-#: \App\config\settings_rdoauth.php:286
-msgid "To design your login and register result page, please read %1$s file inside the %2$s folder."
-msgstr ""
-
 #. translators: %1$s: Current PHP version, %2$s: Required PHP version.
-#: \App\Controllers\Admin\Activation.php:75
+#: App/Controllers/Admin/Activation.php:75
 msgid "You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version or contact plugin author for this help.<br><br>Minimum requirement:<br>PHP %2$s"
 msgstr ""
 
 #. translators: %1$s: Current PHP version, %2$s: Required PHP version.
-#: \App\Controllers\Admin\Activation.php:75
+#: App/Controllers/Admin/Activation.php:75
 msgid "Minimum requirement of PHP version does not meet."
 msgstr ""
 
-#: \App\Controllers\Admin\Activation.php:250
+#: App/Controllers/Admin/Activation.php:250
 msgid "Donate"
 msgstr ""
 
-#: \App\Controllers\Admin\Settings.php:51
-#: \App\Views\admin\settings_v.php:2
+#: App/Controllers/Admin/Settings.php:51
+#: App/Views/admin/settings_v.php:2
 msgid "Rundiz OAuth settings"
 msgstr ""
 
-#: \App\Controllers\Front\HookLoginPage.php:221
+#: App/Controllers/Front/HookLoginPage.php:221
 msgid "Your email has been changed."
 msgstr ""
 
 #. translators: %1$s: Open link, %2$s: Close link
-#: \App\Controllers\Front\RdOauth\Register.php:94
+#: App/Controllers/Front/RdOauth/Register.php:94
 msgid "Registration completed. You can now %1$slogin%2$s using selected OAuth provider."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:33
+#: App/Libraries/ErrorsCollection.php:33
 msgid "Do not manually change email while the settings is using OAuth only. Please try to change the email via OAuth button instead."
 msgstr ""
 
 #. translators: %1$s: Open link, %2$s: Close link.
-#: \App\Libraries\ErrorsCollection.php:36
+#: App/Libraries/ErrorsCollection.php:36
 msgid "Your email is already in use or registered, please try to %1$slogin%2$s instead."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:38
+#: App/Libraries/ErrorsCollection.php:38
 msgid "Your email is already in use or registered, please try another OAuth account that register with different email."
 msgstr ""
 
 #. translators: %1$s: Open link, %2$s: Close link
-#: \App\Libraries\ErrorsCollection.php:41
+#: App/Libraries/ErrorsCollection.php:41
 msgid "Not found this email on the system. Please try to %1$sregister%2$s your account."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:43
+#: App/Libraries/ErrorsCollection.php:43
 msgid "Your email has not been verified or your user on OAuth provider was not found."
 msgstr ""
 
 #. translators: %s: Error code.
-#: \App\Libraries\ErrorsCollection.php:47
+#: App/Libraries/ErrorsCollection.php:47
 msgid "Invalid OAuth settings, please contact administrator to verify OAuth settings. Error code: %s."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:49
+#: App/Libraries/ErrorsCollection.php:49
 msgid "The token has been expired or invalid, please try again."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:51
+#: App/Libraries/ErrorsCollection.php:51
 msgid "No required scope. Please allow us to access an email, public profile to use with WordPress user system."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:53
+#: App/Libraries/ErrorsCollection.php:53
 msgid "The original forgot password process has been disabled, please use OAuth only."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:55
+#: App/Libraries/ErrorsCollection.php:55
 msgid "The original login process has been disabled, please use OAuth only."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:57
+#: App/Libraries/ErrorsCollection.php:57
 msgid "The original registration process has been disabled, please use OAuth only."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:59
+#: App/Libraries/ErrorsCollection.php:59
 msgid "Sorry, please try again."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:61
+#: App/Libraries/ErrorsCollection.php:61
 msgid "Unable to register, please contact the administrator."
 msgstr ""
 
-#: \App\Libraries\ErrorsCollection.php:63
+#: App/Libraries/ErrorsCollection.php:63
 msgid "Your user account on OAuth provider was not verified, please verify your account before continue."
 msgstr ""
 
 #. translators: %s: Template path.
-#: \App\Libraries\Loader.php:97
+#: App/Libraries/Loader.php:97
 msgid "The template file was not found. (%s)"
 msgstr ""
 
-#: \App\Libraries\RundizSettings.php:658
+#: App/Libraries/RundizSettings.php:658
 msgid "Upload"
 msgstr ""
 
-#: \App\Libraries\RundizSettings.php:659
+#: App/Libraries/RundizSettings.php:659
 msgid "Remove"
 msgstr ""
 
-#: \App\Views\admin\editOwnProfilePersonalOptions_v.php:3
-#: \templates\okv-oauth\partials\editAccountChangeEmailButton_v.php:2
-#: \templates\okv-oauth\partials\loginForm_v.php:5
-#: \templates\okv-oauth\partials\registerForm_v.php:6
+#: App/Views/admin/editOwnProfilePersonalOptions_v.php:3
+#: templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:2
+#: templates/okv-oauth/partials/loginForm_v.php:5
+#: templates/okv-oauth/partials/registerForm_v.php:6
 msgid "Please enable javascript."
 msgstr ""
 
-#: \App\Views\admin\editOwnProfilePersonalOptions_v.php:18
-#: \App\Views\admin\editOwnProfilePersonalOptions_v.php:28
-#: \templates\okv-oauth\partials\editAccountChangeEmailButton_v.php:28
-#: \templates\okv-oauth\partials\editAccountChangeEmailButton_v.php:39
+#: App/Views/admin/editOwnProfilePersonalOptions_v.php:18
+#: App/Views/admin/editOwnProfilePersonalOptions_v.php:28
+#: templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:28
+#: templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:39
 msgid "Change email"
 msgstr ""
 
-#: \App\Views\admin\editOwnProfilePersonalOptions_v.php:37
-#: \templates\okv-oauth\partials\editAccountChangeEmailButton_v.php:48
-#: \templates\okv-oauth\partials\loginForm_v.php:36
-#: \templates\okv-oauth\partials\registerForm_v.php:44
+#: App/Views/admin/editOwnProfilePersonalOptions_v.php:37
+#: templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:48
+#: templates/okv-oauth/partials/loginForm_v.php:36
+#: templates/okv-oauth/partials/registerForm_v.php:44
 msgid "OR"
 msgstr ""
 
-#: \templates\okv-oauth\partials\editAccountChangeEmailButton_v.php:17
+#: templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:17
 msgid "Change an email by click on the OAuth button and login to OAuth provider with the email you want."
 msgstr ""
 
-#: \templates\okv-oauth\partials\loginForm_v.php:14
-#: \templates\okv-oauth\partials\loginForm_v.php:26
+#: templates/okv-oauth/partials/loginForm_v.php:14
+#: templates/okv-oauth/partials/loginForm_v.php:26
 msgid "Login"
 msgstr ""
 
-#: \templates\okv-oauth\partials\registerForm_v.php:22
-#: \templates\okv-oauth\partials\registerForm_v.php:34
+#: templates/okv-oauth/partials/registerForm_v.php:22
+#: templates/okv-oauth/partials/registerForm_v.php:34
 msgid "Register"
 msgstr ""
