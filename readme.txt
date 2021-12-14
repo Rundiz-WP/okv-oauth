@@ -1,13 +1,12 @@
 === Rundiz OAuth ===
 Contributors: okvee
-Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HQE4GVV4KTZE
 Tags: oauth, google, google login, google register, facebook, facebook login, facebook register, social login, social connect
-Requires at least: 4.6.0
 Tested up to: 5.4.1
 Stable tag: 1.4.2
-Requires PHP: 5.4
 License: MIT
 License URI: https://opensource.org/licenses/MIT
+Requires at least: 4.6.0
+Requires PHP: 5.4
 
 Use OAuth such as Google, Facebook to login and register.
 

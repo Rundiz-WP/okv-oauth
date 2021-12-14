@@ -4,6 +4,8 @@
  * Plugin URI: https://rundiz.com/?p=319
  * Description: Use OAuth such as Google, Facebook to login and register.
  * Version: 1.4.2
+ * Requires at least: 4.6.0
+ * Requires PHP: 5.4
  * Author: Vee Winch
  * Author URI: http://rundiz.com
  * License: MIT
