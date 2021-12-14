@@ -247,9 +247,9 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
             }
             
             if ($plugin === $file) {
-                $new_link[] = '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HQE4GVV4KTZE" target="donate-rd-oauth">' . __('Donate', 'okv-oauth') . '</a>';
-                $links = array_merge($links, $new_link);
-                unset($new_link);
+                //$new_link[] = '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HQE4GVV4KTZE" target="donate-rd-oauth">' . __('Donate', 'okv-oauth') . '</a>';
+                //$links = array_merge($links, $new_link);
+                //unset($new_link);
             }
             
             return $links;
