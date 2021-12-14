@@ -1,7 +1,7 @@
 === Rundiz OAuth ===
 Contributors: okvee
 Tags: oauth, google, google login, google register, facebook, facebook login, facebook register, social login, social connect
-Tested up to: 5.4.1
+Tested up to: 5.8.2
 Stable tag: 1.4.2
 License: MIT
 License URI: https://opensource.org/licenses/MIT
