@@ -5,7 +5,7 @@ Tested up to: 5.8.2
 Stable tag: 1.4.2
 License: MIT
 License URI: https://opensource.org/licenses/MIT
-Requires at least: 4.6.0
+Requires at least: 5.0
 Requires PHP: 5.4
 
 Use OAuth such as Google, Facebook to login and register.
