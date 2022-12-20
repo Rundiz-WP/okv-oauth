@@ -16,6 +16,12 @@ if (!class_exists('\\RundizOauth\\App\\App')) {
 
 
         /**
+         * @var \RundizOauth\App\Libraries\Loader
+         */
+        public $Loader;
+
+
+        /**
          * load text domain. (language files)
          */
         public function loadLanguage()
