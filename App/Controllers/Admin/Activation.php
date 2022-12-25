@@ -214,9 +214,9 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
         public function registerHooks()
         {
             // register activate hook
-            register_activation_hook(RUNDIZOAUTH_FILE, [&$this, 'activation']);
+            register_activation_hook(RUNDIZOAUTH_FILE, [$this, 'activation']);
             // register deactivate hook
-            register_deactivation_hook(RUNDIZOAUTH_FILE, [&$this, 'deactivation']);
+            register_deactivation_hook(RUNDIZOAUTH_FILE, [$this, 'deactivation']);
             // register uninstall hook. this hook will be work on delete plugin.
             // * register uninstall hook MUST be static method or function.
             register_uninstall_hook(RUNDIZOAUTH_FILE, array('\\RundizOauth\\App\\Controllers\\Admin\\Activation', 'uninstall'));
@@ -224,36 +224,8 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
             add_action('upgrader_process_complete', [$this, 'updatePlugin'], 10, 2);
 
             // add filter action links. this will be displayed in actions area of plugin page. for example: xxxbefore | Activate | Edit | Delete | xxxafter
-            add_filter('plugin_action_links', [&$this, 'actionLinks'], 10, 5);
-            // add filter to row meta. (in plugin page below description)
-            add_filter('plugin_row_meta', [&$this, 'rowMeta'], 10, 2);
+            add_filter('plugin_action_links', [$this, 'actionLinks'], 10, 5);
         }// registerHooks
-
-
-        /**
-         * add links to row meta that is in plugin page under plugin description.
-         * 
-         * @staticvar string $plugin the plugin file name.
-         * @param array $links current meta links
-         * @param string $file the plugin file name for checking.
-         * @return array return modified links.
-         */
-        public function rowMeta($links, $file)
-        {
-            static $plugin;
-            
-            if (!isset($plugin)) {
-                $plugin = plugin_basename(RUNDIZOAUTH_FILE);
-            }
-            
-            if ($plugin === $file) {
-                //$new_link[] = '<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=9HQE4GVV4KTZE" target="donate-rd-oauth">' . __('Donate', 'okv-oauth') . '</a>';
-                //$links = array_merge($links, $new_link);
-                //unset($new_link);
-            }
-            
-            return $links;
-        }// rowMeta
 
 
         /**
