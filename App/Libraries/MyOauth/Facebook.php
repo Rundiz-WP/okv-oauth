@@ -108,7 +108,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                             }// endforeach;
                             unset($item, $key);
 
-                            if ($verifyScopes !== true) {
+                            if (true !== $verifyScopes) {
                                 $result->access_token = null;
                                 $result->rdoauth_error = 'missingrequiredscope';
                             }
@@ -159,7 +159,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                 }
             }
 
-            return ;
+            return '';
         }// getAuthUrl
 
 
@@ -240,7 +240,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                 // if get code querystring from facebook, authenticate and get token.
                 if (check_admin_referer('facebook-login', 'state') === 1) {
                     // if verify nonce passed.
-                    $result = $this->getAccessToken($_REQUEST['code'], get_edit_user_link() . '?rdoauth=facebook');
+                    $result = $this->getAccessToken(sanitize_text_field(wp_unslash($_REQUEST['code'])), get_edit_user_link() . '?rdoauth=facebook');
                     if (isset($result->access_token)) {
                         $access_token = $result->access_token;
                     } elseif (isset($result->error) && is_scalar($result->error)) {
@@ -259,7 +259,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                             // got user profile and verified.
                             // verified property (field) were removed in v3.1
                             $user = get_user_by('email', $result->email);
-                            if ($user === false && !is_wp_error($user)) {
+                            if (false === $user && !is_wp_error($user)) {
                                 // not found user by this email.
                                 // success
                                 return $result->email;
@@ -297,7 +297,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                 // if get code querystring from fb, authenticate and get token.
                 if (check_admin_referer('facebook-login', 'state') === 1) {
                     // if verify nonce passed.
-                    $result = $this->getAccessToken($_REQUEST['code'], home_url('rd-oauth?rdoauth=facebook'));
+                    $result = $this->getAccessToken(sanitize_text_field(wp_unslash($_REQUEST['code'])), home_url('rd-oauth?rdoauth=facebook'));
                     if (isset($result->access_token)) {
                         $access_token = $result->access_token;
                     } elseif (isset($result->rdoauth_error)) {
@@ -314,7 +314,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                             // got user profile and verified.
                             // verified property (field) were removed in v3.1
                             $user = get_user_by('email', $result->email);
-                            if ($user !== false && !is_wp_error($user)) {
+                            if (false !== $user && !is_wp_error($user)) {
                                 // found user by this email.
                                 // keep $user because we will use it as return value.
                                 // set token cookie.
@@ -364,7 +364,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                 // if get code querystring from fb, authenticate and get token.
                 if (check_admin_referer('facebook-login', 'state') === 1) {
                     // if verify nonce passed.
-                    $result = $this->getAccessToken($_REQUEST['code'], home_url('rd-oauth?rdoauth_subpage=register&rdoauth=facebook'));
+                    $result = $this->getAccessToken(sanitize_text_field(wp_unslash($_REQUEST['code'])), home_url('rd-oauth?rdoauth_subpage=register&rdoauth=facebook'));
                     if (isset($result->access_token)) {
                         $access_token = $result->access_token;
                     } elseif (isset($result->rdoauth_error)) {

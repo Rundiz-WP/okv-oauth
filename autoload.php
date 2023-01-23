@@ -8,11 +8,12 @@
  * 
  *      new \Foo\Bar\Baz\Qux;
  *      
- * @param string $class The fully-qualified class name.
+ * @param string $className The fully-qualified class name.
  * @return void
  * @link http://www.php-fig.org/psr/psr-4/examples/ copy from here.
+ * @package rundiz-oauth
  */
-spl_autoload_register(function($class) {
+spl_autoload_register(function($className) {
 
     // project-specific namespace prefix
     $prefix = 'RundizOauth\\';
@@ -22,13 +23,13 @@ spl_autoload_register(function($class) {
 
     // does the class use the namespace prefix?
     $len = strlen($prefix);
-    if (strncmp($prefix, $class, $len) !== 0) {
+    if (strncmp($prefix, $className, $len) !== 0) {
         // no, move to the next registered autoloader
         return;
     }
 
     // get the relative class name
-    $relative_class = substr($class, $len);
+    $relative_class = substr($className, $len);
 
     // replace the namespace prefix with the base directory, replace namespace
     // separators with directory separators in the relative class name, append

@@ -44,15 +44,15 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\Loader')) {
          * load config file and return its values.
          * 
          * @param string $config_file_name
-         * @param boolean $require_once
+         * @param boolean $requireOnce
          * @return mixed return config file content if success. return false if failed.
          */
-        public function loadConfig($config_file_name = 'config', $require_once = false)
+        public function loadConfig($config_file_name = 'config', $requireOnce = false)
         {
             $config_dir = dirname(__DIR__).'/config/';
 
-            if ($config_dir != null && file_exists($config_dir) && is_file($config_dir.$config_file_name.'.php')) {
-                if ($require_once === true) {
+            if (!empty($config_dir) && file_exists($config_dir) && is_file($config_dir.$config_file_name.'.php')) {
+                if (true === $requireOnce) {
                     $config_values = require_once $config_dir.$config_file_name.'.php';
                 } else {
                     $config_values = require $config_dir.$config_file_name.'.php';
@@ -80,12 +80,14 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\Loader')) {
          * @global \WP_Query $wp_query
          * @param string $view_name The template file name.
          * @param array $data The data to send to template file. The array key will becomes variable in template file.
+         * @throws \Exception Throws exception if cannot locate template at all.
          */
         public function loadTemplate($view_name, array $data = [])
         {
             global $wp_query;
 
-            if ($template_path = locate_template('okv-oauth/templates/' . $view_name . '.php')) {
+            $template_path = locate_template('okv-oauth/templates/' . $view_name . '.php');
+            if (!empty($template_path)) {
                 // if template found in the theme location.
             } else {
                 // if template was not found in theme location.
@@ -95,8 +97,6 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\Loader')) {
                     // throw the error to notice the developers.
                     /* translators: %s: Template path. */
                     throw new \Exception(sprintf(__('The template file was not found. (%s)', 'okv-oauth'), $template_path));
-                    // remove the variable.
-                    unset($template_path);
                 }
             }
 
@@ -117,19 +117,19 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\Loader')) {
          * 
          * @param string $view_name view file name refer from app/Views folder.
          * @param array $data for send data variable to view.
-         * @param boolean $require_once use include or include_once? if true, use include_once.
+         * @param boolean $requireOnce use include or include_once? if true, use include_once.
          * @return boolean return true if success loading, or return false if failed to load.
          */
-        public function loadView($view_name, array $data = [], $require_once = false)
+        public function loadView($view_name, array $data = [], $requireOnce = false)
         {
             $view_dir = dirname(__DIR__).'/Views/';
 
-            if ($view_name != null && file_exists($view_dir.$view_name.'.php') && is_file($view_dir.$view_name.'.php')) {
+            if (!empty($view_name) && file_exists($view_dir.$view_name.'.php') && is_file($view_dir.$view_name.'.php')) {
                 if (is_array($data)) {
                     extract($data, EXTR_PREFIX_SAME, 'dupvar_');
                 }
 
-                if ($require_once === true) {
+                if (true === $requireOnce) {
                     include_once $view_dir.$view_name.'.php';
                 } else {
                     include $view_dir.$view_name.'.php';

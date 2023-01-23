@@ -26,17 +26,17 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
 
             $RundizOauth = new \RundizOauth\App\Libraries\RundizOauth();
             $RundizOauth->init();
-            if ($RundizOauth->loginMethod === 0) {
+            if (0 === $RundizOauth->loginMethod) {
                 // if login method is using wp only.
                 exit;
             }
 
-            if (isset($_REQUEST['rdoauth']) && $_REQUEST['rdoauth'] === 'google') {
+            if (isset($_REQUEST['rdoauth']) && 'google' === $_REQUEST['rdoauth']) {
                 // user choose to register with Google.
                 $Google = new \RundizOauth\App\Libraries\MyOauth\Google();
                 $result = $Google->wpRegisterWithGoogle();
                 unset($Google);
-            } elseif (isset($_REQUEST['rdoauth']) && $_REQUEST['rdoauth'] === 'facebook') {
+            } elseif (isset($_REQUEST['rdoauth']) && 'facebook' === $_REQUEST['rdoauth']) {
                 // user choose to register with Facebook.
                 $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
                 $result = $Facebook->wpRegisterWithFacebook();
@@ -89,7 +89,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
                 return $title;
             });
 
-            if (isset($_REQUEST['rdoauth_result']) && $_REQUEST['rdoauth_result'] === 'success') {
+            if (isset($_REQUEST['rdoauth_result']) && 'success' === $_REQUEST['rdoauth_result']) {
                 /* translators: %1$s: Open link, %2$s: Close link */
                 $output['form_success_msg'] = sprintf(__('Registration completed. You can now %1$slogin%2$s using selected OAuth provider.', 'okv-oauth'), '<a href="' . wp_login_url() . '">', '</a>');
             }

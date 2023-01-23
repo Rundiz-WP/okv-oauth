@@ -31,7 +31,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RewriteRules')) {
          */
         public function goToPages()
         {
-            if (get_query_var('pagename') == 'rundiz-oauth') {
+            if (get_query_var('pagename') === 'rundiz-oauth') {
                 switch (get_query_var('rdoauth_subpage')) {
                     case 'register':
                         $Register = new RdOauth\Register();

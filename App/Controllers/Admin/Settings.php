@@ -26,24 +26,6 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
 
 
         /**
-         * an example of how to access settings variable and its values.
-         * 
-         * @global array $rundizoauth_options
-         */
-        public function pluginReadSettingsPage()
-        {
-            $this->getOptions();
-            global $rundizoauth_options;
-
-            $output['rundizoauth_options'] = $rundizoauth_options;
-
-            $Loader = new \RundizOauth\App\Libraries\Loader();
-            $Loader->loadView('admin/readsettings_v', $output);
-            unset($Loader, $output);
-        }// pluginReadSettingsPage
-
-
-        /**
          * setup settings menu to go to settings page.
          */
         public function pluginSettingsMenu()
@@ -72,7 +54,6 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
             } else {
                 echo 'Settings configuration file was not set.';
                 die('Settings configuration file was not set.');
-                exit;
             }
             unset($config_values, $loader);
 
@@ -83,7 +64,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
 
             // if form submitted
             if (isset($_POST) && !empty($_POST)) {
-                if (!wp_verify_nonce((isset($_POST['_wpnonce']) ? $_POST['_wpnonce'] : ''))) {
+                if (!wp_verify_nonce((isset($_POST['_wpnonce']) ? sanitize_text_field(wp_unslash($_POST['_wpnonce'])) : ''))) {
                     wp_nonce_ays('-1');
                 }
 
@@ -94,12 +75,12 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
                 // then save data.
                 $result = $this->saveOptions($options_values);
 
-                if ($result === true) {
+                if (true === $result) {
                     $output['form_result_class'] = 'notice-success';
                     $output['form_result_msg'] = __('Settings saved.');
                 } else {
                     $output['form_result_class'] = 'notice-success';
-                    $output['form_result_msg'] =  __('Settings saved.');
+                    $output['form_result_msg'] = __('Settings saved.');
                 }
             }// endif $_POST
 

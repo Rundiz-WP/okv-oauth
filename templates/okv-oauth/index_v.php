@@ -1,6 +1,8 @@
 <?php 
 /**
  * This template is based on "Bootstrap Basic" theme.
+ * 
+ * @package rundiz-oauth
  */
 get_header(); 
 ?> 
@@ -27,4 +29,5 @@ get_header();
         ?> 
     </div>
 </div>
-<?php get_footer(); ?> 
+<?php 
+get_footer();

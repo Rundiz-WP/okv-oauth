@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<ruleset name="WordPress Coding Standards based custom ruleset for your plugin">
+    <description>Generally-applicable sniffs for WordPress plugins.</description>
+
+    <!-- What to scan -->
+    <file>.</file>
+    <exclude-pattern>/.dev-notes/</exclude-pattern>
+    <exclude-pattern>/tests/</exclude-pattern>
+    <exclude-pattern>/vendor/</exclude-pattern>
+    <exclude-pattern>/node_modules/</exclude-pattern>
+
+    <!-- How to scan -->
+    <!-- Usage instructions: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Usage -->
+    <!-- Annotated ruleset: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml -->
+    <arg value="sp"/> <!-- Show sniff and progress -->
+    <arg name="basepath" value="./"/><!-- Strip the file paths down to the relevant bit -->
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
+    <arg name="parallel" value="8"/><!-- Enables parallel processing when available for faster results. -->
+
+    <ini name="memory_limit" value="256M"/>
+
+    <!-- Rules: Check PHP version compatibility -->
+    <!-- https://github.com/PHPCompatibility/PHPCompatibility#sniffing-your-code-for-compatibility-with-specific-php-versions -->
+    <config name="testVersion" value="5.4-"/>
+    <!-- https://github.com/PHPCompatibility/PHPCompatibilityWP -->
+    <rule ref="PHPCompatibilityWP"/>
+
+    <!-- Rules: WordPress Coding Standards -->
+    <!-- https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards -->
+    <!-- https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki/Customizable-sniff-properties -->
+    <config name="minimum_supported_wp_version" value="5.0"/>
+    <rule ref="WordPress">
+        <!-- exclude name="WordPress.VIP"/ --><!-- removed as error Referenced sniff "WordPress.VIP" does not exist and can't find the fix or additional installation anywhere. -->
+        <exclude name="Generic.Classes.OpeningBraceSameLine.BraceOnNewLine"></exclude>
+        <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedIf"></exclude>
+        <exclude name="Generic.Files.EndFileNewline.NotFound"></exclude>
+        <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning"></exclude>
+        <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie.BraceOnNewLine"></exclude>
+        <exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceAfterOpen"></exclude>
+        <exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceBeforeClose"></exclude>
+        <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed"></exclude>
+        <exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect"></exclude>
+        <exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact"></exclude>
+        <exclude name="PEAR"></exclude>
+        <exclude name="PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.Changed"></exclude>
+        <exclude name="PHPCompatibility.Variables.ForbiddenGlobalVariableVariable.NonBareVariableFound"></exclude>
+        <exclude name="PSR2.Namespaces.NamespaceDeclaration.BlankLineAfter"></exclude>
+        <exclude name="Squiz.Commenting.ClassComment.Missing"></exclude>
+        <exclude name="Squiz.Commenting.ClosingDeclarationComment.Incorrect"></exclude>
+        <exclude name="Squiz.Commenting.FileComment.Missing"></exclude>
+        <exclude name="Squiz.Commenting.FileComment.SpacingAfterComment"></exclude>
+        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"></exclude>
+        <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"></exclude>
+        <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"></exclude>
+        <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"></exclude>
+        <exclude name="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace"></exclude>
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen"></exclude>
+        <exclude name="Squiz.PHP.CommentedOutCode.Found"></exclude>
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentAfterEnd"></exclude>
+        <exclude name="Squiz.PHP.NonExecutableCode.ReturnNotRequired"></exclude>
+        <exclude name="Squiz.Strings.ConcatenationSpacing.PaddingFound"></exclude>
+        <exclude name="Squiz.WhiteSpace.SemicolonSpacing.Incorrect"></exclude>
+        <exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EndLine"></exclude>
+        <exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"></exclude>
+        <exclude name="Universal.ControlStructures.DisallowLonelyIf.Found"></exclude>
+        <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.NoSpaceAfterArrayOpener"></exclude>
+        <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.NoSpaceBeforeArrayCloser"></exclude>
+        <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions.NoSpacesAroundArrayKeys"></exclude>
+        <exclude name="WordPress.Arrays.CommaAfterArrayItem.NoComma"></exclude>
+        <exclude name="WordPress.Arrays.CommaAfterArrayItem.NoSpaceAfterComma"></exclude>
+        <exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned"></exclude>
+        <exclude name="WordPress.Files.FileName.InvalidClassFileName"></exclude>
+        <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"></exclude>
+        <exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedConstantFound"></exclude>
+        <exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound"></exclude>
+        <exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound"></exclude>
+        <exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound"></exclude>
+        <exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid"></exclude>
+        <exclude name="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase"></exclude>
+        <exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase"></exclude>
+        <exclude name="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase"></exclude>
+        <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace"></exclude>
+        <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_error_log"></exclude>
+        <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_print_r"></exclude>
+        <exclude name="WordPress.PHP.DevelopmentFunctions.error_log_var_export"></exclude>
+        <exclude name="WordPress.PHP.DontExtract.extract_extract"></exclude>
+        <exclude name="WordPress.PHP.StrictInArray.MissingTrueStrict"></exclude>
+        <exclude name="WordPress.Security.EscapeOutput.OutputNotEscaped"></exclude><!-- this cause super stupid required escape in `sprintf()` with gettext with placeholders. it will becomes escape variable and escape gettext (double escape). see Activation.php at `activation()` method. -->
+        <exclude name="WordPress.Security.EscapeOutput.UnsafePrintingFunction"></exclude><!-- this cause "All output should be run through an escaping function" error. this is stupid because it should be able to render HTML if needed. -->
+        <exclude name="WordPress.Security.NonceVerification.Recommended"></exclude><!-- this cause "Processing form data without nonce verification" error while it is called from edit profile hook in WP core which is already verfiy nonce. -->
+        <exclude name="WordPress.Security.NonceVerification.Missing"></exclude><!-- this cause "Processing form data without nonce verification" error while it is called from edit profile hook in WP core which is already verfiy nonce. -->
+        <exclude name="WordPress.WhiteSpace.ControlStructureSpacing"></exclude>
+        <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore"></exclude>
+        <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter"></exclude>
+        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_init"></exclude>
+        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_setopt"></exclude>
+        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_exec"></exclude>
+        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_close"></exclude>
+        <exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"></exclude>
+        <exclude name="WordPress.WP.AlternativeFunctions.json_encode_json_encode"></exclude><!-- The function `wp_json_encode()` does not support PHP less than 5.6. -->
+        <exclude name="WordPress.WP.AlternativeFunctions.strip_tags_strip_tags"></exclude>
+        <exclude name="WordPress.WP.EnqueuedResourceParameters.MissingVersion"></exclude>
+        <exclude name="WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion"></exclude>
+        <exclude name="WordPress.WP.I18n.MissingArgDomain"></exclude>
+    </rule>
+    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+        <properties>
+            <!-- Value: replace the function, class, and variable prefixes used. Separate multiple prefixes with a comma. -->
+            <property name="prefixes" type="array" value="demo_plugin_test"/>
+        </properties>
+    </rule>
+    <rule ref="WordPress.WP.I18n">
+        <properties>
+            <!-- Value: replace the text domain used. -->
+            <property name="text_domain" type="array" value="okv-oauth"/>
+        </properties>
+    </rule>
+    <rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
+        <properties>
+            <property name="blank_line_check" value="true"/>
+    	</properties>
+    </rule>
+</ruleset>

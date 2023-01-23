@@ -35,7 +35,7 @@ $google_login_help_msg = sprintf(
             sprintf(
                 /* translators: %s: URL. */
                 __('Authorized JavaScript origins: enter %s', 'okv-oauth'), 
-                '<strong>' . (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . '</strong>'
+                '<strong>' . (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . (isset($_SERVER['HTTP_HOST']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) : '') . '</strong>'
             ) .
             '<br>' .
             __('You may insert one more copy by include both http and https.', 'okv-oauth') .
@@ -97,7 +97,7 @@ $facebook_login_help_msg = sprintf(
             sprintf(
                 /* translators: %s: URL. */
                 __('Deauthorize Callback URL: enter %s', 'okv-oauth'), 
-                '<strong>' . (isset($_SERVER['HTTPS']) ? "https" : "http") . '://' . (isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '') . '</strong>'
+                '<strong>' . (isset($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . (isset($_SERVER['HTTP_HOST']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_HOST'])) : '') . '</strong>'
             ) .
         '</li>' . "\n" .
         '<li>' . __('Click on Save Changes', 'okv-oauth') . '</li>' . "\n" .
@@ -109,9 +109,9 @@ $facebook_login_help_msg = sprintf(
 unset($facebook_apps_url);
 
 
-$active_signup = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
+$wpActiveSignup = get_site_option('registration', 'none');// see `signup_user()` function.
 $wpsignup_field = [];
-if (is_multisite() && $active_signup === 'all') {
+if (is_multisite() && 'all' === $wpActiveSignup) {
     $wpsignup_field = [
         'content' => sprintf(
                 /* translators: %s: Use OAuth only option text. */
@@ -129,7 +129,7 @@ if (is_multisite() && $active_signup === 'all') {
         'type' => 'html',
     ];
 }
-unset($active_signup);
+unset($wpActiveSignup);
 
 
 $design_pages_realpath = realpath(plugin_dir_path(RUNDIZOAUTH_FILE) . 'templates');

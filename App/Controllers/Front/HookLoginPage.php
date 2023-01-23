@@ -21,7 +21,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          */
         public function adminEnqueueScripts($hook)
         {
-            if (is_admin() && $hook === 'profile.php') {
+            if (is_admin() && 'profile.php' === $hook) {
                 wp_enqueue_style('rd-oauth-login');
                 wp_enqueue_style('rd-oauth-font-awesome4');
             }
@@ -40,7 +40,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if ($this->loginMethod === 2) {
+            if (2 === $this->loginMethod) {
                 $allow = false;
             }
 
@@ -57,16 +57,18 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          */
         public function adminNotice()
         {
-            if($output = get_transient('rundiz-oauth-error')) {
+            $output = get_transient('rundiz-oauth-error');
+            if ($output) {
                 delete_transient('rundiz-oauth-error');
                 $output = maybe_unserialize(stripslashes_deep($output));
 
                 if (is_array($output) && array_key_exists('class', $output) && array_key_exists('message', $output)) {
                     $Loader = new \RundizOauth\App\Libraries\Loader();
                     $Loader->loadView('admin/adminNotice_v', $output);
-                    unset($Loader, $output);
+                    unset($Loader);
                 }
             }
+            unset($output);
         }// adminNotice
 
 
@@ -93,7 +95,6 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             global $rundizoauth_options;
 
-            
             if (is_array($rundizoauth_options)) {
                 if (array_key_exists('login_expiration', $rundizoauth_options) &&
                     !empty($rundizoauth_options['login_expiration']) &&
@@ -103,12 +104,12 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     $newLength = intval($rundizoauth_options['login_expiration']);
                 }
 
-                if (isset($newLength) && ($this->loginMethod === 2 || $remember === true)) {
+                if (isset($newLength) && (2 === $this->loginMethod || true === $remember)) {
                     // if rundiz oauth settings is using oauth only OR normal login form and user tick on remember me.
                     // remove filter hook to prevent call hook loop into itself (here, again).
                     remove_filter('auth_cookie_expiration', [$this, 'authCookieExpiration']);
                     // call to the same filter hook to allow other plugins to override login expiration.
-                    $length = apply_filters('auth_cookie_expiration', $newLength * DAY_IN_SECONDS, $user_id, $remember);
+                    $length = apply_filters('auth_cookie_expiration', $newLength * DAY_IN_SECONDS, $user_id, $remember);// phpcs:ignore
                 }
 
                 unset($newLength);
@@ -139,7 +140,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             $this->init();
 
-            if ($this->loginMethod === 2 && ($username != null || $password != null)) {
+            if (2 === $this->loginMethod && (!empty($username) || !empty($password))) {
                 // if using oauth only but there is form data submitted.
                 // show the error message.
                 return new \WP_Error('rundiz_oauth_login_error', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('originallogindisabled'));
@@ -158,7 +159,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if ($this->useOauth === true) {
+            if (true === $this->useOauth) {
                 global $rundizoauth_options;
 
                 $Loader = new \RundizOauth\App\Libraries\Loader();
@@ -177,7 +178,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if ($this->useOauth === true) {
+            if (true === $this->useOauth) {
                 global $rundizoauth_options;
 
                 $Loader = new \RundizOauth\App\Libraries\Loader();
@@ -196,14 +197,14 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if ($this->loginMethod === 1 || $this->loginMethod === 2) {
+            if (1 === $this->loginMethod || 2 === $this->loginMethod) {
                 // if rundiz oauth settings is using wp+oauth (1) or oauth only (2).
-                if (isset($_REQUEST['rdoauth']) && $_REQUEST['rdoauth'] === 'google') {
+                if (isset($_REQUEST['rdoauth']) && 'google' === $_REQUEST['rdoauth']) {
                     // user choose to login with google.
                     $Google = new \RundizOauth\App\Libraries\MyOauth\Google();
                     $email = $Google->wpCheckEmailNotExists();
                     unset($Google);
-                } elseif (isset($_REQUEST['rdoauth']) && $_REQUEST['rdoauth'] === 'facebook') {
+                } elseif (isset($_REQUEST['rdoauth']) && 'facebook' === $_REQUEST['rdoauth']) {
                     // user choose to login with facebook.
                     $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
                     $email = $Facebook->wpCheckEmailNotExists();
@@ -214,13 +215,28 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     if (!is_wp_error($email) && is_scalar($email)) {
                         $user_id = get_current_user_id();
                         $user = get_user_by('ID', $user_id);
-                        wp_update_user(['ID' => $user->ID, 'user_email' => $email]);
+                        wp_update_user([
+                            'ID' => $user->ID, 
+                            'user_email' => $email
+                        ]);
                         do_action('rundiz_oauth_changeemail_success', $user->ID, $email);
                         unset($email, $user, $user_id);
 
-                        set_transient('rundiz-oauth-error', maybe_serialize(['class' => 'notice-success', 'message' => __('Your email has been changed.', 'okv-oauth')]));
+                        set_transient(
+                            'rundiz-oauth-error', 
+                            maybe_serialize([
+                                'class' => 'notice-success', 
+                                'message' => __('Your email has been changed.', 'okv-oauth')
+                            ])
+                        );
                     } elseif (is_wp_error($email)) {
-                        set_transient('rundiz-oauth-error', maybe_serialize(['class' => 'notice-error', 'message' => $email->get_error_message()]));
+                        set_transient(
+                            'rundiz-oauth-error', 
+                            maybe_serialize([
+                                'class' => 'notice-error', 
+                                'message' => $email->get_error_message()
+                            ])
+                        );
                     }
 
                     wp_safe_redirect(get_edit_user_link());
@@ -243,9 +259,9 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                 unset($StylesAndScripts);
             }
 
-            if ($this->useOauth === true) {
+            if (true === $this->useOauth) {
                 // if choose login method as wp login with oauth or oauth only.
-                $action = (isset($_REQUEST['action']) ? $_REQUEST['action'] : '');
+                $action = (isset($_REQUEST['action']) ? sanitize_text_field(wp_unslash($_REQUEST['action'])) : '');
                 if (!in_array($action, ['postpass', 'logout', 'lostpassword', 'retrievepassword', 'resetpass', 'rp', 'register', 'login'], true) && false === has_filter('login_form_' . $action )) {
                     $action = 'login';
                 }
@@ -254,7 +270,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     case 'postpass':
                     case 'logout':
                     case 'lostpassword':
-                        if ($this->loginMethod === 2) {
+                        if (2 === $this->loginMethod) {
                             wp_enqueue_script('rd-oauth-lostpassword', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-lostpassword.js', ['jquery'], false, true);
                             wp_localize_script(
                                 'rd-oauth-lostpassword', 
@@ -276,7 +292,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                         wp_enqueue_style('rd-oauth-font-awesome4');
                 }
 
-                if (isset($action) && $action === 'register') {
+                if (isset($action) && 'register' === $action) {
                     // if in register page.
                     wp_enqueue_script('rd-oauth-register', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-register.js', ['jquery'], false, true);
                     wp_localize_script(
@@ -286,7 +302,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                             'loginMethod' => $this->loginMethod,
                         ]
                     );
-                } elseif (isset($action) && $action === 'login') {
+                } elseif (isset($action) && 'login' === $action) {
                     // if in login page.
                     wp_enqueue_script('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-login.js', ['jquery'], false, true);
                     wp_localize_script(
@@ -311,7 +327,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if ($this->useOauth === true) {
+            if (true === $this->useOauth) {
                 global $rundizoauth_options;
 
                 $Loader = new \RundizOauth\App\Libraries\Loader();
@@ -344,7 +360,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if ($this->loginMethod === 2) {
+            if (2 === $this->loginMethod) {
                 // if using oauth only.
                 // not allow to lost password because user have to login using oauth provider such as Google.
                 $Loader = new \RundizOauth\App\Libraries\Loader();
@@ -364,7 +380,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if ($this->loginMethod === 2) {
+            if (2 === $this->loginMethod) {
                 exit;
             }
         }// lostPasswordPost
@@ -380,7 +396,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if ($this->useOauth === true) {
+            if (true === $this->useOauth) {
                 global $rundizoauth_options;
                 $active_signup = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
 
@@ -489,9 +505,12 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
             $this->init();
 
             if (
-                $this->loginMethod === 2 &&
+                2 === $this->loginMethod &&
                 (
-                    strtoupper($_SERVER['REQUEST_METHOD']) === 'POST' ||
+                    (
+                        isset($_SERVER['REQUEST_METHOD']) &&
+                        'POST' === strtoupper(sanitize_text_field(wp_unslash($_SERVER['REQUEST_METHOD'])))
+                    ) ||
                     isset($_REQUEST['user_email'])
                 )
             ) {
@@ -512,11 +531,13 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             if ($this->useOauth) {
                 if (isset($_REQUEST['redirect_to'])) {
-                    if (session_status() == PHP_SESSION_NONE) {
+                    if (session_status() === PHP_SESSION_NONE) {
                         session_start();
                     }
 
-                    $_SESSION['okv-oauth_redirect_to'] = $_REQUEST['redirect_to'];
+                    $_SESSION['okv-oauth_redirect_to'] = sanitize_text_field(wp_unslash($_REQUEST['redirect_to']));
+
+                    session_write_close();
                 }
             }
         }// rememberRedirectTo
@@ -534,7 +555,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             global $rundizoauth_options;
 
-            if ($this->useOauth === true && $this->loginMethod === 2 && is_numeric($user_id)) {
+            if (true === $this->useOauth && 2 === $this->loginMethod && is_numeric($user_id)) {
                 // if using OAuth only.
                 $current_user = get_user_by('id', $user_id);
 
@@ -552,6 +573,12 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         }// updateOwnProfile
 
 
+        /**
+         * WooCommerce change billing email using OAuth.
+         * 
+         * @param int $user_id
+         * @param string $new_email
+         */
         public function wcChangeBillingEmailUsingOAuth($user_id, $new_email = null)
         {
             if (is_numeric($user_id) && !empty($new_email) && is_email($new_email) && class_exists('\\WooCommerce')) {
@@ -581,11 +608,11 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             global $rundizoauth_options;
 
-            if ($this->useOauth === true && $this->loginMethod === 2) {
-                if ('POST' === strtoupper($_SERVER['REQUEST_METHOD'])) {
+            if (true === $this->useOauth && 2 === $this->loginMethod) {
+                if (isset($_SERVER['REQUEST_METHOD']) && 'POST' === strtoupper(sanitize_text_field(wp_unslash($_SERVER['REQUEST_METHOD'])))) {
                     $current_user = get_user_by('id', get_current_user_id());
                     $current_email = $current_user->user_email;
-                    $account_email = !empty($_POST['account_email']) ? wc_clean($_POST['account_email']) : '';
+                    $account_email = !empty($_POST['account_email']) ? wc_clean($_POST['account_email']) : '';// phpcs:ignore
                     unset($current_user);
 
                     if (strtolower($account_email) !== strtolower($current_email) && is_object($errors)) {
@@ -609,16 +636,16 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             global $rundizoauth_options;
 
-            if ($this->useOauth === true) {
+            if (true === $this->useOauth) {
                 // if choose login method as wp login with oauth or oauth only.
-                if (isset($_REQUEST['action']) && $_REQUEST['action'] === 'register') {
+                if (isset($_REQUEST['action']) && 'register' === $_REQUEST['action']) {
                     // if on register page.
-                    if (isset($_REQUEST['rdoauth']) && $_REQUEST['rdoauth'] === 'google') {
+                    if (isset($_REQUEST['rdoauth']) && 'google' === $_REQUEST['rdoauth']) {
                         // user choose to register with Google.
                         $Google = new \RundizOauth\App\Libraries\MyOauth\Google();
                         $Google->wpRegisterWithGoogle();
                         unset($Google);
-                    } elseif (isset($_REQUEST['rdoauth']) && $_REQUEST['rdoauth'] === 'facebook') {
+                    } elseif (isset($_REQUEST['rdoauth']) && 'facebook' === $_REQUEST['rdoauth']) {
                         // user choose to register with Facebook.
                         $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
                         $Facebook->wpRegisterWithFacebook();
@@ -659,8 +686,8 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             $active_signup_option = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
 
-            if (isset($_SERVER['REQUEST_METHOD']) && strtoupper($_SERVER['REQUEST_METHOD']) === 'POST') {
-                if ($active_signup_option === 'user' && $this->useOauth === true && $this->loginMethod === 2) {
+            if (isset($_SERVER['REQUEST_METHOD']) && 'POST' === strtoupper(sanitize_text_field(wp_unslash($_SERVER['REQUEST_METHOD'])))) {
+                if ('user' === $active_signup_option && true === $this->useOauth && 2 === $this->loginMethod) {
                     $active_signup = 'none';
                 }
             }

@@ -4,14 +4,14 @@
     <?php
     if (isset($_REQUEST['rdoauth-err'])) {
         echo '<div class="error-message rd-oauth-alert rd-oauth-alert-error">';
-        echo \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage($_REQUEST['rdoauth-err']);
+        echo \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage(sanitize_text_field(wp_unslash($_REQUEST['rdoauth-err'])));
         echo '</div>';
     }
     ?> 
 
     <div class="rd-oauth-links-admin">
         <?php
-        if (isset($rundizoauth_options['google_login_enable']) && $rundizoauth_options['google_login_enable'] === '1') {
+        if (isset($rundizoauth_options['google_login_enable']) && '1' === $rundizoauth_options['google_login_enable']) {
             // google login enabled.
             $Google = new RundizOauth\App\Libraries\MyOauth\Google();
         ?> 
@@ -21,7 +21,7 @@
         }// endif;
         ?> 
         <?php
-        if (isset($rundizoauth_options['facebook_login_enable']) && $rundizoauth_options['facebook_login_enable'] === '1') {
+        if (isset($rundizoauth_options['facebook_login_enable']) && '1' === $rundizoauth_options['facebook_login_enable']) {
             // facebook login enabled.
             $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
         ?> 
@@ -31,7 +31,7 @@
         }// endif;
         ?> 
         <?php
-        if (isset($rundizoauth_options['login_method']) && $rundizoauth_options['login_method'] === '1') {
+        if (isset($rundizoauth_options['login_method']) && '1' === $rundizoauth_options['login_method']) {
             // use wp login + oauth, display "or".
         ?> 
         <div class="rd-oauth-or-original-wp-login"><?php _e('OR', 'okv-oauth'); ?></div>

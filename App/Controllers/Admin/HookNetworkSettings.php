@@ -1,5 +1,6 @@
 <?php
 /**
+ * @package rundiz-oauth
  * @license http://opensource.org/licenses/MIT MIT
  */
 
@@ -12,9 +13,14 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Admin\\HookNetworkSettings')
     {
 
 
+        /**
+         * Enqueue admin scripts.
+         * 
+         * @param string $hook
+         */
         public function adminEnqueueScripts($hook)
         {
-            if (is_admin() && is_multisite() && $hook === 'settings.php') {
+            if (is_admin() && is_multisite() && 'settings.php' === $hook) {
                 $this->init();
 
                 wp_enqueue_script('rd-oauth-adminnetworksettings', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-adminnetworksettings.js', ['jquery'], false, true);
@@ -41,7 +47,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Admin\\HookNetworkSettings')
         {
             $this->init();
 
-            if ($this->loginMethod === 2) {
+            if (2 === $this->loginMethod) {
                 // if settings was set to use oauth only.
                 // cannot allow register form to register user and blog 
                 // because user can register any email that is not oauth user 

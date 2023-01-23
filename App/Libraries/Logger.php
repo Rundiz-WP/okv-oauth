@@ -3,7 +3,6 @@
  * Logger class. This class will write log using WordPress system.
  * 
  * @package rundiz-oauth
- * @license http://opensource.org/licenses/MIT MIT
  */
 
 

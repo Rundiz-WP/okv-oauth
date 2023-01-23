@@ -32,7 +32,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
         {
             $setting_file = $this->settings_config_file;
 
-            if ($setting_file == null || !is_string($setting_file)) {
+            if (empty($setting_file) || !is_string($setting_file)) {
                 wp_die('Settings configuration file was not set.');
             }
 
@@ -60,7 +60,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
                     if (is_array($tabs) && array_key_exists('fields', $tabs)) {
                         foreach ($tabs['fields'] as $field_key => $fields) {
                             if (is_array($fields)) {
-                                if (array_key_exists('type', $fields) && $fields['type'] == 'checkbox' && array_key_exists('options', $fields) && is_array($fields['options'])) {
+                                if (array_key_exists('type', $fields) && 'checkbox' === $fields['type'] && array_key_exists('options', $fields) && is_array($fields['options'])) {
                                     // this is checkbox which 1 field can contain multiple checkboxes.
                                     foreach ($fields['options'] as $checkbox_key => $checkboxes) {
                                         if (is_array($checkboxes)) {
@@ -120,7 +120,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
             $tab_style = 'vertical';
             if (is_array($settings_config) && array_key_exists('tab_style', $settings_config)) {
                 // tab style must be vertical or horizontal.
-                if ($settings_config['tab_style'] == 'vertical' || $settings_config['tab_style'] == 'horizontal') {
+                if ('vertical' === $settings_config['tab_style'] || 'horizontal' === $settings_config['tab_style']) {
                     $tab_style = $settings_config['tab_style'];
                 }
             }
@@ -184,8 +184,8 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
                     // get key without square bracket []
                     $key_no_sqb = preg_replace('/\[.*?\]/', '', $key);
 
-                    if (isset($_REQUEST) && is_array($_REQUEST) && isset($_REQUEST[$key_no_sqb])) {
-                        $output[$key] = $_REQUEST[$key_no_sqb];
+                    if (isset($_REQUEST[$key_no_sqb])) {
+                        $output[$key] = sanitize_text_field(wp_unslash($_REQUEST[$key_no_sqb]));
                     } else {
                         $output[$key] = '';
                     }
@@ -292,9 +292,9 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
 
                         case 'checkbox':
                         case 'radio':
-
+                            // above is group of input clicking.
                         case 'select':
-
+                            // above is select box.
                         case 'color':
                         case 'date':
                         case 'email':
@@ -406,15 +406,15 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
         {
             $field_type = (array_key_exists('type', $fields) ? $fields['type'] : 'text');
 
-            if ($field_type == 'checkbox') {
+            if ('checkbox' === $field_type) {
                 // input type checkbox or radio. ------------------------------
                 $output = $this->renderFormInputCheckbox($field_key, $fields, $options_values);
-            } elseif ($field_type == 'radio') {
+            } elseif ('radio' === $field_type) {
                 $output = $this->renderFormInputRadio($field_key, $fields, $options_values);
-            } elseif ($field_type == 'select') {
+            } elseif ('select' === $field_type) {
                 // select box ----------------------------------------------------
                 $output = $this->renderFormSelectbox($field_key, $fields, $options_values);
-            } elseif ($field_type == 'textarea') {
+            } elseif ('textarea' === $field_type) {
                 // textarea ------------------------------------------------------
                 $output = $this->renderFormTextarea($field_key, $fields, $options_values);
             } else {
@@ -489,14 +489,14 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
                                     $field_value = $options_values[$checkbox_id];
                                 }
                                 
-                                if (isset($field_value) && $checkboxes['value'] == $field_value) {
+                                if (isset($field_value) && $checkboxes['value'] === $field_value) {
                                     $output .= ' checked="checked"';
                                 }
                             } else {
                                 // this is check box array.
                                 // check that options values contain this checked. this can override default automatically.
                                 if (is_array($options_values) && array_key_exists($checkbox_id, $options_values)) {
-                                    $field_value_array = (array)$options_values[$checkbox_id];
+                                    $field_value_array = (array) $options_values[$checkbox_id];
                                 }
 
                                 $field_value = (isset($field_value_array) ? $field_value_array : []);
@@ -526,7 +526,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
                         if (!array_key_exists('description', $checkboxes) && $i < count($fields['options'])) {
                             $output .= '<br>'."\n";
                         }
-                        $i++;
+                        ++$i;
                     }
 
                     unset($checkbox_id, $field_value);
@@ -571,7 +571,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
                         $output .= ' name="'.$field_name.'"';
                         if (array_key_exists('value', $radio_buttons)) {
                             $output .= ' value="'.$radio_buttons['value'].'"';
-                            if ($field_value == $radio_buttons['value']) {
+                            if ($field_value === $radio_buttons['value']) {
                                 $output .= ' checked="checked"';
                             }
                         }
@@ -595,7 +595,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
                         if (!array_key_exists('description', $radio_buttons) && $i < count($fields['options'])) {
                             $output .= '<br>'."\n";
                         }
-                        $i++;
+                        ++$i;
                     }
                 }// endforeach;
                 unset($i, $radio_buttons, $radio_key);
@@ -637,7 +637,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
             }
 
             $output = '';
-            if ($preview_mode == 'preview_all' || $preview_mode == 'preview_url' || $preview_mode == 'no_preview_img') {
+            if ('preview_all' === $preview_mode || 'preview_url' === $preview_mode || 'no_preview_img' === $preview_mode) {
                 $output = '<input type="text" id="preview-media-url-'.$field_name.'" class="large-text" value="'.(is_array($field_values) && array_key_exists('url', $field_values) ? esc_url($field_values['url']) : '').'" readonly>'."\n";
             }
             $output .= '<input type="hidden" id="media-id-'.$field_name.'" name="'.$field_name.'[id]" value="'.(is_array($field_values) && array_key_exists('id', $field_values) ? $field_values['id'] : '').'">'."\n";
@@ -648,9 +648,9 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
             $output .= '<input type="hidden" id="media-medium-'.$field_name.'" name="'.$field_name.'[medium]" value="'.(is_array($field_values) && array_key_exists('medium', $field_values) ? $field_values['medium'] : '').'">'."\n";
             $output .= '<input type="hidden" id="media-thumbnail-'.$field_name.'" name="'.$field_name.'[thumbnail]" value="'.(is_array($field_values) && array_key_exists('thumbnail', $field_values) ? $field_values['thumbnail'] : '').'">'."\n";
             $output .= '<br>'."\n";
-            if ($preview_mode == 'preview_all' || $preview_mode == 'preview_img' || $preview_mode == 'no_preview_url') {
+            if ('preview_all' === $preview_mode || 'preview_img' === $preview_mode || 'no_preview_url' === $preview_mode) {
                 $output .= '<div class="image-preview image-preview-'.$field_name.'">';
-                if (is_array($field_values) && array_key_exists('thumbnail', $field_values) && $field_values['thumbnail'] != null) {
+                if (is_array($field_values) && array_key_exists('thumbnail', $field_values) && !empty($field_values['thumbnail'])) {
                     $output .= '<img src="'.$field_values['thumbnail'].'" alt="">';
                 }
                 $output .= '</div>'."\n";
@@ -700,7 +700,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
                         $output .= '<optgroup label="'.$option_key.'">'."\n";
                         foreach ($option_item1 as $option_item2 => $option_item3) {
                             $output .= '<option value="'.$option_item2.'"';
-                            if (!is_array($field_value) && $field_value == $option_item2) {
+                            if (!is_array($field_value) && $field_value === $option_item2) {
                                 $output .= ' selected="selected"';
                             } elseif (is_array($field_value) && in_array($option_item2, $field_value)) {
                                 $output .= ' selected="selected"';
@@ -712,7 +712,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
                         $output .= '</optgroup>'."\n";
                     } else {
                         $output .= '<option value="'.$option_key.'"';
-                        if (!is_array($field_value) && $field_value == $option_key) {
+                        if (!is_array($field_value) && $field_value === $option_key) {
                             $output .= ' selected="selected"';
                         } elseif (is_array($field_value) && in_array($option_key, $field_value)) {
                             $output .= ' selected="selected"';

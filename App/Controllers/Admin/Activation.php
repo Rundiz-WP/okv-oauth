@@ -40,7 +40,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
                 $plugin = plugin_basename(RUNDIZOAUTH_FILE);
             }
             
-            if ($plugin == $plugin_file) {
+            if ($plugin === $plugin_file) {
                 $link['settings'] = '<a href="'.  esc_url(get_admin_url(null, 'options-general.php?page=rd-oauth-settings')).'">'.__('Settings').'</a>';
                 $actions = array_merge($link, $actions);
             }
@@ -62,7 +62,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
             if (function_exists('phpversion')) {
                 $phpversion = phpversion();
             }
-            if (!isset($phpversion) || (isset($phpversion) && $phpversion === false)) {
+            if (!isset($phpversion) || (isset($phpversion) && false === $phpversion)) {
                 if (defined('PHP_VERSION')) {
                     $phpversion = PHP_VERSION;
                 } else {
@@ -77,7 +77,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
             }
             if (version_compare(get_bloginfo('version'), $wordpress_required_version, '<')) {
                 /* translators: %1$s: Current WordPress version, %2$s: Required WordPress version. */
-                wp_die(sprintf(__('Your WordPress version does not meet the requirement. (%1$s < %2$s).', 'rd-events'), get_bloginfo('version'), $wordpress_required_version));
+                wp_die(sprintf(__('Your WordPress version does not meet the requirement. (%1$s < %2$s).', 'okv-oauth'), get_bloginfo('version'), $wordpress_required_version));
                 exit;
             }
             unset($phpversion, $phpversion_required, $wordpress_required_version);
@@ -92,16 +92,15 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
             // add option to site or multisite -----------------------------
             if (is_multisite()) {
                 // this site is multisite. activate on all site.
-                $blog_ids = $wpdb->get_col('SELECT blog_id FROM '.$wpdb->blogs);
-                $original_blog_id = get_current_blog_id();
-                if ($blog_ids) {
-                    foreach ($blog_ids as $blog_id) {
-                        switch_to_blog($blog_id);
+                $sites = get_sites();
+                if ($sites) {
+                    foreach ($sites as $site) {
+                        switch_to_blog($site->blog_id);
                         $this->activationAddUpdateOption($rundizoauth_options);
+                        restore_current_blog();
                     }
                 }
-                switch_to_blog($original_blog_id);
-                unset($blog_id, $blog_ids, $original_blog_id);
+                unset($site, $sites);
             } else {
                 // this site is single site. activate on single site.
                 $this->activationAddUpdateOption($rundizoauth_options);
@@ -126,7 +125,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
             // check current option exists or not.
             $current_options = get_option($this->main_option_name);
 
-            if ($current_options === false) {
+            if (false === $current_options) {
                 // newly installed (at least for this version). current option is not exists, add it.
                 $sub_options = [];
 
@@ -137,19 +136,19 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
                     $okvoauth_login_cookie_expiration = get_option('okvoauth_login_cookie_expiration');
                     $okvoauth_google_client_id = get_option('okvoauth_google_client_id');
                     $okvoauth_google_client_secret = get_option('okvoauth_google_client_secret');
-                    if (isset($sub_options['login_method']) && $okvoauth_login_method !== false) {
+                    if (isset($sub_options['login_method']) && false !== $okvoauth_login_method) {
                         $sub_options['login_method'] = $okvoauth_login_method;
                     }
-                    if (isset($sub_options['login_expiration']) && $okvoauth_login_cookie_expiration !== false) {
+                    if (isset($sub_options['login_expiration']) && false !== $okvoauth_login_cookie_expiration) {
                         $sub_options['login_expiration'] = $okvoauth_login_cookie_expiration;
                     }
-                    if (isset($sub_options['google_client_id']) && $okvoauth_google_client_id !== false) {
+                    if (isset($sub_options['google_client_id']) && false !== $okvoauth_google_client_id) {
                         $sub_options['google_client_id'] = $okvoauth_google_client_id;
                         if (isset($sub_options['google_login_enable'])) {
                             $sub_options['google_login_enable'] = '1';
                         }
                     }
-                    if (isset($sub_options['google_client_secret']) && $okvoauth_google_client_secret !== false) {
+                    if (isset($sub_options['google_client_secret']) && false !== $okvoauth_google_client_secret) {
                         $sub_options['google_client_secret'] = $okvoauth_google_client_secret;
                         if (isset($sub_options['google_login_enable'])) {
                             $sub_options['google_login_enable'] = '1';
@@ -166,7 +165,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
                 $sub_options = maybe_serialize($sub_options);
                 add_option($this->main_option_name, $sub_options);
                 unset($sub_options);
-            } elseif (isset($some_of_your_update_options_conditions) && $some_of_your_update_options_conditions === true) {
+            } elseif (isset($some_of_your_update_options_conditions) && false === $some_of_your_update_options_conditions) {
                 // use update if some condition is met. such as older options.
                 // @todo [rd-oauth][rd-settings-fw] this condition is not in use. just for the future.
                 $sub_options = $current_options;
@@ -203,7 +202,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
          */
         private static function getMainOptionName()
         {
-            $class = new self;
+            $class = new self();
             return $class->main_option_name;
         }// getMainOptionName
 
@@ -242,16 +241,15 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
             // delete options.
             if (is_multisite()) {
                 // this is multi site, delete options in all sites.
-                $blog_ids = $wpdb->get_col('SELECT blog_id FROM '.$wpdb->blogs);
-                $original_blog_id = get_current_blog_id();
-                if ($blog_ids) {
-                    foreach ($blog_ids as $blog_id) {
-                        switch_to_blog($blog_id);
+                $sites = get_sites();
+                if ($sites) {
+                    foreach ($sites as $site) {
+                        switch_to_blog($site->blog_id);
                         delete_option(static::getMainOptionName());
+                        restore_current_blog();
                     }
                 }
-                switch_to_blog($original_blog_id);
-                unset($blog_id, $blog_ids, $original_blog_id);
+                unset($site, $sites);
             } else {
                 // this is single site, delete options in single site.
                 delete_option(static::getMainOptionName());
@@ -270,17 +268,17 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
         public function updatePlugin($upgrader, array $hook_extra)
         {
             if (is_array($hook_extra) && array_key_exists('action', $hook_extra) && array_key_exists('type', $hook_extra) && array_key_exists('plugins', $hook_extra)) {
-                if ($hook_extra['action'] == 'update' && $hook_extra['type'] == 'plugin' && is_array($hook_extra['plugins']) && !empty($hook_extra['plugins'])) {
+                if ('update' === $hook_extra['action'] && 'plugin' === $hook_extra['type'] && is_array($hook_extra['plugins']) && !empty($hook_extra['plugins'])) {
                     $this_plugin = plugin_basename(RUNDIZOAUTH_FILE);
                     foreach ($hook_extra['plugins'] as $key => $plugin) {
-                        if ($this_plugin == $plugin) {
+                        if ($this_plugin === $plugin) {
                             $this_plugin_updated = true;
                             break;
                         }
                     }// endforeach;
                     unset($key, $plugin, $this_plugin);
 
-                    if (isset($this_plugin_updated) && $this_plugin_updated === true) {
+                    if (isset($this_plugin_updated) && true === $this_plugin_updated) {
                         global $wpdb;
                         $wpdb->show_errors();
 
@@ -290,16 +288,15 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
                         // add option to site or multisite -----------------------------
                         if (is_multisite()) {
                             // this site is multisite. activate on all site.
-                            $blog_ids = $wpdb->get_col('SELECT blog_id FROM '.$wpdb->blogs);
-                            $original_blog_id = get_current_blog_id();
-                            if ($blog_ids) {
-                                foreach ($blog_ids as $blog_id) {
-                                    switch_to_blog($blog_id);
+                            $sites = get_sites();
+                            if ($sites) {
+                                foreach ($sites as $site) {
+                                    switch_to_blog($site->blog_id);
                                     $this->activationAddUpdateOption($rundizoauth_options);
+                                    restore_current_blog();
                                 }
                             }
-                            switch_to_blog($original_blog_id);
-                            unset($blog_id, $blog_ids, $original_blog_id);
+                            unset($site, $sites);
                         } else {
                             // this site is single site. activate on single site.
                             $this->activationAddUpdateOption($rundizoauth_options);

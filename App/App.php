@@ -22,7 +22,7 @@ if (!class_exists('\\RundizOauth\\App\\App')) {
 
 
         /**
-         * load text domain. (language files)
+         * Load text domain. (language files)
          */
         public function loadLanguage()
         {
@@ -31,7 +31,7 @@ if (!class_exists('\\RundizOauth\\App\\App')) {
 
 
         /**
-         * run the wp plugin app.
+         * Run the wp plugin app.
          */
         public function run()
         {

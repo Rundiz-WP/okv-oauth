@@ -3,7 +3,7 @@
  * The controller interface.<br>
  * This file contain the interface and required method(s) that is needed to use with auto register controller in the loader library.
  * 
- * @author Vee W.
+ * @package rundiz-oauth
  * @license http://opensource.org/licenses/MIT MIT
  */
 

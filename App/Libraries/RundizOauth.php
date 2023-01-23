@@ -3,7 +3,6 @@
  * Rundiz OAuth register or login functional.
  * 
  * @package rundiz-oauth
- * @license http://opensource.org/licenses/MIT MIT
  */
 
 
@@ -43,7 +42,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
          */
         public function init()
         {
-            if ($this->useOauth !== false) {
+            if (false !== $this->useOauth) {
                 // already initialized.
                 return ;
             }
@@ -57,8 +56,8 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
                 if (
                     array_key_exists('login_method', $rundizoauth_options) &&
                     (
-                        $rundizoauth_options['login_method'] == '1' ||
-                        $rundizoauth_options['login_method'] == '2'
+                        '1' === strval($rundizoauth_options['login_method']) ||
+                        '2' === strval($rundizoauth_options['login_method'])
                     )
                 ) {
                     // if choose login method as wp login with oauth or oauth only.
@@ -70,9 +69,9 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
                         array_key_exists('google_login_enable', $rundizoauth_options) && 
                         array_key_exists('google_client_id', $rundizoauth_options) && 
                         array_key_exists('google_client_secret', $rundizoauth_options) && 
-                        $rundizoauth_options['google_login_enable'] == '1' &&
-                        $rundizoauth_options['google_client_id'] != null &&
-                        $rundizoauth_options['google_client_secret'] != null
+                        '1' === strval($rundizoauth_options['google_login_enable']) &&
+                        !empty($rundizoauth_options['google_client_id']) &&
+                        !empty($rundizoauth_options['google_client_secret'])
                     ) {
                         $this->oauthProviders[] = 'google';
                     }
@@ -80,15 +79,15 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
                         array_key_exists('facebook_login_enable', $rundizoauth_options) &&
                         array_key_exists('facebook_app_id', $rundizoauth_options) &&
                         array_key_exists('facebook_app_secret', $rundizoauth_options) &&
-                        $rundizoauth_options['facebook_login_enable'] == '1' &&
-                        $rundizoauth_options['facebook_app_id'] != null &&
-                        $rundizoauth_options['facebook_app_secret'] != null
+                        '1' === strval($rundizoauth_options['facebook_login_enable']) &&
+                        !empty($rundizoauth_options['facebook_app_id']) &&
+                        !empty($rundizoauth_options['facebook_app_secret'])
                     ) {
                         $this->oauthProviders[] = 'facebook';
                     }
 
                     // at last, verify that if login method is set to use oauth only and providers was set.
-                    if ($this->loginMethod === 2 && empty($this->oauthProviders)) {
+                    if (2 === $this->loginMethod && empty($this->oauthProviders)) {
                         // if login method is using oauth only and providers was not set (maybe not enabled or missed config values).
                         // change login method to 1
                         $this->loginMethod = 1;
@@ -111,7 +110,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
                 return false;
             }
 
-            if (session_status() == PHP_SESSION_NONE) {
+            if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
             
@@ -130,7 +129,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
             $redirect_to = apply_filters('login_redirect', $redirect_to, $requested_redirect_to, $user);
             unset($requested_redirect_to);
 
-            if ((empty($redirect_to) || $redirect_to == 'wp-admin/' || $redirect_to == admin_url())) {
+            if ((empty($redirect_to) || 'wp-admin/' === $redirect_to || admin_url() === $redirect_to)) {
                 // If the user doesn't belong to a blog, send them to user admin. If the user can't edit posts, send them to their profile.
                 if (is_multisite() && !get_active_blog_for_user($user->ID) && !is_super_admin($user->ID)) {
                     $redirect_to = user_admin_url();
@@ -140,7 +139,8 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
                     $redirect_to = admin_url('profile.php');
                 }
             }
-            
+
+            session_write_close();
             wp_safe_redirect($redirect_to);
             
             exit;

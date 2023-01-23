@@ -38,7 +38,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\ErrorsCollection')) {
                     return __('Your email is already in use or registered, please try another OAuth account that register with different email.', 'okv-oauth');
                 case 'emailnotfoundinwordpress':
                     /* translators: %1$s: Open link, %2$s: Close link */
-                    return sprintf(__('Not found this email on the system. Please try to %1$sregister%2$s your account.', 'okv-oauth'), '<a href="' . wp_login_url() . '?action=register' . '">', '</a>');
+                    return sprintf(__('Not found this email on the system. Please try to %1$sregister%2$s your account.', 'okv-oauth'), '<a href="' . wp_login_url() . '?action=register">', '</a>');
                 case 'emailnotverified':
                     return __('Your email has not been verified or your user on OAuth provider was not found.', 'okv-oauth');
                 case 'invalidoauthsettings':

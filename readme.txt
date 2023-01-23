@@ -2,11 +2,11 @@
 Contributors: okvee
 Tags: oauth, google, google login, google register, facebook, facebook login, facebook register, social login, social connect
 Tested up to: 6.2
+Requires at least: 5.0
+Requires PHP: 5.4
 Stable tag: 1.4.3
 License: MIT
 License URI: https://opensource.org/licenses/MIT
-Requires at least: 5.0
-Requires PHP: 5.4
 
 Use OAuth such as Google, Facebook to login and register.
 

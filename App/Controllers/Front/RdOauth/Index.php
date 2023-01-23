@@ -26,24 +26,24 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Index')) {
 
             $RundizOauth = new \RundizOauth\App\Libraries\RundizOauth();
             $RundizOauth->init();
-            if ($RundizOauth->loginMethod === 0) {
+            if (0 === $RundizOauth->loginMethod) {
                 // if login method is using wp only.
                 exit;
             }
 
-            if (isset($_REQUEST['rdoauth']) && $_REQUEST['rdoauth'] === 'google') {
+            if (isset($_REQUEST['rdoauth']) && 'google' === $_REQUEST['rdoauth']) {
                 // user choose to login with google.
                 $Google = new \RundizOauth\App\Libraries\MyOauth\Google();
                 $user = $Google->wpLoginWithGoogle(null);
                 unset($Google);
-            } elseif (isset($_REQUEST['rdoauth']) && $_REQUEST['rdoauth'] === 'facebook') {
+            } elseif (isset($_REQUEST['rdoauth']) && 'facebook' === $_REQUEST['rdoauth']) {
                 // user choose to login with facebook.
                 $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
                 $user = $Facebook->wpLoginWithFacebook(null);
                 unset($Facebook);
             }
 
-            if (isset($user) && $user !== null && !is_wp_error($user)) {
+            if (isset($user) && !is_null($user) && !is_wp_error($user)) {
                 // if login success, those oauth function must return the WP_User object.
                 // cannot just return $user like other login plugins because the form was not really submitted and cookie expiration can't set.
                 // manually set wp login cookie.

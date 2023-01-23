@@ -95,7 +95,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
          * @link https://developers.google.com/identity/protocols/oauth2/web-server#creatingclient Reference.
          * @link https://developers.google.com/identity/protocols/oauth2/scopes Available scopes.
          * @global array $rundizoauth_options
-         * @param string Redirect URL.
+         * @param string $redirect_url Redirect URL.
          * @return string Return generated URL.
          */
         public function getAuthUrl($redirect_url)
@@ -143,7 +143,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                 }
             }
 
-            return ;
+            return '';
         }// getAuthUrl
 
 
@@ -180,7 +180,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                 // if get code querystring from google, authenticate and get token.
                 if (check_admin_referer('google-login', 'state') === 1) {
                     // if verify nonce passed.
-                    $result = $this->getAccessToken($_REQUEST['code'], get_edit_user_link() . '?rdoauth=google');
+                    $result = $this->getAccessToken(sanitize_text_field(wp_unslash($_REQUEST['code'])), get_edit_user_link() . '?rdoauth=google');
                     if (isset($result->access_token) && isset($result->id_token)) {
                         $access_token = $result->access_token;
                         $id_token = $result->id_token;
@@ -196,18 +196,18 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
 
                     if (isset($access_token) && isset($id_token)) {
                         $result = $this->validateTokenAndGetAttributes($access_token, $id_token);
-                        if (isset($result['result']) && $result['result'] === true) {
+                        if (isset($result['result']) && true === $result['result']) {
                             // if valid token
                             if (
                                 isset($result['data']) && 
                                 isset($result['data']->email) && 
                                 isset($result['data']->email_verified) && 
-                                $result['data']->email_verified === 'true' &&
+                                'true' === $result['data']->email_verified &&
                                 isset($result['profileInfo'])
                             ) {
                                 // got user profile and email was verified.
                                 $user = get_user_by('email', $result['data']->email);
-                                if ($user === false && !is_wp_error($user)) {
+                                if (false === $user && !is_wp_error($user)) {
                                     // not found user by this email.
                                     // success
                                     return $result['data']->email;
@@ -245,7 +245,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                 // if get code querystring from google, authenticate and get token.
                 if (check_admin_referer('google-login', 'state') === 1) {
                     // if verify nonce passed.
-                    $result = $this->getAccessToken($_REQUEST['code'], home_url('rd-oauth?rdoauth=google'));
+                    $result = $this->getAccessToken(sanitize_text_field(wp_unslash($_REQUEST['code'])), home_url('rd-oauth?rdoauth=google'));
                     if (isset($result->access_token) && isset($result->id_token)) {
                         $access_token = $result->access_token;
                         $id_token = $result->id_token;
@@ -262,18 +262,18 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
 
                     if (isset($access_token) && isset($id_token)) {
                         $result = $this->validateTokenAndGetAttributes($access_token, $id_token);
-                        if (isset($result['result']) && $result['result'] === true) {
+                        if (isset($result['result']) && true === $result['result']) {
                             // if valid token
                             if (
                                 isset($result['data']) && 
                                 isset($result['data']->email) && 
                                 isset($result['data']->email_verified) && 
-                                $result['data']->email_verified === 'true' &&
+                                'true' === $result['data']->email_verified &&
                                 isset($result['profileInfo'])
                             ) {
                                 // got user profile and email was verified.
                                 $user = get_user_by('email', $result['data']->email);
-                                if ($user !== false && !is_wp_error($user)) {
+                                if (false !== $user && !is_wp_error($user)) {
                                     // found user by this email.
                                     // keep $user because we will use it as return value.
                                     // set token cookie.
@@ -322,7 +322,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                 // if get code querystring from google, authenticate and get token.
                 if (check_admin_referer('google-login', 'state') === 1) {
                     // if verify nonce passed.
-                    $result = $this->getAccessToken($_REQUEST['code'], home_url('rd-oauth?rdoauth_subpage=register&rdoauth=google'));
+                    $result = $this->getAccessToken(sanitize_text_field(wp_unslash($_REQUEST['code'])), home_url('rd-oauth?rdoauth_subpage=register&rdoauth=google'));
                     if (isset($result->access_token) && isset($result->id_token)) {
                         $access_token = $result->access_token;
                         $id_token = $result->id_token;
@@ -337,13 +337,13 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
 
                     if (isset($access_token) && isset($id_token)) {
                         $result = $this->validateTokenAndGetAttributes($access_token, $id_token);
-                        if (isset($result['result']) && $result['result'] === true) {
+                        if (isset($result['result']) && true === $result['result']) {
                             // if validated token
                             if (
                                 isset($result['data']) && 
                                 isset($result['data']->email) && 
                                 isset($result['data']->email_verified) && 
-                                $result['data']->email_verified === 'true' &&
+                                'true' === $result['data']->email_verified &&
                                 isset($result['profileInfo'])
                             ) {
                                 // got user profile and email was verified.
