@@ -104,12 +104,6 @@
         <exclude name="WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion"></exclude>
         <exclude name="WordPress.WP.I18n.MissingArgDomain"></exclude>
     </rule>
-    <rule ref="WordPress.NamingConventions.PrefixAllGlobals">
-        <properties>
-            <!-- Value: replace the function, class, and variable prefixes used. Separate multiple prefixes with a comma. -->
-            <property name="prefixes" type="array" value="demo_plugin_test"/>
-        </properties>
-    </rule>
     <rule ref="WordPress.WP.I18n">
         <properties>
             <!-- Value: replace the text domain used. -->
