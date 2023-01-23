@@ -1,25 +1,25 @@
-# Copyright (C) 2021 Vee Winch
+# Copyright (C) 2023 Vee Winch
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rundiz OAuth 1.4.2\n"
+"Project-Id-Version: Rundiz OAuth 1.4.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-12-14T19:21:31+07:00\n"
+"POT-Creation-Date: 2023-01-23T18:20:52+07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.5.0\n"
+"X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: okv-oauth\n"
 
 #. Plugin Name of the plugin
-#: App/Controllers/Admin/Settings.php:51
+#: App/Controllers/Admin/Settings.php:33
 #: App/Controllers/Front/RdOauth/Index.php:73
 #: App/Controllers/Front/RdOauth/Register.php:88
 #: App/Views/admin/editOwnProfilePersonalOptions_v.php:2
-#: templates/okv-oauth/index_v.php:9
+#: templates/okv-oauth/index_v.php:11
 msgid "Rundiz OAuth"
 msgstr ""
 
@@ -287,12 +287,17 @@ msgstr ""
 msgid "Minimum requirement of PHP version does not meet."
 msgstr ""
 
-#: App/Controllers/Admin/Settings.php:51
+#. translators: %1$s: Current WordPress version, %2$s: Required WordPress version.
+#: App/Controllers/Admin/Activation.php:80
+msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
+msgstr ""
+
+#: App/Controllers/Admin/Settings.php:33
 #: App/Views/admin/settings_v.php:2
 msgid "Rundiz OAuth settings"
 msgstr ""
 
-#: App/Controllers/Front/HookLoginPage.php:221
+#: App/Controllers/Front/HookLoginPage.php:229
 msgid "Your email has been changed."
 msgstr ""
 
@@ -361,7 +366,7 @@ msgid "Your user account on OAuth provider was not verified, please verify your 
 msgstr ""
 
 #. translators: %s: Template path.
-#: App/Libraries/Loader.php:97
+#: App/Libraries/Loader.php:99
 msgid "The template file was not found. (%s)"
 msgstr ""
 

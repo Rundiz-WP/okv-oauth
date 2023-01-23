@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okv-oauth 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
-"POT-Creation-Date: 2021-12-14T19:21:31+07:00\n"
-"PO-Revision-Date: 2021-12-14 19:22+0700\n"
+"POT-Creation-Date: 2023-01-23T18:20:52+07:00\n"
+"PO-Revision-Date: 2023-01-23 18:21+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: <>\n"
 "Language: th\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2.2\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;__ngettext;_n;__ngettext_noop;_n_noop;_x;_nx;"
 "_nx_noop;_ex;esc_attr__;esc_attr_e;esc_attr_x;esc_html__;esc_html_e;esc_html_x;_e;_nc\n"
 "X-Poedit-Basepath: .\n"
@@ -20,9 +20,9 @@ msgstr ""
 "X-Poedit-SearchPath-1: ..\n"
 
 #. Plugin Name of the plugin
-#: App/Controllers/Admin/Settings.php:51 App/Controllers/Front/RdOauth/Index.php:73
+#: App/Controllers/Admin/Settings.php:33 App/Controllers/Front/RdOauth/Index.php:73
 #: App/Controllers/Front/RdOauth/Register.php:88 App/Views/admin/editOwnProfilePersonalOptions_v.php:2
-#: templates/okv-oauth/index_v.php:9
+#: templates/okv-oauth/index_v.php:11
 msgid "Rundiz OAuth"
 msgstr "Rundiz OAuth"
 
@@ -296,11 +296,16 @@ msgstr ""
 msgid "Minimum requirement of PHP version does not meet."
 msgstr "รุ่นของ PHP ไม่ตรงตามความต้องการขั้นต่ำ."
 
-#: App/Controllers/Admin/Settings.php:51 App/Views/admin/settings_v.php:2
+#. translators: %1$s: Current WordPress version, %2$s: Required WordPress version.
+#: App/Controllers/Admin/Activation.php:80
+msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
+msgstr "รุ่นเวิร์ดเพรสของคุณไม่ตรงกับความต้องการขั้นต่ำ. (%1$s < %2$s)."
+
+#: App/Controllers/Admin/Settings.php:33 App/Views/admin/settings_v.php:2
 msgid "Rundiz OAuth settings"
 msgstr "การตั้งค่า Rundiz OAuth"
 
-#: App/Controllers/Front/HookLoginPage.php:221
+#: App/Controllers/Front/HookLoginPage.php:229
 msgid "Your email has been changed."
 msgstr "อีเมลของคุณได้เปลี่ยนแปลงแล้ว."
 
@@ -377,7 +382,7 @@ msgid ""
 msgstr "บัญชีผู้ใช้ของคุณบนผู้ให้บริการ OAuth นั้นยังไม่ได้ผ่านการยืนยัน, โปรดยืนยันผู้ใช้ก่อนดำเนินการต่อไป."
 
 #. translators: %s: Template path.
-#: App/Libraries/Loader.php:97
+#: App/Libraries/Loader.php:99
 msgid "The template file was not found. (%s)"
 msgstr "ไม่พบเท็มเพลท. (%s)"
 
@@ -421,10 +426,6 @@ msgstr "เข้าสู่ระบบ"
 #: templates/okv-oauth/partials/registerForm_v.php:34
 msgid "Register"
 msgstr "ลงทะเบียน"
-
-#, php-format
-#~ msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
-#~ msgstr "รุ่นเวิร์ดเพรสของคุณไม่ตรงกับความต้องการขั้นต่ำ. (%1$s < %2$s)."
 
 #~ msgid "Donate"
 #~ msgstr "บริจาค"
