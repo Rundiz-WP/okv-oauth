@@ -113,14 +113,9 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
             if (session_status() === PHP_SESSION_NONE) {
                 session_start();
             }
-            
-            $secure_cookie = '';
-            
+
             if (isset($_SESSION['okv-oauth_redirect_to'])) {
-                $redirect_to = $_SESSION['okv-oauth_redirect_to'];
-                // Redirect to https if user wants ssl
-                if ($secure_cookie && false !== strpos($redirect_to, 'wp-admin'))
-                    $redirect_to = preg_replace('|^http://|', 'https://', $redirect_to);
+                $redirect_to = sanitize_url($_SESSION['okv-oauth_redirect_to']);
             } else {
                 $redirect_to = admin_url();
             }
