@@ -25,7 +25,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\ErrorsCollection')) {
         public static function getErrorMessage($errorCode)
         {
             if (!is_scalar($errorCode)) {
-                return ;
+                return '';
             }
 
             switch ($errorCode) {
@@ -62,7 +62,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\ErrorsCollection')) {
                 case 'usernotverified':
                     return __('Your user account on OAuth provider was not verified, please verify your account before continue.', 'okv-oauth');
                 default:
-                    return ;
+                    return '';
             }
         }// getErrorMessage
 
