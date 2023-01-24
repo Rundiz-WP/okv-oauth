@@ -1,0 +1,127 @@
+{
+    "moduleName": "Rundiz OAuth",
+    "wpDev": true,
+    "build": {
+        "clean": {
+            "destinations": [
+            ]
+        },
+        "copy": {
+            "copyTasks": [
+            ],
+            "copyWP": [
+                {
+                    "patterns": "App/**",
+                    "destination": "App"
+                },
+                {
+                    "patterns": "assets/**",
+                    "destination": "assets"
+                },
+                {
+                    "patterns": "languages/**",
+                    "destination": "languages"
+                },
+                {
+                    "patterns": "templates/**",
+                    "destination": "templates"
+                },
+                {
+                    "patterns": "*.md",
+                    "destination": "."
+                },
+                {
+                    "patterns": "*.php",
+                    "destination": "."
+                },
+                {
+                    "patterns": "*.txt",
+                    "destination": "."
+                }
+            ]
+        },
+        "customTasks": [
+        ]
+    },
+    "watch": {
+        "watcher": [
+            {
+                "patterns": "App/**",
+                "destination": "App"
+            },
+            {
+                "patterns": "assets/**",
+                "destination": "assets"
+            },
+            {
+                "patterns": "languages/**",
+                "destination": "languages"
+            },
+            {
+                "patterns": "templates/**",
+                "destination": "templates"
+            },
+            {
+                "patterns": "*.php",
+                "destination": "."
+            }
+        ],
+        "customWatches": [
+        ]
+    },
+    "writeVersions": [
+    ],
+    "pack": {
+        "versionHeaderFile": "readme.txt",
+        "versionPattern": "Stable tag(\\s?)(:?)(\\s?)(?<version>([\\d\\.]+)([-+\\.0-9a-z]*))",
+        "packPatterns": {
+            "dev": {
+                "patterns": [
+                    "**",
+                    ".*/**",
+                    ".*"
+                ],
+                "options": {
+                    "ignore": [
+                        ".backup",
+                        ".dist",
+                        ".git",
+                        ".phpdoc",
+                        ".phpunit*",
+                        "composer.lock",
+                        "node_modules",
+                        "package-*.json"
+                    ]
+                }
+            },
+            "prod": {
+                "patterns": [
+                    "**"
+                ],
+                "options": {
+                    "ignore": [
+                        ".*",
+                        ".backup",
+                        ".dev-notes",
+                        ".dist",
+                        ".git",
+                        ".phpdoc",
+                        ".phpunit*",
+                        "assets-src",
+                        "composer.lock",
+                        "gulpfile.js",
+                        "node_modules",
+                        "node_tasks",
+                        "package*.json",
+                        "phpunit.xml*",
+                        "tests"
+                    ]
+                }
+            }
+        },
+        "zipFilePrefix": "okv-oauth",
+        "zipOptions": {
+            "zipPrefix": "okv-oauth"
+        }
+    }
+}
