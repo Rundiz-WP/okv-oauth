@@ -4,7 +4,7 @@ Tags: oauth, google, google login, google register, facebook, facebook login, fa
 Tested up to: 6.2
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.4.3
+Stable tag: 1.4.4
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -58,6 +58,13 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.4.4 =
+2023-01-24
+
+* Remove row meta hook.
+* Improve code by escape, sanitize as reported by PHP CodeSniffer & WordPress coding standard.
+* Fix method MUST always return string in **App/Libraries/ErrorsCollection.php** at `getErrorMessage()` method.
+
 = 1.4.3 =
 2022-12-20
 
