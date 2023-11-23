@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okv-oauth 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
-"POT-Creation-Date: 2023-01-23T18:20:52+07:00\n"
-"PO-Revision-Date: 2023-01-23 18:21+0700\n"
+"POT-Creation-Date: 2023-11-23T12:38:32+07:00\n"
+"PO-Revision-Date: 2023-11-23 12:39+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: <>\n"
 "Language: th\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3.2\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;__ngettext;_n;__ngettext_noop;_n_noop;_x;_nx;"
 "_nx_noop;_ex;esc_attr__;esc_attr_e;esc_attr_x;esc_html__;esc_html_e;esc_html_x;_e;_nc\n"
 "X-Poedit-Basepath: .\n"
@@ -143,38 +143,42 @@ msgid ""
 "To make your app ready for public use, please go to App Review menu and change the option there."
 msgstr "การทำให้แอพของคุณพร้อมใช้งานสาธารณะ, ให้ไปที่เมนู App Review และเปลี่ยนตัวเลือกที่นั่น."
 
+#: App/config/settings_rdoauth.php:109
+msgid "Please note that Facebook API is no longer supported by the plugin author."
+msgstr "โปรดทราบว่า Facebook API จะไม่รองรับโดยผู้เขียนปลั๊กอินอีกต่อไป."
+
 #. translators: %s: Use OAuth only option text.
-#: App/config/settings_rdoauth.php:118
+#: App/config/settings_rdoauth.php:119
 msgid "This is multi-site WordPress and the registration page may not work perfectly with method %s."
 msgstr "เว็บไซต์นี้ใช้ระบบเวิร์ดเพรสหลายไซต์ และการลงทะเบียนอาจไม่ทำงานได้ดีกับวิธี %s."
 
-#: App/config/settings_rdoauth.php:119 App/config/settings_rdoauth.php:167
+#: App/config/settings_rdoauth.php:120 App/config/settings_rdoauth.php:168
 msgid "Use OAuth only"
 msgstr "ใช้ OAuth เท่านั้น"
 
 #. translators: %1$s: Allow new registrations text, %2$s: User accounts may be registered text.
-#: App/config/settings_rdoauth.php:124
+#: App/config/settings_rdoauth.php:125
 msgid "It is recommended that you change the network settings for %1$s to %2$s."
 msgstr "แนะนำให้คุณเปลี่ยนการตั้งค่าเน็ตเวิร์คสำหรับ %1$s ไปยัง %2$s."
 
-#: App/config/settings_rdoauth.php:128
+#: App/config/settings_rdoauth.php:129
 msgid "Multi-site"
 msgstr "หลายเว็บไซต์"
 
 #. translators: %1$s: The design guide text file name, %2$s: The design guide file location.
-#: App/config/settings_rdoauth.php:138
+#: App/config/settings_rdoauth.php:139
 msgid "To design your login and register result page, please read %1$s file inside the %2$s folder."
 msgstr "การออกแบบหน้าเข้าสู่ระบบและลงทะเบียน, โปรดอ่าน %1$s ภายในโฟลเดอร์ %2$s."
 
-#: App/config/settings_rdoauth.php:148
+#: App/config/settings_rdoauth.php:149
 msgid "Here is the content on text file."
 msgstr "นี่คือเนื้อหาบนไฟล์."
 
-#: App/config/settings_rdoauth.php:158
+#: App/config/settings_rdoauth.php:159
 msgid "Plugin settings"
 msgstr "ตั้งค่าปลั๊กอิน"
 
-#: App/config/settings_rdoauth.php:162
+#: App/config/settings_rdoauth.php:163
 msgid ""
 "If you choose to use OAuth only, please make sure that you have at least one of them enabled and "
 "correct setting values otherwise you will be unable to login."
@@ -182,103 +186,103 @@ msgstr ""
 "ถ้าคุณเลือกใช้ OAuth เท่านั้น, โปรดแน่ใจว่าคุณได้เปิดใช้งานและระบุค่าต่างๆอย่างถูกต้องอย่างน้อย 1 ผู้ให้บริการ "
 "มิฉะนั้นคุณจะไม่สามารถเข้าสู่ระบบได้."
 
-#: App/config/settings_rdoauth.php:165
+#: App/config/settings_rdoauth.php:166
 msgid "Do not use (use WordPress login)"
 msgstr "ไม่ใช้งาน (ใช้เวิร์ดเพรสเข้าสู่ระบบตามปกติ)"
 
-#: App/config/settings_rdoauth.php:166
+#: App/config/settings_rdoauth.php:167
 msgid "Use WordPress login with OAuth"
 msgstr "ใช้เวิร์ดเพรสควบคู่กับ OAuth"
 
-#: App/config/settings_rdoauth.php:169
+#: App/config/settings_rdoauth.php:170
 msgid "Login/Register method"
 msgstr "วิธีการเข้าสู่ระบบหรือลงทะเบียน"
 
 #. translators: %s: auth_cookie_expiration hook.
-#: App/config/settings_rdoauth.php:176
+#: App/config/settings_rdoauth.php:177
 msgid "This setting can be override by any plugins that hook into %s."
 msgstr "การตั้งค่านี้สามารถเขียนทับโดยปลั๊กอินอื่นๆที่ฮุคไปยัง %s ได้."
 
 #. translators: %s: auth_cookie_expiration hook.
-#: App/config/settings_rdoauth.php:176
+#: App/config/settings_rdoauth.php:177
 msgid "This setting will be use when user remember login or use OAuth only for login method."
 msgstr "การตั้งค่านี้จะใช้เมื่อผู้ใช้จดจำการเข้าสู่ระบบหรือเลือกวิธีการเข้าสู่ระบบเป็น ใช้ OAuth เท่านั้น."
 
-#: App/config/settings_rdoauth.php:179
+#: App/config/settings_rdoauth.php:180
 msgid "Login expiration"
 msgstr "วันหมดอายุหลังการเข้าสู่ระบบ"
 
-#: App/config/settings_rdoauth.php:186
+#: App/config/settings_rdoauth.php:187
 msgid "Google login"
 msgstr "เข้าสู่ระบบด้วย Google"
 
-#: App/config/settings_rdoauth.php:193
+#: App/config/settings_rdoauth.php:194
 msgid "Enable Google login"
 msgstr "เปิดใช้งานเข้าสู่ระบบด้วย Google"
 
-#: App/config/settings_rdoauth.php:197 App/config/settings_rdoauth.php:267
+#: App/config/settings_rdoauth.php:198 App/config/settings_rdoauth.php:268
 msgid "Enable"
 msgstr "เปิดใช้งาน"
 
-#: App/config/settings_rdoauth.php:204
+#: App/config/settings_rdoauth.php:205
 msgid "Client ID"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:211
+#: App/config/settings_rdoauth.php:212
 msgid "Client secret"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:215
+#: App/config/settings_rdoauth.php:216
 msgid "Auth parameters"
 msgstr "พารามิเตอร์ Auth"
 
-#: App/config/settings_rdoauth.php:215
+#: App/config/settings_rdoauth.php:216
 msgid "Reference"
 msgstr "อ้างอิง"
 
-#: App/config/settings_rdoauth.php:222
+#: App/config/settings_rdoauth.php:223
 msgid "Not set"
 msgstr "ไม่กำหนด"
 
-#: App/config/settings_rdoauth.php:225
+#: App/config/settings_rdoauth.php:226
 msgid "Default"
 msgstr "ค่าเดิม"
 
-#: App/config/settings_rdoauth.php:227
+#: App/config/settings_rdoauth.php:228
 msgid "Prompt"
 msgstr "การถาม"
 
 #. translators: %1$s &amp; text, %2$s: &amp;include_granted_scopes=true&amp;hd=mydomain.com text
-#: App/config/settings_rdoauth.php:234
+#: App/config/settings_rdoauth.php:235
 msgid "Alway start with %1$s For example: %2$s."
 msgstr "เริ่มต้นด้วย %1$s ตัวอย่างเช่น: %2$s."
 
 #. translators: %s: The parameters that will be skipped.
-#: App/config/settings_rdoauth.php:240
+#: App/config/settings_rdoauth.php:241
 msgid "These parameters will be skipped: %s"
 msgstr "พารามิเตอร์เหล่านี้จะถูกข้ามไป: %s"
 
-#: App/config/settings_rdoauth.php:245
+#: App/config/settings_rdoauth.php:246
 msgid "Other parameters"
 msgstr "พารามิเตอร์อื่นๆ"
 
-#: App/config/settings_rdoauth.php:256
+#: App/config/settings_rdoauth.php:257
 msgid "Facebook login"
 msgstr "เข้าสู่ระบบด้วย Facebook"
 
-#: App/config/settings_rdoauth.php:263
+#: App/config/settings_rdoauth.php:264
 msgid "Enable Facebook login"
 msgstr "เปิดใช้งานเข้าสู่ระบบด้วย Facebook"
 
-#: App/config/settings_rdoauth.php:274
+#: App/config/settings_rdoauth.php:275
 msgid "App ID"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:281
+#: App/config/settings_rdoauth.php:282
 msgid "App secret"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:292
+#: App/config/settings_rdoauth.php:293
 msgid "Design pages"
 msgstr "ออกแบบหน้า"
 

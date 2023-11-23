@@ -105,7 +105,8 @@ $facebook_login_help_msg = sprintf(
         '<li>' . __('Use App ID and App Secret generated from there.', 'okv-oauth') . '</li>' . "\n" .
         '<li>' . __('You may setup your app info here such as name, icon.', 'okv-oauth') . '</li>' . "\n" .
         '<li>' . __('To make your app ready for public use, please go to App Review menu and change the option there.', 'okv-oauth') . '</li>' . "\n" .
-    '</ul>' . "\n";
+    '</ul>' . "\n" .
+    '<p class="rd-settings-notice rd-settings-notice-warning">' . __('Please note that Facebook API is no longer supported by the plugin author.', 'okv-oauth') . '</p>';
 unset($facebook_apps_url);
 
 

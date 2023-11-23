@@ -2,16 +2,16 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rundiz OAuth 1.4.3\n"
+"Project-Id-Version: Rundiz OAuth 1.4.4\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-01-23T18:20:52+07:00\n"
+"POT-Creation-Date: 2023-11-23T12:38:32+07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.8.0-alpha-9dfa966\n"
 "X-Domain: okv-oauth\n"
 
 #. Plugin Name of the plugin
@@ -140,140 +140,144 @@ msgstr ""
 msgid "To make your app ready for public use, please go to App Review menu and change the option there."
 msgstr ""
 
+#: App/config/settings_rdoauth.php:109
+msgid "Please note that Facebook API is no longer supported by the plugin author."
+msgstr ""
+
 #. translators: %s: Use OAuth only option text.
-#: App/config/settings_rdoauth.php:118
+#: App/config/settings_rdoauth.php:119
 msgid "This is multi-site WordPress and the registration page may not work perfectly with method %s."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:119
-#: App/config/settings_rdoauth.php:167
+#: App/config/settings_rdoauth.php:120
+#: App/config/settings_rdoauth.php:168
 msgid "Use OAuth only"
 msgstr ""
 
 #. translators: %1$s: Allow new registrations text, %2$s: User accounts may be registered text.
-#: App/config/settings_rdoauth.php:124
+#: App/config/settings_rdoauth.php:125
 msgid "It is recommended that you change the network settings for %1$s to %2$s."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:128
+#: App/config/settings_rdoauth.php:129
 msgid "Multi-site"
 msgstr ""
 
 #. translators: %1$s: The design guide text file name, %2$s: The design guide file location.
-#: App/config/settings_rdoauth.php:138
+#: App/config/settings_rdoauth.php:139
 msgid "To design your login and register result page, please read %1$s file inside the %2$s folder."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:148
+#: App/config/settings_rdoauth.php:149
 msgid "Here is the content on text file."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:158
+#: App/config/settings_rdoauth.php:159
 msgid "Plugin settings"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:162
+#: App/config/settings_rdoauth.php:163
 msgid "If you choose to use OAuth only, please make sure that you have at least one of them enabled and correct setting values otherwise you will be unable to login."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:165
+#: App/config/settings_rdoauth.php:166
 msgid "Do not use (use WordPress login)"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:166
+#: App/config/settings_rdoauth.php:167
 msgid "Use WordPress login with OAuth"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:169
+#: App/config/settings_rdoauth.php:170
 msgid "Login/Register method"
 msgstr ""
 
 #. translators: %s: auth_cookie_expiration hook.
-#: App/config/settings_rdoauth.php:176
+#: App/config/settings_rdoauth.php:177
 msgid "This setting can be override by any plugins that hook into %s."
 msgstr ""
 
 #. translators: %s: auth_cookie_expiration hook.
-#: App/config/settings_rdoauth.php:176
+#: App/config/settings_rdoauth.php:177
 msgid "This setting will be use when user remember login or use OAuth only for login method."
 msgstr ""
 
-#: App/config/settings_rdoauth.php:179
+#: App/config/settings_rdoauth.php:180
 msgid "Login expiration"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:186
+#: App/config/settings_rdoauth.php:187
 msgid "Google login"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:193
+#: App/config/settings_rdoauth.php:194
 msgid "Enable Google login"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:197
-#: App/config/settings_rdoauth.php:267
+#: App/config/settings_rdoauth.php:198
+#: App/config/settings_rdoauth.php:268
 msgid "Enable"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:204
+#: App/config/settings_rdoauth.php:205
 msgid "Client ID"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:211
+#: App/config/settings_rdoauth.php:212
 msgid "Client secret"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:215
+#: App/config/settings_rdoauth.php:216
 msgid "Auth parameters"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:215
+#: App/config/settings_rdoauth.php:216
 msgid "Reference"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:222
+#: App/config/settings_rdoauth.php:223
 msgid "Not set"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:225
+#: App/config/settings_rdoauth.php:226
 msgid "Default"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:227
+#: App/config/settings_rdoauth.php:228
 msgid "Prompt"
 msgstr ""
 
 #. translators: %1$s &amp; text, %2$s: &amp;include_granted_scopes=true&amp;hd=mydomain.com text
-#: App/config/settings_rdoauth.php:234
+#: App/config/settings_rdoauth.php:235
 msgid "Alway start with %1$s For example: %2$s."
 msgstr ""
 
 #. translators: %s: The parameters that will be skipped.
-#: App/config/settings_rdoauth.php:240
+#: App/config/settings_rdoauth.php:241
 msgid "These parameters will be skipped: %s"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:245
+#: App/config/settings_rdoauth.php:246
 msgid "Other parameters"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:256
+#: App/config/settings_rdoauth.php:257
 msgid "Facebook login"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:263
+#: App/config/settings_rdoauth.php:264
 msgid "Enable Facebook login"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:274
+#: App/config/settings_rdoauth.php:275
 msgid "App ID"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:281
+#: App/config/settings_rdoauth.php:282
 msgid "App secret"
 msgstr ""
 
-#: App/config/settings_rdoauth.php:292
+#: App/config/settings_rdoauth.php:293
 msgid "Design pages"
 msgstr ""
 
