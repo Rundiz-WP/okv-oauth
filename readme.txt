@@ -1,10 +1,10 @@
 === Rundiz OAuth ===
 Contributors: okvee
 Tags: oauth, google, google login, google register, facebook, facebook login, facebook register, social login, social connect
-Tested up to: 6.2
+Tested up to: 6.5
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.4.4
+Stable tag: 1.5
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -26,7 +26,7 @@ This project is maintain by <a href="https://rundiz.com" target="author_site">Ru
 = System requirement =
 PHP 5.4 or higher<br>
 Open SSL PHP extension.<br>
-WordPress 4.6.0 or higher
+WordPress 5.0 or higher
 
 == Installation ==
 1. Upload "okv-oauth" folder to the "/wp-content/plugins/" directory.
@@ -63,41 +63,9 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 
 * Facebook OAuth API no longer supported (the plugin author has no Facebook account anymore).
 * Fix incorrect check select box value with key that is number.
+* Add block for display register, login, logout links.
+* Update code following PHPCS guide.
 
-= 1.4.4 =
-2023-01-24
-
-* Remove row meta hook.
-* Improve code by escape, sanitize as reported by PHP CodeSniffer & WordPress coding standard.
-* Fix method MUST always return string in **App/Libraries/ErrorsCollection.php** at `getErrorMessage()` method.
-
-= 1.4.3 =
-2022-12-20
-
-* Fix "PHP Deprecated:  Creation of dynamic property".
-
-= 1.4.2 =
-2020-05-01
-
-* Fetch text content of design guide to display in the settings page.
-* Update Google OAuth URLs.
-* Update Facebook OAuth URLs.
-* Add Logger class and log the API result in debug mode (WP_DEBUG constant must be defined to `true`).
-
-= 1.4.1 =
-2019-12-05
-
-* Fix remove login password field (for OAuth only option) to compatible with WordPress 5.3
-* Add filter to not allow "Both sites and user accounts can be registered" register option on network settings (multi-site).
-
-= 1.4 =
-2018-12-08
-
-* Update translation text.
-* Add new translation template (.POT) file.
-* Move enqueue styles from many places but same name into common library and enqueue just name.
-* Add translators help.
-* Support WordPress 5.0+
 
 Previous version updates:  
 Please read on changelog.md

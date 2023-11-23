@@ -2,6 +2,41 @@
 
 ## Version 1.x
 
+### 1.4.4
+2023-01-24
+
+* Remove row meta hook.
+* Improve code by escape, sanitize as reported by PHP CodeSniffer & WordPress coding standard.
+* Fix method MUST always return string in **App/Libraries/ErrorsCollection.php** at `getErrorMessage()` method.
+
+### 1.4.3
+2022-12-20
+
+* Fix "PHP Deprecated:  Creation of dynamic property".
+
+### 1.4.2
+2020-05-01
+
+* Fetch text content of design guide to display in the settings page.
+* Update Google OAuth URLs.
+* Update Facebook OAuth URLs.
+* Add Logger class and log the API result in debug mode (WP_DEBUG constant must be defined to `true`).
+
+### 1.4.1
+2019-12-05
+
+* Fix remove login password field (for OAuth only option) to compatible with WordPress 5.3
+* Add filter to not allow "Both sites and user accounts can be registered" register option on network settings (multi-site).
+
+### 1.4
+2018-12-08
+
+* Update translation text.
+* Add new translation template (.POT) file.
+* Move enqueue styles from many places but same name into common library and enqueue just name.
+* Add translators help.
+* Support WordPress 5.0+
+
 ### 1.3.3
 2018-10-18
 

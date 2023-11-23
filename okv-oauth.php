@@ -3,7 +3,7 @@
  * Plugin Name: Rundiz OAuth
  * Plugin URI: https://rundiz.com/?p=319
  * Description: Use OAuth such as Google, Facebook to login and register.
- * Version: 1.4.4
+ * Version: 1.5
  * Requires at least: 5.0
  * Requires PHP: 5.4
  * Author: Vee Winch
