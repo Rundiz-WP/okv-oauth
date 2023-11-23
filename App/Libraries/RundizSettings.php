@@ -700,7 +700,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
                         $output .= '<optgroup label="'.$option_key.'">'."\n";
                         foreach ($option_item1 as $option_item2 => $option_item3) {
                             $output .= '<option value="'.$option_item2.'"';
-                            if (!is_array($field_value) && $field_value === $option_item2) {
+                            if (!is_array($field_value) && strval($field_value) === strval($option_item2)) {
                                 $output .= ' selected="selected"';
                             } elseif (is_array($field_value) && in_array($option_item2, $field_value)) {
                                 $output .= ' selected="selected"';
@@ -712,7 +712,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizSettings')) {
                         $output .= '</optgroup>'."\n";
                     } else {
                         $output .= '<option value="'.$option_key.'"';
-                        if (!is_array($field_value) && $field_value === $option_key) {
+                        if (!is_array($field_value) && strval($field_value) === strval($option_key)) {
                             $output .= ' selected="selected"';
                         } elseif (is_array($field_value) && in_array($option_key, $field_value)) {
                             $output .= ' selected="selected"';
