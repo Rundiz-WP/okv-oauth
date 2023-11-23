@@ -152,7 +152,7 @@ unset($design_pages_textcontent);
 
 
 return [
-    'tab_style' => 'vertical',// vertical or horizontal
+    'tab_style' => 'vertical', // vertical or horizontal
     'setting_tabs' => [
         [
             'icon' => 'fa fa-sign-in fa-fw',
@@ -181,7 +181,7 @@ return [
                     'type' => 'select',
                 ],
             ],
-        ],// end login settings tab.
+        ], // end login settings tab.
         [
             'icon' => 'fa fa-google fa-fw',
             'title' => __('Google login', 'okv-oauth'),
@@ -251,7 +251,7 @@ return [
                     'type' => 'html_full',
                 ],
             ],
-        ],// end google login settings tab.
+        ], // end google login settings tab.
         [
             'icon' => 'fa fa-facebook fa-fw',
             'title' => __('Facebook login', 'okv-oauth'),
@@ -287,7 +287,7 @@ return [
                     'type' => 'html_full',
                 ],
             ],
-        ],// end facebook login settings tab.
+        ], // end facebook login settings tab.
         [
             'icon' => 'fa fa-paint-brush fa-fw',
             'title' => __('Design pages', 'okv-oauth'),
@@ -298,6 +298,6 @@ return [
                     'type' => 'html_full',
                 ],
             ],
-        ],// end design help tab.
+        ], // end design help tab.
     ],
 ];

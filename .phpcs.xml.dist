@@ -5,6 +5,7 @@
     <!-- What to scan -->
     <file>.</file>
     <exclude-pattern>/.dev-notes/</exclude-pattern>
+    <exclude-pattern>/blocks/</exclude-pattern>
     <exclude-pattern>/tests/</exclude-pattern>
     <exclude-pattern>/vendor/</exclude-pattern>
     <exclude-pattern>/node_modules/</exclude-pattern>
@@ -34,7 +35,8 @@
         <!-- exclude name="WordPress.VIP"/ --><!-- removed as error Referenced sniff "WordPress.VIP" does not exist and can't find the fix or additional installation anywhere. -->
         <exclude name="Generic.Classes.OpeningBraceSameLine.BraceOnNewLine"></exclude>
         <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedIf"></exclude>
-        <exclude name="Generic.Files.EndFileNewline.NotFound"></exclude>
+        <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.Found"></exclude>
+        <exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed"></exclude>
         <exclude name="Generic.Formatting.MultipleStatementAlignment.NotSameWarning"></exclude>
         <exclude name="Generic.Functions.OpeningFunctionBraceKernighanRitchie.BraceOnNewLine"></exclude>
         <exclude name="Generic.WhiteSpace.ArbitraryParenthesesSpacing.SpaceAfterOpen"></exclude>
@@ -42,33 +44,43 @@
         <exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed"></exclude>
         <exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect"></exclude>
         <exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact"></exclude>
+        <exclude name="NormalizedArrays.Arrays.ArrayBraceSpacing.SpaceAfterArrayOpenerSingleLine"></exclude>
+        <exclude name="NormalizedArrays.Arrays.ArrayBraceSpacing.SpaceBeforeArrayCloserSingleLine"></exclude>
+        <exclude name="NormalizedArrays.Arrays.ArrayBraceSpacing.NoSpaceAfterArrayOpener"></exclude>
+        <exclude name="NormalizedArrays.Arrays.ArrayBraceSpacing.NoSpaceBeforeArrayCloser"></exclude>
+        <exclude name="NormalizedArrays.Arrays.CommaAfterLast.NoComma"></exclude>
+        <exclude name="NormalizedArrays.Arrays.CommaAfterLast.NoSpaceAfterComma"></exclude>
         <exclude name="PEAR"></exclude>
         <exclude name="PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.Changed"></exclude>
         <exclude name="PHPCompatibility.Variables.ForbiddenGlobalVariableVariable.NonBareVariableFound"></exclude>
+        <exclude name="PSR2.Classes.ClassDeclaration.CloseBraceAfterBody"></exclude>
+        <exclude name="PSR2.Files.EndFileNewline.NotFound"></exclude>
+        <exclude name="PSR2.Files.EndFileNewline.NoneFound"></exclude>
+        <exclude name="PSR2.Files.EndFileNewline.TooMany"></exclude>
         <exclude name="PSR2.Namespaces.NamespaceDeclaration.BlankLineAfter"></exclude>
         <exclude name="Squiz.Commenting.ClassComment.Missing"></exclude>
         <exclude name="Squiz.Commenting.ClosingDeclarationComment.Incorrect"></exclude>
         <exclude name="Squiz.Commenting.FileComment.Missing"></exclude>
         <exclude name="Squiz.Commenting.FileComment.SpacingAfterComment"></exclude>
-        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"></exclude>
         <exclude name="Squiz.Commenting.FunctionComment.MissingParamComment"></exclude>
+        <exclude name="Squiz.Commenting.FunctionComment.ParamCommentFullStop"></exclude>
         <exclude name="Squiz.Commenting.FunctionComment.SpacingAfterParamType"></exclude>
         <exclude name="Squiz.Commenting.InlineComment.InvalidEndChar"></exclude>
+        <exclude name="Squiz.Commenting.VariableComment.Missing"></exclude>
         <exclude name="Squiz.ControlStructures.ControlSignature.NewlineAfterOpenBrace"></exclude>
         <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingAfterOpen"></exclude>
+        <exclude name="Squiz.Functions.FunctionDeclarationArgumentSpacing.SpacingBeforeClose"></exclude>
+        <exclude name="Squiz.Functions.MultiLineFunctionDeclaration.SpaceAfterFunction"></exclude>
         <exclude name="Squiz.PHP.CommentedOutCode.Found"></exclude>
         <exclude name="Squiz.PHP.EmbeddedPhp.ContentAfterEnd"></exclude>
+        <exclude name="Squiz.PHP.EmbeddedPhp.ContentBeforeOpen"></exclude>
         <exclude name="Squiz.PHP.NonExecutableCode.ReturnNotRequired"></exclude>
         <exclude name="Squiz.Strings.ConcatenationSpacing.PaddingFound"></exclude>
         <exclude name="Squiz.WhiteSpace.SemicolonSpacing.Incorrect"></exclude>
         <exclude name="Squiz.WhiteSpace.SuperfluousWhitespace.EndLine"></exclude>
         <exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"></exclude>
         <exclude name="Universal.ControlStructures.DisallowLonelyIf.Found"></exclude>
-        <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.NoSpaceAfterArrayOpener"></exclude>
-        <exclude name="WordPress.Arrays.ArrayDeclarationSpacing.NoSpaceBeforeArrayCloser"></exclude>
         <exclude name="WordPress.Arrays.ArrayKeySpacingRestrictions.NoSpacesAroundArrayKeys"></exclude>
-        <exclude name="WordPress.Arrays.CommaAfterArrayItem.NoComma"></exclude>
-        <exclude name="WordPress.Arrays.CommaAfterArrayItem.NoSpaceAfterComma"></exclude>
         <exclude name="WordPress.Arrays.MultipleStatementAlignment.DoubleArrowNotAligned"></exclude>
         <exclude name="WordPress.Files.FileName.InvalidClassFileName"></exclude>
         <exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"></exclude>
@@ -76,6 +88,7 @@
         <exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound"></exclude>
         <exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedNamespaceFound"></exclude>
         <exclude name="WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound"></exclude>
+        <exclude name="WordPress.NamingConventions.ValidFunctionName.FunctionNameInvalid"></exclude>
         <exclude name="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid"></exclude>
         <exclude name="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase"></exclude>
         <exclude name="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase"></exclude>
@@ -93,13 +106,11 @@
         <exclude name="WordPress.WhiteSpace.ControlStructureSpacing"></exclude>
         <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore"></exclude>
         <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter"></exclude>
+        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_close"></exclude>
+        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_exec"></exclude>
         <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_init"></exclude>
         <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_setopt"></exclude>
-        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_exec"></exclude>
-        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_close"></exclude>
         <exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"></exclude>
-        <exclude name="WordPress.WP.AlternativeFunctions.json_encode_json_encode"></exclude><!-- The function `wp_json_encode()` does not support PHP less than 5.6. -->
-        <exclude name="WordPress.WP.AlternativeFunctions.strip_tags_strip_tags"></exclude>
         <exclude name="WordPress.WP.EnqueuedResourceParameters.MissingVersion"></exclude>
         <exclude name="WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion"></exclude>
         <exclude name="WordPress.WP.I18n.MissingArgDomain"></exclude>

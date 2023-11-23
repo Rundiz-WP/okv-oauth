@@ -277,7 +277,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                                     // found user by this email.
                                     // keep $user because we will use it as return value.
                                     // set token cookie.
-                                    setcookie('rundiz_oauth_google_tokens', json_encode([$access_token, $id_token]), time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
+                                    setcookie('rundiz_oauth_google_tokens', wp_json_encode([$access_token, $id_token]), time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
                                     // complete.
                                 } else {
                                     // user was not found.
@@ -349,7 +349,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                                 // got user profile and email was verified.
                                 if (email_exists($result['data']->email) === false && username_exists($result['data']->email) === false) {
                                     // if user that is using this email is NOT already exists (yay).
-                                    setcookie('rundiz_oauth_google_tokens', json_encode([$access_token, $id_token]), time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
+                                    setcookie('rundiz_oauth_google_tokens', wp_json_encode([$access_token, $id_token]), time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
                                     $output['access_token'] = $access_token;
                                     $output['id_token'] = $id_token;
                                     $output['email'] = $result['data']->email;

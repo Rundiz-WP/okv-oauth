@@ -8,7 +8,6 @@
 
 namespace RundizOauth\App;
 
-use RundizOauth\App\Controllers as Controllers;
 
 if (!class_exists('\\RundizOauth\\App\\App')) {
     class App

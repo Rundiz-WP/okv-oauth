@@ -217,7 +217,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                         $user = get_user_by('ID', $user_id);
                         wp_update_user([
                             'ID' => $user->ID, 
-                            'user_email' => $email
+                            'user_email' => $email,
                         ]);
                         do_action('rundiz_oauth_changeemail_success', $user->ID, $email);
                         unset($email, $user, $user_id);
@@ -226,7 +226,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                             'rundiz-oauth-error', 
                             maybe_serialize([
                                 'class' => 'notice-success', 
-                                'message' => __('Your email has been changed.', 'okv-oauth')
+                                'message' => __('Your email has been changed.', 'okv-oauth'),
                             ])
                         );
                     } elseif (is_wp_error($email)) {
@@ -234,7 +234,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                             'rundiz-oauth-error', 
                             maybe_serialize([
                                 'class' => 'notice-error', 
-                                'message' => $email->get_error_message()
+                                'message' => $email->get_error_message(),
                             ])
                         );
                     }

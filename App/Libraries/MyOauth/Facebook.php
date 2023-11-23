@@ -3,6 +3,7 @@
  * Facebook login
  * 
  * @package rundiz-oauth
+ * // phpcs:ignoreFile -- no longer supported.
  */
 
 

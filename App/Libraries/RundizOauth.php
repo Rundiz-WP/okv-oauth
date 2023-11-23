@@ -120,7 +120,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
                 $redirect_to = admin_url();
             }
 
-            $requested_redirect_to = (isset($_SESSION['okv-oauth_redirect_to']) ? $_SESSION['okv-oauth_redirect_to'] : '');
+            $requested_redirect_to = (isset($_SESSION['okv-oauth_redirect_to']) ? sanitize_url($_SESSION['okv-oauth_redirect_to']) : '');
             $redirect_to = apply_filters('login_redirect', $redirect_to, $requested_redirect_to, $user);
             unset($requested_redirect_to);
 
