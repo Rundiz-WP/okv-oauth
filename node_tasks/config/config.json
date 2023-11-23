@@ -19,6 +19,10 @@
                     "destination": "assets"
                 },
                 {
+                    "patterns": "blocks/**",
+                    "destination": "blocks"
+                },
+                {
                     "patterns": "languages/**",
                     "destination": "languages"
                 },
@@ -108,8 +112,8 @@
                         ".phpdoc",
                         ".phpunit*",
                         "assets-src",
+                        "blocks-src",
                         "composer.lock",
-                        "gulpfile.js",
                         "node_modules",
                         "node_tasks",
                         "package*.json",

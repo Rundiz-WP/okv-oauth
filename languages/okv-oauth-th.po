@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okv-oauth 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
-"POT-Creation-Date: 2023-11-23T12:38:32+07:00\n"
-"PO-Revision-Date: 2023-11-23 12:39+0700\n"
+"POT-Creation-Date: 2023-11-24T03:13:17+07:00\n"
+"PO-Revision-Date: 2023-11-24 03:13+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: <>\n"
 "Language: th\n"
@@ -11,13 +11,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Poedit 3.4.1\n"
 "X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e;__ngettext;_n;__ngettext_noop;_n_noop;_x;_nx;"
 "_nx_noop;_ex;esc_attr__;esc_attr_e;esc_attr_x;esc_html__;esc_html_e;esc_html_x;_e;_nc\n"
-"X-Poedit-Basepath: .\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPath-1: ..\n"
 
 #. Plugin Name of the plugin
 #: App/Controllers/Admin/Settings.php:33 App/Controllers/Front/RdOauth/Index.php:73
@@ -226,11 +225,11 @@ msgstr "เปิดใช้งาน"
 
 #: App/config/settings_rdoauth.php:205
 msgid "Client ID"
-msgstr ""
+msgstr "Client ID"
 
 #: App/config/settings_rdoauth.php:212
 msgid "Client secret"
-msgstr ""
+msgstr "Client secret"
 
 #: App/config/settings_rdoauth.php:216
 msgid "Auth parameters"
@@ -276,11 +275,11 @@ msgstr "เปิดใช้งานเข้าสู่ระบบด้ว
 
 #: App/config/settings_rdoauth.php:275
 msgid "App ID"
-msgstr ""
+msgstr "App ID"
 
 #: App/config/settings_rdoauth.php:282
 msgid "App secret"
-msgstr ""
+msgstr "App secret"
 
 #: App/config/settings_rdoauth.php:293
 msgid "Design pages"
@@ -431,12 +430,16 @@ msgstr "เข้าสู่ระบบ"
 msgid "Register"
 msgstr "ลงทะเบียน"
 
-#~ msgid "Donate"
-#~ msgstr "บริจาค"
+#: blocks/loginlinks/block.js:1
+msgid "Display link to admin dashboard"
+msgstr "แสดงลิ้งค์ไปยังหน้าผู้ดูแล"
 
-#~ msgid "File was not found!"
-#~ msgstr "ไม่พบไฟล์!"
+#: blocks/loginlinks/block.json
+msgctxt "block description"
+msgid "Display login, register, logout links."
+msgstr "แสดงลิ้งค์เข้าสู่ระบบ, ลงทะเบียน, ออกจากระบบ."
 
-#, php-format
-#~ msgid "From the menu, go to APIs &amp; services &gt; Library and enable %1$sGoogle+ API%2$s."
-#~ msgstr "จากเมนู, ไปที่ APIs &amp; services &gt; Library และเปิดใช้งาน %1$sGoogle+ API%2$s."
+#: blocks/loginlinks/block.json
+msgctxt "block title"
+msgid "Login links"
+msgstr "ลิ้งค์เข้าสู่ระบบ"

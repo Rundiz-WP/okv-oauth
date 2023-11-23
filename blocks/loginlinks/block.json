@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "attributes": {
+    "displayLinkToAdmin": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "category": "theme",
+  "description": "Display login, register, logout links.",
+  "editorScript": "file:./block.js",
+  "icon": "admin-users",
+  "name": "rd-oauth/blocks-loginlinks",
+  "render": "file:./render.php",
+  "style": [
+    "file:./style-block.css",
+    "rd-oauth-loginlinks-block-style"
+  ],
+  "supports": {
+    "className": true
+  },
+  "textdomain": "okv-oauth",
+  "title": "Login links"
+}

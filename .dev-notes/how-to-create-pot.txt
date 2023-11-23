@@ -1,3 +1,7 @@
 Use this command:
-`wp i18n make-pot . --exclude="assets,languages,*.css,*.js,*.svg,*.eot,*.woff,*.woff2,*.ttf,*.html,*.txt,*.pot"`
+`wp i18n make-pot . --exclude="assets,block-src,languages,*.css,*.js,*.svg,*.eot,*.woff,*.woff2,*.ttf,*.html,*.txt,*.pot"`
 And check the result.
+
+Convert to JSON to make block i18n supported with this command:
+`wp i18n make-json languages/okv-oauth-th.po --no-purge --pretty-print`
+and rename **${domain}-${locale}-${md5}.json** to **${domain}-${locale}-${handle}.json** where `${handle}` is from `wp_set_script_translations()` function in PHP.

@@ -1,0 +1,18 @@
+{
+    "translation-revision-date": "2023-11-24 03:13+0700",
+    "generator": "WP-CLI\/2.8.0-alpha-9dfa966",
+    "source": "blocks\/loginlinks\/block.js",
+    "domain": "okv-oauth",
+    "locale_data": {
+        "messages": {
+            "": {
+                "domain": "okv-oauth",
+                "lang": "th",
+                "plural-forms": "nplurals=1; plural=0;"
+            },
+            "Display link to admin dashboard": [
+                "\u0e41\u0e2a\u0e14\u0e07\u0e25\u0e34\u0e49\u0e07\u0e04\u0e4c\u0e44\u0e1b\u0e22\u0e31\u0e07\u0e2b\u0e19\u0e49\u0e32\u0e1c\u0e39\u0e49\u0e14\u0e39\u0e41\u0e25"
+            ]
+        }
+    }
+}

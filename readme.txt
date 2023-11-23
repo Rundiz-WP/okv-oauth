@@ -58,6 +58,12 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.5 =
+2023-11-xx
+
+* Facebook OAuth API no longer supported (the plugin author has no Facebook account anymore).
+* Fix incorrect check select box value with key that is number.
+
 = 1.4.4 =
 2023-01-24
 

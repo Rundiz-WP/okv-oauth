@@ -1,0 +1,15 @@
+{
+    "name": "okv-oauth",
+    "version": "1.5.0",
+    "main": "index.js",
+    "author": "Vee W.",
+    "license": "MIT",
+    "devDependencies": {
+        "@wordpress/scripts": "^26.17.0"
+    },
+    "scripts": {
+        "build": "wp-scripts build --webpack-src-dir=\"./blocks-src\" --output-path=\"./blocks\"",
+        "start": "wp-scripts start --webpack-src-dir=\"./blocks-src\" --output-path=\"./blocks\"",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    }
+}
