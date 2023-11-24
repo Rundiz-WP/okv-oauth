@@ -4,7 +4,7 @@ Tags: oauth, google, google login, google register, facebook, facebook login, fa
 Tested up to: 6.5
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.5
+Stable tag: 1.5.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -58,8 +58,13 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.5.1 =
+2023-11-24
+
+* Add legacy login links widget (Hot update). This widget have more options and can work with PolyLang Free while block need PolyLang Pro.
+
 = 1.5 =
-2023-11-xx
+2023-11-23
 
 * Facebook OAuth API no longer supported (the plugin author has no Facebook account anymore).
 * Fix incorrect check select box value with key that is number.

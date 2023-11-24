@@ -1,9 +1,10 @@
 {
     "name": "okv-oauth",
-    "version": "1.5",
+    "version": "1.5.1",
     "main": "index.js",
     "author": "Vee W.",
     "license": "MIT",
+    "private": true,
     "devDependencies": {
         "@wordpress/scripts": "^26.17.0"
     },
