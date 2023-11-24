@@ -9,7 +9,7 @@
 namespace RundizOauth\App\Controllers\Blocks;
 
 
-if (!class_exists('RundizOauth\App\Controllers\Blocks\\LoginLinks')) {
+if (!class_exists('\\RundizOauth\\App\\Controllers\\Blocks\\LoginLinks')) {
     class LoginLinks implements \RundizOauth\App\Controllers\ControllerInterface
     {
 

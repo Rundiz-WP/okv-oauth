@@ -1,5 +1,5 @@
 Use this command:
-`wp i18n make-pot . --exclude="assets,block-src,languages,*.css,*.js,*.svg,*.eot,*.woff,*.woff2,*.ttf,*.html,*.txt,*.pot"`
+`wp i18n make-pot . --exclude="assets,blocks-src,languages,node_modules,node_tasks,*.css,*.svg,*.eot,*.woff,*.woff2,*.ttf,*.html,*.txt,*.pot"`
 And check the result.
 
 Convert to JSON to make block i18n supported with this command:

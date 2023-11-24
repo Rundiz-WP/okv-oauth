@@ -14,9 +14,9 @@ $classes = ($isUserLoggedIn ? 'logged-in' : 'logged-out');
 $contents = '';
 
 if (!$isUserLoggedIn && get_option('users_can_register')) {
-    $contents .= '<li><a href="' . esc_url( wp_registration_url() ) . '">' . __( 'Register' ) . '</a></li>' . PHP_EOL;
+    $contents .= '<li><a href="' . esc_url(wp_registration_url()) . '">' . __('Register') . '</a></li>' . PHP_EOL;
 } elseif ($isUserLoggedIn && isset($attributes) && is_array($attributes) && array_key_exists('displayLinkToAdmin', $attributes) && true === $attributes['displayLinkToAdmin']) {
-    $contents .= '<li><a href="' . admin_url() . '">' . __( 'Site Admin' ) . '</a></li>' . PHP_EOL;
+    $contents .= '<li><a href="' . admin_url() . '">' . __('Site Admin') . '</a></li>' . PHP_EOL;
 }
 unset($isUserLoggedIn);
 
