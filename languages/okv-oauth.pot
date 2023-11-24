@@ -2,14 +2,14 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rundiz OAuth 1.4.4\n"
+"Project-Id-Version: Rundiz OAuth 1.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-24T03:13:17+07:00\n"
+"POT-Creation-Date: 2023-11-24T14:11:14+07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.0-alpha-9dfa966\n"
 "X-Domain: okv-oauth\n"
@@ -403,6 +403,52 @@ msgstr ""
 msgid "OR"
 msgstr ""
 
+#: App/Widgets/LoginLinksWidget.php:28
+msgid "Login links widget"
+msgstr ""
+
+#: App/Widgets/LoginLinksWidget.php:30
+msgid "Display links to login, logout, and other (depend on settings)."
+msgstr ""
+
+#: App/Widgets/LoginLinksWidget.php:50
+msgid "Title"
+msgstr ""
+
+#: App/Widgets/LoginLinksWidget.php:58
+#: blocks/loginlinks/block.js:1
+msgid "Display link to admin dashboard"
+msgstr ""
+
+#: App/Widgets/LoginLinksWidget.php:65
+msgid "Display link to edit profile"
+msgstr ""
+
+#: App/Widgets/LoginLinksWidget.php:69
+msgid "Use HTML element"
+msgstr ""
+
+#. translators: %1$s: HTML element that will be use.
+#: App/Widgets/LoginLinksWidget.php:72
+#: App/Widgets/LoginLinksWidget.php:74
+#: App/Widgets/LoginLinksWidget.php:76
+msgid "Use %1$s"
+msgstr ""
+
+#: App/Widgets/LoginLinksWidget.php:81
+msgid "List wrapper classes"
+msgstr ""
+
+#: App/Widgets/LoginLinksWidget.php:86
+msgid "List item classes"
+msgstr ""
+
+#: App/Widgets/LoginLinksWidget.php:212
+#: templates/okv-oauth/partials/registerForm_v.php:22
+#: templates/okv-oauth/partials/registerForm_v.php:34
+msgid "Register"
+msgstr ""
+
 #: templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:17
 msgid "Change an email by click on the OAuth button and login to OAuth provider with the email you want."
 msgstr ""
@@ -410,15 +456,6 @@ msgstr ""
 #: templates/okv-oauth/partials/loginForm_v.php:14
 #: templates/okv-oauth/partials/loginForm_v.php:26
 msgid "Login"
-msgstr ""
-
-#: templates/okv-oauth/partials/registerForm_v.php:22
-#: templates/okv-oauth/partials/registerForm_v.php:34
-msgid "Register"
-msgstr ""
-
-#: blocks/loginlinks/block.js:1
-msgid "Display link to admin dashboard"
 msgstr ""
 
 #: blocks/loginlinks/block.json

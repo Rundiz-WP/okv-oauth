@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okv-oauth 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
-"POT-Creation-Date: 2023-11-24T03:13:17+07:00\n"
-"PO-Revision-Date: 2023-11-24 03:13+0700\n"
+"POT-Creation-Date: 2023-11-24T14:11:14+07:00\n"
+"PO-Revision-Date: 2023-11-24 14:11+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: <>\n"
 "Language: th\n"
@@ -416,6 +416,49 @@ msgstr "เปลี่ยนอีเมล"
 msgid "OR"
 msgstr "หรือ"
 
+#: App/Widgets/LoginLinksWidget.php:28
+msgid "Login links widget"
+msgstr "วิดเจ็ตลิ้งค์เข้าสู่ระบบ"
+
+#: App/Widgets/LoginLinksWidget.php:30
+msgid "Display links to login, logout, and other (depend on settings)."
+msgstr "แสดงลิ้งค์ไปยังหน้าเข้าสู่ระบบ, ออกจากระบบ, และอื่นๆ (ขึ้นอยู่กับการตั้งค่า)."
+
+#: App/Widgets/LoginLinksWidget.php:50
+msgid "Title"
+msgstr "หัวข้อ"
+
+#: App/Widgets/LoginLinksWidget.php:58 blocks/loginlinks/block.js:1
+msgid "Display link to admin dashboard"
+msgstr "แสดงลิ้งค์ไปยังหน้าผู้ดูแล"
+
+#: App/Widgets/LoginLinksWidget.php:65
+msgid "Display link to edit profile"
+msgstr "แสดงลิ้งค์ไปยังหน้าแก้ไขโปรไฟล์"
+
+#: App/Widgets/LoginLinksWidget.php:69
+msgid "Use HTML element"
+msgstr "ใช้แท็ก HTML"
+
+#. translators: %1$s: HTML element that will be use.
+#: App/Widgets/LoginLinksWidget.php:72 App/Widgets/LoginLinksWidget.php:74
+#: App/Widgets/LoginLinksWidget.php:76
+msgid "Use %1$s"
+msgstr "ใช้ %1$s"
+
+#: App/Widgets/LoginLinksWidget.php:81
+msgid "List wrapper classes"
+msgstr "คลาสตัวหุ้มรายการ"
+
+#: App/Widgets/LoginLinksWidget.php:86
+msgid "List item classes"
+msgstr "คลาสแต่ละรายการ"
+
+#: App/Widgets/LoginLinksWidget.php:212 templates/okv-oauth/partials/registerForm_v.php:22
+#: templates/okv-oauth/partials/registerForm_v.php:34
+msgid "Register"
+msgstr "ลงทะเบียน"
+
 #: templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:17
 msgid ""
 "Change an email by click on the OAuth button and login to OAuth provider with the email you want."
@@ -424,15 +467,6 @@ msgstr "เปลี่ยนอีเมลโดยคลิกบนปุ่
 #: templates/okv-oauth/partials/loginForm_v.php:14 templates/okv-oauth/partials/loginForm_v.php:26
 msgid "Login"
 msgstr "เข้าสู่ระบบ"
-
-#: templates/okv-oauth/partials/registerForm_v.php:22
-#: templates/okv-oauth/partials/registerForm_v.php:34
-msgid "Register"
-msgstr "ลงทะเบียน"
-
-#: blocks/loginlinks/block.js:1
-msgid "Display link to admin dashboard"
-msgstr "แสดงลิ้งค์ไปยังหน้าผู้ดูแล"
 
 #: blocks/loginlinks/block.json
 msgctxt "block description"

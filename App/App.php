@@ -51,6 +51,11 @@ if (!class_exists('\\RundizOauth\\App\\App')) {
             $this->Loader = new \RundizOauth\App\Libraries\Loader();
             $this->Loader->autoRegisterControllers();
 
+            // Register all widgets.
+            $WidgetAutoRegister = new Widgets\AutoRegisterWidgets();
+            $WidgetAutoRegister->registerAll();
+            unset($WidgetAutoRegister);
+
             // The rest of controllers that is not able to register via loader's auto register.
             // They must be manually write it down here, below this line.
             // For example:
