@@ -106,10 +106,6 @@
         <exclude name="WordPress.WhiteSpace.ControlStructureSpacing"></exclude>
         <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceBefore"></exclude>
         <exclude name="WordPress.WhiteSpace.OperatorSpacing.NoSpaceAfter"></exclude>
-        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_close"></exclude>
-        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_exec"></exclude>
-        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_init"></exclude>
-        <exclude name="WordPress.WP.AlternativeFunctions.curl_curl_setopt"></exclude>
         <exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"></exclude>
         <exclude name="WordPress.WP.EnqueuedResourceParameters.MissingVersion"></exclude>
         <exclude name="WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion"></exclude>

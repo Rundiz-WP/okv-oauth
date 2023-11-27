@@ -25,23 +25,6 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
 
 
         /**
-         * @var resource The cUrl resource.
-         */
-        protected $ch;
-
-
-        /**
-         * Initialize cURL and set common option.
-         */
-        protected function curlInit()
-        {
-            $this->ch = curl_init();
-
-            curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, true);
-        }// curlInit
-
-
-        /**
          * Verify code and get access token.
          * 
          * @link https://developers.google.com/identity/protocols/oauth2/web-server#exchange-authorization-code Reference.
@@ -62,24 +45,24 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                     array_key_exists('google_client_id', $rundizoauth_options) &&
                     array_key_exists('google_client_secret', $rundizoauth_options)
                 ) {
-                    $this->curlInit();
-                    curl_setopt($this->ch, CURLOPT_URL, 'https://oauth2.googleapis.com/token');
-                    curl_setopt($this->ch, CURLOPT_HTTPHEADER, ['Content-type: application/x-www-form-urlencoded']);
-                    curl_setopt($this->ch, CURLOPT_POST, true);
 
                     $postData = 'code=' . rawurlencode($code) .
                         '&client_id=' . rawurlencode($rundizoauth_options['google_client_id']) .
                         '&client_secret=' . rawurlencode($rundizoauth_options['google_client_secret']) .
                         '&redirect_uri=' . rawurlencode($redirect_uri) .
                         '&grant_type=authorization_code';
-                    curl_setopt($this->ch, CURLOPT_POSTFIELDS, $postData);
-                    unset($postData);
 
-                    $result = curl_exec($this->ch);
+                    $remoteArgs = [
+                        'headers' => 'Content-type: application/x-www-form-urlencoded',
+                        'body' => $postData,
+                    ];
+                    unset($postData);
+                    $response = wp_remote_post('https://oauth2.googleapis.com/token', $remoteArgs);
+                    unset($remoteArgs);
+                    $result = wp_remote_retrieve_body($response);
+                    unset($response);
                     \RundizOauth\App\Libraries\Logger::writeLog('Google OAuth token result:' . PHP_EOL . $result);
                     $result = json_decode($result);
-
-                    curl_close($this->ch);
 
                     return $result;
                 }
@@ -156,15 +139,14 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
          */
         protected function getUserProfileInfo($access_token)
         {
-            $this->curlInit();
-
-            curl_setopt($this->ch, CURLOPT_URL, 'https://www.googleapis.com/oauth2/v2/userinfo?access_token=' . rawurlencode($access_token));
-
-            $result = curl_exec($this->ch);
+            $response = wp_remote_get('https://www.googleapis.com/oauth2/v2/userinfo?access_token=' . rawurlencode($access_token));
+            $result = wp_remote_retrieve_body($response);
+            unset($response);
             $result = json_decode($result);
 
-            curl_close($this->ch);
-
+            if (!is_object($result)) {
+                return new \stdClass();
+            }
             return $result;
         }// getUserProfileInfo
 
@@ -400,14 +382,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                     array_key_exists('google_client_id', $rundizoauth_options) &&
                     array_key_exists('google_client_secret', $rundizoauth_options)
                 ) {
-                    $this->curlInit();
-                    curl_setopt($this->ch, CURLOPT_URL, 'https://oauth2.googleapis.com/tokeninfo?id_token=' . rawurlencode($id_token));
-
-                    $result = curl_exec($this->ch);
+                    $response = wp_remote_get('https://oauth2.googleapis.com/tokeninfo?id_token=' . rawurlencode($id_token));
+                    $result = wp_remote_retrieve_body($response);
+                    unset($response);
                     \RundizOauth\App\Libraries\Logger::writeLog('Google OAuth validate token: ' . PHP_EOL . $result);
                     $result = json_decode($result);
-
-                    curl_close($this->ch);
 
                     if (isset($result->error_description)) {
                         $output['result'] = false;
