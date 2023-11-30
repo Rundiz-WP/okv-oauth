@@ -109,18 +109,18 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
             }
 
             if ('div_p' === $useElement) {
-                $openWrapper = '<div class="' . esc_attr($wrapperClasses) . '">' . "\n";
-                $closeWrapper = '</div>' . "\n";
+                $openWrapper = '<div class="' . esc_attr($wrapperClasses) . '">' . PHP_EOL;
+                $closeWrapper = '</div>' . PHP_EOL;
                 $openLine = '<p class="rd-oauth-loginlinks-widget-list-item' . $lineClasses . '">';
                 $closeLine = '</p>';
             } elseif ('div_div' === $useElement) {
-                $openWrapper = '<div class="' . esc_attr($wrapperClasses) . '">' . "\n";
-                $closeWrapper = '</div>' . "\n";
+                $openWrapper = '<div class="' . esc_attr($wrapperClasses) . '">' . PHP_EOL;
+                $closeWrapper = '</div>' . PHP_EOL;
                 $openLine = '<div class="rd-oauth-loginlinks-widget-list-item' . $lineClasses . '">';
                 $closeLine = '</div>';
             } else {
-                $openWrapper = '<ul class="' . esc_attr($wrapperClasses) . '">' . "\n";
-                $closeWrapper = '</ul>' . "\n";
+                $openWrapper = '<ul class="' . esc_attr($wrapperClasses) . '">' . PHP_EOL;
+                $closeWrapper = '</ul>' . PHP_EOL;
                 $openLine = '<li class="rd-oauth-loginlinks-widget-list-item' . $lineClasses . '">';
                 $closeLine = '</li>';
             }
@@ -173,10 +173,10 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
             }
 
             // set output front-end widget ---------------------------------
-            $output = $args['before_widget'] . "\n";
+            $output = $args['before_widget'] . PHP_EOL;
 
             if (isset($instance['rdoauth-loginlinks-widget-title']) && !empty($instance['rdoauth-loginlinks-widget-title'])) {
-                $output .= $args['before_title'] . apply_filters('widget_title', $instance['rdoauth-loginlinks-widget-title']) . $args['after_title'] . "\n";
+                $output .= $args['before_title'] . apply_filters('widget_title', $instance['rdoauth-loginlinks-widget-title']) . $args['after_title'] . PHP_EOL;
             }
 
             $currentUrl = ( is_ssl() ? 'https://' : 'http://' ) . 
@@ -195,29 +195,37 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
 
             // list site-admin/register/login/edit profile/logout links
             $output .= $openWrapper;
+            // apply filters after open the wrapper.
+            $output .= apply_filters('rdoauth_loginlinkswidgetblock_afteropenwrapper', '', $openLine, $closeLine);
             if ($isUserLoggedIn) {
                 // if logged in.
+                // apply filters for logged in users, before display links.
+                $output .= apply_filters('rdoauth_loginlinkswidgetblock_loggedin_beforelinks', '', $openLine, $closeLine);
                 if (isset($instance['rdoauth-loginlinks-displaylink-admin']) && '1' === $instance['rdoauth-loginlinks-displaylink-admin']) {
                     // if setting to allowed link to admin.
-                    $output .= $openLine . '<a href="' . admin_url() . '">' . __('Site Admin') . '</a>' . $closeLine . "\n";
+                    $output .= $openLine . '<a href="' . admin_url() . '">' . __('Site Admin') . '</a>' . $closeLine . PHP_EOL;
                 }
                 if (isset($instance['rdoauth-loginlinks-displaylink-editprofile']) && '1' === $instance['rdoauth-loginlinks-displaylink-editprofile']) {
                     // if setting to allowed link to edit profile.
-                    $output .= $openLine . '<a href="' . get_edit_user_link() . '">' . __('Edit Profile') . '</a>' . $closeLine . "\n";
+                    $output .= $openLine . '<a href="' . get_edit_user_link() . '">' . __('Edit Profile') . '</a>' . $closeLine . PHP_EOL;
                 }
+                // apply filters for logged in users, after  display links.
+                $output .= apply_filters('rdoauth_loginlinkswidgetblock_loggedin_afterlinks', '', $openLine, $closeLine);
             } else {
                 // if NOT logged in.
                 if (get_option('users_can_register')) {
                     // if setting is allowed user register.
-                    $output .= $openLine . '<a href="' . wp_registration_url() . '">' . __('Register', 'okv-oauth') . '</a>' . $closeLine . "\n";
+                    $output .= $openLine . '<a href="' . wp_registration_url() . '">' . __('Register', 'okv-oauth') . '</a>' . $closeLine . PHP_EOL;
                 }
             }// endif;
-            $output .= $openLine . wp_loginout($currentUrl, false) . $closeLine . "\n";
+            $output .= $openLine . wp_loginout($currentUrl, false) . $closeLine . PHP_EOL;
+            // apply filters after login/logout.
+            $output .= apply_filters('rdoauth_loginlinkswidgetblock_afterloginout', '', $openLine, $closeLine);
             unset($currentUrl, $isUserLoggedIn);
             $output .= $closeWrapper;
             unset($closeLine, $closeWrapper, $openLine, $openWrapper);
 
-            $output .= $args['after_widget'] . "\n";
+            $output .= $args['after_widget'] . PHP_EOL;
 
             echo $output;
 
