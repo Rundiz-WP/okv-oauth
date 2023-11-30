@@ -5,6 +5,10 @@
     "displayLinkToAdmin": {
       "type": "boolean",
       "default": false
+    },
+    "displayLinkToEditProfile": {
+      "type": "boolean",
+      "default": false
     }
   },
   "category": "theme",
