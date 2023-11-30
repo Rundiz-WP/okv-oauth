@@ -1,3 +1,9 @@
+/**
+ * Login links block JS.
+ * 
+ * @package rundiz-oauth
+ * @since 1.5
+ */
 import { registerBlockType } from '@wordpress/blocks';
 import { 
     useBlockProps,

@@ -1,6 +1,7 @@
 <?php
 /**
  * @package rundiz-oauth
+ * @since 1.5.1
  */
 
 
@@ -196,10 +197,12 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
             // list site-admin/register/login/edit profile/logout links
             $output .= $openWrapper;
             // apply filters after open the wrapper.
+            // @since 1.5.2
             $output .= apply_filters('rdoauth_loginlinkswidgetblock_afteropenwrapper', '', $openLine, $closeLine);
             if ($isUserLoggedIn) {
                 // if logged in.
                 // apply filters for logged in users, before display links.
+                // @since 1.5.2
                 $output .= apply_filters('rdoauth_loginlinkswidgetblock_loggedin_beforelinks', '', $openLine, $closeLine);
                 if (isset($instance['rdoauth-loginlinks-displaylink-admin']) && '1' === $instance['rdoauth-loginlinks-displaylink-admin']) {
                     // if setting to allowed link to admin.
@@ -210,6 +213,7 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
                     $output .= $openLine . '<a href="' . get_edit_user_link() . '">' . __('Edit Profile') . '</a>' . $closeLine . PHP_EOL;
                 }
                 // apply filters for logged in users, after  display links.
+                // @since 1.5.2
                 $output .= apply_filters('rdoauth_loginlinkswidgetblock_loggedin_afterlinks', '', $openLine, $closeLine);
             } else {
                 // if NOT logged in.
@@ -220,6 +224,7 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
             }// endif;
             $output .= $openLine . wp_loginout($currentUrl, false) . $closeLine . PHP_EOL;
             // apply filters after login/logout.
+            // @since 1.5.2
             $output .= apply_filters('rdoauth_loginlinkswidgetblock_afterloginout', '', $openLine, $closeLine);
             unset($currentUrl, $isUserLoggedIn);
             $output .= $closeWrapper;

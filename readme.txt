@@ -4,7 +4,7 @@ Tags: oauth, google, google login, google register, facebook, facebook login, fa
 Tested up to: 6.5
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.5.1
+Stable tag: 1.5.2
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -58,6 +58,13 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.5.2 =
+2023-11-30
+
+* Fix use wp_remote_xxx() instead of cURL in Google OAuth API class.
+* Add display link to edit profile option into block.
+* Add filters hook supported in block and legacy widget.
+
 = 1.5.1 =
 2023-11-24
 

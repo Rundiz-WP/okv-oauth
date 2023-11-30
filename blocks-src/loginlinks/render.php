@@ -3,6 +3,7 @@
  * Render contents for loginlinks block.
  * 
  * @package rundiz-oauth
+ * @since 1.5
  */
 
 
@@ -20,6 +21,7 @@ $contents = '';
 $contents .= '<ul ' . $wrapperAttributes . '>';
 unset($wrapperAttributes);
 // apply filters after open the wrapper.
+// @since 1.5.2
 $contents .= apply_filters('rdoauth_loginlinkswidgetblock_afteropenwrapper', '', $openLine, $closeLine);
 
 if (!$isUserLoggedIn && get_option('users_can_register')) {
@@ -28,6 +30,7 @@ if (!$isUserLoggedIn && get_option('users_can_register')) {
 } elseif ($isUserLoggedIn) {
     // if user logged in.
     // apply filters for logged in users, before display links.
+    // @since 1.5.2
     $contents .= apply_filters('rdoauth_loginlinkswidgetblock_loggedin_beforelinks', '', $openLine, $closeLine);
     if (isset($attributes) && is_array($attributes) && array_key_exists('displayLinkToAdmin', $attributes) && true === $attributes['displayLinkToAdmin']) {
         // if block was set to display link to admin dashboard.
@@ -38,12 +41,14 @@ if (!$isUserLoggedIn && get_option('users_can_register')) {
         $contents .= $openLine . '<a href="' . get_edit_user_link() . '">' . __('Edit Profile') . '</a>' . $closeLine . PHP_EOL;
     }
     // apply filters for logged in users, after  display links.
+    // @since 1.5.2
     $contents .= apply_filters('rdoauth_loginlinkswidgetblock_loggedin_afterlinks', '', $openLine, $closeLine);
 }
 unset($isUserLoggedIn);
 
 $contents .= $openLine . wp_loginout($currentUrl, false) . $closeLine . PHP_EOL;
 // apply filters after login/logout.
+// @since 1.5.2
 $contents .= apply_filters('rdoauth_loginlinkswidgetblock_afterloginout', '', $openLine, $closeLine);
 unset($currentUrl);
 $contents .= '</ul>';
