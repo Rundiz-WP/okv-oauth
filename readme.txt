@@ -4,7 +4,7 @@ Tags: oauth, google, google login, google register, facebook, facebook login, fa
 Tested up to: 6.5
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.5.2
+Stable tag: 1.5.3
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -58,6 +58,11 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.5.3 =
+2023-12-23
+
+* Fix check settings that use OAuth only.
+
 = 1.5.2 =
 2023-11-30
 
