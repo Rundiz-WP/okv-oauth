@@ -133,11 +133,6 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          */
         public function authenticate($user, $username, $password)
         {
-            if (is_a($user, 'WP_User')) {
-                // if already logged in (maybe by previous hook or plugin), do nothing.
-                return $user;
-            }
-
             $this->init();
 
             if (2 === $this->loginMethod && (!empty($username) || !empty($password))) {
