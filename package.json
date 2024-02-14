@@ -6,7 +6,7 @@
     "license": "MIT",
     "private": true,
     "devDependencies": {
-        "@wordpress/scripts": "^26.17.0"
+        "@wordpress/scripts": "^27.2.0"
     },
     "scripts": {
         "build": "wp-scripts build --webpack-src-dir=\"./blocks-src\" --output-path=\"./blocks\"",
