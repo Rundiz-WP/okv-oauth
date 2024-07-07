@@ -1,6 +1,6 @@
 === Rundiz OAuth ===
 Contributors: okvee
-Tags: oauth, google, google login, google register, facebook, facebook login, facebook register, social login, social connect
+Tags: oauth, google, social login, social connect
 Tested up to: 6.6
 Requires at least: 5.0
 Requires PHP: 5.4
