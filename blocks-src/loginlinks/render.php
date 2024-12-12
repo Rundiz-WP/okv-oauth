@@ -56,5 +56,5 @@ $contents .= '</ul>';
 unset($closeLine, $openLine);
 
 // must use echo, not return.
-echo  $contents;
+echo $contents;
 // that's all. end of file.
