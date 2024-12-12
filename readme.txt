@@ -4,7 +4,7 @@ Tags: oauth, google, social login, social connect
 Tested up to: 6.8
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.5.3
+Stable tag: 1.5.4
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
