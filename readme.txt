@@ -1,7 +1,7 @@
 === Rundiz OAuth ===
 Contributors: okvee
 Tags: oauth, google, social login, social connect
-Tested up to: 6.6
+Tested up to: 6.8
 Requires at least: 5.0
 Requires PHP: 5.4
 Stable tag: 1.5.3
@@ -58,6 +58,11 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.5.4 =
+2024-12-12
+
+* New wp-script (Node.js script) build block and create new **-rtl.css** file automatically.
+
 = 1.5.3 =
 2023-12-23
 
