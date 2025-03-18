@@ -34,7 +34,7 @@ if (!class_exists('\\RundizOauth\\App\\App')) {
          */
         public function run()
         {
-            add_action('plugins_loaded', function() {
+            add_action('init', function() {
                 // @link https://codex.wordpress.org/Function_Reference/load_plugin_textdomain Reference.
                 // @link https://developer.wordpress.org/reference/functions/load_plugin_textdomain/ Reference.
                 // @link https://wordpress.stackexchange.com/questions/245250/override-plugin-text-domain-in-child-theme Override text domain, translation by other themes, plugins.

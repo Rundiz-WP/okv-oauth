@@ -17,15 +17,6 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
 
 
         /**
-         * controller constructor
-         */
-        public function __construct() {
-            // setup all options from setting config file.
-            $this->setupAllOptions();
-        }// __construct
-
-
-        /**
          * setup settings menu to go to settings page.
          */
         public function pluginSettingsMenu()

@@ -17,11 +17,15 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
 
 
         /**
+         * @var bool Mark that is it already setup all options.
+         */
+        private $alreadySetupAllOptions = false;
+
+
+        /**
          * controller constructor
          */
         public function __construct() {
-            // setup all options from setting config file.
-            $this->setupAllOptions();
         }// __construct
 
 
@@ -117,6 +121,11 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
          */
         private function activationAddUpdateOption(array $current_options = [])
         {
+            if (false === $this->alreadySetupAllOptions) {
+                $this->setupAllOptions();
+                $this->alreadySetupAllOptions = true;
+            }
+
             if (defined('WP_DEBUG') && WP_DEBUG === true) {
                 // for debug.
                 error_log('plugin activation or updated for site ' . get_current_blog_id());
