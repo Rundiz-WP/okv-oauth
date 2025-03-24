@@ -4,7 +4,7 @@ Tags: oauth, google, social login, social connect
 Tested up to: 6.8
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.5.5
+Stable tag: 1.5.6
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -58,6 +58,13 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.5.6 =
+2025-03-24
+
+* Delete widget on uninstall, delete old options on activate/update the plugin.
+* Add new hooks about reset password, retrieve password.
+* Update option without autoload to improve performance.
+
 = 1.5.5 =
 2025-03-18
 
