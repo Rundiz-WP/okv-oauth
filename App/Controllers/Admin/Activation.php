@@ -174,13 +174,9 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
                 $sub_options = maybe_serialize($sub_options);
                 add_option($this->main_option_name, $sub_options);
                 unset($sub_options);
-            } elseif (isset($some_of_your_update_options_conditions) && false === $some_of_your_update_options_conditions) {
+            } else {
                 // use update if some condition is met. such as older options.
                 // @todo [rd-oauth][rd-settings-fw] this condition is not in use. just for the future.
-                $sub_options = $current_options;
-                $sub_options = maybe_serialize($sub_options);
-                update_option($this->main_option_name, $sub_options);
-                unset($sub_options);
             }
 
             unset($current_options);
@@ -190,6 +186,8 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
             $RewriteRules->addRewriteRules();
             unset($RewriteRules);
             flush_rewrite_rules();
+
+            $this->deleteOldOptions();
         }// activationAddUpdateOption
 
 
@@ -202,6 +200,20 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
             // remove all added rewrite rules.
             flush_rewrite_rules();
         }// deactivation
+
+
+        /**
+         * Delete old options from previous version.
+         * 
+         * @since 1.5.6
+         */
+        private function deleteOldOptions()
+        {
+            delete_option('okvoauth_login_method');
+            delete_option('okvoauth_login_cookie_expiration');
+            delete_option('okvoauth_google_client_id');
+            delete_option('okvoauth_google_client_secret');
+        }// deleteOldOptions
 
 
         /**
@@ -255,6 +267,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
                     foreach ($sites as $site) {
                         switch_to_blog($site->blog_id);
                         delete_option(static::getMainOptionName());
+                        delete_option('widget_rdoauth_loginlinks_widget');
                         restore_current_blog();
                     }
                 }
@@ -262,6 +275,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
             } else {
                 // this is single site, delete options in single site.
                 delete_option(static::getMainOptionName());
+                delete_option('widget_rdoauth_loginlinks_widget');
             }
         }// uninstall
 
