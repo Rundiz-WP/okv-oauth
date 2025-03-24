@@ -455,9 +455,11 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
             // lost password page. ------------------------------------------------------------
             // display error at lost password form if using OAuth only.
             add_action('lostpassword_form', [$this, 'lostPasswordForm']);
-            // hooks into last password after form submitted but before process.
+            // hooks into lost password after form submitted but before process.
             add_action('lostpassword_post', [$this, 'lostPasswordPost']);
             add_action('retreive_password', [$this, 'lostPasswordPost']);
+            add_action('retrieve_password', [$this, 'lostPasswordPost']);
+            add_filter('send_retrieve_password_email', [$this, 'retrievePassword'], 10, 3);
             // disallow password to be reset if using OAuth only.
             add_filter('allow_password_reset', [$this, 'allowPasswordReset'], 10, 2);
 
@@ -536,6 +538,27 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                 }
             }
         }// rememberRedirectTo
+
+
+        /**
+         * Check that to send the retrieve password email or not.
+         * 
+         * @since 1.5.6
+         * @param bool $send Send indicate. Default is `true`.
+         * @param string $user_login The username for the user.
+         * @param \WP_User $user_data WP_User object.
+         * @return bool
+         */
+        public function retrievePassword($send, $user_login, \WP_User $user_data)
+        {
+            $this->init();
+
+            if (2 === $this->loginMethod) {
+                $send = false;
+            }
+
+            return $send;
+        }// retrievePassword
 
 
         /**
