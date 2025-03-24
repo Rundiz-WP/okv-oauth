@@ -65,9 +65,9 @@ if (!trait_exists('\\RundizOauth\\App\\AppTrait')) {
             $get_option = get_option($this->main_option_name);
             $sub_options = maybe_serialize(stripslashes_deep($data));
             if (false !== $get_option) {
-                return update_option($this->main_option_name, $sub_options);
+                return update_option($this->main_option_name, $sub_options, false);
             } else {
-                return add_option($this->main_option_name, $sub_options);
+                return add_option($this->main_option_name, $sub_options, '', false);
             }
         }// saveOptions
 

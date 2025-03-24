@@ -172,7 +172,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
                 }
 
                 $sub_options = maybe_serialize($sub_options);
-                add_option($this->main_option_name, $sub_options);
+                add_option($this->main_option_name, $sub_options, '', false);
                 unset($sub_options);
             } else {
                 // use update if some condition is met. such as older options.
