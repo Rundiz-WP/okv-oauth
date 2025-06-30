@@ -155,7 +155,7 @@ return [
     'tab_style' => 'vertical', // vertical or horizontal
     'setting_tabs' => [
         [
-            'icon' => 'fa fa-sign-in fa-fw',
+            'icon' => 'fa-solid fa-right-to-bracket fa-fw',
             'title' => __('Plugin settings', 'okv-oauth'),
             'fields' => [
                 [
@@ -183,7 +183,7 @@ return [
             ],
         ], // end login settings tab.
         [
-            'icon' => 'fa fa-google fa-fw',
+            'icon' => 'fa-brands fa-google fa-fw',
             'title' => __('Google login', 'okv-oauth'),
             'fields' => [
                 [
@@ -253,7 +253,7 @@ return [
             ],
         ], // end google login settings tab.
         [
-            'icon' => 'fa fa-facebook fa-fw',
+            'icon' => 'fa-brands fa-facebook-f fa-fw',
             'title' => __('Facebook login', 'okv-oauth'),
             'fields' => [
                 [
@@ -289,7 +289,7 @@ return [
             ],
         ], // end facebook login settings tab.
         [
-            'icon' => 'fa fa-paint-brush fa-fw',
+            'icon' => 'fa-solid fa-paintbrush fa-fw',
             'title' => __('Design pages', 'okv-oauth'),
             'fields' => [
                 [

@@ -15,7 +15,7 @@
             // google login enabled.
             $Google = new RundizOauth\App\Libraries\MyOauth\Google();
         ?> 
-        <div class="rd-oauth-link oauth-google"><a class="rd-oauth-button google" href="<?php echo $Google->getAuthUrl(get_edit_user_link() . '?rdoauth=google'); ?>"><i class="fa fa-google fa-fw"></i> <?php _e('Change email', 'okv-oauth'); ?></a></div>
+        <div class="rd-oauth-link oauth-google"><a class="rd-oauth-button google" href="<?php echo $Google->getAuthUrl(get_edit_user_link() . '?rdoauth=google'); ?>"><i class="fa-brands fa-google fa-fw"></i> <?php _e('Change email', 'okv-oauth'); ?></a></div>
         <?php
             unset($Google);
         }// endif;
@@ -25,7 +25,7 @@
             // facebook login enabled.
             $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
         ?> 
-        <div class="rd-oauth-link oauth-facebook"><a class="rd-oauth-button facebook" href="<?php echo $Facebook->getAuthUrl(get_edit_user_link() . '?rdoauth=facebook'); ?>"><i class="fa fa-facebook fa-fw"></i> <?php _e('Change email', 'okv-oauth'); ?></a></div>
+        <div class="rd-oauth-link oauth-facebook"><a class="rd-oauth-button facebook" href="<?php echo $Facebook->getAuthUrl(get_edit_user_link() . '?rdoauth=facebook'); ?>"><i class="fa-brands fa-facebook-f fa-fw"></i> <?php _e('Change email', 'okv-oauth'); ?></a></div>
         <?php
             unset($Facebook);
         }// endif;

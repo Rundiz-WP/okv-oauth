@@ -102,9 +102,9 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
          * 
          * These code copy from wp-login.php file.
          * 
-         * @param object $user user object from wp.
+         * @param \WP_User $user user object.
          */
-        public function loggedinRedirect($user)
+        public function loggedinRedirect(\WP_User $user)
         {
             if (is_wp_error($user) || (!is_wp_error($user) && !is_object($user))) {
                 return false;

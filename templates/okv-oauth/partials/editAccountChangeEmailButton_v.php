@@ -23,7 +23,7 @@
         if (isset($rundizoauth_options['google_login_enable']) && '1' === $rundizoauth_options['google_login_enable']) {
             // google login enabled.
             $Google = new RundizOauth\App\Libraries\MyOauth\Google();
-            $thisOAuthIcon = apply_filters('rundizoauth_google_iconhtml', '<i class="fa fa-google fa-fw"></i>');
+            $thisOAuthIcon = apply_filters('rundizoauth_google_iconhtml', '<i class="fa-brands fa-google fa-fw"></i>');
         ?> 
         <div class="rd-oauth-link oauth-google"><a class="rd-oauth-button google" href="<?php echo $Google->getAuthUrl(get_edit_user_link() . '?rdoauth=google'); ?>"><?php echo $thisOAuthIcon; ?> <?php _e('Change email', 'okv-oauth'); ?></a></div>
         <?php
@@ -34,7 +34,7 @@
         if (isset($rundizoauth_options['facebook_login_enable']) && '1' === $rundizoauth_options['facebook_login_enable']) {
             // facebook login enabled.
             $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
-            $thisOAuthIcon = apply_filters('rundizoauth_facebook_iconhtml', '<i class="fa fa-facebook fa-fw"></i>');
+            $thisOAuthIcon = apply_filters('rundizoauth_facebook_iconhtml', '<i class="fa-brands fa-facebook-f fa-fw"></i>');
         ?> 
         <div class="rd-oauth-link oauth-facebook"><a class="rd-oauth-button facebook" href="<?php echo $Facebook->getAuthUrl(get_edit_user_link() . '?rdoauth=facebook'); ?>"><?php echo $thisOAuthIcon; ?> <?php _e('Change email', 'okv-oauth'); ?></a></div>
         <?php

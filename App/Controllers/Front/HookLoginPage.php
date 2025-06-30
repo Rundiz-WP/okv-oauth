@@ -23,7 +23,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             if (is_admin() && 'profile.php' === $hook) {
                 wp_enqueue_style('rd-oauth-login');
-                wp_enqueue_style('rd-oauth-font-awesome4');
+                wp_enqueue_style('rd-oauth-font-awesome6');
             }
         }// adminEnqueueScripts
 
@@ -248,7 +248,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if (!wp_script_is('rd-oauth-font-awesome4', 'registered')) {
+            if (!wp_script_is('rd-oauth-font-awesome6', 'registered')) {
                 $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
                 $StylesAndScripts->registerStylesAndScripts();
                 unset($StylesAndScripts);
@@ -284,7 +284,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     case 'login':
                     default:
                         wp_enqueue_style('rd-oauth-login');
-                        wp_enqueue_style('rd-oauth-font-awesome4');
+                        wp_enqueue_style('rd-oauth-font-awesome6');
                 }
 
                 if (isset($action) && 'register' === $action) {
@@ -721,14 +721,14 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if (!wp_script_is('rd-oauth-font-awesome4', 'registered')) {
+            if (!wp_script_is('rd-oauth-font-awesome6', 'registered')) {
                 $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
                 $StylesAndScripts->registerStylesAndScripts();
                 unset($StylesAndScripts);
             }
 
             wp_enqueue_style('rd-oauth-login');
-            wp_enqueue_style('rd-oauth-font-awesome4');
+            wp_enqueue_style('rd-oauth-font-awesome6');
             wp_enqueue_script('rd-oauth-wpsignup', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-wpsignup.js', ['jquery'], false, true);
             $active_signup = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
             wp_localize_script(
