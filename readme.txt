@@ -58,6 +58,12 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.5.7 =
+xxxx-xx-xx
+
+* Update to FontAwesome 6 from 4.
+* Move manual code that called to OAuth multiple classes & methods to one that call them all per setting, request query string.
+
 = 1.5.6 =
 2025-03-24
 

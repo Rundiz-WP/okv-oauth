@@ -194,17 +194,12 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             if (1 === $this->loginMethod || 2 === $this->loginMethod) {
                 // if rundiz oauth settings is using wp+oauth (1) or oauth only (2).
-                if (isset($_REQUEST['rdoauth']) && 'google' === $_REQUEST['rdoauth']) {
-                    // user choose to login with google.
-                    $Google = new \RundizOauth\App\Libraries\MyOauth\Google();
-                    $email = $Google->wpCheckEmailNotExists();
-                    unset($Google);
-                } elseif (isset($_REQUEST['rdoauth']) && 'facebook' === $_REQUEST['rdoauth']) {
-                    // user choose to login with facebook.
-                    $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
-                    $email = $Facebook->wpCheckEmailNotExists();
-                    unset($Facebook);
+                $OAuthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
+                $OAuthClass = $OAuthProviders->getClass((isset($_REQUEST['rdoauth']) ? $_REQUEST['rdoauth'] : ''));
+                if (is_object($OAuthClass)) {
+                    $email = $OAuthClass->wpCheckEmailNotExists();
                 }
+                unset($OAuthClass, $OAuthProviders);
 
                 if (isset($email)) {
                     if (!is_wp_error($email) && is_scalar($email)) {
@@ -357,7 +352,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             if (2 === $this->loginMethod) {
                 // if using oauth only.
-                // not allow to lost password because user have to login using oauth provider such as Google.
+                // not allow to lost password because user have to login using OAuth service provider.
                 $Loader = new \RundizOauth\App\Libraries\Loader();
                 $Loader->loadTemplate('okv-oauth/partials/lostPasswordForm_v');
                 unset($Loader);
@@ -642,52 +637,23 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
 
         /**
-         * Authenticate with oAuth providers on wp register.
-         * 
-         * @link https://developer.wordpress.org/reference/hooks/init/ Reference.
-         * @global type $rundizoauth_options
-         * @deprecated since 1.2 Use /rd-oauth?rdoauth_subpage=register front-end custom page to register user via OAuth instead.
-         */
-        public function wpInit()
-        {
-            $this->init();
-
-            global $rundizoauth_options;
-
-            if (true === $this->useOauth) {
-                // if choose login method as wp login with oauth or oauth only.
-                if (isset($_REQUEST['action']) && 'register' === $_REQUEST['action']) {
-                    // if on register page.
-                    if (isset($_REQUEST['rdoauth']) && 'google' === $_REQUEST['rdoauth']) {
-                        // user choose to register with Google.
-                        $Google = new \RundizOauth\App\Libraries\MyOauth\Google();
-                        $Google->wpRegisterWithGoogle();
-                        unset($Google);
-                    } elseif (isset($_REQUEST['rdoauth']) && 'facebook' === $_REQUEST['rdoauth']) {
-                        // user choose to register with Facebook.
-                        $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
-                        $Facebook->wpRegisterWithFacebook();
-                        unset($Facebook);
-                    }
-                }
-            }
-        }// wpInit
-
-
-        /**
          * Logout and remove any cookies that use while register or login.
          * 
          * @link https://codex.wordpress.org/Plugin_API/Action_Reference/wp_logout Reference.
          */
         public function wpLogout()
         {
-            $Google = new \RundizOauth\App\Libraries\MyOauth\Google();
-            $Google->wpLogoutWithGoogle();
-            unset($Google);
-
-            $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
-            $Facebook->wpLogoutWithFacebook();
-            unset($Facebook);
+            $OAuthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
+            $providers = $OAuthProviders->getAllClasses();
+            unset($OAuthProviders);
+            if (is_iterable($providers)) {
+                foreach ($providers as $providerKey => $OAuthClass) {
+                    /* @var $OAuthClass \RundizOauth\App\Libraries\MyOauth\Interfaces\MyOAuthInterface */
+                    $OAuthClass->wpLogoutUseOAuth();
+                }// endforeach;
+                unset($OAuthClass, $providerKey);
+            }// endif;
+            unset($providers);
         }// wpLogout
 
 

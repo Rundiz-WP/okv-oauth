@@ -31,17 +31,14 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Index')) {
                 exit;
             }
 
-            if (isset($_REQUEST['rdoauth']) && 'google' === $_REQUEST['rdoauth']) {
-                // user choose to login with google.
-                $Google = new \RundizOauth\App\Libraries\MyOauth\Google();
-                $user = $Google->wpLoginWithGoogle(null);
-                unset($Google);
-            } elseif (isset($_REQUEST['rdoauth']) && 'facebook' === $_REQUEST['rdoauth']) {
-                // user choose to login with facebook.
-                $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
-                $user = $Facebook->wpLoginWithFacebook(null);
-                unset($Facebook);
+            $OAuthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
+            /* @var $OAuthProvider \RundizOauth\App\Libraries\MyOauth\Interfaces\MyOAuthInterface */
+            $OAuthProvider = $OAuthProviders->getClass((isset($_REQUEST['rdoauth']) ? $_REQUEST['rdoauth'] : ''));
+            unset($OAuthProviders);
+            if (is_object($OAuthProvider)) {
+                $user = $OAuthProvider->wpLoginUseOAuth();
             }
+            unset($OAuthProvider);
 
             if (isset($user) && !is_null($user) && !is_wp_error($user)) {
                 // if login success, those oauth function must return the WP_User object.

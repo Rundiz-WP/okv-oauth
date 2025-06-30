@@ -21,7 +21,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
      * @link https://developers.facebook.com/docs/facebook-login/reauthentication Re-authentication reference.
      * @link https://developers.facebook.com/tools/explorer/145634995501895/ Tools.
      */
-    class Facebook
+    class Facebook implements Interfaces\MyOAuthInterface
     {
 
 
@@ -129,12 +129,9 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
 
 
         /**
-         * Get authenticate URL.
+         * {@inheritDoc}
          * 
          * @link https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow#logindialog Reference
-         * @global array $rundizoauth_options
-         * @param string $redirect_uri Redirect URL.
-         * @return string Return generated URL.
          */
         public function getAuthUrl($redirect_uri)
         {
@@ -162,6 +159,28 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
 
             return '';
         }// getAuthUrl
+
+
+        /**
+         * {@inheritDoc}
+         * 
+         * @since 1.5.7
+         */
+        public function getIconClasses()
+        {
+            return 'fa-brands fa-facebook-f fa-fw';
+        }// getIconClasses
+
+
+        /**
+         * {@inheritDoc}
+         * 
+         * @since 1.5.7
+         */
+        public function getProviderName()
+        {
+            return __('Facebook', 'okv-oauth');
+        }// getProviderName
 
 
         /**
@@ -231,9 +250,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
 
 
         /**
-         * Check that authorised OAuth provider's email is not exists in the WordPress system.
-         * 
-         * @return \WP_Error|string|null Return error message on failed to validate, return email string if validate passed.
+         * {@inheritDoc}
          */
         public function wpCheckEmailNotExists()
         {
@@ -283,16 +300,17 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
 
 
         /**
-         * Make WordPress login using Facebook OAuth.
+         * {@inheritDoc}
          * 
-         * @param null|WP_User|WP_Error $user
-         * @return null|WP_User|WP_Error
+         * @since 1.5.7 Renamed from `wpLoginWithFacebook()`
          */
-        public function wpLoginWithFacebook($user)
+        public function wpLoginUseOAuth()
         {
             if (isset($_REQUEST['error'])) {
                 return new \WP_Error('rundiz_oauth_tryagain', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
             }
+
+            $user = null;
 
             if (isset($_REQUEST['code'])) {
                 // if get code querystring from fb, authenticate and get token.
@@ -334,28 +352,30 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                         unset($result);
                     }
                     unset($access_token);
-                }
-            }
+                }// endif; there is no state from service provider. (or verify nonce failed.)
+            }// endif; there is no code from service provider.
 
             return $user;
-        }// wpLoginWithFacebook
+        }// wpLoginUseOAuth
 
 
         /**
-         * Remove Facebook tokens cookie.
+         * {@inheritDoc}
+         * 
+         * @since 1.5.7 Renamed from `wpLogoutWithFacebook()`
          */
-        public function wpLogoutWithFacebook()
+        public function wpLogoutUseOAuth()
         {
             setcookie('rundiz_oauth_facebook_tokens', '', (time()-(365 * DAY_IN_SECONDS)), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '' );
-        }// wpLogoutWithFacebook
+        }// wpLogoutUseOAuth
 
 
         /**
-         * Make WordPress register user using Facebook account.
+         * {@inheritDoc}
          * 
-         * @return null|\WP_Error|array Return error if failed, return array with access_token, email in keys if success.
+         * @since 1.5.7 Renamed from `wpRegisterWithFacebook()`.
          */
-        public function wpRegisterWithFacebook()
+        public function wpRegisterUseOAuth()
         {
             if (isset($_REQUEST['error'])) {
                 return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
@@ -399,9 +419,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                         unset($result);
                     }
                     unset($access_token);
-                }
-            }
-        }// wpRegisterWithFacebook
+                }// endif; there is no state from service provider. (or verify nonce failed.)
+            }// endif; there is no code from service provider.
+
+            return null;
+        }// wpRegisterUseOAuth
 
 
     }

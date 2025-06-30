@@ -31,17 +31,14 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
                 exit;
             }
 
-            if (isset($_REQUEST['rdoauth']) && 'google' === $_REQUEST['rdoauth']) {
-                // user choose to register with Google.
-                $Google = new \RundizOauth\App\Libraries\MyOauth\Google();
-                $result = $Google->wpRegisterWithGoogle();
-                unset($Google);
-            } elseif (isset($_REQUEST['rdoauth']) && 'facebook' === $_REQUEST['rdoauth']) {
-                // user choose to register with Facebook.
-                $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
-                $result = $Facebook->wpRegisterWithFacebook();
-                unset($Facebook);
+            $OAuthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
+            /* @var $OAuthProvider \RundizOauth\App\Libraries\MyOauth\Interfaces\MyOAuthInterface */
+            $OAuthProvider = $OAuthProviders->getClass((isset($_REQUEST['rdoauth']) ? $_REQUEST['rdoauth'] : ''));
+            unset($OAuthProviders);
+            if (is_object($OAuthProvider)) {
+                $result = $OAuthProvider->wpRegisterUseOAuth();
             }
+            unset($OAuthProvider);
 
             if (isset($result) && is_wp_error($result)) {
                 $output['form_error_msg'] = $result->get_error_message();

@@ -151,6 +151,9 @@ $design_pages_content .= '<blockquote>' . nl2br(esc_html($design_pages_textconte
 unset($design_pages_textcontent);
 
 
+$GoogleOAuth = new RundizOauth\App\Libraries\MyOauth\Google();
+$FacebookOAuth = new RundizOauth\App\Libraries\MyOauth\Facebook();
+
 return [
     'tab_style' => 'vertical', // vertical or horizontal
     'setting_tabs' => [
@@ -183,15 +186,19 @@ return [
             ],
         ], // end login settings tab.
         [
-            'icon' => 'fa-brands fa-google fa-fw',
-            'title' => __('Google login', 'okv-oauth'),
+            'icon' => $GoogleOAuth->getIconClasses(),
+            'title' => $GoogleOAuth->getProviderName(),
             'fields' => [
                 [
                     'options' => [
                         [
                             'default' => '',
                             'id' => 'google_login_enable',
-                            'title' => __('Enable Google login', 'okv-oauth'),
+                            'title' => sprintf(
+                                /* translators: %1$s OAuth provider name. */
+                                __('Enable login with %1$s', 'okv-oauth'),
+                                $GoogleOAuth->getProviderName()
+                            ),
                             'value' => '1',
                         ],
                     ],
@@ -253,15 +260,19 @@ return [
             ],
         ], // end google login settings tab.
         [
-            'icon' => 'fa-brands fa-facebook-f fa-fw',
-            'title' => __('Facebook login', 'okv-oauth'),
+            'icon' => $FacebookOAuth->getIconClasses(),
+            'title' => $FacebookOAuth->getProviderName(),
             'fields' => [
                 [
                     'options' => [
                         [
                             'default' => '',
                             'id' => 'facebook_login_enable',
-                            'title' => __('Enable Facebook login', 'okv-oauth'),
+                            'title' => sprintf(
+                                /* translators: %1$s OAuth provider name. */
+                                __('Enable login with %1$s', 'okv-oauth'),
+                                $FacebookOAuth->getProviderName()
+                            ),
                             'value' => '1',
                         ],
                     ],

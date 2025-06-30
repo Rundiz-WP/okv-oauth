@@ -17,7 +17,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
      * @link https://developers.google.com/identity/protocols/OpenIDConnect Reference.
      * @link https://developers.google.com/identity/protocols/OAuth2WebServer Reference.
      */
-    class Google
+    class Google implements Interfaces\MyOAuthInterface
     {
 
 
@@ -73,13 +73,10 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
 
 
         /**
-         * Get authenticate URL.
+         * {@inheritDoc}
          * 
          * @link https://developers.google.com/identity/protocols/oauth2/web-server#creatingclient Reference.
          * @link https://developers.google.com/identity/protocols/oauth2/scopes Available scopes.
-         * @global array $rundizoauth_options
-         * @param string $redirect_url Redirect URL.
-         * @return string Return generated URL.
          */
         public function getAuthUrl($redirect_url)
         {
@@ -131,6 +128,28 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
 
 
         /**
+         * {@inheritDoc}
+         * 
+         * @since 1.5.7
+         */
+        public function getIconClasses()
+        {
+            return 'fa-brands fa-google fa-fw';
+        }// getIconClasses
+
+
+        /**
+         * {@inheritDoc}
+         * 
+         * @since 1.5.7
+         */
+        public function getProviderName()
+        {
+            return __('Google', 'okv-oauth');
+        }// getProviderName
+
+
+        /**
          * Get user profile info.
          * 
          * @link https://developers.google.com/oauthplayground/ OAuth API endpoint playground.
@@ -152,9 +171,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
 
 
         /**
-         * Check that authorised OAuth provider's email is not exists in the WordPress system.
-         * 
-         * @return \WP_Error|string|null Return error message on failed to validate, return email string if validate passed.
+         * {@inheritDoc}
          */
         public function wpCheckEmailNotExists()
         {
@@ -216,13 +233,14 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
 
 
         /**
-         * Make WordPress login using Google OAuth.
+         * {@inheritDoc}
          * 
-         * @param null|\WP_User|\WP_Error $user
-         * @return null|\WP_User|\WP_Error
+         * @since 1.5.7 Renamed from `wpLoginWithGoogle()`
          */
-        public function wpLoginWithGoogle($user)
+        public function wpLoginUseOAuth()
         {
+            $user = null;
+
             if (isset($_REQUEST['code']) && isset($_REQUEST['state'])) {
                 // if get code querystring from google, authenticate and get token.
                 if (check_admin_referer('google-login', 'state') === 1) {
@@ -277,28 +295,32 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                         }
                         unset($result);
                     }
-                }
-            }
+                }// endif; there is no state from service provider. (or verify nonce failed.)
+            }// endif; there is no code and state from service provider.
 
             return $user;
-        }// wpLoginWithGoogle
+        }// wpLoginUseOAuth
 
 
         /**
-         * Remove Google tokens cookie.
+         * {@inheritDoc}
+         * 
+         * @since 1.5.7 Renamed from `wpLogoutWithGoogle()`
          */
-        public function wpLogoutWithGoogle()
+        public function wpLogoutUseOAuth()
         {
             setcookie('rundiz_oauth_google_tokens', '', (time()-(365 * DAY_IN_SECONDS)), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '' );
-        }// wpLogoutWithGoogle
+        }// wpLogoutUseOAuth
 
 
         /**
-         * Make WordPress register user using Google account.
+         * {@inheritDoc}
          * 
-         * @return null|\WP_Error|array Return error if failed, return array with access_token, id_token, email in keys if success.
+         * @since 1.5.7 Renamed from `wpRegisterWithGoogle()`.
+         * @return null|\WP_Error|array Same as inherited doc block but the array contain more key:
+         *              `id_token`.
          */
-        public function wpRegisterWithGoogle()
+        public function wpRegisterUseOAuth()
         {
             if (isset($_REQUEST['code']) && isset($_REQUEST['state'])) {
                 // if get code querystring from google, authenticate and get token.
@@ -351,11 +373,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                         unset($result);
                     }
                     unset($access_token, $id_token);
-                }
-            }
+                }// endif; there is no state from service provider. (or verify nonce failed.)
+            }// endif; there is code and state from service provider.
 
             return null;
-        }// wpRegisterWithGoogle
+        }// wpRegisterUseOAuth
 
 
         /**

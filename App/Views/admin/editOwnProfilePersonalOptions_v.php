@@ -11,24 +11,22 @@
 
     <div class="rd-oauth-links-admin">
         <?php
-        if (isset($rundizoauth_options['google_login_enable']) && '1' === $rundizoauth_options['google_login_enable']) {
-            // google login enabled.
-            $Google = new RundizOauth\App\Libraries\MyOauth\Google();
+        $OauthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
+        $classes = $OauthProviders->getClasses($rundizoauth_options);
+        unset($OauthProviders);
+        if (is_iterable($classes)) {
+            foreach ($classes as $providerKey => $OAuthClass) {
         ?> 
-        <div class="rd-oauth-link oauth-google"><a class="rd-oauth-button google" href="<?php echo $Google->getAuthUrl(get_edit_user_link() . '?rdoauth=google'); ?>"><i class="fa-brands fa-google fa-fw"></i> <?php _e('Change email', 'okv-oauth'); ?></a></div>
+        <div class="rd-oauth-link oauth-<?=$providerKey; ?>">
+            <a class="rd-oauth-button <?=$providerKey; ?>" href="<?php echo $OAuthClass->getAuthUrl(get_edit_user_link() . '?rdoauth=' . $providerKey); ?>">
+                <i class="<?php echo $OAuthClass->getIconClasses(); ?>"></i> <?php _e('Change email', 'okv-oauth'); ?>
+            </a>
+        </div>
         <?php
-            unset($Google);
-        }// endif;
-        ?> 
-        <?php
-        if (isset($rundizoauth_options['facebook_login_enable']) && '1' === $rundizoauth_options['facebook_login_enable']) {
-            // facebook login enabled.
-            $Facebook = new \RundizOauth\App\Libraries\MyOauth\Facebook();
-        ?> 
-        <div class="rd-oauth-link oauth-facebook"><a class="rd-oauth-button facebook" href="<?php echo $Facebook->getAuthUrl(get_edit_user_link() . '?rdoauth=facebook'); ?>"><i class="fa-brands fa-facebook-f fa-fw"></i> <?php _e('Change email', 'okv-oauth'); ?></a></div>
-        <?php
-            unset($Facebook);
-        }// endif;
+            }// endforeach;
+            unset($providerKey, $OAuthClass);
+        }// endif; is_iterable
+        unset($classes);
         ?> 
         <?php
         if (isset($rundizoauth_options['login_method']) && '1' === $rundizoauth_options['login_method']) {
