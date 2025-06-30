@@ -110,6 +110,42 @@ $facebook_login_help_msg = sprintf(
 unset($facebook_apps_url);
 
 
+$linenaver_dev_console_url = 'https://developers.line.biz/console/;';
+$linenaver_login_help_msg = sprintf(
+        /* translators: %1$s: Open link, %2$s Close link. */
+        __('Please visit %1$sLINE developers console%2$s and create or open your channel.', 'okv-oauth'), 
+        '<a href="' . $linenaver_dev_console_url . '" target="line_console">', 
+        '</a>'
+    ) . "\n" .
+    '<ul class="rd-settings-ul">' . "\n" .
+        '<li>' . __('Open the LINE Login tab.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . __('Click Edit on Callback URL.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' .
+            sprintf(
+                /* translators: %s: URLs. */
+                __('Enter %s', 'okv-oauth'), 
+                '<strong>' . home_url('rd-oauth?rdoauth=linenaver') . '</strong><br>' .
+                '<strong>' . home_url('rd-oauth?rdoauth_subpage=register&rdoauth=linenaver') . '</strong><br>' .
+                '<strong>' . admin_url('profile.php') . '?rdoauth=linenaver</strong><br>' .
+                '<strong>' . admin_url('user/profile.php') . '?rdoauth=linenaver</strong>'
+            ) .
+            '<br>' .
+            __('You may insert one more copy by include both http and https.', 'okv-oauth') .
+        '</li>' . "\n" .
+        '<li>' . __('Click Update.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . __('Open Basic settings tab.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . __('Use Client ID and Channel secret from there.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . sprintf(
+            /* translators: %1$s Open link, %2$s Close link. */
+            __('For more information, please read more on %1$sthis document%2$s.', 'okv-oauth'),
+            '<a href="https://developers.line.biz/en/docs/line-login/integrate-line-login/#create-a-channel" target="linenaver_doc">',
+            '</a>'
+        ) .
+        '</li>' . "\n" .
+    '</ul>' . "\n";
+unset($linenaver_dev_console_url);
+
+
 $wpActiveSignup = get_site_option('registration', 'none');// see `signup_user()` function.
 $wpsignup_field = [];
 if (is_multisite() && 'all' === $wpActiveSignup) {
@@ -153,6 +189,7 @@ unset($design_pages_textcontent);
 
 $GoogleOAuth = new RundizOauth\App\Libraries\MyOauth\Google();
 $FacebookOAuth = new RundizOauth\App\Libraries\MyOauth\Facebook();
+$LINEOauth = new \RundizOauth\App\Libraries\MyOauth\Line();
 
 return [
     'tab_style' => 'vertical', // vertical or horizontal
@@ -238,7 +275,7 @@ return [
                 [
                     'default' => '',
                     'description' => sprintf(
-                        /* translators: %1$s &amp; text, %2$s: &amp;include_granted_scopes=true&amp;hd=mydomain.com text */
+                        /* translators: %1$s &amp; text, %2$s: example parameters &amp;a=true&amp;b=false */
                         __('Alway start with %1$s For example: %2$s.', 'okv-oauth'), 
                         '<code>&amp;</code>', 
                         '<code>&amp;include_granted_scopes=true&amp;hd=mydomain.com</code>'
@@ -299,6 +336,80 @@ return [
                 ],
             ],
         ], // end facebook login settings tab.
+        [
+            'icon' => $LINEOauth->getIconClasses(),
+            'title' => $LINEOauth->getProviderName(),
+            'fields' => [
+                [
+                    'options' => [
+                        [
+                            'default' => '',
+                            'id' => 'linenaver_login_enable',
+                            'title' => sprintf(
+                                /* translators: %1$s OAuth provider name. */
+                                __('Enable login with %1$s', 'okv-oauth'),
+                                $LINEOauth->getProviderName()
+                            ),
+                            'value' => '1',
+                        ],
+                    ],
+                    'title' => __('Enable', 'okv-oauth'),
+                    'type' => 'checkbox',
+                ],
+                [
+                    'default' => '',
+                    'id' => 'linenaver_client_id',
+                    'input_attributes' => ['autocomplete' => 'off'],
+                    'title' => __('Client ID', 'okv-oauth'),
+                    'type' => 'text',
+                ],
+                [
+                    'default' => '',
+                    'id' => 'linenaver_channel_secret',
+                    'input_attributes' => ['autocomplete' => 'off'],
+                    'title' => __('Client secret', 'okv-oauth'),
+                    'type' => 'text',
+                ],
+                [
+                    'content' => '<h3>' . __('Auth parameters', 'okv-oauth') . ' <small>(<a href="https://developers.line.biz/en/docs/line-login/integrate-line-login/#making-an-authorization-request" target="linenaver_ref">' . __('Reference', 'okv-oauth') . '</a>)</small></h3>',
+                    'type' => 'html_full',
+                ],
+                [
+                    'default' => 'none',
+                    'id' => 'linenaver_auth_param_prompt',
+                    'options' => [
+                        '' => __('Not set', 'okv-oauth'),
+                        'consent' => 'consent',
+                        'none' => 'none',
+                        'login' => 'login',
+                    ],
+                    'title' => __('Prompt', 'okv-oauth'),
+                    'type' => 'select',
+                ],
+                [
+                    'default' => '',
+                    'description' => sprintf(
+                        /* translators: %1$s &amp; text, %2$s: example parameters &amp;a=true&amp;b=false */
+                        __('Alway start with %1$s For example: %2$s.', 'okv-oauth'), 
+                        '<code>&amp;</code>', 
+                        '<code>&amp;a=true&amp;b=false</code>'
+                    ) . '<br>' .
+                    sprintf(
+                        /* translators: %s: The parameters that will be skipped. */
+                        __('These parameters will be skipped: %s', 'okv-oauth'),
+                        '<code>client_id</code>, <code>response_type</code>, <code>scope</code>, <code>redirect_uri</code>, <code>state</code>, <code>prompt</code>'
+                    ),
+                    'id' => 'linenaver_auth_param_other',
+                    'input_attributes' => ['autocomplete' => 'off'],
+                    'title' => __('Other parameters', 'okv-oauth'),
+                    'type' => 'text',
+                ],
+                [
+                    'content' => $linenaver_login_help_msg,
+                    'type' => 'html_full',
+                ],
+            ],
+        ],// end LINE login settings tab.
         [
             'icon' => 'fa-solid fa-paintbrush fa-fw',
             'title' => __('Design pages', 'okv-oauth'),

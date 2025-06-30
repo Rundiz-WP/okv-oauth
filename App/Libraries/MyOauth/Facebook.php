@@ -292,8 +292,8 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                         }
                         unset($result);
                     }
-                }
-            }
+                }// endif; there is no state from service provider. (or verify nonce failed.)
+            }// endif; there is no code from service provider.
 
             return ;
         }// wpCheckEmailNotExists

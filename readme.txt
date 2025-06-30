@@ -63,6 +63,7 @@ xxxx-xx-xx
 
 * Update to FontAwesome 6 from 4.
 * Move manual code that called to OAuth multiple classes & methods to one that call them all per setting, request query string.
+* Add LINE OAuth.
 
 = 1.5.6 =
 2025-03-24

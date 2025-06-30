@@ -225,8 +225,8 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                         }
                         unset($result);
                     }
-                }
-            }
+                }// endif; there is no state from service provider. (or verify nonce failed.)
+            }// endif; there is no code and state from service provider.
 
             return ;
         }// wpCheckEmailNotExists
@@ -295,6 +295,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                         }
                         unset($result);
                     }
+                    unset($access_token, $id_token);
                 }// endif; there is no state from service provider. (or verify nonce failed.)
             }// endif; there is no code and state from service provider.
 

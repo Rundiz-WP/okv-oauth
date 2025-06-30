@@ -29,14 +29,22 @@
 .rd-oauth-button:hover {
     text-decoration: none;
 }
+
+
+/* color per brand */
 .rd-oauth-button.google {
-    background-color: #DE4932;
+    background-color: #EA4335;
     color: #fff;
 }
 .rd-oauth-button.facebook {
     background-color: #3b5998;
     color: #fff;
 }
+.rd-oauth-button.linenaver {
+    background-color: #06c755;
+    color: #fff;
+}
+/* end color per brand */
 
 
 .rd-oauth-link {

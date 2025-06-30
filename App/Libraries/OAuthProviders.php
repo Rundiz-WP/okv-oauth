@@ -24,6 +24,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\OAuthProviders')) {
         protected $providers = [
             'google' => 'Google',
             'facebook' => 'Facebook',
+            'linenaver' => 'Line',
         ];
 
 

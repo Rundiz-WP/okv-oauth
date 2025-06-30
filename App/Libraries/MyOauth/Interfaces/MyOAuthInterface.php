@@ -44,7 +44,8 @@ if (!interface_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Interfaces\\MyOAu
 
 
         /**
-         * Check that authorized OAuth provider's email is not exists in the WordPress system.
+         * Check that authorized OAuth provider's email is not exists in the WordPress system.  
+         * This usually will be use to check before change the email in edit profile page.
          * 
          * @return \WP_Error|string|null Return error message on failed to validate, return email string if validate passed.
          */
