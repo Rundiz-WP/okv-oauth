@@ -174,7 +174,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
                 $sub_options = maybe_serialize($sub_options);
                 add_option($this->main_option_name, $sub_options, '', false);
                 unset($sub_options);
-            } else {
+            } else {// phpcs:ignore Generic.CodeAnalysis.EmptyStatement.DetectedElse
                 // use update if some condition is met. such as older options.
                 // @todo [rd-oauth][rd-settings-fw] this condition is not in use. just for the future.
             }

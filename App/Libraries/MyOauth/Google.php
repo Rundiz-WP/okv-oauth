@@ -72,11 +72,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
         }// getAccessToken
 
 
-        /**
-         * {@inheritDoc}
-         * 
+        /** phpcs:ignore Squiz.Commenting.FunctionComment.MissingParamTag
          * @link https://developers.google.com/identity/protocols/oauth2/web-server#creatingclient Reference.
          * @link https://developers.google.com/identity/protocols/oauth2/scopes Available scopes.
+         * 
+         * {@inheritDoc}
          */
         public function getAuthUrl($redirect_url)
         {

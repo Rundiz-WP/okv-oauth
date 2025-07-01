@@ -17,8 +17,8 @@
         if (is_iterable($classes)) {
             foreach ($classes as $providerKey => $OAuthClass) {
         ?> 
-        <div class="rd-oauth-link oauth-<?=$providerKey; ?>">
-            <a class="rd-oauth-button <?=$providerKey; ?>" href="<?php echo $OAuthClass->getAuthUrl(get_edit_user_link() . '?rdoauth=' . $providerKey); ?>">
+        <div class="rd-oauth-link oauth-<?= $providerKey; ?>">
+            <a class="rd-oauth-button <?= $providerKey; ?>" href="<?php echo $OAuthClass->getAuthUrl(get_edit_user_link() . '?rdoauth=' . $providerKey); ?>">
                 <i class="<?php echo $OAuthClass->getIconClasses(); ?>"></i> <?php _e('Change email', 'okv-oauth'); ?>
             </a>
         </div>

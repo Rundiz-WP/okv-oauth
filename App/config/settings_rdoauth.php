@@ -409,7 +409,7 @@ return [
                     'type' => 'html_full',
                 ],
             ],
-        ],// end LINE login settings tab.
+        ], // end LINE login settings tab.
         [
             'icon' => 'fa-solid fa-paintbrush fa-fw',
             'title' => __('Design pages', 'okv-oauth'),

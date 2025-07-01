@@ -58,7 +58,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\OAuthProviders')) {
          * 
          * @param string $check The string to check with `$providers` property. Only matched will return its class
          * @return \RundizOauth\App\Libraries\MyOauth\Interfaces\MyOAuthInterface|null Return class that implemented `MyOAuthInterface`.
-         * @throws \InvalidArgumentException
+         * @throws \InvalidArgumentException Throw exception if invalid argument type.
          */
         public function getClass($check)
         {

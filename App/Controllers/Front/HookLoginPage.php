@@ -195,7 +195,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
             if (1 === $this->loginMethod || 2 === $this->loginMethod) {
                 // if rundiz oauth settings is using wp+oauth (1) or oauth only (2).
                 $OAuthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
-                $OAuthClass = $OAuthProviders->getClass((isset($_REQUEST['rdoauth']) ? $_REQUEST['rdoauth'] : ''));
+                $OAuthClass = $OAuthProviders->getClass((isset($_REQUEST['rdoauth']) ? sanitize_text_field(wp_unslash($_REQUEST['rdoauth'])) : ''));
                 if (is_object($OAuthClass)) {
                     $email = $OAuthClass->wpCheckEmailNotExists();
                 }

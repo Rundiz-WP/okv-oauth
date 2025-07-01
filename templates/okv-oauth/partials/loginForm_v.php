@@ -12,8 +12,8 @@ $oauth_enabled = false;
         if (is_iterable($classes)) {
             foreach ($classes as $providerKey => $OAuthClass) {
         ?> 
-        <div class="rd-oauth-link oauth-<?=$providerKey; ?>">
-            <a class="rd-oauth-button <?=$providerKey; ?>" href="<?php echo $OAuthClass->getAuthUrl(home_url('rd-oauth?rdoauth=' . $providerKey)); ?>">
+        <div class="rd-oauth-link oauth-<?= $providerKey; ?>">
+            <a class="rd-oauth-button <?= $providerKey; ?>" href="<?php echo $OAuthClass->getAuthUrl(home_url('rd-oauth?rdoauth=' . $providerKey)); ?>">
                 <i class="<?php echo $OAuthClass->getIconClasses(); ?>"></i> <?php _e('Login', 'okv-oauth'); ?>
             </a>
         </div>

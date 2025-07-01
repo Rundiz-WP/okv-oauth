@@ -70,7 +70,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
         }// getAccessToken
 
 
-        /**
+        /** phpcs:ignore Squiz.Commenting.FunctionComment.MissingParamTag
          * {@inheritDoc}
          */
         public function getAuthUrl($redirect_url)
@@ -297,7 +297,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
                         return new \WP_Error('rundiz_oauth_linenaver_returnerror', __('Auto login could not work.', 'okv-oauth'));
                     default:
                         if (isset($_REQUEST['error_description'])) {
-                            return new \WP_Error('rundiz_oauth_linenaver_unknown_error', strip_tags(sanitize_text_field($_REQUEST['error_description'])));
+                            return new \WP_Error('rundiz_oauth_linenaver_unknown_error', wp_strip_all_tags(sanitize_text_field(wp_unslash($_REQUEST['error_description']))));
                         } else {
                             return new \WP_Error('rundiz_oauth_linenaver_unknown_error', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
                         }

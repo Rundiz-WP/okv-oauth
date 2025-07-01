@@ -33,7 +33,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
 
             $OAuthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
             /* @var $OAuthProvider \RundizOauth\App\Libraries\MyOauth\Interfaces\MyOAuthInterface */
-            $OAuthProvider = $OAuthProviders->getClass((isset($_REQUEST['rdoauth']) ? $_REQUEST['rdoauth'] : ''));
+            $OAuthProvider = $OAuthProviders->getClass((isset($_REQUEST['rdoauth']) ? sanitize_text_field(wp_unslash($_REQUEST['rdoauth'])) : ''));
             unset($OAuthProviders);
             if (is_object($OAuthProvider)) {
                 $result = $OAuthProvider->wpRegisterUseOAuth();
