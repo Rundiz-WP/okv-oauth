@@ -2,6 +2,48 @@
 
 ## Version 1.x
 
+### 1.5.6
+2025-03-24
+
+* Delete widget on uninstall, delete old options on activate/update the plugin.
+* Add new hooks about reset password, retrieve password.
+* Update option without autoload to improve performance.
+
+### 1.5.5
+2025-03-18
+
+* Fix load text domain too early.
+
+### 1.5.4
+2024-12-12
+
+* New wp-script (Node.js script) build block and create new **-rtl.css** file automatically.
+
+### 1.5.3
+2023-12-23
+
+* Fix check settings that use OAuth only.
+
+### 1.5.2
+2023-11-30
+
+* Fix use wp_remote_xxx() instead of cURL in Google OAuth API class.
+* Add display link to edit profile option into block.
+* Add filters hook supported in block and legacy widget.
+
+### 1.5.1
+2023-11-24
+
+* Add legacy login links widget (Hot update). This widget have more options and can work with PolyLang Free while block need PolyLang Pro.
+
+### 1.5
+2023-11-23
+
+* Facebook OAuth API no longer supported (the plugin author has no Facebook account anymore).
+* Fix incorrect check select box value with key that is number.
+* Add block for display register, login, logout links.
+* Update code following PHPCS guide.
+
 ### 1.4.4
 2023-01-24
 
