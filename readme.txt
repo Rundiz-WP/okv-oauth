@@ -8,13 +8,13 @@ Stable tag: 1.5.6
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
-Use OAuth such as Google, Facebook to login and register.
+Use OAuth such as Google, LINE to login and register.
 
 == Description ==
-Use Oauth such as Google and Facebook account to login, register member in WordPress website. Control how your wp-login page will be used. Force use only OAuth or use them both.
+Use Oauth such as Google and LINE account to login, register member in WordPress website. Control how your wp-login page will be used. Force use only OAuth or use them both.
 
-Both Google and Facebook already have "Multi factor" or "2 factor" authentication. 
-So, instead of implementing the 2FA (2 factor authentication) into your WordPress and add those keys into your user's authenticator app on smart phone (which might too much list of them). Just use OAuth system!
+Both Google and LINE already have "Multi factor" or "2 factor" authentication. 
+So, instead of implementing the 2FA (2 factor authentication) into your WordPress and add those keys into your user's authenticator app on smart phone (which may already have a lot of them). Just use OAuth system!
 
 It is very easy and much secure for your users on your WordPress website. (Depends on your user security settings on those providers).
 Since v 1.0 your users can register using OAuth in one click from your website and one click to allow/continue on OAuth provider website. Just few clicks and done.
@@ -24,9 +24,7 @@ You can also change login expiration by using remember login or use OAuth only f
 This project is maintain by <a href="https://rundiz.com" target="author_site">Rundiz.com</a>. Feel free to rate and comments.<br>
 
 = System requirement =
-PHP 5.4 or higher<br>
-Open SSL PHP extension.<br>
-WordPress 5.0 or higher
+Open SSL PHP extension.
 
 == Installation ==
 1. Upload "okv-oauth" folder to the "/wp-content/plugins/" directory.

@@ -41,13 +41,13 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
             if (is_array($rundizoauth_options)) {
                 if (
                     array_key_exists('linenaver_login_enable', $rundizoauth_options) &&
-                    array_key_exists('linenaver_client_id', $rundizoauth_options) &&
+                    array_key_exists('linenaver_channel_id', $rundizoauth_options) &&
                     array_key_exists('linenaver_channel_secret', $rundizoauth_options)
                 ) {
                     $postData = 'code=' . rawurlencode($code) .
                         '&grant_type=authorization_code' .
                         '&redirect_uri=' . rawurlencode($redirect_uri) .
-                        '&client_id=' . rawurlencode($rundizoauth_options['linenaver_client_id']) .
+                        '&client_id=' . rawurlencode($rundizoauth_options['linenaver_channel_id']) .
                         '&client_secret=' . rawurlencode($rundizoauth_options['linenaver_channel_secret']);
 
                     $remoteArgs = [
@@ -83,11 +83,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
             if (is_array($rundizoauth_options)) {
                 if (
                     array_key_exists('linenaver_login_enable', $rundizoauth_options) &&
-                    array_key_exists('linenaver_client_id', $rundizoauth_options)
+                    array_key_exists('linenaver_channel_id', $rundizoauth_options)
                 ) {
                     $oauth_url = 'https://access.line.me/oauth2/v2.1/authorize' .
                         '?response_type=code' .
-                        '&client_id=' . rawurlencode($rundizoauth_options['linenaver_client_id']) .
+                        '&client_id=' . rawurlencode($rundizoauth_options['linenaver_channel_id']) .
                         '&redirect_uri=' . rawurlencode($redirect_url) .
                         '&state=' . rawurlencode(wp_create_nonce('linenaver-login')) .
                         '&scope=' . rawurlencode('profile openid email');
@@ -156,7 +156,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
 
             if (is_array($rundizoauth_options)) {
                 $postData = 'id_token=' . $id_token .
-                    '&client_id=' . rawurlencode($rundizoauth_options['linenaver_client_id']);
+                    '&client_id=' . rawurlencode($rundizoauth_options['linenaver_channel_id']);
 
                 $remoteArgs = [
                     'headers' => 'Content-type: application/x-www-form-urlencoded',

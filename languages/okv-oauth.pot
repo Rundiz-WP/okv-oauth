@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-01T04:29:31+07:00\n"
+"POT-Creation-Date: 2025-07-01T11:56:09+07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.11.0\n"
 "X-Domain: okv-oauth\n"
@@ -177,7 +177,7 @@ msgid "Open Basic settings tab."
 msgstr ""
 
 #: App/config/settings_rdoauth.php:137
-msgid "Use Client ID and Channel secret from there."
+msgid "Use Channel ID and Channel secret from there."
 msgstr ""
 
 #. translators: %1$s Open link, %2$s Close link.
@@ -261,12 +261,10 @@ msgid "Enable"
 msgstr ""
 
 #: App/config/settings_rdoauth.php:249
-#: App/config/settings_rdoauth.php:363
 msgid "Client ID"
 msgstr ""
 
 #: App/config/settings_rdoauth.php:256
-#: App/config/settings_rdoauth.php:370
 msgid "Client secret"
 msgstr ""
 
@@ -317,6 +315,14 @@ msgstr ""
 
 #: App/config/settings_rdoauth.php:330
 msgid "App secret"
+msgstr ""
+
+#: App/config/settings_rdoauth.php:363
+msgid "Channel ID"
+msgstr ""
+
+#: App/config/settings_rdoauth.php:370
+msgid "Channel secret"
 msgstr ""
 
 #: App/config/settings_rdoauth.php:415

@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okv-oauth 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
-"POT-Creation-Date: 2025-07-01T04:29:31+07:00\n"
-"PO-Revision-Date: 2025-07-01 04:34+0700\n"
+"POT-Creation-Date: 2025-07-01T11:56:09+07:00\n"
+"PO-Revision-Date: 2025-07-01 11:56+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: <>\n"
 "Language: th\n"
@@ -177,8 +177,8 @@ msgid "Open Basic settings tab."
 msgstr "เปิดแท็บการตั้งค่าพื้นฐาน."
 
 #: App/config/settings_rdoauth.php:137
-msgid "Use Client ID and Channel secret from there."
-msgstr "ใช้ Client ID และ Client secret จากที่นี่."
+msgid "Use Channel ID and Channel secret from there."
+msgstr "ใช้ Channel ID และ Channel secret จากที่นี่."
 
 #. translators: %1$s Open link, %2$s Close link.
 #: App/config/settings_rdoauth.php:140
@@ -261,11 +261,11 @@ msgstr "เปิดใช้งานเข้าสู่ระบบด้ว
 msgid "Enable"
 msgstr "เปิดใช้งาน"
 
-#: App/config/settings_rdoauth.php:249 App/config/settings_rdoauth.php:363
+#: App/config/settings_rdoauth.php:249
 msgid "Client ID"
 msgstr "Client ID"
 
-#: App/config/settings_rdoauth.php:256 App/config/settings_rdoauth.php:370
+#: App/config/settings_rdoauth.php:256
 msgid "Client secret"
 msgstr "Client secret"
 
@@ -310,6 +310,14 @@ msgstr "App ID"
 #: App/config/settings_rdoauth.php:330
 msgid "App secret"
 msgstr "App secret"
+
+#: App/config/settings_rdoauth.php:363
+msgid "Channel ID"
+msgstr "Channel ID"
+
+#: App/config/settings_rdoauth.php:370
+msgid "Channel secret"
+msgstr "Channel secret"
 
 #: App/config/settings_rdoauth.php:415
 msgid "Design pages"

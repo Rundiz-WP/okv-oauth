@@ -110,7 +110,7 @@ $facebook_login_help_msg = sprintf(
 unset($facebook_apps_url);
 
 
-$linenaver_dev_console_url = 'https://developers.line.biz/console/;';
+$linenaver_dev_console_url = 'https://developers.line.biz/console/';
 $linenaver_login_help_msg = sprintf(
         /* translators: %1$s: Open link, %2$s Close link. */
         __('Please visit %1$sLINE developers console%2$s and create or open your channel.', 'okv-oauth'), 
@@ -134,7 +134,7 @@ $linenaver_login_help_msg = sprintf(
         '</li>' . "\n" .
         '<li>' . __('Click Update.', 'okv-oauth') . '</li>' . "\n" .
         '<li>' . __('Open Basic settings tab.', 'okv-oauth') . '</li>' . "\n" .
-        '<li>' . __('Use Client ID and Channel secret from there.', 'okv-oauth') . '</li>' . "\n" .
+        '<li>' . __('Use Channel ID and Channel secret from there.', 'okv-oauth') . '</li>' . "\n" .
         '<li>' . sprintf(
             /* translators: %1$s Open link, %2$s Close link. */
             __('For more information, please read more on %1$sthis document%2$s.', 'okv-oauth'),
@@ -358,16 +358,16 @@ return [
                 ],
                 [
                     'default' => '',
-                    'id' => 'linenaver_client_id',
+                    'id' => 'linenaver_channel_id',
                     'input_attributes' => ['autocomplete' => 'off'],
-                    'title' => __('Client ID', 'okv-oauth'),
+                    'title' => __('Channel ID', 'okv-oauth'),
                     'type' => 'text',
                 ],
                 [
                     'default' => '',
                     'id' => 'linenaver_channel_secret',
                     'input_attributes' => ['autocomplete' => 'off'],
-                    'title' => __('Client secret', 'okv-oauth'),
+                    'title' => __('Channel secret', 'okv-oauth'),
                     'type' => 'text',
                 ],
                 [
