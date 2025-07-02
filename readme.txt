@@ -55,7 +55,8 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
-= 2025-07-02 =
+= 1.6.1 =
+2025-07-02
 
 * Update CSS version number to use current.
 
