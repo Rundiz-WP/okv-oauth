@@ -4,7 +4,7 @@ Tags: oauth, google, social login, social connect
 Tested up to: 6.9
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.6.0
+Stable tag: 1.6.1
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -55,13 +55,16 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 2025-07-02 =
+
+* Update CSS version number to use current.
+
 = 1.6.0 =
 2025-07-01
 
+* Code improvement.
 * Update to FontAwesome 6 from 4.
-* Move manual code that called to OAuth multiple classes & methods to one that call them all per setting, request query string.
 * Add LINE OAuth.
-* Update code following PHPCS guide.
 * Bump version from v1.5.7
 
 Previous version updates:  

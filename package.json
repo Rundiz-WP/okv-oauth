@@ -1,6 +1,6 @@
 {
     "name": "okv-oauth",
-    "version": "1.5.6",
+    "version": "1.6.0",
     "main": "index.js",
     "author": "Vee W.",
     "license": "MIT",
