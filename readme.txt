@@ -22,10 +22,8 @@ Since v 1.0 your users can register using OAuth in one click from your website a
 You can also change login expiration by using remember login.  
 You can set how your user login use OAuth with normal login form, or OAuth only, or disable OAuth login from Rundiz OAuth settings page.
 
-This project is maintain by <a href="https://rundiz.com" target="author_site">Rundiz.com</a>. Feel free to rate and comments.<br>
-
-= System requirement =
-Open SSL PHP extension.
+This project is maintain by <a href="https://rundiz.com" target="author_site">Rundiz.com</a>. Feel free to rate and comments.  
+Please <a href="https://rundiz.com/en/donate" target="donate">donate</a> to support the developer.
 
 == Installation ==
 1. Upload "okv-oauth" folder to the "/wp-content/plugins/" directory or use add from plugins management page.
