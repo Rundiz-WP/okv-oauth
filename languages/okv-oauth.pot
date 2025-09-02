@@ -2,16 +2,16 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rundiz OAuth 1.5.7a-20250630\n"
+"Project-Id-Version: Rundiz OAuth 1.6.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-07-01T11:56:09+07:00\n"
+"POT-Creation-Date: 2025-09-02T13:55:22+07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: okv-oauth\n"
 
 #. Plugin Name of the plugin
@@ -31,7 +31,7 @@ msgstr ""
 
 #. Description of the plugin
 #: okv-oauth.php
-msgid "Use OAuth such as Google, Facebook to login and register."
+msgid "Use OAuth such as Google, LINE to login and register."
 msgstr ""
 
 #. Author of the plugin
@@ -41,7 +41,7 @@ msgstr ""
 
 #. Author URI of the plugin
 #: okv-oauth.php
-msgid "http://rundiz.com"
+msgid "https://rundiz.com"
 msgstr ""
 
 #: App/config/settings_rdoauth.php:10
@@ -51,6 +51,7 @@ msgstr ""
 #. translators: %s: number of days.
 #: App/config/settings_rdoauth.php:13
 #: App/config/settings_rdoauth.php:17
+#, php-format
 msgid "%s day"
 msgid_plural "%s days"
 msgstr[0] ""
@@ -58,6 +59,7 @@ msgstr[1] ""
 
 #. translators: %1$s: Open link, %2$s Close link.
 #: App/config/settings_rdoauth.php:26
+#, php-format
 msgid "Please visit %1$sGoogle Projects%2$s and create or open your project."
 msgstr ""
 
@@ -75,6 +77,7 @@ msgstr ""
 
 #. translators: %s: URL.
 #: App/config/settings_rdoauth.php:37
+#, php-format
 msgid "Authorized JavaScript origins: enter %s"
 msgstr ""
 
@@ -87,6 +90,7 @@ msgstr ""
 
 #. translators: %s: URLs.
 #: App/config/settings_rdoauth.php:46
+#, php-format
 msgid "Authorized redirect URIs: enter %s"
 msgstr ""
 
@@ -100,6 +104,7 @@ msgstr ""
 
 #. translators: %1$s: Open link, %2$s: Close link
 #: App/config/settings_rdoauth.php:67
+#, php-format
 msgid "Please visit %1$sFacebook for developers%2$s and add or open your app."
 msgstr ""
 
@@ -109,6 +114,7 @@ msgstr ""
 
 #. translators: %1$s: Open strong tag, %2$s: Close strong tag.
 #: App/config/settings_rdoauth.php:76
+#, php-format
 msgid "From Add a product section, click Set Up on %1$sFacebook Login%2$s."
 msgstr ""
 
@@ -118,11 +124,13 @@ msgstr ""
 
 #. translators: %s: URLs.
 #: App/config/settings_rdoauth.php:87
+#, php-format
 msgid "Valid OAuth redirect URIs: enter %s"
 msgstr ""
 
 #. translators: %s: URL.
 #: App/config/settings_rdoauth.php:99
+#, php-format
 msgid "Deauthorize Callback URL: enter %s"
 msgstr ""
 
@@ -152,6 +160,7 @@ msgstr ""
 
 #. translators: %1$s: Open link, %2$s Close link.
 #: App/config/settings_rdoauth.php:116
+#, php-format
 msgid "Please visit %1$sLINE developers console%2$s and create or open your channel."
 msgstr ""
 
@@ -165,6 +174,7 @@ msgstr ""
 
 #. translators: %s: URLs.
 #: App/config/settings_rdoauth.php:126
+#, php-format
 msgid "Enter %s"
 msgstr ""
 
@@ -182,11 +192,13 @@ msgstr ""
 
 #. translators: %1$s Open link, %2$s Close link.
 #: App/config/settings_rdoauth.php:140
+#, php-format
 msgid "For more information, please read more on %1$sthis document%2$s."
 msgstr ""
 
 #. translators: %s: Use OAuth only option text.
 #: App/config/settings_rdoauth.php:155
+#, php-format
 msgid "This is multi-site WordPress and the registration page may not work perfectly with method %s."
 msgstr ""
 
@@ -197,6 +209,7 @@ msgstr ""
 
 #. translators: %1$s: Allow new registrations text, %2$s: User accounts may be registered text.
 #: App/config/settings_rdoauth.php:161
+#, php-format
 msgid "It is recommended that you change the network settings for %1$s to %2$s."
 msgstr ""
 
@@ -206,6 +219,7 @@ msgstr ""
 
 #. translators: %1$s: The design guide text file name, %2$s: The design guide file location.
 #: App/config/settings_rdoauth.php:175
+#, php-format
 msgid "To design your login and register result page, please read %1$s file inside the %2$s folder."
 msgstr ""
 
@@ -235,6 +249,7 @@ msgstr ""
 
 #. translators: %s: auth_cookie_expiration hook.
 #: App/config/settings_rdoauth.php:217
+#, php-format
 msgid "This setting can be override by any plugins that hook into %s."
 msgstr ""
 
@@ -251,6 +266,7 @@ msgstr ""
 #: App/config/settings_rdoauth.php:236
 #: App/config/settings_rdoauth.php:310
 #: App/config/settings_rdoauth.php:350
+#, php-format
 msgid "Enable login with %1$s"
 msgstr ""
 
@@ -295,12 +311,14 @@ msgstr ""
 #. translators: %1$s &amp; text, %2$s: example parameters &amp;a=true&amp;b=false
 #: App/config/settings_rdoauth.php:279
 #: App/config/settings_rdoauth.php:393
+#, php-format
 msgid "Alway start with %1$s For example: %2$s."
 msgstr ""
 
 #. translators: %s: The parameters that will be skipped.
 #: App/config/settings_rdoauth.php:285
 #: App/config/settings_rdoauth.php:399
+#, php-format
 msgid "These parameters will be skipped: %s"
 msgstr ""
 
@@ -331,6 +349,7 @@ msgstr ""
 
 #. translators: %1$s: Current PHP version, %2$s: Required PHP version.
 #: App/Controllers/Admin/Activation.php:79
+#, php-format
 msgid "You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version or contact plugin author for this help.<br><br>Minimum requirement:<br>PHP %2$s"
 msgstr ""
 
@@ -341,7 +360,12 @@ msgstr ""
 
 #. translators: %1$s: Current WordPress version, %2$s: Required WordPress version.
 #: App/Controllers/Admin/Activation.php:84
+#, php-format
 msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
+msgstr ""
+
+#: App/Controllers/Admin/Activation.php:272
+msgid "Donate"
 msgstr ""
 
 #: App/Controllers/Admin/Settings.php:24
@@ -355,6 +379,7 @@ msgstr ""
 
 #. translators: %1$s: Open link, %2$s: Close link
 #: App/Controllers/Front/RdOauth/Register.php:91
+#, php-format
 msgid "Registration completed. You can now %1$slogin%2$s using selected OAuth provider."
 msgstr ""
 
@@ -364,6 +389,7 @@ msgstr ""
 
 #. translators: %1$s: Open link, %2$s: Close link.
 #: App/Libraries/ErrorsCollection.php:36
+#, php-format
 msgid "Your email is already in use or registered, please try to %1$slogin%2$s instead."
 msgstr ""
 
@@ -373,6 +399,7 @@ msgstr ""
 
 #. translators: %1$s: Open link, %2$s: Close link
 #: App/Libraries/ErrorsCollection.php:41
+#, php-format
 msgid "Not found this email on the system. Please try to %1$sregister%2$s your account."
 msgstr ""
 
@@ -382,6 +409,7 @@ msgstr ""
 
 #. translators: %s: Error code.
 #: App/Libraries/ErrorsCollection.php:47
+#, php-format
 msgid "Invalid OAuth settings, please contact administrator to verify OAuth settings. Error code: %s."
 msgstr ""
 
@@ -419,6 +447,7 @@ msgstr ""
 
 #. translators: %s: Template path.
 #: App/Libraries/Loader.php:99
+#, php-format
 msgid "The template file was not found. (%s)"
 msgstr ""
 
@@ -507,6 +536,7 @@ msgstr ""
 #: App/Widgets/LoginLinksWidget.php:73
 #: App/Widgets/LoginLinksWidget.php:75
 #: App/Widgets/LoginLinksWidget.php:77
+#, php-format
 msgid "Use %1$s"
 msgstr ""
 

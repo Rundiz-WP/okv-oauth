@@ -1,6 +1,6 @@
 {
-    "translation-revision-date": "2023-11-24 14:11+0700",
-    "generator": "WP-CLI\/2.8.0-alpha-9dfa966",
+    "translation-revision-date": "2025-09-02 13:55+0700",
+    "generator": "WP-CLI\/2.12.0",
     "source": "blocks\/loginlinks\/block.js",
     "domain": "messages",
     "locale_data": {
@@ -12,6 +12,9 @@
             },
             "Display link to admin dashboard": [
                 "\u0e41\u0e2a\u0e14\u0e07\u0e25\u0e34\u0e49\u0e07\u0e04\u0e4c\u0e44\u0e1b\u0e22\u0e31\u0e07\u0e2b\u0e19\u0e49\u0e32\u0e1c\u0e39\u0e49\u0e14\u0e39\u0e41\u0e25"
+            ],
+            "Display link to edit profile": [
+                "\u0e41\u0e2a\u0e14\u0e07\u0e25\u0e34\u0e49\u0e07\u0e04\u0e4c\u0e44\u0e1b\u0e22\u0e31\u0e07\u0e2b\u0e19\u0e49\u0e32\u0e41\u0e01\u0e49\u0e44\u0e02\u0e42\u0e1b\u0e23\u0e44\u0e1f\u0e25\u0e4c"
             ]
         }
     }

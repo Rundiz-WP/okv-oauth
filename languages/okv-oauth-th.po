@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okv-oauth 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
-"POT-Creation-Date: 2025-07-01T11:56:09+07:00\n"
-"PO-Revision-Date: 2025-07-01 11:56+0700\n"
+"POT-Creation-Date: 2025-09-02T13:55:22+07:00\n"
+"PO-Revision-Date: 2025-09-02 13:55+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: <>\n"
 "Language: th\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.7\n"
 "X-Poedit-KeywordsList: "
 "_;gettext;gettext_noop;__;_e;__ngettext;_n;__ngettext_noop;_n_noop;_x;_nx;_nx_noop;_ex;esc_attr__;esc_attr_e;esc_attr_x;esc_html__;esc_html_e;esc_html_x;_e;_nc\n"
 "X-Poedit-Basepath: ..\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #. Description of the plugin
 #: okv-oauth.php
-msgid "Use OAuth such as Google, Facebook to login and register."
+msgid "Use OAuth such as Google, LINE to login and register."
 msgstr ""
 
 #. Author of the plugin
@@ -42,7 +42,7 @@ msgstr ""
 
 #. Author URI of the plugin
 #: okv-oauth.php
-msgid "http://rundiz.com"
+msgid "https://rundiz.com"
 msgstr ""
 
 #: App/config/settings_rdoauth.php:10
@@ -51,12 +51,14 @@ msgstr "ใช้ค่าเดิมของ WordPress"
 
 #. translators: %s: number of days.
 #: App/config/settings_rdoauth.php:13 App/config/settings_rdoauth.php:17
+#, php-format
 msgid "%s day"
 msgid_plural "%s days"
 msgstr[0] "%s วัน"
 
 #. translators: %1$s: Open link, %2$s Close link.
 #: App/config/settings_rdoauth.php:26
+#, php-format
 msgid "Please visit %1$sGoogle Projects%2$s and create or open your project."
 msgstr "โปรดไปยัง %1$sGoogle Projects%2$s แล้วสร้างหรือเปิดโปรเจ็คของคุณ."
 
@@ -74,6 +76,7 @@ msgstr "เลือกเว็บแอปพลิเคชั่น"
 
 #. translators: %s: URL.
 #: App/config/settings_rdoauth.php:37
+#, php-format
 msgid "Authorized JavaScript origins: enter %s"
 msgstr "Authorized JavaScript origins: กรอก %s"
 
@@ -84,6 +87,7 @@ msgstr "คุณอาจเพิ่มอีกรายการหรือ
 
 #. translators: %s: URLs.
 #: App/config/settings_rdoauth.php:46
+#, php-format
 msgid "Authorized redirect URIs: enter %s"
 msgstr "Authorized redirect URIs: กรอก %s"
 
@@ -97,6 +101,7 @@ msgstr "ไปยัง APIs &amp; service &gt; OAuth consent screen แล้�
 
 #. translators: %1$s: Open link, %2$s: Close link
 #: App/config/settings_rdoauth.php:67
+#, php-format
 msgid "Please visit %1$sFacebook for developers%2$s and add or open your app."
 msgstr "โปรดไปยัง %1$sFacebook for developers%2$s แล้วเพิ่มหรือเปิดแอปของคุณ."
 
@@ -106,6 +111,7 @@ msgstr "คลิก +เพิ่มแอปใหม่, กรอกชื�
 
 #. translators: %1$s: Open strong tag, %2$s: Close strong tag.
 #: App/config/settings_rdoauth.php:76
+#, php-format
 msgid "From Add a product section, click Set Up on %1$sFacebook Login%2$s."
 msgstr "จากส่วนเพิ่มผลิตภัณฑ์, คลิกตั้งค่าที่ %1$sFacebook Login%2$s."
 
@@ -117,11 +123,13 @@ msgstr ""
 
 #. translators: %s: URLs.
 #: App/config/settings_rdoauth.php:87
+#, php-format
 msgid "Valid OAuth redirect URIs: enter %s"
 msgstr "Valid OAuth redirect URIs: กรอก %s"
 
 #. translators: %s: URL.
 #: App/config/settings_rdoauth.php:99
+#, php-format
 msgid "Deauthorize Callback URL: enter %s"
 msgstr "Deauthorize Callback URL: กรอก %s"
 
@@ -152,6 +160,7 @@ msgstr "โปรดทราบว่า Facebook API จะไม่รอง�
 
 #. translators: %1$s: Open link, %2$s Close link.
 #: App/config/settings_rdoauth.php:116
+#, php-format
 msgid "Please visit %1$sLINE developers console%2$s and create or open your channel."
 msgstr "โปรดไปยัง %1$sLINE developers console%2$s แล้วเพิ่มหรือเปิดช่องของคุณ."
 
@@ -165,6 +174,7 @@ msgstr "คลิกแก้ไขที่ Callback URL."
 
 #. translators: %s: URLs.
 #: App/config/settings_rdoauth.php:126
+#, php-format
 msgid "Enter %s"
 msgstr "กรอก %s"
 
@@ -182,11 +192,13 @@ msgstr "ใช้ Channel ID และ Channel secret จากที่นี�
 
 #. translators: %1$s Open link, %2$s Close link.
 #: App/config/settings_rdoauth.php:140
+#, php-format
 msgid "For more information, please read more on %1$sthis document%2$s."
 msgstr "สำหรับข้อมูลเพิ่มเติม, โปรดอ่านต่อที่ %1$sเอกสารนี้%2$s."
 
 #. translators: %s: Use OAuth only option text.
 #: App/config/settings_rdoauth.php:155
+#, php-format
 msgid "This is multi-site WordPress and the registration page may not work perfectly with method %s."
 msgstr "เว็บไซต์นี้ใช้ระบบเวิร์ดเพรสหลายไซต์ และการลงทะเบียนอาจไม่ทำงานได้ดีกับวิธี %s."
 
@@ -196,6 +208,7 @@ msgstr "ใช้ OAuth เท่านั้น"
 
 #. translators: %1$s: Allow new registrations text, %2$s: User accounts may be registered text.
 #: App/config/settings_rdoauth.php:161
+#, php-format
 msgid "It is recommended that you change the network settings for %1$s to %2$s."
 msgstr "แนะนำให้คุณเปลี่ยนการตั้งค่าเน็ตเวิร์คสำหรับ %1$s ไปยัง %2$s."
 
@@ -205,6 +218,7 @@ msgstr "หลายเว็บไซต์"
 
 #. translators: %1$s: The design guide text file name, %2$s: The design guide file location.
 #: App/config/settings_rdoauth.php:175
+#, php-format
 msgid "To design your login and register result page, please read %1$s file inside the %2$s folder."
 msgstr "การออกแบบหน้าเข้าสู่ระบบและลงทะเบียน, โปรดอ่าน %1$s ภายในโฟลเดอร์ %2$s."
 
@@ -238,6 +252,7 @@ msgstr "วิธีการเข้าสู่ระบบหรือลง
 
 #. translators: %s: auth_cookie_expiration hook.
 #: App/config/settings_rdoauth.php:217
+#, php-format
 msgid "This setting can be override by any plugins that hook into %s."
 msgstr "การตั้งค่านี้สามารถเขียนทับโดยปลั๊กอินอื่นๆที่ฮุคไปยัง %s ได้."
 
@@ -253,6 +268,7 @@ msgstr "วันหมดอายุหลังการเข้าสู่
 #. translators: %1$s OAuth provider name.
 #: App/config/settings_rdoauth.php:236 App/config/settings_rdoauth.php:310
 #: App/config/settings_rdoauth.php:350
+#, php-format
 msgid "Enable login with %1$s"
 msgstr "เปิดใช้งานเข้าสู่ระบบด้วย %1$s."
 
@@ -291,11 +307,13 @@ msgstr "การถาม"
 
 #. translators: %1$s &amp; text, %2$s: example parameters &amp;a=true&amp;b=false
 #: App/config/settings_rdoauth.php:279 App/config/settings_rdoauth.php:393
+#, php-format
 msgid "Alway start with %1$s For example: %2$s."
 msgstr "เริ่มต้นด้วย %1$s ตัวอย่างเช่น: %2$s."
 
 #. translators: %s: The parameters that will be skipped.
 #: App/config/settings_rdoauth.php:285 App/config/settings_rdoauth.php:399
+#, php-format
 msgid "These parameters will be skipped: %s"
 msgstr "พารามิเตอร์เหล่านี้จะถูกข้ามไป: %s"
 
@@ -325,6 +343,7 @@ msgstr "ออกแบบหน้า"
 
 #. translators: %1$s: Current PHP version, %2$s: Required PHP version.
 #: App/Controllers/Admin/Activation.php:79
+#, php-format
 msgid ""
 "You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version "
 "or contact plugin author for this help.<br><br>Minimum requirement:<br>PHP %2$s"
@@ -339,8 +358,13 @@ msgstr "รุ่นของ PHP ไม่ตรงตามความต้�
 
 #. translators: %1$s: Current WordPress version, %2$s: Required WordPress version.
 #: App/Controllers/Admin/Activation.php:84
+#, php-format
 msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
 msgstr "รุ่นเวิร์ดเพรสของคุณไม่ตรงกับความต้องการขั้นต่ำ. (%1$s < %2$s)."
+
+#: App/Controllers/Admin/Activation.php:272
+msgid "Donate"
+msgstr "บริจาค"
 
 #: App/Controllers/Admin/Settings.php:24 App/Views/admin/settings_v.php:2
 msgid "Rundiz OAuth settings"
@@ -352,6 +376,7 @@ msgstr "อีเมลของคุณได้เปลี่ยนแปล
 
 #. translators: %1$s: Open link, %2$s: Close link
 #: App/Controllers/Front/RdOauth/Register.php:91
+#, php-format
 msgid "Registration completed. You can now %1$slogin%2$s using selected OAuth provider."
 msgstr "ลงทะเบียนสำเร็จแล้ว. คุณสามารถ %1$sเข้าสู่ระบบ%2$s โดยใช้ผู้ให้บริการ OAuth ที่เลือก."
 
@@ -363,6 +388,7 @@ msgstr "กรุณาอย่าเปลี่ยนอีเมลในช
 
 #. translators: %1$s: Open link, %2$s: Close link.
 #: App/Libraries/ErrorsCollection.php:36
+#, php-format
 msgid "Your email is already in use or registered, please try to %1$slogin%2$s instead."
 msgstr "อีเมลของคุณถูกใช้งานหรือลงทะเบียนแล้ว, โปรดลองใช้การ%1$sเข้าสู่ระบบ%2$sแทน."
 
@@ -374,6 +400,7 @@ msgstr "อีเมลล์นี้มีผู้ใช้อยู่แล
 
 #. translators: %1$s: Open link, %2$s: Close link
 #: App/Libraries/ErrorsCollection.php:41
+#, php-format
 msgid "Not found this email on the system. Please try to %1$sregister%2$s your account."
 msgstr "ไม่พบอีเมลนี้ในระบบ. โปรดลอง%1$sลงทะเบียน%2$sอีกครั้ง."
 
@@ -383,6 +410,7 @@ msgstr "อีเมลของคุณยังไม่ได้ยืนย
 
 #. translators: %s: Error code.
 #: App/Libraries/ErrorsCollection.php:47
+#, php-format
 msgid "Invalid OAuth settings, please contact administrator to verify OAuth settings. Error code: %s."
 msgstr "การตั้งค่า OAuth ไม่ถูกต้อง, โปรดติดต่อผู้ดูแลเพื่อตรวจสอบการตั้งค่า  OAuth. รหัสข้อผิดพลาด: %s."
 
@@ -424,6 +452,7 @@ msgstr "บัญชีผู้ใช้ของคุณบนผู้ให
 
 #. translators: %s: Template path.
 #: App/Libraries/Loader.php:99
+#, php-format
 msgid "The template file was not found. (%s)"
 msgstr "ไม่พบเท็มเพลท. (%s)"
 
@@ -509,6 +538,7 @@ msgstr "ใช้แท็ก HTML"
 #. translators: %1$s: HTML element that will be use.
 #: App/Widgets/LoginLinksWidget.php:73 App/Widgets/LoginLinksWidget.php:75
 #: App/Widgets/LoginLinksWidget.php:77
+#, php-format
 msgid "Use %1$s"
 msgstr "ใช้ %1$s"
 

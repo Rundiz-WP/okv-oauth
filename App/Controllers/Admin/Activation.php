@@ -245,7 +245,37 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Activation')) {
 
             // add filter action links. this will be displayed in actions area of plugin page. for example: xxxbefore | Activate | Edit | Delete | xxxafter
             add_filter('plugin_action_links', [$this, 'actionLinks'], 10, 5);
+            // add filter to row meta. (in plugin page below description). for example: By xxx | Visit plugin site | xxxafter
+            add_filter('plugin_row_meta', [$this, 'rowMeta'], 10, 2);
         }// registerHooks
+
+
+                /**
+         * Add links to row meta that is in Plugins page under plugin description. For example: xxxbefore | By xxx | Visit plugin site | xxxafter
+         * 
+         * @staticvar string $plugin The plugin file name.
+         * @param array $links Current meta links
+         * @param string $file The plugin file name for checking.
+         * @return array Return modified links.
+         */
+        public function rowMeta(array $links, $file)
+        {
+            static $plugin;
+            
+            if (!isset($plugin)) {
+                $plugin = plugin_basename(RUNDIZOAUTH_FILE);
+            }
+            
+            if ($plugin === $file) {
+                $after_link = [];
+
+                $after_link[] = '<a href="https://rundiz.com/en/donate" target="donate">' . __('Donate', 'okv-oauth') . '</a>';
+                $links = array_merge($links, $after_link);
+                unset($after_link);
+            }
+            
+            return $links;
+        }// rowMeta
 
 
         /**
