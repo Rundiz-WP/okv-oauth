@@ -92,6 +92,7 @@
                         ".git",
                         ".phpdoc",
                         ".phpunit*",
+                        ".phpunit.cache",
                         "composer.lock",
                         "node_modules",
                         "package-*.json"
@@ -111,6 +112,7 @@
                         ".git",
                         ".phpdoc",
                         ".phpunit*",
+                        ".phpunit.cache",
                         "assets-src",
                         "blocks-src",
                         "composer.lock",
