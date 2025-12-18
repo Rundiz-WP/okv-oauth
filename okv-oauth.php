@@ -25,7 +25,7 @@ if (!defined('RUNDIZOAUTH_FILE')) {
 
 if (!defined('RUNDIZOAUTH_VERSION')) {
     $pluginData = (function_exists('get_file_data') ? get_file_data(__FILE__, ['Version' => 'Version']) : null);
-    $pluginVersion = (isset($pluginData['Version']) ? $pluginData['Version'] : date('Ym'));
+    $pluginVersion = (isset($pluginData['Version']) ? $pluginData['Version'] : date('Ym'));// phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
     unset($pluginData);
     define('RUNDIZOAUTH_VERSION', $pluginVersion);
     unset($pluginVersion);

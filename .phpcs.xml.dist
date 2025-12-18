@@ -5,6 +5,7 @@
     <!-- What to scan -->
     <file>.</file>
     <exclude-pattern>/.dev-notes/</exclude-pattern>
+    <exclude-pattern>/.phpunit.cache/</exclude-pattern>
     <exclude-pattern>/blocks/</exclude-pattern>
     <exclude-pattern>/tests/</exclude-pattern>
     <exclude-pattern>/vendor/</exclude-pattern>
@@ -114,7 +115,9 @@
     <rule ref="WordPress.WP.I18n">
         <properties>
             <!-- Value: replace the text domain used. -->
-            <property name="text_domain" type="array" value="okv-oauth"/>
+            <property name="text_domain" type="array">
+                <element value="okv-oauth"/>
+            </property>
         </properties>
     </rule>
     <rule ref="WordPress.WhiteSpace.ControlStructureSpacing">
