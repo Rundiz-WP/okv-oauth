@@ -7,8 +7,15 @@
 namespace RundizOauth\Tests\App\Libraries;
 
 
-class ErrorsCollectionTest extends \WP_UnitTestCase
+use PHPUnit\Framework\TestCase;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
+
+
+class ErrorsCollectionTest extends  TestCase
 {
+
+
+    use AssertIsType;
 
 
     public function testGetErrorMessage()

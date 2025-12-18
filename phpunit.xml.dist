@@ -1,15 +1,19 @@
 <?xml version="1.0"?>
 <phpunit
-	bootstrap="tests/bootstrap.php"
-	backupGlobals="false"
-	colors="true"
-	convertErrorsToExceptions="true"
-	convertNoticesToExceptions="true"
-	convertWarningsToExceptions="true"
-	>
-	<testsuites>
-		<testsuite name="tests">
-			<directory suffix=".php">./tests/</directory>
-		</testsuite>
-	</testsuites>
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+    bootstrap="tests/bootstrap.php" 
+    backupGlobals="false" 
+    cacheDirectory="./.phpunit.cache"
+    colors="true" 
+    displayDetailsOnTestsThatTriggerDeprecations="true"
+    displayDetailsOnTestsThatTriggerErrors="true"
+    displayDetailsOnTestsThatTriggerNotices="true"
+    displayDetailsOnTestsThatTriggerWarnings="true"
+    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/10.4/phpunit.xsd" 
+>
+    <testsuites>
+        <testsuite name="tests">
+            <directory suffix="Test.php">./tests/</directory>
+        </testsuite>
+    </testsuites>
 </phpunit>

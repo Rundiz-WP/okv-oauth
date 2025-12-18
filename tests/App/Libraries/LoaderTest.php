@@ -7,8 +7,15 @@
 namespace RundizOauth\Tests\App\Libraries;
 
 
-class LoaderTest extends \WP_UnitTestCase
+use PHPUnit\Framework\TestCase;
+use Yoast\PHPUnitPolyfills\Polyfills\AssertIsType;
+
+
+class LoaderTest extends  TestCase
 {
+
+
+    use AssertIsType;
 
 
     public function testLoadConfig()
