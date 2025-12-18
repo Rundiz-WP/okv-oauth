@@ -30,20 +30,22 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\Logger')) {
                     $message = 'value type ' . gettype($message) . '.';
                 }
 
-                $messagePrefix = 'Back trace:' . PHP_EOL;
+                $messagePrefix = '[rundiz oauth] ';
+                
+                $messageSuffix = PHP_EOL . 'Debug back trace:' . PHP_EOL;
                 $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 10);
                 if (is_array($trace)) {
                     foreach ($trace as $eachTrace) {
                         if (isset($eachTrace['file']) && isset($eachTrace['line'])) {
-                            $messagePrefix .= $eachTrace['file'] . ' : ' . $eachTrace['line'] . PHP_EOL;
+                            $messageSuffix .= $eachTrace['file'] . ' : ' . $eachTrace['line'] . PHP_EOL;
                         }
                     }// endforeach;
                     unset($eachTrace);
                 }
                 unset($trace);
 
-                error_log($messagePrefix . $message . PHP_EOL);
-                unset($messagePrefix);
+                error_log($messagePrefix . $message . $messageSuffix . PHP_EOL);
+                unset($messagePrefix, $messageSuffix);
             }
         }// writeLog
 
