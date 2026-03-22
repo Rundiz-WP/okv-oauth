@@ -1,14 +1,17 @@
 <?php
 /**
- * @package rundiz-oauth
+ * @package okv-oauth
  * @since 1.5.1
  */
 
 
-namespace RundizOauth\App\Widgets;
+namespace OKVOauth\App\Widgets;
 
 
-if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
+if (!class_exists('\\OKVOauth\\App\\Widgets\\LoginLinksWidget')) {
+    /**
+     * Login links widget class.
+     */
     class LoginLinksWidget extends \WP_Widget
     {
 
@@ -25,11 +28,11 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
         public function __construct()
         {
             parent::__construct(
-                    'rdoauth_loginlinks_widget', // base ID
-                    __('Login links widget', 'okv-oauth'), 
-                    [
-                        'description' => __('Display links to login, logout, and other (depend on settings).', 'okv-oauth'),
-                    ]
+                'rdoauth_loginlinks_widget', // base ID
+                __('Login links widget', 'okv-oauth'), 
+                [
+                    'description' => __('Display links to login, logout, and other (depend on settings).', 'okv-oauth'),
+                ]
             );
         }// __construct
 
@@ -48,27 +51,27 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
 
             // output form
             $output = '<p>';
-            $output .= '<label for="' . $this->get_field_id('rdoauth-loginlinks-widget-title') . '">' . __('Title', 'okv-oauth') . ':</label>';
-            $output .= '<input id="' . $this->get_field_id('rdoauth-loginlinks-widget-title') . '" class="widefat" type="text" name="' . $this->get_field_name('rdoauth-loginlinks-widget-title') . '" value="' . esc_attr($this->widgetTitle) . '">';
+            $output .= '<label for="' . esc_attr($this->get_field_id('rdoauth-loginlinks-widget-title')) . '">' . esc_html__('Title', 'okv-oauth') . ':</label>';
+            $output .= '<input id="' . esc_attr($this->get_field_id('rdoauth-loginlinks-widget-title')) . '" class="widefat" type="text" name="' . esc_attr($this->get_field_name('rdoauth-loginlinks-widget-title')) . '" value="' . esc_attr($this->widgetTitle) . '">';
             $output .= '</p>';
 
             $output .= '<p>';
-            $output .= '<input id="' . $this->get_field_id('rdoauth-loginlinks-displaylink-admin') . '" class="input-checkbox" type="checkbox" name="' . $this->get_field_name('rdoauth-loginlinks-displaylink-admin') . '" value="1"' . 
+            $output .= '<input id="' . esc_attr($this->get_field_id('rdoauth-loginlinks-displaylink-admin')) . '" class="input-checkbox" type="checkbox" name="' . esc_attr($this->get_field_name('rdoauth-loginlinks-displaylink-admin')) . '" value="1"' . 
                 (isset($instance['rdoauth-loginlinks-displaylink-admin']) ? checked($instance['rdoauth-loginlinks-displaylink-admin'], '1', false) : '') . 
             '> ';
-            $output .= '<label for="' . $this->get_field_id('rdoauth-loginlinks-displaylink-admin') . '">' . __('Display link to admin dashboard', 'okv-oauth') . ':</label>';
+            $output .= '<label for="' . esc_attr($this->get_field_id('rdoauth-loginlinks-displaylink-admin')) . '">' . esc_html__('Display link to admin dashboard', 'okv-oauth') . ':</label>';
             $output .= '</p>';
 
             $output .= '<p>';
-            $output .= '<input id="' . $this->get_field_id('rdoauth-loginlinks-displaylink-editprofile') . '" class="input-checkbox" type="checkbox" name="' . $this->get_field_name('rdoauth-loginlinks-displaylink-editprofile') . '" value="1"' . 
+            $output .= '<input id="' . esc_attr($this->get_field_id('rdoauth-loginlinks-displaylink-editprofile')) . '" class="input-checkbox" type="checkbox" name="' . esc_attr($this->get_field_name('rdoauth-loginlinks-displaylink-editprofile')) . '" value="1"' . 
                 (isset($instance['rdoauth-loginlinks-displaylink-editprofile']) ? checked($instance['rdoauth-loginlinks-displaylink-editprofile'], '1', false) : '') . 
             '> ';
-            $output .= '<label for="' . $this->get_field_id('rdoauth-loginlinks-displaylink-editprofile') . '">' . __('Display link to edit profile', 'okv-oauth') . ':</label>';
+            $output .= '<label for="' . esc_attr($this->get_field_id('rdoauth-loginlinks-displaylink-editprofile')) . '">' . esc_html__('Display link to edit profile', 'okv-oauth') . ':</label>';
             $output .= '</p>';
 
             $output .= '<p>';
-            $output .= '<label for="' . $this->get_field_id('rdoauth-loginlinks-useelement') . '">' . __('Use HTML element', 'okv-oauth') . ':</label>';
-            $output .= '<select id="' . $this->get_field_id('rdoauth-loginlinks-useelement') . '" name="' . $this->get_field_name('rdoauth-loginlinks-useelement') . '">';
+            $output .= '<label for="' . esc_attr($this->get_field_id('rdoauth-loginlinks-useelement')) . '">' . esc_html__('Use HTML element', 'okv-oauth') . ':</label>';
+            $output .= '<select id="' . esc_attr($this->get_field_id('rdoauth-loginlinks-useelement')) . '" name="' . esc_attr($this->get_field_name('rdoauth-loginlinks-useelement')) . '">';
             /* translators: %1$s: HTML element that will be use. */
             $output .= '<option value=""' . (isset($instance['rdoauth-loginlinks-useelement']) ? selected($instance['rdoauth-loginlinks-useelement'], '', false) : ' selected') . '>' . esc_html(sprintf(__('Use %1$s', 'okv-oauth'), 'ul & li')) . '</option>';
             /* translators: %1$s: HTML element that will be use. */
@@ -79,15 +82,17 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
             $output .= '</p>';
 
             $output .= '<p>';
-            $output .= '<label for="' . $this->get_field_id('rdoauth-loginlinks-wrapper-classes') . '">' . __('List wrapper classes', 'okv-oauth') . ':</label>';
-            $output .= '<input id="' . $this->get_field_id('rdoauth-loginlinks-wrapper-classes') . '" class="widefat" type="text" name="' . $this->get_field_name('rdoauth-loginlinks-wrapper-classes') . '" value="' . esc_attr($instance['rdoauth-loginlinks-wrapper-classes']) . '">';
+            $output .= '<label for="' . esc_attr($this->get_field_id('rdoauth-loginlinks-wrapper-classes')) . '">' . esc_html__('List wrapper classes', 'okv-oauth') . ':</label>';
+            $output .= '<input id="' . esc_attr($this->get_field_id('rdoauth-loginlinks-wrapper-classes')) . '" class="widefat" type="text" name="' . esc_attr($this->get_field_name('rdoauth-loginlinks-wrapper-classes')) . '" value="' . esc_attr($instance['rdoauth-loginlinks-wrapper-classes']) . '">';
             $output .= '</p>';
 
             $output .= '<p>';
-            $output .= '<label for="' . $this->get_field_id('rdoauth-loginlinks-listitem-classes') . '">' . __('List item classes', 'okv-oauth') . ':</label>';
-            $output .= '<input id="' . $this->get_field_id('rdoauth-loginlinks-listitem-classes') . '" class="widefat" type="text" name="' . $this->get_field_name('rdoauth-loginlinks-listitem-classes') . '" value="' . esc_attr($instance['rdoauth-loginlinks-listitem-classes']) . '">';
+            $output .= '<label for="' . esc_attr($this->get_field_id('rdoauth-loginlinks-listitem-classes')) . '">' . esc_html__('List item classes', 'okv-oauth') . ':</label>';
+            $output .= '<input id="' . esc_attr($this->get_field_id('rdoauth-loginlinks-listitem-classes')) . '" class="widefat" type="text" name="' . esc_attr($this->get_field_name('rdoauth-loginlinks-listitem-classes')) . '" value="' . esc_attr($instance['rdoauth-loginlinks-listitem-classes']) . '">';
             $output .= '</p>';
 
+            // all are already escaped inside the variable.
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo $output;
 
             unset($output);
@@ -198,40 +203,46 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
             $output .= $openWrapper;
             // apply filters after open the wrapper.
             // @since 1.5.2
-            $output .= apply_filters('rdoauth_loginlinkswidgetblock_afteropenwrapper', '', $openLine, $closeLine);
+            // @since 1.7.0 Renamed from `rdoauth_loginlinkswidgetblock_afteropenwrapper`.
+            $output .= apply_filters('okv_oauth_loginlinkswidgetblock_afteropenwrapper', '', $openLine, $closeLine);
             if ($isUserLoggedIn) {
                 // if logged in.
                 // apply filters for logged in users, before display links.
                 // @since 1.5.2
-                $output .= apply_filters('rdoauth_loginlinkswidgetblock_loggedin_beforelinks', '', $openLine, $closeLine);
+                // @since 1.7.0 Renamed from `rdoauth_loginlinkswidgetblock_loggedin_beforelinks`.
+                $output .= apply_filters('okv_oauth_loginlinkswidgetblock_loggedin_beforelinks', '', $openLine, $closeLine);
                 if (isset($instance['rdoauth-loginlinks-displaylink-admin']) && '1' === $instance['rdoauth-loginlinks-displaylink-admin']) {
                     // if setting to allowed link to admin.
-                    $output .= $openLine . '<a href="' . admin_url() . '">' . __('Site Admin') . '</a>' . $closeLine . PHP_EOL;
+                    $output .= $openLine . '<a href="' . esc_url(admin_url()) . '">' . esc_html__('Site Admin', 'okv-oauth') . '</a>' . $closeLine . PHP_EOL;
                 }
                 if (isset($instance['rdoauth-loginlinks-displaylink-editprofile']) && '1' === $instance['rdoauth-loginlinks-displaylink-editprofile']) {
                     // if setting to allowed link to edit profile.
-                    $output .= $openLine . '<a href="' . get_edit_user_link() . '">' . __('Edit Profile') . '</a>' . $closeLine . PHP_EOL;
+                    $output .= $openLine . '<a href="' . esc_url(get_edit_user_link()) . '">' . esc_html__('Edit Profile', 'okv-oauth') . '</a>' . $closeLine . PHP_EOL;
                 }
                 // apply filters for logged in users, after  display links.
                 // @since 1.5.2
-                $output .= apply_filters('rdoauth_loginlinkswidgetblock_loggedin_afterlinks', '', $openLine, $closeLine);
+                // @since 1.7.0 Renamed from `rdoauth_loginlinkswidgetblock_loggedin_afterlinks`.
+                $output .= apply_filters('okv_oauth_loginlinkswidgetblock_loggedin_afterlinks', '', $openLine, $closeLine);
             } else {
                 // if NOT logged in.
                 if (get_option('users_can_register')) {
                     // if setting is allowed user register.
-                    $output .= $openLine . '<a href="' . wp_registration_url() . '">' . __('Register', 'okv-oauth') . '</a>' . $closeLine . PHP_EOL;
+                    $output .= $openLine . '<a href="' . esc_url(wp_registration_url()) . '">' . esc_html__('Register', 'okv-oauth') . '</a>' . $closeLine . PHP_EOL;
                 }
             }// endif;
             $output .= $openLine . wp_loginout($currentUrl, false) . $closeLine . PHP_EOL;
             // apply filters after login/logout.
             // @since 1.5.2
-            $output .= apply_filters('rdoauth_loginlinkswidgetblock_afterloginout', '', $openLine, $closeLine);
+            // @since 1.7.0 Renamed from `rdoauth_loginlinkswidgetblock_afterloginout`.
+            $output .= apply_filters('okv_oauth_loginlinkswidgetblock_afterloginout', '', $openLine, $closeLine);
             unset($currentUrl, $isUserLoggedIn);
             $output .= $closeWrapper;
             unset($closeLine, $closeWrapper, $openLine, $openWrapper);
 
             $output .= $args['after_widget'] . PHP_EOL;
 
+            // all are already escaped inside the variable.
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo $output;
 
             // clear unused variables
@@ -239,5 +250,5 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\LoginLinksWidget')) {
         }// widget
 
 
-    }
+    }// LoginLinksWidget
 }

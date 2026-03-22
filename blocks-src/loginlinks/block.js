@@ -1,7 +1,7 @@
 /**
  * Login links block JS.
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  * @since 1.5
  */
 import { registerBlockType } from '@wordpress/blocks';

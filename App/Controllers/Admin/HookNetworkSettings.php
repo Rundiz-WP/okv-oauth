@@ -1,29 +1,33 @@
 <?php
 /**
- * @package rundiz-oauth
+ * @package okv-oauth
  * @license http://opensource.org/licenses/MIT MIT
  */
 
 
-namespace RundizOauth\App\Controllers\Admin;
+namespace OKVOauth\App\Controllers\Admin;
 
 
-if (!class_exists('\\RundizOauth\\App\\Controllers\\Admin\\HookNetworkSettings')) {
-    class HookNetworkSettings extends \RundizOauth\App\Libraries\RundizOauth implements \RundizOauth\App\Controllers\ControllerInterface
+if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\HookNetworkSettings')) {
+    /**
+     * Hook network settings class.
+     */
+    class HookNetworkSettings extends \OKVOauth\App\Libraries\RundizOauth implements \OKVOauth\App\Controllers\ControllerInterface
     {
 
 
         /**
          * Enqueue admin scripts.
          * 
-         * @param string $hook
+         * @link https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts/ Reference.
+         * @param string $hook The current admin page.
          */
         public function adminEnqueueScripts($hook)
         {
             if (is_admin() && is_multisite() && 'settings.php' === $hook) {
                 $this->init();
 
-                wp_enqueue_script('rd-oauth-adminnetworksettings', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-adminnetworksettings.js', ['jquery'], false, true);
+                wp_enqueue_script('rd-oauth-adminnetworksettings', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-adminnetworksettings.js', ['jquery'], OKVOAUTH_VERSION, true);
                 wp_localize_script(
                     'rd-oauth-adminnetworksettings',
                     'RdOauthAdminNetworkSettings',
@@ -38,6 +42,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Admin\\HookNetworkSettings')
         /**
          * Filter update network settings for site registration.
          * 
+         * @link https://developer.wordpress.org/reference/hooks/pre_update_site_option_option/ Reference.
          * @param mixed $value New value of the network option.
          * @param mixed $old_value Old value of the network option.
          * @param string $option Option name.
@@ -69,5 +74,5 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Admin\\HookNetworkSettings')
         }// registerHooks
 
 
-    }
+    }// HookNetworkSettings
 }

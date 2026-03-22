@@ -2,23 +2,26 @@
 /**
  * Rundiz OAuth register or login functional.
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\App\Libraries;
+namespace OKVOauth\App\Libraries;
 
 
-if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
+if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizOauth')) {
+    /**
+     * RundizOauth class.
+     */
     class RundizOauth
     {
 
 
-        use \RundizOauth\App\AppTrait;
+        use \OKVOauth\App\AppTrait;
 
 
         /**
-         * @var integer Login method. 0 = wp only, 1 = wp+oauth, 2 = oauth only.
+         * @var int Login method. 0 = wp only, 1 = wp+oauth, 2 = oauth only.
          */
         public $loginMethod = 0;
 
@@ -30,7 +33,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
 
 
         /**
-         * @var boolean If settings to use wp login with oauth or oauth only then this value will be true.
+         * @var bool If settings to use wp login with oauth or oauth only then this value will be true.
          */
         public $useOauth = false;
 
@@ -38,50 +41,50 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
         /**
          * Call to this class before begins using any properties.
          * 
-         * @global array $rundizoauth_options
+         * @global array $okv_oauth_options
          */
         public function init()
         {
             if (false !== $this->useOauth) {
                 // already initialized.
-                return ;
+                return;
             }
 
             // get all options from setting config file.
             $this->getOptions();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
-            if (is_array($rundizoauth_options)) {
+            if (is_array($okv_oauth_options)) {
                 if (
-                    array_key_exists('login_method', $rundizoauth_options) &&
+                    array_key_exists('login_method', $okv_oauth_options) &&
                     (
-                        '1' === strval($rundizoauth_options['login_method']) ||
-                        '2' === strval($rundizoauth_options['login_method'])
+                        '1' === strval($okv_oauth_options['login_method']) ||
+                        '2' === strval($okv_oauth_options['login_method'])
                     )
                 ) {
                     // if choose login method as wp login with oauth or oauth only.
                     $this->useOauth = true;
-                    $this->loginMethod = intval($rundizoauth_options['login_method']);
+                    $this->loginMethod = intval($okv_oauth_options['login_method']);
 
                     // check that which oauth providers was enabled.
                     if (
-                        array_key_exists('google_login_enable', $rundizoauth_options) && 
-                        array_key_exists('google_client_id', $rundizoauth_options) && 
-                        array_key_exists('google_client_secret', $rundizoauth_options) && 
-                        '1' === strval($rundizoauth_options['google_login_enable']) &&
-                        !empty($rundizoauth_options['google_client_id']) &&
-                        !empty($rundizoauth_options['google_client_secret'])
+                        array_key_exists('google_login_enable', $okv_oauth_options) && 
+                        array_key_exists('google_client_id', $okv_oauth_options) && 
+                        array_key_exists('google_client_secret', $okv_oauth_options) && 
+                        '1' === strval($okv_oauth_options['google_login_enable']) &&
+                        !empty($okv_oauth_options['google_client_id']) &&
+                        !empty($okv_oauth_options['google_client_secret'])
                     ) {
                         $this->oauthProviders[] = 'google';
                     }
                     if (
-                        array_key_exists('facebook_login_enable', $rundizoauth_options) &&
-                        array_key_exists('facebook_app_id', $rundizoauth_options) &&
-                        array_key_exists('facebook_app_secret', $rundizoauth_options) &&
-                        '1' === strval($rundizoauth_options['facebook_login_enable']) &&
-                        !empty($rundizoauth_options['facebook_app_id']) &&
-                        !empty($rundizoauth_options['facebook_app_secret'])
+                        array_key_exists('facebook_login_enable', $okv_oauth_options) &&
+                        array_key_exists('facebook_app_id', $okv_oauth_options) &&
+                        array_key_exists('facebook_app_secret', $okv_oauth_options) &&
+                        '1' === strval($okv_oauth_options['facebook_login_enable']) &&
+                        !empty($okv_oauth_options['facebook_app_id']) &&
+                        !empty($okv_oauth_options['facebook_app_secret'])
                     ) {
                         $this->oauthProviders[] = 'facebook';
                     }
@@ -121,6 +124,8 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
             }
 
             $requested_redirect_to = (isset($_SESSION['okv-oauth_redirect_to']) ? sanitize_url($_SESSION['okv-oauth_redirect_to']) : '');
+            // use (apply) WP core filter.
+            // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedHooknameFound
             $redirect_to = apply_filters('login_redirect', $redirect_to, $requested_redirect_to, $user);
             unset($requested_redirect_to);
 
@@ -142,5 +147,5 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\RundizOauth')) {
         }// loggedinRedirect
 
 
-    }
+    }// RundizOauth
 }

@@ -2,16 +2,19 @@
 /**
  * Auto register all available widgets in this theme. To make it works, you have to call <code>registerAll()</code> method.
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  * @link https://wordpress.stackexchange.com/questions/396479/how-migrate-a-legacy-widget-to-block No need to convert/migrate widget to block.
  * @link https://developer.wordpress.org/block-editor/how-to-guides/widgets/legacy-widget-block/ In case it is needed, this is migration guide.
  */
 
 
-namespace RundizOauth\App\Widgets;
+namespace OKVOauth\App\Widgets;
 
 
-if (!class_exists('\\RundizOauth\\App\\Widgets\\AutoRegisterWidgets')) {
+if (!class_exists('\\OKVOauth\\App\\Widgets\\AutoRegisterWidgets')) {
+    /**
+     * Auto register widgets class.
+     */
     class AutoRegisterWidgets
     {
 
@@ -30,7 +33,7 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\AutoRegisterWidgets')) {
                     $class_name = __NAMESPACE__ . '\\' . $file_name_only;
 
                     if (__CLASS__ !== $class_name && class_exists($class_name)) {
-                        add_action('widgets_init', function() use ($class_name) {
+                        add_action('widgets_init', function () use ($class_name) {
                             return register_widget($class_name);
                         }, 11);
                     }
@@ -43,5 +46,5 @@ if (!class_exists('\\RundizOauth\\App\\Widgets\\AutoRegisterWidgets')) {
         }// registerAll
 
 
-    }
+    }// AutoRegisterWidgets
 }

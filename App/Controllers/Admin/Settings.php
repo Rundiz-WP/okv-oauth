@@ -2,22 +2,25 @@
 /**
  * Settings class is for add settings menu.
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\App\Controllers\Admin;
+namespace OKVOauth\App\Controllers\Admin;
 
-if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
-    class Settings implements \RundizOauth\App\Controllers\ControllerInterface
+if (!class_exists('\\OKVOauth\\App\\Controllers\\Settings')) {
+    /**
+     * Settings class.
+     */
+    class Settings implements \OKVOauth\App\Controllers\ControllerInterface
     {
 
 
-        use \RundizOauth\App\AppTrait;
+        use \OKVOauth\App\AppTrait;
 
 
         /**
-         * setup settings menu to go to settings page.
+         * Setup settings menu to go to settings page.
          */
         public function pluginSettingsMenu()
         {
@@ -28,27 +31,26 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
 
 
         /**
-         * display plugin settings page.
+         * Display plugin settings page.
          */
         public function pluginSettingsPage()
         {
             // check permission.
             if (!current_user_can('manage_options')) {
-                wp_die(__('You do not have permission to access this page.'));
+                wp_die(esc_html__('You do not have permission to access this page.', 'okv-oauth'));
             }
 
             // load config values to get settings config file.
-            $loader = new \RundizOauth\App\Libraries\Loader();
+            $loader = new \OKVOauth\App\Libraries\Loader();
             $config_values = $loader->loadConfig();
             if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
                 $settings_config_file = $config_values['rundiz_settings_config_file'];
             } else {
-                echo 'Settings configuration file was not set.';
-                die('Settings configuration file was not set.');
+                wp_die(esc_html__('Settings configuration file was not set.', 'okv-oauth'));
             }
             unset($config_values, $loader);
 
-            $RundizSettings = new \RundizOauth\App\Libraries\RundizSettings();
+            $RundizSettings = new \OKVOauth\App\Libraries\RundizSettings();
             $RundizSettings->settings_config_file = $settings_config_file;
 
             $options_values = $this->getOptions();
@@ -68,17 +70,17 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
 
                 if (true === $result) {
                     $output['form_result_class'] = 'notice-success';
-                    $output['form_result_msg'] = __('Settings saved.');
+                    $output['form_result_msg'] = __('Settings saved.', 'okv-oauth');
                 } else {
                     $output['form_result_class'] = 'notice-success';
-                    $output['form_result_msg'] = __('Settings saved.');
+                    $output['form_result_msg'] = __('Settings saved.', 'okv-oauth');
                 }
             }// endif $_POST
 
             $output['settings_page'] = $RundizSettings->getSettingsPage($options_values);
             unset($RundizSettings, $options_values);
 
-            $Loader = new \RundizOauth\App\Libraries\Loader();
+            $Loader = new \OKVOauth\App\Libraries\Loader();
             $Loader->loadView('admin/settings_v', $output);
             unset($Loader, $output);
         }// pluginSettingsPage
@@ -96,24 +98,24 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Settings')) {
 
 
         /**
-         * enqueue scripts and styles here.
+         * Enqueue scripts and styles here.
          */
         public function registerScripts()
         {
             if (!wp_script_is('rd-oauth-font-awesome6', 'registered')) {
-                $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
+                $StylesAndScripts = new \OKVOauth\App\Libraries\StylesAndScripts();
                 $StylesAndScripts->registerStylesAndScripts();
                 unset($StylesAndScripts);
             }
 
             // to name fontawesome handle as `plugin-name-prefix-font-awesome6` is to prevent conflict with other plugins that maybe use older version but same handle that cause some newer icons in this plugin disappears.
             wp_enqueue_style('rd-oauth-font-awesome6');
-            wp_enqueue_style('rd-oauth-rd-settings-tabs-css', plugin_dir_url(RUNDIZOAUTH_FILE).'assets/css/rd-settings-tabs.css');
-            wp_enqueue_script('rd-oauth-rd-settings-tabs-js', plugin_dir_url(RUNDIZOAUTH_FILE).'assets/js/rd-settings-tabs.js', ['jquery'], false, true);
+            wp_enqueue_style('rd-oauth-rd-settings-tabs-css', plugin_dir_url(OKVOAUTH_FILE) . 'assets/css/rd-settings-tabs.css', [], OKVOAUTH_VERSION);
+            wp_enqueue_script('rd-oauth-rd-settings-tabs-js', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-settings-tabs.js', ['jquery'], OKVOAUTH_VERSION, true);
 
-            wp_enqueue_style('rd-oauth-rd-settings-customstyle-css', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-settings-customstyle.css');
+            wp_enqueue_style('rd-oauth-rd-settings-customstyle-css', plugin_dir_url(OKVOAUTH_FILE) . 'assets/css/rd-settings-customstyle.css', [], OKVOAUTH_VERSION);
         }// registerScripts
 
 
-    }
+    }//Settings
 }

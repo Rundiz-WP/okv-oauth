@@ -2,15 +2,15 @@
 /**
  * LINE (Naver)
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  * @since 1.5.7
  */
 
 
-namespace RundizOauth\App\Libraries\MyOauth;
+namespace OKVOauth\App\Libraries\MyOauth;
 
 
-if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
+if (!class_exists('\\OKVOauth\\App\\Libraries\\MyOauth\\Line')) {
     /**
      * LINE OAuth class.
      * 
@@ -20,7 +20,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
     {
 
 
-        use \RundizOauth\App\AppTrait;
+        use \OKVOauth\App\AppTrait;
 
 
         /**
@@ -36,19 +36,19 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
             // get all options from setting config file.
             $this->getOptions();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
-            if (is_array($rundizoauth_options)) {
+            if (is_array($okv_oauth_options)) {
                 if (
-                    array_key_exists('linenaver_login_enable', $rundizoauth_options) &&
-                    array_key_exists('linenaver_channel_id', $rundizoauth_options) &&
-                    array_key_exists('linenaver_channel_secret', $rundizoauth_options)
+                    array_key_exists('linenaver_login_enable', $okv_oauth_options) &&
+                    array_key_exists('linenaver_channel_id', $okv_oauth_options) &&
+                    array_key_exists('linenaver_channel_secret', $okv_oauth_options)
                 ) {
                     $postData = 'code=' . rawurlencode($code) .
                         '&grant_type=authorization_code' .
                         '&redirect_uri=' . rawurlencode($redirect_uri) .
-                        '&client_id=' . rawurlencode($rundizoauth_options['linenaver_channel_id']) .
-                        '&client_secret=' . rawurlencode($rundizoauth_options['linenaver_channel_secret']);
+                        '&client_id=' . rawurlencode($okv_oauth_options['linenaver_channel_id']) .
+                        '&client_secret=' . rawurlencode($okv_oauth_options['linenaver_channel_secret']);
 
                     $remoteArgs = [
                         'headers' => 'Content-type: application/x-www-form-urlencoded',
@@ -59,7 +59,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
                     unset($remoteArgs);
                     $result = wp_remote_retrieve_body($response);
                     unset($response);
-                    \RundizOauth\App\Libraries\Logger::writeLog('LINE OAuth token result:' . PHP_EOL . $result);
+                    \OKVOauth\App\Libraries\Logger::writeLog('LINE OAuth token result:' . PHP_EOL . $result);
                     $result = json_decode($result);
 
                     return $result;
@@ -78,29 +78,29 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
             // get all options from setting config file.
             $this->getOptions();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
-            if (is_array($rundizoauth_options)) {
+            if (is_array($okv_oauth_options)) {
                 if (
-                    array_key_exists('linenaver_login_enable', $rundizoauth_options) &&
-                    array_key_exists('linenaver_channel_id', $rundizoauth_options)
+                    array_key_exists('linenaver_login_enable', $okv_oauth_options) &&
+                    array_key_exists('linenaver_channel_id', $okv_oauth_options)
                 ) {
                     $oauth_url = 'https://access.line.me/oauth2/v2.1/authorize' .
                         '?response_type=code' .
-                        '&client_id=' . rawurlencode($rundizoauth_options['linenaver_channel_id']) .
+                        '&client_id=' . rawurlencode($okv_oauth_options['linenaver_channel_id']) .
                         '&redirect_uri=' . rawurlencode($redirect_url) .
                         '&state=' . rawurlencode(wp_create_nonce('linenaver-login')) .
                         '&scope=' . rawurlencode('profile openid email');
-                    if (isset($rundizoauth_options['linenaver_auth_param_prompt']) && !empty($rundizoauth_options['linenaver_auth_param_prompt'])) {
-                        $oauth_url .= '&prompt=' . $rundizoauth_options['linenaver_auth_param_prompt'];
+                    if (isset($okv_oauth_options['linenaver_auth_param_prompt']) && !empty($okv_oauth_options['linenaver_auth_param_prompt'])) {
+                        $oauth_url .= '&prompt=' . $okv_oauth_options['linenaver_auth_param_prompt'];
                     }
 
-                    if (isset($rundizoauth_options['linenaver_auth_param_other']) && !empty($rundizoauth_options['linenaver_auth_param_other'])) {
-                        parse_str(str_replace('&amp;', '&', $rundizoauth_options['linenaver_auth_param_other']), $other_params);
+                    if (isset($okv_oauth_options['linenaver_auth_param_other']) && !empty($okv_oauth_options['linenaver_auth_param_other'])) {
+                        parse_str(str_replace('&amp;', '&', $okv_oauth_options['linenaver_auth_param_other']), $other_params);
                         if (isset($other_params) && is_array($other_params)) {
                             $skip_param_names = ['client_id', 'response_type', 'scope', 'redirect_uri', 'state', 'prompt'];
                             foreach ($other_params as $name => $value) {
-                                if (in_array(strtolower($name), $skip_param_names)) {
+                                if (in_array(strtolower($name), $skip_param_names, true)) {
                                     unset($other_params[$name]);
                                 }
                             }// endforeach;
@@ -150,13 +150,13 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
             // get all options from setting config file.
             $this->getOptions();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
             $output = [];
 
-            if (is_array($rundizoauth_options)) {
+            if (is_array($okv_oauth_options)) {
                 $postData = 'id_token=' . $id_token .
-                    '&client_id=' . rawurlencode($rundizoauth_options['linenaver_channel_id']);
+                    '&client_id=' . rawurlencode($okv_oauth_options['linenaver_channel_id']);
 
                 $remoteArgs = [
                     'headers' => 'Content-type: application/x-www-form-urlencoded',
@@ -196,11 +196,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
                     } elseif (isset($result->error) && is_scalar($result->error)) {
                         // there is errors from LINE.
                         unset($access_token, $id_token);
-                        return new \WP_Error('rundiz_oauth_invalid_oauth_settings', sprintf(\RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
+                        return new \WP_Error('okv_oauth_invalid_oauth_settings', sprintf(\OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
                     } else {
                         // invalid token.
                         unset($access_token, $id_token, $result);
-                        return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                        return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                     }
 
                     if (isset($id_token)) {
@@ -215,18 +215,18 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
                             } else {
                                 // email is already exists.
                                 unset($access_token, $result, $user);
-                                    return new \WP_Error('rundiz_oauth_email_exists', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse_tryanother'));
+                                    return new \WP_Error('okv_oauth_email_exists', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse_tryanother'));
                             }
                         } else {
                             unset($access_token, $result);
-                            return new \WP_Error('rundiz_oauth_user_notverified', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('usernotverified'));
+                            return new \WP_Error('okv_oauth_user_notverified', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('usernotverified'));
                         }
                         unset($result);
                     }
                 }// endif; there is no state from service provider. (or verify nonce failed.)
             }// endif; there is no code and state from service provider.
 
-            return ;
+            return;// phpcs:ignore Squiz.PHP.NonExecutableCode.ReturnNotRequired
         }// wpCheckEmailNotExists
 
 
@@ -248,11 +248,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
                     } elseif (isset($result->error) && is_scalar($result->error)) {
                         // there is errors from LINE.
                         unset($access_token, $id_token);
-                        return new \WP_Error('rundiz_oauth_invalid_oauth_settings', sprintf(\RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
+                        return new \WP_Error('okv_oauth_invalid_oauth_settings', sprintf(\OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
                     } else {
                         // invalid token.
                         unset($access_token, $id_token, $result);
-                        return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                        return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                     }
                     unset($result);
 
@@ -265,17 +265,17 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
                                 // found user by this email.
                                 // keep $user because we will use it as return value.
                                 // set token cookie.
-                                setcookie('rundiz_oauth_linenaver_tokens', $access_token, time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
+                                setcookie('okv_oauth_linenaver_tokens', $access_token, time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
                                 // complete.
                             } else {
                                 // user was not found.
                                 // in case that to create user instead, add the code here.
                                 unset($access_token, $result, $user);
-                                return new \WP_Error('rundiz_oauth_user_notfound', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotfoundinwordpress'));
+                                return new \WP_Error('okv_oauth_user_notfound', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotfoundinwordpress'));
                             }
                         } else {
                             unset($access_token, $result);
-                            return new \WP_Error('rundiz_oauth_user_notverified', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('usernotverified'));
+                            return new \WP_Error('okv_oauth_user_notverified', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('usernotverified'));
                         }
                         unset($result);
                     }
@@ -285,21 +285,21 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
                 // if there is an error returned from OAuth provider.
                 switch ($_REQUEST['error']) {
                     case 'INVALID_REQUEST':
-                        return new \WP_Error('rundiz_oauth_invalid_oauth_settings', sprintf(\RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
+                        return new \WP_Error('okv_oauth_invalid_oauth_settings', sprintf(\OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
                     case 'ACCESS_DENIED':
-                        return new \WP_Error('rundiz_oauth_linenaver_accessdenied', __('You have cenceled.', 'okv-oauth'));
+                        return new \WP_Error('okv_oauth_linenaver_accessdenied', __('You have cenceled.', 'okv-oauth'));
                     case 'INVALID_SCOPE':
-                        return new \WP_Error('rundiz_oauth_linenavar_returnerror', __('Invalid scope. Please notify the plugin developer.', 'okv-oauth'));
+                        return new \WP_Error('okv_oauth_linenavar_returnerror', __('Invalid scope. Please notify the plugin developer.', 'okv-oauth'));
                     case 'SERVER_ERROR':
-                        return new \WP_Error('rundiz_oauth_linenavar_returnerror', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
+                        return new \WP_Error('okv_oauth_linenavar_returnerror', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
                     case 'LOGIN_REQUIRED':
                     case 'INTERACTION_REQUIRED':
-                        return new \WP_Error('rundiz_oauth_linenaver_returnerror', __('Auto login could not work.', 'okv-oauth'));
+                        return new \WP_Error('okv_oauth_linenaver_returnerror', __('Auto login could not work.', 'okv-oauth'));
                     default:
                         if (isset($_REQUEST['error_description'])) {
-                            return new \WP_Error('rundiz_oauth_linenaver_unknown_error', wp_strip_all_tags(sanitize_text_field(wp_unslash($_REQUEST['error_description']))));
+                            return new \WP_Error('okv_oauth_linenaver_unknown_error', wp_strip_all_tags(sanitize_text_field(wp_unslash($_REQUEST['error_description']))));
                         } else {
-                            return new \WP_Error('rundiz_oauth_linenaver_unknown_error', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
+                            return new \WP_Error('okv_oauth_linenaver_unknown_error', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
                         }
                 }
             }// endif; there is no code and state from service provider.
@@ -313,7 +313,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
          */
         public function wpLogoutUseOAuth()
         {
-            setcookie('rundiz_oauth_linenaver_tokens', '', (time()-(365 * DAY_IN_SECONDS)), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '' );
+            setcookie('okv_oauth_linenaver_tokens', '', (time()-(365 * DAY_IN_SECONDS)), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '' );
         }// wpLogoutUseOAuth
 
 
@@ -323,7 +323,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
         public function wpRegisterUseOAuth()
         {
             if (isset($_REQUEST['error'])) {
-                return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
+                return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
             }
 
             if (isset($_REQUEST['code']) && isset($_REQUEST['state'])) {
@@ -336,10 +336,10 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
                         $id_token = $result->id_token;
                     } elseif (isset($result->error) && is_scalar($result->error)) {
                         unset($access_token, $id_token);
-                        return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
+                        return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
                     } else {
                         unset($access_token, $id_token, $result);
-                        return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                        return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                     }
                     unset($result);
 
@@ -349,20 +349,20 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Line')) {
                             // got user profile and verified.
                             if (email_exists($result->email) === false && username_exists($result->email) === false) {
                                 // if user that is using this email is NOT already exists (yay).
-                                setcookie('rundiz_oauth_linenaver_tokens', $access_token, time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
+                                setcookie('okv_oauth_linenaver_tokens', $access_token, time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
                                 $output['access_token'] = $access_token;
                                 $output['email'] = $result->email;
                                 return $output;
                             } else {
                                 unset($access_token, $id_token, $result);
-                                return new \WP_Error('rundiz_oauth_email_already_inuse', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse'));
+                                return new \WP_Error('okv_oauth_email_already_inuse', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse'));
                             }
                         } else {
                             unset($access_token);
                             if (isset($result->error)) {
-                                return new \WP_Error('rundiz_oauth_linenaver_unknown_error', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
+                                return new \WP_Error('okv_oauth_linenaver_unknown_error', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
                             } else {
-                                return new \WP_Error('rundiz_oauth_linenaver_no_email', __('Your LINE account have no email available. Please register and confirm your email with LINE before continue.', 'okv-oauth'));
+                                return new \WP_Error('okv_oauth_linenaver_no_email', __('Your LINE account have no email available. Please register and confirm your email with LINE before continue.', 'okv-oauth'));
                             }
                         }
                         unset($result);

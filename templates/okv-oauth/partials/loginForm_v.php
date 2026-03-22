@@ -1,33 +1,45 @@
 <?php
-$oauth_enabled = false;
+/**
+ * Login form template. Use in WordPress core login page.
+ * 
+ * @package okv-oauth
+ * 
+ * phpcs:disable Generic.WhiteSpace.ScopeIndent.Incorrect, Generic.WhiteSpace.ScopeIndent.IncorrectExact
+ */
+
+
+if (!defined('ABSPATH')) {
+    exit();
+}
+
 ?>
 <div class="rd-oauth-form">
-    <noscript><div class="error-message rd-oauth-alert rd-oauth-alert-error">'<?php _e('Please enable javascript.', 'okv-oauth'); ?>'</div></noscript>
+    <noscript><div class="error-message rd-oauth-alert rd-oauth-alert-error">'<?php esc_html_e('Please enable javascript.', 'okv-oauth'); ?>'</div></noscript>
 
     <div class="rd-oauth-links">
         <?php
-        $OauthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
-        $classes = $OauthProviders->getClasses($rundizoauth_options);
-        unset($OauthProviders);
-        if (is_iterable($classes)) {
-            foreach ($classes as $providerKey => $OAuthClass) {
+        $okv_oauth_OauthProviders = new \OKVOauth\App\Libraries\OAuthProviders();
+        $okv_oauth_classes = $okv_oauth_OauthProviders->getClasses($okv_oauth_options);
+        unset($okv_oauth_OauthProviders);
+        if (is_iterable($okv_oauth_classes)) {
+            foreach ($okv_oauth_classes as $okv_oauth_providerKey => $okv_oauth_OAuthClass) {
         ?> 
-        <div class="rd-oauth-link oauth-<?= $providerKey; ?>">
-            <a class="rd-oauth-button <?= $providerKey; ?>" href="<?php echo $OAuthClass->getAuthUrl(home_url('rd-oauth?rdoauth=' . $providerKey)); ?>">
-                <i class="<?php echo $OAuthClass->getIconClasses(); ?>"></i> <?php _e('Login', 'okv-oauth'); ?>
+        <div class="rd-oauth-link oauth-<?= esc_attr($okv_oauth_providerKey); ?>">
+            <a class="rd-oauth-button <?= esc_attr($okv_oauth_providerKey); ?>" href="<?php echo esc_url($okv_oauth_OAuthClass->getAuthUrl(home_url('rd-oauth?rdoauth=' . $okv_oauth_providerKey))); ?>">
+                <i class="<?php echo esc_attr($okv_oauth_OAuthClass->getIconClasses()); ?>"></i> <?php esc_html_e('Login', 'okv-oauth'); ?>
             </a>
         </div>
         <?php
             }// endforeach;
-            unset($providerKey, $OAuthClass);
+            unset($okv_oauth_providerKey, $okv_oauth_OAuthClass);
         }// endif; is_iterable
-        unset($classes);
+        unset($okv_oauth_classes);
         ?> 
         <?php
-        if (isset($rundizoauth_options['login_method']) && '1' === $rundizoauth_options['login_method']) {
+        if (isset($okv_oauth_options['login_method']) && '1' === $okv_oauth_options['login_method']) {
             // use wp login + oauth, display "or".
         ?> 
-        <div class="rd-oauth-or-original-wp-login"><?php _e('OR', 'okv-oauth'); ?></div>
+        <div class="rd-oauth-or-original-wp-login"><?php esc_html_e('OR', 'okv-oauth'); ?></div>
         <?php
         }// endif;
         ?> 

@@ -3,15 +3,18 @@
  * Hooks into profile page (logged in user edit their profile).
  * 
  * @since 1.5.6
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\App\Controllers\Admin;
+namespace OKVOauth\App\Controllers\Admin;
 
 
-if (!class_exists('\\RundizOauth\\App\\Controllers\\Admin\\HookProfilePage')) {
-    class HookProfilePage extends \RundizOauth\App\Libraries\RundizOauth implements \RundizOauth\App\Controllers\ControllerInterface
+if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\HookProfilePage')) {
+    /**
+     * Hook profile page class. (User profile.)
+     */
+    class HookProfilePage extends \OKVOauth\App\Libraries\RundizOauth implements \OKVOauth\App\Controllers\ControllerInterface
     {
 
 
@@ -27,8 +30,9 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Admin\\HookProfilePage')) {
         /**
          * Show or hide password fields.
          * 
-         * @param bool $show
-         * @param \WP_User $profile
+         * @link https://developer.wordpress.org/reference/hooks/show_password_fields/ Reference.
+         * @param bool $show Whether to show the password fields. Default `true`.
+         * @param \WP_User $profile User object for the current user to edit.
          * @return bool
          */
         public function showPasswordFields($show, \WP_User $profile)
@@ -43,5 +47,5 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Admin\\HookProfilePage')) {
         }// showPasswordFields
 
 
-    }
+    }// HookProfilePage
 }// endif;

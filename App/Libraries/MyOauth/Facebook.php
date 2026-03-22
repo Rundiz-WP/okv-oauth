@@ -2,14 +2,14 @@
 /**
  * Facebook login
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  * // phpcs:ignoreFile -- no longer supported.
  */
 
 
-namespace RundizOauth\App\Libraries\MyOauth;
+namespace OKVOauth\App\Libraries\MyOauth;
 
-if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
+if (!class_exists('\\OKVOauth\\App\\Libraries\\MyOauth\\Facebook')) {
     /**
      * Facebook OAuth class.
      * 
@@ -25,7 +25,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
     {
 
 
-        use \RundizOauth\App\AppTrait;
+        use \OKVOauth\App\AppTrait;
 
 
         /**
@@ -56,7 +56,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
          * Verify code and get access token.
          * 
          * @link https://developers.facebook.com/docs/facebook-login/manually-build-a-login-flow#exchangecode Reference.
-         * @global array $rundizoauth_options
+         * @global array $okv_oauth_options
          * @param string $code The code got from Facebook.
          * @param string $redirect_uri Redirect URI.
          * @return mixed Return false on failure, return object on success.
@@ -66,31 +66,31 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
             // get all options from setting config file.
             $this->getOptions();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
-            if (is_array($rundizoauth_options)) {
+            if (is_array($okv_oauth_options)) {
                 if (
-                    array_key_exists('facebook_login_enable', $rundizoauth_options) &&
-                    array_key_exists('facebook_app_id', $rundizoauth_options) &&
-                    array_key_exists('facebook_app_secret', $rundizoauth_options)
+                    array_key_exists('facebook_login_enable', $okv_oauth_options) &&
+                    array_key_exists('facebook_app_id', $okv_oauth_options) &&
+                    array_key_exists('facebook_app_secret', $okv_oauth_options)
                 ) {
                     $this->curlInit();
                     $oauth_url = 'https://graph.facebook.com/v6.0/oauth/access_token' .
-                        '?client_id=' . rawurlencode($rundizoauth_options['facebook_app_id']) .
+                        '?client_id=' . rawurlencode($okv_oauth_options['facebook_app_id']) .
                         '&redirect_uri=' . rawurlencode($redirect_uri) .
-                        '&client_secret=' . rawurlencode($rundizoauth_options['facebook_app_secret']) .
+                        '&client_secret=' . rawurlencode($okv_oauth_options['facebook_app_secret']) .
                         '&code=' . rawurlencode($code);
                     curl_setopt($this->ch, CURLOPT_URL, $oauth_url);
                     unset($oauth_url);
 
                     $result = curl_exec($this->ch);
-                    \RundizOauth\App\Libraries\Logger::writeLog('Facebook OAuth access token result:' . PHP_EOL . $result);
+                    \OKVOauth\App\Libraries\Logger::writeLog('Facebook OAuth access token result:' . PHP_EOL . $result);
                     $result = json_decode($result);
 
                     curl_close($this->ch);
 
                     if (is_object($result) && isset($result->access_token)) {
-                        $result->permissions = $this->getPermissions($result->access_token, $rundizoauth_options['facebook_app_secret']);
+                        $result->permissions = $this->getPermissions($result->access_token, $okv_oauth_options['facebook_app_secret']);
                         if (isset($result->permissions->data) && is_array($result->permissions->data)) {
                             $verifyScopes = false;
                             foreach ($result->permissions->data as $key => $item) {
@@ -138,16 +138,16 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
             // get all options from setting config file.
             $this->getOptions();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
-            if (is_array($rundizoauth_options)) {
+            if (is_array($okv_oauth_options)) {
                 if (
-                    array_key_exists('facebook_login_enable', $rundizoauth_options) &&
-                    array_key_exists('facebook_app_id', $rundizoauth_options) &&
-                    array_key_exists('facebook_app_secret', $rundizoauth_options)
+                    array_key_exists('facebook_login_enable', $okv_oauth_options) &&
+                    array_key_exists('facebook_app_id', $okv_oauth_options) &&
+                    array_key_exists('facebook_app_secret', $okv_oauth_options)
                 ) {
                     $oauth_url = 'https://www.facebook.com/v6.0/dialog/oauth' .
-                        '?client_id=' . rawurlencode($rundizoauth_options['facebook_app_id']) .
+                        '?client_id=' . rawurlencode($okv_oauth_options['facebook_app_id']) .
                         '&auth_type=rerequest' .
                         '&response_type=code' .
                         '&scope=email' .
@@ -204,7 +204,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
             unset($oauth_url);
 
             $result = curl_exec($this->ch);
-            \RundizOauth\App\Libraries\Logger::writeLog('Facebook get permissions:' . PHP_EOL . $result);
+            \OKVOauth\App\Libraries\Logger::writeLog('Facebook get permissions:' . PHP_EOL . $result);
             $result = json_decode($result);
 
             curl_close($this->ch);
@@ -218,7 +218,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
          * 
          * @link https://developers.facebook.com/docs/graph-api/using-graph-api/ Using Graph reference.
          * @link https://developers.facebook.com/docs/graph-api/advanced Graph advanced use reference.
-         * @global array $rundizoauth_options
+         * @global array $okv_oauth_options
          * @param string $access_token The access token got from Facebook.
          * @return object Return Facebook object result.
          */
@@ -227,20 +227,20 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
             // get all options from setting config file.
             $this->getOptions();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
             $this->curlInit();
 
             $oauth_url = 'https://graph.facebook.com/me' .
                 '?fields=id,name,email,picture.width(2000).height(2000)' .
                 '&access_token=' . rawurlencode($access_token) .
-                '&appsecret_proof=' . rawurlencode(hash_hmac('sha256', $access_token, (isset($rundizoauth_options['facebook_app_secret']) ? $rundizoauth_options['facebook_app_secret'] : '')));
+                '&appsecret_proof=' . rawurlencode(hash_hmac('sha256', $access_token, (isset($okv_oauth_options['facebook_app_secret']) ? $okv_oauth_options['facebook_app_secret'] : '')));
             // fields that were removed due to deprecated: verified.
             curl_setopt($this->ch, CURLOPT_URL, $oauth_url);
             unset($oauth_url);
 
             $result = curl_exec($this->ch);
-            \RundizOauth\App\Libraries\Logger::writeLog('Facebook get user profile info:' . PHP_EOL . $result);
+            \OKVOauth\App\Libraries\Logger::writeLog('Facebook get user profile info:' . PHP_EOL . $result);
             $result = json_decode($result);
 
             curl_close($this->ch);
@@ -264,11 +264,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                     } elseif (isset($result->error) && is_scalar($result->error)) {
                         // there is errors from Facebook.
                         unset($access_token);
-                        return new \WP_Error('rundiz_oauth_invalid_oauth_settings', sprintf(\RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
+                        return new \WP_Error('okv_oauth_invalid_oauth_settings', sprintf(\OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
                     } else {
                         // invalid token.
                         unset($access_token, $result);
-                        return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                        return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                     }
 
                     if (isset($access_token)) {
@@ -284,11 +284,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                             } else {
                                 // email is already exists.
                                 unset($access_token, $result, $user);
-                                    return new \WP_Error('rundiz_oauth_email_exists', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse_tryanother'));
+                                    return new \WP_Error('okv_oauth_email_exists', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse_tryanother'));
                             }
                         } else {
                             unset($access_token, $result);
-                            return new \WP_Error('rundiz_oauth_user_notverified', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('usernotverified'));
+                            return new \WP_Error('okv_oauth_user_notverified', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('usernotverified'));
                         }
                         unset($result);
                     }
@@ -307,7 +307,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
         public function wpLoginUseOAuth()
         {
             if (isset($_REQUEST['error'])) {
-                return new \WP_Error('rundiz_oauth_tryagain', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
+                return new \WP_Error('okv_oauth_tryagain', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
             }
 
             $user = null;
@@ -320,10 +320,10 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                     if (isset($result->access_token)) {
                         $access_token = $result->access_token;
                     } elseif (isset($result->rdoauth_error)) {
-                        return new \WP_Error('rundiz_oauth_autherror', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage($result->rdoauth_error));
+                        return new \WP_Error('okv_oauth_autherror', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage($result->rdoauth_error));
                     } else {
                         unset($access_token, $result);
-                        return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                        return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                     }
                     unset($result);
 
@@ -337,17 +337,17 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                                 // found user by this email.
                                 // keep $user because we will use it as return value.
                                 // set token cookie.
-                                setcookie('rundiz_oauth_facebook_tokens', $access_token, time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
+                                setcookie('okv_oauth_facebook_tokens', $access_token, time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
                                 // complete.
                             } else {
                                 // user was not found.
                                 // in case that to create user instead, add the code here.
                                 unset($access_token, $result, $user);
-                                return new \WP_Error('rundiz_oauth_user_notfound', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotfoundinwordpress'));
+                                return new \WP_Error('okv_oauth_user_notfound', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotfoundinwordpress'));
                             }
                         } else {
                             unset($access_token, $result);
-                            return new \WP_Error('rundiz_oauth_user_notverified', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('usernotverified'));
+                            return new \WP_Error('okv_oauth_user_notverified', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('usernotverified'));
                         }
                         unset($result);
                     }
@@ -366,7 +366,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
          */
         public function wpLogoutUseOAuth()
         {
-            setcookie('rundiz_oauth_facebook_tokens', '', (time()-(365 * DAY_IN_SECONDS)), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '' );
+            setcookie('okv_oauth_facebook_tokens', '', (time()-(365 * DAY_IN_SECONDS)), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '' );
         }// wpLogoutUseOAuth
 
 
@@ -378,7 +378,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
         public function wpRegisterUseOAuth()
         {
             if (isset($_REQUEST['error'])) {
-                return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
+                return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('tryagain'));
             }
 
             if (isset($_REQUEST['code'])) {
@@ -390,10 +390,10 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                         $access_token = $result->access_token;
                     } elseif (isset($result->rdoauth_error)) {
                         unset($access_token);
-                        return new \WP_Error('rundiz_oauth_err', $result->rdoauth_error);
+                        return new \WP_Error('okv_oauth_err', $result->rdoauth_error);
                     } else {
                         unset($access_token, $result);
-                        return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                        return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                     }
                     unset($result);
 
@@ -404,17 +404,17 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Facebook')) {
                             // verified property (field) were removed in v3.1
                             if (email_exists($result->email) === false && username_exists($result->email) === false) {
                                 // if user that is using this email is NOT already exists (yay).
-                                setcookie('rundiz_oauth_facebook_tokens', $access_token, time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
+                                setcookie('okv_oauth_facebook_tokens', $access_token, time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
                                 $output['access_token'] = $access_token;
                                 $output['email'] = $result->email;
                                 return $output;
                             } else {
                                 unset($access_token, $result);
-                                return new \WP_Error('rundiz_oauth_email_already_inuse', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse'));
+                                return new \WP_Error('okv_oauth_email_already_inuse', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse'));
                             }
                         } else {
                             unset($access_token, $result);
-                            return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('usernotverified'));
+                            return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('usernotverified'));
                         }
                         unset($result);
                     }

@@ -2,15 +2,18 @@
 /**
  * Custom OAuth register page.
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  * @license http://opensource.org/licenses/MIT MIT
  */
 
 
-namespace RundizOauth\App\Controllers\Front\RdOauth;
+namespace OKVOauth\App\Controllers\Front\RdOauth;
 
 
-if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) {
+if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\RdOauth\\Register')) {
+    /**
+     * Front /rd-oauth register page class.
+     */
     class Register
     {
 
@@ -24,16 +27,16 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
         {
             $output = [];
 
-            $RundizOauth = new \RundizOauth\App\Libraries\RundizOauth();
+            $RundizOauth = new \OKVOauth\App\Libraries\RundizOauth();
             $RundizOauth->init();
             if (0 === $RundizOauth->loginMethod) {
                 // if login method is using wp only.
                 exit;
             }
 
-            $OAuthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
-            /* @var $OAuthProvider \RundizOauth\App\Libraries\MyOauth\Interfaces\MyOAuthInterface */
-            $OAuthProvider = $OAuthProviders->getClass((isset($_REQUEST['rdoauth']) ? sanitize_text_field(wp_unslash($_REQUEST['rdoauth'])) : ''));
+            $OAuthProviders = new \OKVOauth\App\Libraries\OAuthProviders();
+            /* @var $OAuthProvider \OKVOauth\App\Libraries\MyOauth\Interfaces\MyOAuthInterface */
+            $OAuthProvider = $OAuthProviders->getClass((isset($_REQUEST['rdoauth']) ? sanitize_text_field(wp_unslash($_REQUEST['rdoauth'])) : ''));// phpcs:ignore WordPress.Security.NonceVerification.Recommended
             unset($OAuthProviders);
             if (is_object($OAuthProvider)) {
                 $result = $OAuthProvider->wpRegisterUseOAuth();
@@ -52,7 +55,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
                         wp_safe_redirect(home_url('rd-oauth?rdoauth_subpage=register&rdoauth_result=success'));
                         exit;
                     } else {
-                        $output['form_error_msg'] = \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('unableregister');
+                        $output['form_error_msg'] = \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('unableregister');
                     }
                 } else {
                     // if NOT multi-site.
@@ -65,7 +68,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
                         wp_safe_redirect(home_url('rd-oauth?rdoauth_subpage=register&rdoauth_result=success'));
                         exit;
                     } else {
-                        $output['form_error_msg'] = \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('unableregister');
+                        $output['form_error_msg'] = \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('unableregister');
                     }
                 }// endif multisite.
             }
@@ -81,17 +84,18 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
 
             // set title of the page.
             // @link https://developer.wordpress.org/reference/hooks/document_title_parts/ Reference.
-            add_filter('document_title_parts', function($title) {
+            add_filter('document_title_parts', function ($title) {
                 $title['title'] = __('Rundiz OAuth', 'okv-oauth');
                 return $title;
             });
 
+            // phpcs:ignore WordPress.Security.NonceVerification.Recommended
             if (isset($_REQUEST['rdoauth_result']) && 'success' === $_REQUEST['rdoauth_result']) {
                 /* translators: %1$s: Open link, %2$s: Close link */
                 $output['form_success_msg'] = sprintf(__('Registration completed. You can now %1$slogin%2$s using selected OAuth provider.', 'okv-oauth'), '<a href="' . wp_login_url() . '">', '</a>');
             }
 
-            $Loader = new \RundizOauth\App\Libraries\Loader();
+            $Loader = new \OKVOauth\App\Libraries\Loader();
             $Loader->loadTemplate('okv-oauth/register_v', $output);
             unset($Loader, $output);
             exit;
@@ -104,7 +108,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
         public function registerScripts()
         {
             if (!wp_script_is('rd-oauth-login', 'registered')) {
-                $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
+                $StylesAndScripts = new \OKVOauth\App\Libraries\StylesAndScripts();
                 $StylesAndScripts->registerStylesAndScripts();
                 unset($StylesAndScripts);
             }
@@ -113,5 +117,5 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RdOauth\\Register')) 
         }// registerScripts
 
 
-    }
+    }// Register
 }

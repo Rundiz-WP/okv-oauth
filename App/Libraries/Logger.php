@@ -2,14 +2,17 @@
 /**
  * Logger class. This class will write log using WordPress system.
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\App\Libraries;
+namespace OKVOauth\App\Libraries;
 
 
-if (!class_exists('\\RundizOauth\\App\\Libraries\\Logger')) {
+if (!class_exists('\\OKVOauth\\App\\Libraries\\Logger')) {
+    /**
+     * Logger class.
+     */
     class Logger
     {
 
@@ -23,16 +26,17 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\Logger')) {
         {
             if (defined('WP_DEBUG') && WP_DEBUG === true) {
                 if (is_array($message) || is_object($message)) {
-                    $message = print_r($message, true);
+                    $message = print_r($message, true);// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
                 } elseif (is_bool($message) || is_null($message) || trim($message) === '') {
-                    $message = var_export($message, true) . ' (value type ' . gettype($message) . ').';
+                    $message = var_export($message, true) . ' (value type ' . gettype($message) . ').';// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_var_export
                 } elseif (is_callable($message) || is_resource($message)) {
                     $message = 'value type ' . gettype($message) . '.';
                 }
 
-                $messagePrefix = '[rundiz oauth] ';
-                
+                $messagePrefix = '[okv-oauth] ';
+
                 $messageSuffix = PHP_EOL . 'Debug back trace:' . PHP_EOL;
+                // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_debug_backtrace, PHPCompatibility.FunctionUse.ArgumentFunctionsReportCurrentValue.Changed
                 $trace = debug_backtrace(DEBUG_BACKTRACE_PROVIDE_OBJECT, 10);
                 if (is_array($trace)) {
                     foreach ($trace as $eachTrace) {
@@ -44,11 +48,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\Logger')) {
                 }
                 unset($trace);
 
-                error_log($messagePrefix . $message . $messageSuffix . PHP_EOL);
+                error_log($messagePrefix . $message . $messageSuffix . PHP_EOL);// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
                 unset($messagePrefix, $messageSuffix);
             }
         }// writeLog
 
 
-    }
+    }// Logger
 }

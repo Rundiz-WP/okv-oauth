@@ -1,14 +1,14 @@
 <?php
 /**
- * @package rundiz-oauth
+ * @package okv-oauth
  * @since 1.5.7
  */
 
 
-namespace RundizOauth\App\Libraries\MyOauth\Interfaces;
+namespace OKVOauth\App\Libraries\MyOauth\Interfaces;
 
 
-if (!interface_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Interfaces\\MyOAuthInterface')) {
+if (!interface_exists('\\OKVOauth\\App\\Libraries\\MyOauth\\Interfaces\\MyOAuthInterface')) {
     /**
      * My OAuth interface.
      * 

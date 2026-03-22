@@ -11,15 +11,21 @@
  * @param string $className The fully-qualified class name.
  * @return void
  * @link http://www.php-fig.org/psr/psr-4/examples/ copy from here.
- * @package rundiz-oauth
+ * @package okv-oauth
  */
-spl_autoload_register(function($className) {
+
+
+if (!defined('ABSPATH')) {
+    exit();
+}
+
+spl_autoload_register(function ($className) {
 
     // project-specific namespace prefix
-    $prefix = 'RundizOauth\\';
+    $prefix = 'OKVOauth\\';
 
     // base directory for the namespace prefix
-    $base_dir = __DIR__.'/';
+    $base_dir = __DIR__ . '/';
 
     // does the class use the namespace prefix?
     $len = strlen($prefix);

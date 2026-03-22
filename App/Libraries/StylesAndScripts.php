@@ -2,14 +2,17 @@
 /**
  * Styles (CSS) and scripts (JS).
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\App\Libraries;
+namespace OKVOauth\App\Libraries;
 
 
-if (!class_exists('\\RundizOauth\\App\\Libraries\\StylesAndScripts')) {
+if (!class_exists('\\OKVOauth\\App\\Libraries\\StylesAndScripts')) {
+    /**
+     * Styles and scripts class.
+     */
     class StylesAndScripts
     {
 
@@ -30,10 +33,10 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\StylesAndScripts')) {
          */
         public function registerStylesAndScripts()
         {
-            wp_register_style('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/css/rd-oauth-login.css', [], RUNDIZOAUTH_VERSION);
-            wp_register_style('rd-oauth-font-awesome6', plugin_dir_url(RUNDIZOAUTH_FILE).'assets/vendor/font-awesome/css/all.min.css', [], '6.7.2');
+            wp_register_style('rd-oauth-login', plugin_dir_url(OKVOAUTH_FILE) . 'assets/css/rd-oauth-login.css', [], OKVOAUTH_VERSION);
+            wp_register_style('rd-oauth-font-awesome6', plugin_dir_url(OKVOAUTH_FILE) . 'assets/vendor/font-awesome/css/all.min.css', [], '6.7.2');
         }// registerStylesAndScripts
 
 
-    }
+    }// StylesAndScripts
 }

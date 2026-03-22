@@ -2,14 +2,14 @@
 /**
  * Google login
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\App\Libraries\MyOauth;
+namespace OKVOauth\App\Libraries\MyOauth;
 
 
-if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
+if (!class_exists('\\OKVOauth\\App\\Libraries\\MyOauth\\Google')) {
     /**
      * Google OAuth class.
      * 
@@ -21,7 +21,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
     {
 
 
-        use \RundizOauth\App\AppTrait;
+        use \OKVOauth\App\AppTrait;
 
 
         /**
@@ -37,18 +37,18 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
             // get all options from setting config file.
             $this->getOptions();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
-            if (is_array($rundizoauth_options)) {
+            if (is_array($okv_oauth_options)) {
                 if (
-                    array_key_exists('google_login_enable', $rundizoauth_options) &&
-                    array_key_exists('google_client_id', $rundizoauth_options) &&
-                    array_key_exists('google_client_secret', $rundizoauth_options)
+                    array_key_exists('google_login_enable', $okv_oauth_options) &&
+                    array_key_exists('google_client_id', $okv_oauth_options) &&
+                    array_key_exists('google_client_secret', $okv_oauth_options)
                 ) {
 
                     $postData = 'code=' . rawurlencode($code) .
-                        '&client_id=' . rawurlencode($rundizoauth_options['google_client_id']) .
-                        '&client_secret=' . rawurlencode($rundizoauth_options['google_client_secret']) .
+                        '&client_id=' . rawurlencode($okv_oauth_options['google_client_id']) .
+                        '&client_secret=' . rawurlencode($okv_oauth_options['google_client_secret']) .
                         '&redirect_uri=' . rawurlencode($redirect_uri) .
                         '&grant_type=authorization_code';
 
@@ -61,7 +61,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                     unset($remoteArgs);
                     $result = wp_remote_retrieve_body($response);
                     unset($response);
-                    \RundizOauth\App\Libraries\Logger::writeLog('Google OAuth token result:' . PHP_EOL . $result);
+                    \OKVOauth\App\Libraries\Logger::writeLog('Google OAuth token result:' . PHP_EOL . $result);
                     $result = json_decode($result);
 
                     return $result;
@@ -73,6 +73,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
 
 
         /** phpcs:ignore Squiz.Commenting.FunctionComment.MissingParamTag
+         * 
          * @link https://developers.google.com/identity/protocols/oauth2/web-server#creatingclient Reference.
          * @link https://developers.google.com/identity/protocols/oauth2/scopes Available scopes.
          * 
@@ -83,31 +84,31 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
             // get all options from setting config file.
             $this->getOptions();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
-            if (is_array($rundizoauth_options)) {
+            if (is_array($okv_oauth_options)) {
                 if (
-                    array_key_exists('google_login_enable', $rundizoauth_options) &&
-                    array_key_exists('google_client_id', $rundizoauth_options) &&
-                    array_key_exists('google_client_secret', $rundizoauth_options)
+                    array_key_exists('google_login_enable', $okv_oauth_options) &&
+                    array_key_exists('google_client_id', $okv_oauth_options) &&
+                    array_key_exists('google_client_secret', $okv_oauth_options)
                 ) {
                     $oauth_url = 'https://accounts.google.com/o/oauth2/v2/auth' .
-                        '?client_id=' . rawurlencode($rundizoauth_options['google_client_id']) .
+                        '?client_id=' . rawurlencode($okv_oauth_options['google_client_id']) .
                         '&response_type=code' .
                         '&scope=' . rawurlencode('openid https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile') .
                         '&redirect_uri=' . rawurlencode($redirect_url) .
                         '&access_type=online' .
                         '&state=' . rawurlencode(wp_create_nonce('google-login'));
-                    if (isset($rundizoauth_options['google_auth_param_prompt']) && !empty($rundizoauth_options['google_auth_param_prompt'])) {
-                        $oauth_url .= '&prompt=' . $rundizoauth_options['google_auth_param_prompt'];
+                    if (isset($okv_oauth_options['google_auth_param_prompt']) && !empty($okv_oauth_options['google_auth_param_prompt'])) {
+                        $oauth_url .= '&prompt=' . $okv_oauth_options['google_auth_param_prompt'];
                     }
 
-                    if (isset($rundizoauth_options['google_auth_param_other']) && !empty($rundizoauth_options['google_auth_param_other'])) {
-                        parse_str(str_replace('&amp;', '&', $rundizoauth_options['google_auth_param_other']), $other_params);
+                    if (isset($okv_oauth_options['google_auth_param_other']) && !empty($okv_oauth_options['google_auth_param_other'])) {
+                        parse_str(str_replace('&amp;', '&', $okv_oauth_options['google_auth_param_other']), $other_params);
                         if (isset($other_params) && is_array($other_params)) {
                             $skip_param_names = ['client_id', 'response_type', 'scope', 'redirect_uri', 'access_type', 'state', 'prompt'];
                             foreach ($other_params as $name => $value) {
-                                if (in_array(strtolower($name), $skip_param_names)) {
+                                if (in_array(strtolower($name), $skip_param_names, true)) {
                                     unset($other_params[$name]);
                                 }
                             }// endforeach;
@@ -186,11 +187,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                     } elseif (isset($result->error) && is_scalar($result->error)) {
                         // there is errors from Google.
                         unset($access_token, $id_token);
-                        return new \WP_Error('rundiz_oauth_invalid_oauth_settings', sprintf(\RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
+                        return new \WP_Error('okv_oauth_invalid_oauth_settings', sprintf(\OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
                     } else {
                         // invalid token.
                         unset($access_token, $id_token, $result);
-                        return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                        return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                     }
 
                     if (isset($access_token) && isset($id_token)) {
@@ -213,22 +214,22 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                                 } else {
                                     // email is already exists.
                                     unset($access_token, $id_token, $result, $user);
-                                    return new \WP_Error('rundiz_oauth_email_exists', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse_tryanother'));
+                                    return new \WP_Error('okv_oauth_email_exists', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse_tryanother'));
                                 }
                             } else {
                                 unset($access_token, $id_token, $result);
-                                return new \WP_Error('rundiz_oauth_email_not_verified', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotverified'));
+                                return new \WP_Error('okv_oauth_email_not_verified', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotverified'));
                             }
                         } else {
                             unset($access_token, $id_token, $result);
-                            return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                            return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                         }
                         unset($result);
                     }
                 }// endif; there is no state from service provider. (or verify nonce failed.)
             }// endif; there is no code and state from service provider.
 
-            return ;
+            return;// phpcs:ignore Squiz.PHP.NonExecutableCode.ReturnNotRequired
         }// wpCheckEmailNotExists
 
 
@@ -252,11 +253,11 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                     } elseif (isset($result->error) && is_scalar($result->error)) {
                         // there is errors from Google.
                         unset($access_token, $id_token);
-                        return new \WP_Error('rundiz_oauth_invalid_oauth_settings', sprintf(\RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
+                        return new \WP_Error('okv_oauth_invalid_oauth_settings', sprintf(\OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
                     } else {
                         // invalid token.
                         unset($access_token, $id_token, $result);
-                        return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                        return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                     }
                     unset($result);
 
@@ -277,21 +278,21 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                                     // found user by this email.
                                     // keep $user because we will use it as return value.
                                     // set token cookie.
-                                    setcookie('rundiz_oauth_google_tokens', wp_json_encode([$access_token, $id_token]), time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
+                                    setcookie('okv_oauth_google_tokens', wp_json_encode([$access_token, $id_token]), time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
                                     // complete.
                                 } else {
                                     // user was not found.
                                     // in case that to create user instead, add the code here.
                                     unset($access_token, $id_token, $result, $user);
-                                    return new \WP_Error('rundiz_oauth_user_notfound', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotfoundinwordpress'));
+                                    return new \WP_Error('okv_oauth_user_notfound', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotfoundinwordpress'));
                                 }
                             } else {
                                 unset($access_token, $id_token, $result);
-                                return new \WP_Error('rundiz_oauth_email_not_verified', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotverified'));
+                                return new \WP_Error('okv_oauth_email_not_verified', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotverified'));
                             }
                         } else {
                             unset($access_token, $id_token, $result);
-                            return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                            return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                         }
                         unset($result);
                     }
@@ -310,7 +311,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
          */
         public function wpLogoutUseOAuth()
         {
-            setcookie('rundiz_oauth_google_tokens', '', (time()-(365 * DAY_IN_SECONDS)), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '' );
+            setcookie('okv_oauth_google_tokens', '', (time()-(365 * DAY_IN_SECONDS)), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '' );
         }// wpLogoutUseOAuth
 
 
@@ -333,10 +334,10 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                         $id_token = $result->id_token;
                     } elseif (isset($result->error) && is_scalar($result->error)) {
                         unset($access_token, $id_token);
-                        return new \WP_Error('rundiz_oauth_invalid_oauth_settings', sprintf(\RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
+                        return new \WP_Error('okv_oauth_invalid_oauth_settings', sprintf(\OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidoauthsettings'), $result->error));
                     } else {
                         unset($access_token, $id_token, $result);
-                        return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                        return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                     }
                     unset($result);
 
@@ -354,22 +355,22 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
                                 // got user profile and email was verified.
                                 if (email_exists($result['data']->email) === false && username_exists($result['data']->email) === false) {
                                     // if user that is using this email is NOT already exists (yay).
-                                    setcookie('rundiz_oauth_google_tokens', wp_json_encode([$access_token, $id_token]), time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
+                                    setcookie('okv_oauth_google_tokens', wp_json_encode([$access_token, $id_token]), time()+(2 * DAY_IN_SECONDS), '/', defined(COOKIE_DOMAIN) ? COOKIE_DOMAIN : '');
                                     $output['access_token'] = $access_token;
                                     $output['id_token'] = $id_token;
                                     $output['email'] = $result['data']->email;
                                     return $output;
                                 } else {
                                     unset($access_token, $id_token, $result);
-                                    return new \WP_Error('rundiz_oauth_email_already_inuse', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse'));
+                                    return new \WP_Error('okv_oauth_email_already_inuse', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailalreadyinuse'));
                                 }
                             } else {
                                 unset($access_token, $id_token, $result);
-                                return new \WP_Error('rundiz_oauth_email_not_verified', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotverified'));
+                                return new \WP_Error('okv_oauth_email_not_verified', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('emailnotverified'));
                             }
                         } else {
                             unset($access_token, $id_token, $result);
-                            return new \WP_Error('rundiz_oauth_invalid_token', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
+                            return new \WP_Error('okv_oauth_invalid_token', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('invalidtoken'));
                         }
                         unset($result);
                     }
@@ -385,7 +386,7 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
          * Validate token and get attributes.
          * 
          * @link https://developers.google.com/identity/protocols/oauth2/openid-connect#validatinganidtoken Reference.
-         * @global array $rundizoauth_options
+         * @global array $okv_oauth_options
          * @param string $access_token The access token got from Google.
          * @param string $id_token The token ID got from Google.
          * @return array Return result in array.
@@ -395,32 +396,33 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
             // get all options from setting config file.
             $this->getOptions();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
             $output = [];
 
-            if (is_array($rundizoauth_options)) {
+            if (is_array($okv_oauth_options)) {
                 if (
-                    array_key_exists('google_login_enable', $rundizoauth_options) &&
-                    array_key_exists('google_client_id', $rundizoauth_options) &&
-                    array_key_exists('google_client_secret', $rundizoauth_options)
+                    array_key_exists('google_login_enable', $okv_oauth_options) &&
+                    array_key_exists('google_client_id', $okv_oauth_options) &&
+                    array_key_exists('google_client_secret', $okv_oauth_options)
                 ) {
                     $response = wp_remote_get('https://oauth2.googleapis.com/tokeninfo?id_token=' . rawurlencode($id_token));
                     $result = wp_remote_retrieve_body($response);
                     unset($response);
-                    \RundizOauth\App\Libraries\Logger::writeLog('Google OAuth validate token: ' . PHP_EOL . $result);
+                    \OKVOauth\App\Libraries\Logger::writeLog('Google OAuth validate token: ' . PHP_EOL . $result);
                     $result = json_decode($result);
 
                     if (isset($result->error_description)) {
                         $output['result'] = false;
                     } elseif (
                         isset($result->iss) && strpos($result->iss, 'accounts.google.com') !== false &&
-                        isset($result->aud) && $result->aud === $rundizoauth_options['google_client_id']
+                        isset($result->aud) && $result->aud === $okv_oauth_options['google_client_id']
                     ) {
                         $output['result'] = true;
                         $output['data'] = $result;
                         $output['profileInfo'] = $this->getUserProfileInfo($access_token);
-                        \RundizOauth\App\Libraries\Logger::writeLog('Google OAuth get attributes: ' . PHP_EOL . print_r($output['profileInfo'], true));
+                        // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
+                        \OKVOauth\App\Libraries\Logger::writeLog('Google OAuth get attributes: ' . PHP_EOL . print_r($output['profileInfo'], true));
                     } else {
                         $output['result'] = false;
                     }
@@ -433,5 +435,5 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\MyOauth\\Google')) {
         }// validateTokenAndGetAttributes
 
 
-    }
+    }//Google
 }

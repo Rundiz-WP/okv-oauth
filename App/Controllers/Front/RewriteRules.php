@@ -2,16 +2,19 @@
 /**
  * Add front-end page rewrite rules.
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  * @license http://opensource.org/licenses/MIT MIT
  */
 
 
-namespace RundizOauth\App\Controllers\Front;
+namespace OKVOauth\App\Controllers\Front;
 
 
-if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RewriteRules')) {
-    class RewriteRules implements \RundizOauth\App\Controllers\ControllerInterface
+if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\RewriteRules')) {
+    /**
+     * RewriteRules class.
+     */
+    class RewriteRules implements \OKVOauth\App\Controllers\ControllerInterface
     {
 
 
@@ -20,7 +23,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RewriteRules')) {
          */
         public function addRewriteRules()
         {
-            add_rewrite_rule('^rd-oauth', 'index.php?pagename=rundiz-oauth&rdoauth_subpage=index', 'top');
+            add_rewrite_rule('^rd-oauth', 'index.php?pagename=okv-oauth&rdoauth_subpage=index', 'top');
         }// addRewriteRules
 
 
@@ -31,7 +34,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RewriteRules')) {
          */
         public function goToPages()
         {
-            if (get_query_var('pagename') === 'rundiz-oauth') {
+            if (get_query_var('pagename') === 'okv-oauth') {
                 switch (get_query_var('rdoauth_subpage')) {
                     case 'register':
                         $Register = new RdOauth\Register();
@@ -54,7 +57,8 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RewriteRules')) {
         /**
          * Setup additional query variable.
          * 
-         * @param array $vars
+         * @link https://developer.wordpress.org/reference/hooks/query_vars/ Reference.
+         * @param array $vars The array of allowed query variable names.
          * @return array
          */
         public function queryVars($vars)
@@ -78,5 +82,5 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\RewriteRules')) {
         }// registerHooks
 
 
-    }
+    }// RewriteRules
 }

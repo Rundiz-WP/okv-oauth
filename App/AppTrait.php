@@ -2,31 +2,33 @@
 /**
  * Main app trait for common works.
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\App;
+namespace OKVOauth\App;
 
-if (!trait_exists('\\RundizOauth\\App\\AppTrait')) {
+if (!trait_exists('\\OKVOauth\\App\\AppTrait')) {
     trait AppTrait
     {
 
 
         /**
          * Main option name.
-         * @var string set main option name of this plugin. the name should be english, number, underscore, or anycharacters that can be set to variable. for example: 'rundizoauth_options' will be set to $rundizoauth_options
-         * @uses call this trait method $this->getOptions(); before access $rundizoauth_options in global variable.
+         * 
+         * @var string set main option name of this plugin. the name should be english, number, underscore, or anycharacters that can be set to variable. for example: 'okv_oauth_options' will be set to $okv_oauth_options
+         * @uses call this trait method $this->getOptions(); before access $okv_oauth_options in global variable.
          */
-        public $main_option_name = 'rundizoauth_options';
+        public $main_option_name = 'okv_oauth_options';
 
         /**
          * All available options.
-         * these options will be accessible via main option name variable. for example: options name 'the_name' can call from $rundizoauth_options['the_name'];.
+         * these options will be accessible via main option name variable. for example: options name 'the_name' can call from $okv_oauth_options['the_name'];.
+         * 
          * @var array set all options available for this plugin. it must be 2d array (key => default value, key2 => default value, ...)
          */
         public $all_options = [
-            'rdoauth_db_version' => '1.0',
+            'okv_oauth_db_version' => '1.0',
         ];
 
 
@@ -37,16 +39,16 @@ if (!trait_exists('\\RundizOauth\\App\\AppTrait')) {
          */
         public function getOptions()
         {
-            $mainOptionName = $this->main_option_name;
-            $$mainOptionName = null;
-            global $$mainOptionName;
-            $$mainOptionName = [];
+            $option_name = $this->main_option_name;
+            global ${$option_name};// phpcs:ignore PHPCompatibility.Variables.ForbiddenGlobalVariableVariable.NonBareVariableFound
+            ${$option_name} = [];// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 
-            $get_option = get_option($this->main_option_name);
+            $get_option = get_option($option_name);
             if (false !== $get_option) {
-                ${$this->main_option_name} = maybe_unserialize($get_option);
+                // if option has value.
+                ${$option_name} = maybe_unserialize($get_option);// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
                 unset($get_option);
-                return (array) ${$this->main_option_name};
+                return (array) ${$option_name};
             }
 
             unset($get_option);
@@ -58,7 +60,7 @@ if (!trait_exists('\\RundizOauth\\App\\AppTrait')) {
          * Save options.
          * 
          * @param array $data array of submitted data in key => value
-         * @return boolean return true if saved successfully. return false if not updated.
+         * @return bool return true if saved successfully. return false if not updated.
          */
         public function saveOptions(array $data)
         {
@@ -79,7 +81,7 @@ if (!trait_exists('\\RundizOauth\\App\\AppTrait')) {
         public function setupAllOptions()
         {
             // load config values to get settings config file.
-            $loader = new \RundizOauth\App\Libraries\Loader();
+            $loader = new \OKVOauth\App\Libraries\Loader();
             $config_values = $loader->loadConfig();
             if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
                 $settings_config_file = $config_values['rundiz_settings_config_file'];
@@ -89,12 +91,12 @@ if (!trait_exists('\\RundizOauth\\App\\AppTrait')) {
             }
             unset($config_values, $loader);
 
-            $RundizSettings = new \RundizOauth\App\Libraries\RundizSettings();
+            $RundizSettings = new \OKVOauth\App\Libraries\RundizSettings();
             $RundizSettings->settings_config_file = $settings_config_file;
             $this->all_options = array_merge($this->all_options, $RundizSettings->getSettingsFieldsId());
             unset($RundizSettings, $settings_config_file);
         }// setupAllOptions
 
 
-    }
+    }// AppTrait
 }

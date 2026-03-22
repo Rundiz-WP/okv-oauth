@@ -2,14 +2,17 @@
 /**
  * Errors collection
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\App\Libraries;
+namespace OKVOauth\App\Libraries;
 
 
-if (!class_exists('\\RundizOauth\\App\\Libraries\\ErrorsCollection')) {
+if (!class_exists('\\OKVOauth\\App\\Libraries\\ErrorsCollection')) {
+    /**
+     * ErrorsCollection class.
+     */
     class ErrorsCollection
     {
 
@@ -67,5 +70,5 @@ if (!class_exists('\\RundizOauth\\App\\Libraries\\ErrorsCollection')) {
         }// getErrorMessage
 
 
-    }
+    }// ErrorsCollection
 }

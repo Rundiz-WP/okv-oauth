@@ -2,22 +2,26 @@
 /**
  * Hooks into login page.
  * 
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\App\Controllers\Front;
+namespace OKVOauth\App\Controllers\Front;
 
 
-if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
-    class HookLoginPage extends \RundizOauth\App\Libraries\RundizOauth implements \RundizOauth\App\Controllers\ControllerInterface
+if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
+    /**
+     * Hook login page class.
+     */
+    class HookLoginPage extends \OKVOauth\App\Libraries\RundizOauth implements \OKVOauth\App\Controllers\ControllerInterface
     {
 
 
         /**
          * Enqueue styles and scripts for edit profile page.
          * 
-         * @param string $hook
+         * @link https://developer.wordpress.org/reference/hooks/admin_enqueue_scripts/ Reference.
+         * @param string $hook The current admin page.
          */
         public function adminEnqueueScripts($hook)
         {
@@ -32,9 +36,9 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          * Disallow password reset if setting is using OAuth only.
          * 
          * @link https://developer.wordpress.org/reference/hooks/allow_password_reset/ Reference.
-         * @param boolean $allow
-         * @param integer $user_id
-         * @return boolean
+         * @param bool $allow Whether to allow the password to be reset. Default `true`.
+         * @param int $user_id The ID of the user attempting to reset a password.
+         * @return bool
          */
         public function allowPasswordReset($allow, $user_id)
         {
@@ -57,13 +61,13 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          */
         public function adminNotice()
         {
-            $output = get_transient('rundiz-oauth-error');
+            $output = get_transient('okv_oauth_error');
             if ($output) {
-                delete_transient('rundiz-oauth-error');
+                delete_transient('okv_oauth_error');
                 $output = maybe_unserialize(stripslashes_deep($output));
 
                 if (is_array($output) && array_key_exists('class', $output) && array_key_exists('message', $output)) {
-                    $Loader = new \RundizOauth\App\Libraries\Loader();
+                    $Loader = new \OKVOauth\App\Libraries\Loader();
                     $Loader->loadView('admin/adminNotice_v', $output);
                     unset($Loader);
                 }
@@ -76,10 +80,10 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          * Set cookie expiration.
          * 
          * @link https://developer.wordpress.org/reference/hooks/auth_cookie_expiration/ Reference.
-         * @global array $rundizoauth_options
-         * @param integer $length
-         * @param integer $user_id
-         * @param boolean $remember
+         * @global array $okv_oauth_options
+         * @param int $length Duration of the expiration period in seconds.
+         * @param int $user_id User ID.
+         * @param bool $remember Whether to remember the user login. Default false.
          */
         public function authCookieExpiration($length, $user_id, $remember = false)
         {
@@ -93,15 +97,15 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             $this->init();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
-            if (is_array($rundizoauth_options)) {
-                if (array_key_exists('login_expiration', $rundizoauth_options) &&
-                    !empty($rundizoauth_options['login_expiration']) &&
-                    intval($rundizoauth_options['login_expiration']) > 0
+            if (is_array($okv_oauth_options)) {
+                if (array_key_exists('login_expiration', $okv_oauth_options) &&
+                    !empty($okv_oauth_options['login_expiration']) &&
+                    intval($okv_oauth_options['login_expiration']) > 0
                 ) {
                     // if login expiration was set, get its length as new length for next checking.
-                    $newLength = intval($rundizoauth_options['login_expiration']);
+                    $newLength = intval($okv_oauth_options['login_expiration']);
                 }
 
                 if (isset($newLength) && (2 === $this->loginMethod || true === $remember)) {
@@ -126,9 +130,9 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          * 
          * @link https://developer.wordpress.org/reference/hooks/authenticate/ Reference.
          * @link https://ben.lobaugh.net/blog/7175/wordpress-replace-built-in-user-authentication Reference.
-         * @param null|\WP_User|\WP_Error $user
-         * @param string $username
-         * @param string $password
+         * @param null|\WP_User|\WP_Error $user `WP_User` if the user is authenticated. `WP_Error` or `null` otherwise.
+         * @param string $username Username or email address.
+         * @param string $password User password.
          * @return null|\WP_User|\WP_Error
          */
         public function authenticate($user, $username, $password)
@@ -138,7 +142,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
             if (2 === $this->loginMethod && (!empty($username) || !empty($password))) {
                 // if using oauth only but there is form data submitted.
                 // show the error message.
-                return new \WP_Error('rundiz_oauth_login_error', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('originallogindisabled'));
+                return new \WP_Error('okv_oauth_login_error', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('originallogindisabled'));
             }
 
             return $user;
@@ -155,10 +159,10 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
             $this->init();
 
             if (true === $this->useOauth) {
-                global $rundizoauth_options;
+                global $okv_oauth_options;
 
-                $Loader = new \RundizOauth\App\Libraries\Loader();
-                $Loader->loadTemplate('okv-oauth/partials/editAccountChangeEmailButton_v', ['rundizoauth_options' => $rundizoauth_options]);
+                $Loader = new \OKVOauth\App\Libraries\Loader();
+                $Loader->loadTemplate('okv-oauth/partials/editAccountChangeEmailButton_v', ['okv_oauth_options' => $okv_oauth_options]);
                 unset($Loader);
             }
         }// editAccountChangeEmailButton
@@ -167,17 +171,18 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         /**
          * Add buttons into edit own profile before name section.
          * 
-         * @param \WP_User $user
+         * @link https://developer.wordpress.org/reference/hooks/profile_personal_options/
+         * @param \WP_User $user The current `WP_User` object.
          */
         public function editOwnProfilePersonalOptions($user)
         {
             $this->init();
 
             if (true === $this->useOauth) {
-                global $rundizoauth_options;
+                global $okv_oauth_options;
 
-                $Loader = new \RundizOauth\App\Libraries\Loader();
-                $Loader->loadView('admin/editOwnProfilePersonalOptions_v', ['rundizoauth_options' => $rundizoauth_options]);
+                $Loader = new \OKVOauth\App\Libraries\Loader();
+                $Loader->loadView('admin/editOwnProfilePersonalOptions_v', ['okv_oauth_options' => $okv_oauth_options]);
                 unset($Loader);
             } else {
                 return false;
@@ -187,6 +192,8 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
         /**
          * Perform change an email with OAuth.
+         * 
+         * @link https://developer.wordpress.org/reference/hooks/load-page_hook/ Reference.
          */
         public function loadProfile()
         {
@@ -194,7 +201,9 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             if (1 === $this->loginMethod || 2 === $this->loginMethod) {
                 // if rundiz oauth settings is using wp+oauth (1) or oauth only (2).
-                $OAuthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
+                $OAuthProviders = new \OKVOauth\App\Libraries\OAuthProviders();
+                // The nonce verification will be called by WP core. It is no need here.
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended 
                 $OAuthClass = $OAuthProviders->getClass((isset($_REQUEST['rdoauth']) ? sanitize_text_field(wp_unslash($_REQUEST['rdoauth'])) : ''));
                 if (is_object($OAuthClass)) {
                     $email = $OAuthClass->wpCheckEmailNotExists();
@@ -209,11 +218,11 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                             'ID' => $user->ID, 
                             'user_email' => $email,
                         ]);
-                        do_action('rundiz_oauth_changeemail_success', $user->ID, $email);
+                        do_action('okv_oauth_changeemail_success', $user->ID, $email);
                         unset($email, $user, $user_id);
 
                         set_transient(
-                            'rundiz-oauth-error', 
+                            'okv_oauth_error', 
                             maybe_serialize([
                                 'class' => 'notice-success', 
                                 'message' => __('Your email has been changed.', 'okv-oauth'),
@@ -221,7 +230,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                         );
                     } elseif (is_wp_error($email)) {
                         set_transient(
-                            'rundiz-oauth-error', 
+                            'okv_oauth_error', 
                             maybe_serialize([
                                 'class' => 'notice-error', 
                                 'message' => $email->get_error_message(),
@@ -238,19 +247,23 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
         /**
          * Add CSS to login/register page.
+         * 
+         * @link https://developer.wordpress.org/reference/hooks/login_enqueue_scripts/ Reference.
          */
         public function loginEnqueueScripts()
         {
             $this->init();
 
             if (!wp_script_is('rd-oauth-font-awesome6', 'registered')) {
-                $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
+                $StylesAndScripts = new \OKVOauth\App\Libraries\StylesAndScripts();
                 $StylesAndScripts->registerStylesAndScripts();
                 unset($StylesAndScripts);
             }
 
             if (true === $this->useOauth) {
                 // if choose login method as wp login with oauth or oauth only.
+                // This hook is for enqueue styles/scripts only. There is no form processing here. So, nonce is no need.
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended 
                 $action = (isset($_REQUEST['action']) ? sanitize_text_field(wp_unslash($_REQUEST['action'])) : '');
                 if (!in_array($action, ['postpass', 'logout', 'lostpassword', 'retrievepassword', 'resetpass', 'rp', 'register', 'login'], true) && false === has_filter('login_form_' . $action )) {
                     $action = 'login';
@@ -261,7 +274,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     case 'logout':
                     case 'lostpassword':
                         if (2 === $this->loginMethod) {
-                            wp_enqueue_script('rd-oauth-lostpassword', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-lostpassword.js', ['jquery'], false, true);
+                            wp_enqueue_script('rd-oauth-lostpassword', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-lostpassword.js', ['jquery'], OKVOAUTH_VERSION, true);
                             wp_localize_script(
                                 'rd-oauth-lostpassword', 
                                 'RdOauthLostPassword', 
@@ -284,7 +297,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
                 if (isset($action) && 'register' === $action) {
                     // if in register page.
-                    wp_enqueue_script('rd-oauth-register', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-register.js', ['jquery'], false, true);
+                    wp_enqueue_script('rd-oauth-register', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-register.js', ['jquery'], OKVOAUTH_VERSION, true);
                     wp_localize_script(
                         'rd-oauth-register', 
                         'RdOauthRegister', 
@@ -294,7 +307,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     );
                 } elseif (isset($action) && 'login' === $action) {
                     // if in login page.
-                    wp_enqueue_script('rd-oauth-login', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-login.js', ['jquery'], false, true);
+                    wp_enqueue_script('rd-oauth-login', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-login.js', ['jquery'], OKVOAUTH_VERSION, true);
                     wp_localize_script(
                         'rd-oauth-login', 
                         'RdOauthLogin', 
@@ -311,17 +324,17 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          * Add buttons into login form.
          * 
          * @link https://developer.wordpress.org/reference/hooks/login_form/ Reference.
-         * @global array $rundizoauth_options
+         * @global array $okv_oauth_options
          */
         public function loginForm()
         {
             $this->init();
 
             if (true === $this->useOauth) {
-                global $rundizoauth_options;
+                global $okv_oauth_options;
 
-                $Loader = new \RundizOauth\App\Libraries\Loader();
-                $Loader->loadTemplate('okv-oauth/partials/loginForm_v', ['rundizoauth_options' => $rundizoauth_options]);
+                $Loader = new \OKVOauth\App\Libraries\Loader();
+                $Loader->loadTemplate('okv-oauth/partials/loginForm_v', ['okv_oauth_options' => $okv_oauth_options]);
                 unset($Loader);
             } else {
                 return false;
@@ -353,7 +366,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
             if (2 === $this->loginMethod) {
                 // if using oauth only.
                 // not allow to lost password because user have to login using OAuth service provider.
-                $Loader = new \RundizOauth\App\Libraries\Loader();
+                $Loader = new \OKVOauth\App\Libraries\Loader();
                 $Loader->loadTemplate('okv-oauth/partials/lostPasswordForm_v');
                 unset($Loader);
             }
@@ -380,21 +393,21 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          * Add buttons to register page.
          * 
          * @link https://developer.wordpress.org/reference/hooks/register_form/ Reference.
-         * @global array $rundizoauth_options
+         * @global array $okv_oauth_options
          */
         public function registerForm()
         {
             $this->init();
 
             if (true === $this->useOauth) {
-                global $rundizoauth_options;
+                global $okv_oauth_options;
                 $active_signup = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
 
-                $Loader = new \RundizOauth\App\Libraries\Loader();
+                $Loader = new \OKVOauth\App\Libraries\Loader();
                 $Loader->loadTemplate(
                     'okv-oauth/partials/registerForm_v', 
                     [
-                        'rundizoauth_options' => $rundizoauth_options, 
+                        'okv_oauth_options' => $okv_oauth_options, 
                         'oauthProviders' => $this->oauthProviders,
                         'active_signup' => $active_signup,
                     ]
@@ -476,7 +489,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
             // perform change email with OAuth.
             add_action('load-profile.php', [$this, 'loadProfile']);
                 // same as above but for woocommerce only by change the billing email.
-                add_action('rundiz_oauth_changeemail_success', [$this, 'wcChangeBillingEmailUsingOAuth'], 10, 2);
+                add_action('okv_oauth_changeemail_success', [$this, 'wcChangeBillingEmailUsingOAuth'], 10, 2);
 
             // on logout, remove any cookies that used while register/login
             add_action('wp_logout', [$this, 'wpLogout']);
@@ -487,9 +500,9 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          * Add validations
          * 
          * @link https://developer.wordpress.org/reference/hooks/registration_errors/ Reference.
-         * @param \WP_Error $errors
-         * @param string $sanitized_user_login
-         * @param string $user_email
+         * @param \WP_Error $errors A `WP_Error` object containing any errors encountered during registration.
+         * @param string $sanitized_user_login User’s username after it has been sanitized.
+         * @param string $user_email User’s email.
          * @return object
          */
         public function registrationErrors(\WP_Error $errors, $sanitized_user_login, $user_email)
@@ -500,14 +513,18 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                 2 === $this->loginMethod &&
                 (
                     (
+                        // The nonce verification will be called by WP core. It is no need here.
+                        // phpcs:ignore WordPress.Security.NonceVerification.Recommended 
                         isset($_SERVER['REQUEST_METHOD']) &&
                         'POST' === strtoupper(sanitize_text_field(wp_unslash($_SERVER['REQUEST_METHOD'])))
                     ) ||
+                    // The nonce verification will be called by WP core. It is no need here.
+                    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     isset($_REQUEST['user_email'])
                 )
             ) {
                 // if use oauth only but have form submitted.
-                $errors->add('register-form-disabled', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('originalregisterdisabled'));
+                $errors->add('register-form-disabled', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('originalregisterdisabled'));
             }
 
             return $errors;
@@ -516,17 +533,23 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
         /**
          * Remember redirect to querystring and set to session for use later.
+         * 
+         * @link https://developer.wordpress.org/reference/hooks/login_init/ Reference.
          */
         public function rememberRedirectTo()
         {
             $this->init();
 
             if ($this->useOauth) {
+                // The nonce verification will be called by WP core. It is no need here.
+                // phpcs:ignore WordPress.Security.NonceVerification.Recommended 
                 if (isset($_REQUEST['redirect_to'])) {
                     if (session_status() === PHP_SESSION_NONE) {
                         session_start();
                     }
 
+                    // The nonce verification will be called by WP core. It is no need here.
+                    // phpcs:ignore WordPress.Security.NonceVerification.Recommended
                     $_SESSION['okv-oauth_redirect_to'] = sanitize_text_field(wp_unslash($_REQUEST['redirect_to']));
 
                     session_write_close();
@@ -538,6 +561,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         /**
          * Check that to send the retrieve password email or not.
          * 
+         * @link https://developer.wordpress.org/reference/hooks/send_retrieve_password_email/ Reference.
          * @since 1.5.6
          * @param bool $send Send indicate. Default is `true`.
          * @param string $user_login The username for the user.
@@ -559,25 +583,29 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         /**
          * Validate and detect email changes while using OAuth only is not allowed.
          * 
-         * @global array $rundizoauth_options
-         * @param integer $user_id
+         * @link https://developer.wordpress.org/reference/hooks/personal_options_update/ Reference.
+         * @global array $okv_oauth_options
+         * @param int $user_id The user ID.
          */
         public function updateOwnProfile($user_id)
         {
             $this->init();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
             if (true === $this->useOauth && 2 === $this->loginMethod && is_numeric($user_id)) {
                 // if using OAuth only.
                 $current_user = get_user_by('id', $user_id);
 
+                // phpcs:ignore WordPress.Security.NonceVerification.Missing
                 if (isset($_POST['email']) && isset($current_user->user_email) && $_POST['email'] !== $current_user->user_email) {
                     // if detecting email changes while it is using OAuth only. No, do not allow. restore the post email value.
                     $_POST['email'] = $current_user->user_email;
                     // trigger no change email error.
-                    add_action('user_profile_update_errors', function($errors, $update, $user) {
-                        $errors->add('donot-manually-change-email', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('donotmanuallychangeemail'));
+                    // @link https://developer.wordpress.org/reference/hooks/user_profile_update_errors/ Reference.
+                    // phpcs:ignore Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed
+                    add_action('user_profile_update_errors', function ($errors, $update, $user) {
+                        $errors->add('donot-manually-change-email', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('donotmanuallychangeemail'));
                     }, 10, 3);
                 }
 
@@ -589,8 +617,8 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         /**
          * WooCommerce change billing email using OAuth.
          * 
-         * @param int $user_id
-         * @param string $new_email
+         * @param int $user_id The user ID.
+         * @param string $new_email New email address.
          */
         public function wcChangeBillingEmailUsingOAuth($user_id, $new_email = null)
         {
@@ -607,19 +635,19 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         /**
          * Prevent user manually change email in WooCommerce.
          * 
-         * @global array $rundizoauth_options
-         * @param \WP_Error $errors
-         * @param object $user
+         * @global array $okv_oauth_options
+         * @param \WP_Error $errors The `WP_Error` object.
+         * @param object $user The user object.
          */
         public function wcPreventEmailChange(&$errors = null, &$user = null)
         {
             if (!class_exists('\\WooCommerce')) {
-                return ;
+                return;
             }
 
             $this->init();
 
-            global $rundizoauth_options;
+            global $okv_oauth_options;
 
             if (true === $this->useOauth && 2 === $this->loginMethod) {
                 if (isset($_SERVER['REQUEST_METHOD']) && 'POST' === strtoupper(sanitize_text_field(wp_unslash($_SERVER['REQUEST_METHOD'])))) {
@@ -629,7 +657,7 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     unset($current_user);
 
                     if (strtolower($account_email) !== strtolower($current_email) && is_object($errors)) {
-                        $errors->add('rundizoauth_dontchange_email', \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('donotmanuallychangeemail'));
+                        $errors->add('okv_oauth_dontchange_email', \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('donotmanuallychangeemail'));
                     }
                 }
             }
@@ -643,12 +671,12 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
          */
         public function wpLogout()
         {
-            $OAuthProviders = new \RundizOauth\App\Libraries\OAuthProviders();
+            $OAuthProviders = new \OKVOauth\App\Libraries\OAuthProviders();
             $providers = $OAuthProviders->getAllClasses();
             unset($OAuthProviders);
             if (is_iterable($providers)) {
                 foreach ($providers as $providerKey => $OAuthClass) {
-                    /* @var $OAuthClass \RundizOauth\App\Libraries\MyOauth\Interfaces\MyOAuthInterface */
+                    /* @var $OAuthClass \OKVOauth\App\Libraries\MyOauth\Interfaces\MyOAuthInterface */
                     $OAuthClass->wpLogoutUseOAuth();
                 }// endforeach;
                 unset($OAuthClass, $providerKey);
@@ -688,14 +716,14 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
             $this->init();
 
             if (!wp_script_is('rd-oauth-font-awesome6', 'registered')) {
-                $StylesAndScripts = new \RundizOauth\App\Libraries\StylesAndScripts();
+                $StylesAndScripts = new \OKVOauth\App\Libraries\StylesAndScripts();
                 $StylesAndScripts->registerStylesAndScripts();
                 unset($StylesAndScripts);
             }
 
             wp_enqueue_style('rd-oauth-login');
             wp_enqueue_style('rd-oauth-font-awesome6');
-            wp_enqueue_script('rd-oauth-wpsignup', plugin_dir_url(RUNDIZOAUTH_FILE) . 'assets/js/rd-oauth-wpsignup.js', ['jquery'], false, true);
+            wp_enqueue_script('rd-oauth-wpsignup', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-wpsignup.js', ['jquery'], OKVOAUTH_VERSION, true);
             $active_signup = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
             wp_localize_script(
                 'rd-oauth-wpsignup', 
@@ -708,5 +736,5 @@ if (!class_exists('\\RundizOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         }// wpSignupEnqueueScripts
 
 
-    }
+    }// HookLoginPage
 }
