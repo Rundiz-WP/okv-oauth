@@ -1,16 +1,18 @@
 {
     "name": "okv-oauth",
-    "version": "1.6.4",
+    "version": "1.7.0",
     "main": "index.js",
     "author": "Vee W.",
     "license": "MIT",
     "private": true,
     "devDependencies": {
-        "@wordpress/scripts": "^30.7.0"
+        "@wordpress/scripts": "^31.7.0"
     },
     "scripts": {
-        "build": "wp-scripts build --webpack-src-dir=\"./blocks-src\" --output-path=\"./blocks\"",
-        "start": "wp-scripts start --webpack-src-dir=\"./blocks-src\" --output-path=\"./blocks\"",
+        "buildBlocks": "wp-scripts build --webpack-src-dir=\"./blocks-src\" --output-path=\"./blocks\"",
+        "langJson": "wp i18n make-json languages/okv-oauth-th.po --no-purge --pretty-print",
+        "langPot": "wp i18n make-pot . --exclude=\"assets/vendor,blocks-src,languages,node_modules,node_tasks,*.css,*.svg,*.eot,*.woff,*.woff2,*.ttf,*.html,*.txt,*.pot\"",
+        "watchBlocks": "wp-scripts start --webpack-src-dir=\"./blocks-src\" --output-path=\"./blocks\"",
         "test": "echo \"Error: no test specified\" && exit 1"
     }
 }

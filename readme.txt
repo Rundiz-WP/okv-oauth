@@ -4,7 +4,7 @@ Tags: oauth, google, social login, social connect
 Tested up to: 7.0
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.6.4
+Stable tag: 1.7.0
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -26,6 +26,8 @@ This project is maintain by <a href="https://rundiz.com" target="author_site">Ru
 Please <a href="https://rundiz.com/en/donate" target="donate">donate</a> to support the developer.
 
 Tested up to PHP 8.5.
+
+Original source of the block(s) is on GitHub. ( https://github.com/Rundiz-WP/okv-oauth )
 
 == Installation ==
 1. Upload "okv-oauth" folder to the "/wp-content/plugins/" directory or use add from plugins management page.
@@ -55,23 +57,11 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
-= 1.6.4 =
-2025-12-18
+= 1.7.0 =
+2026-03-23
 
-* Minor update.
-
-= 1.6.1 =
-2025-07-02
-
-* Update CSS version number to use current.
-
-= 1.6.0 =
-2025-07-01
-
-* Code improvement.
-* Update to FontAwesome 6 from 4.
-* Add LINE OAuth.
-* Bump version from v1.5.7
+* Rename namespace, variables, options, etc to match plugin slug.
+* Update escape on display PHP.
 
 Previous version updates:  
 Please read on changelog.md

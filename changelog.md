@@ -2,6 +2,24 @@
 
 ## Version 1.x
 
+### 1.6.4
+2025-12-18
+
+* Minor update.
+
+### 1.6.1
+2025-07-02
+
+* Update CSS version number to use current.
+
+### 1.6.0
+2025-07-01
+
+* Code improvement.
+* Update to FontAwesome 6 from 4.
+* Add LINE OAuth.
+* Bump version from v1.5.7
+
 ### 1.5.6
 2025-03-24
 
