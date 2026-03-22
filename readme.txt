@@ -62,6 +62,7 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 
 * Rename namespace, variables, options, etc to match plugin slug.
 * Update escape on display PHP.
+* When you update to this version, please update permalink by go to Settings > Permalinks > and click Save Changes. This will not change anything but it will be flush the rewrite rules to let them update.
 
 Previous version updates:  
 Please read on changelog.md
