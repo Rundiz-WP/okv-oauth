@@ -1,10 +1,10 @@
 <?php
 /**
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\Tests\App\Libraries;
+namespace OKVOauth\Tests\App\Libraries;
 
 
 use PHPUnit\Framework\TestCase;
@@ -20,7 +20,7 @@ class LoaderTest extends  TestCase
 
     public function testLoadConfig()
     {
-        $Loader = new \RundizOauth\App\Libraries\Loader();
+        $Loader = new \OKVOauth\App\Libraries\Loader();
         $configVal = $Loader->loadConfig();
         $this->assertTrue(is_array($configVal) && !empty($configVal));
         $this->assertTrue(array_key_exists('rundiz_settings_config_file', $configVal));
@@ -30,7 +30,7 @@ class LoaderTest extends  TestCase
 
     public function testLoadTemplate()
     {
-        $Loader = new \RundizOauth\App\Libraries\Loader();
+        $Loader = new \OKVOauth\App\Libraries\Loader();
         ob_start();
         $Loader->loadTemplate('okv-oauth/index_v');
         $contents = ob_get_contents();
@@ -43,7 +43,7 @@ class LoaderTest extends  TestCase
 
     public function testLoadView()
     {
-        $Loader = new \RundizOauth\App\Libraries\Loader();
+        $Loader = new \OKVOauth\App\Libraries\Loader();
         ob_start();
         $result = $Loader->loadView('admin/settings_v');
         $contents = ob_get_contents();

@@ -1,10 +1,10 @@
 <?php
 /**
- * @package rundiz-oauth
+ * @package okv-oauth
  */
 
 
-namespace RundizOauth\Tests\App\Libraries;
+namespace OKVOauth\Tests\App\Libraries;
 
 
 use PHPUnit\Framework\TestCase;
@@ -21,15 +21,15 @@ class ErrorsCollectionTest extends  TestCase
     public function testGetErrorMessage()
     {
         // test that it is always return string.
-        $result = \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage(['boo' => 'The argument must be string but never mind, it must return string anyway.']);
+        $result = \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage(['boo' => 'The argument must be string but never mind, it must return string anyway.']);
         $this->assertIsString($result);
         $this->assertEmpty($result);
         $this->assertTrue($result === '');
 
-        $result = \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('donotmanuallychangeemail');
+        $result = \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('donotmanuallychangeemail');
         $this->assertIsString($result);
 
-        $result = \RundizOauth\App\Libraries\ErrorsCollection::getErrorMessage('thiserrorcodeneverexistsinthecode_' . uniqid());
+        $result = \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('thiserrorcodeneverexistsinthecode_' . uniqid());
         $this->assertIsString($result);
         $this->assertEmpty($result);
         $this->assertTrue($result === '');
