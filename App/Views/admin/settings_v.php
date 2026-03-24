@@ -14,7 +14,7 @@ $okv_oauth_kses_file = dirname(OKVOAUTH_FILE) . '/App/config/kses_data.php';
 
 ?>
 <div class="wrap">
-    <h1><?php echo esc_html_e('Rundiz OAuth settings', 'okv-oauth'); ?></h1>
+    <h1><?php esc_html_e('Rundiz OAuth settings', 'okv-oauth'); ?></h1>
 
     <?php 
     if (isset($form_result_class) && isset($form_result_msg)) {
