@@ -152,6 +152,8 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Activation')) {
             // check current option exists or not.
             $current_options = get_option($this->main_option_name);
 
+            // check old version option names and move them into new option name.
+            // @todo[rundiz] Delete this block of code on v 1.7+.
             if (false === $current_options) {
                 // if newly installed (at least for this version). current option is not exists, add it.
                 $sub_options = [];
@@ -193,7 +195,10 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Activation')) {
                 add_option($this->main_option_name, $sub_options, '', false);
                 unset($sub_options);
             }// endif;
+            // end check old version option names. ---------------------
 
+            // rename option name from pre v1.6.5 that was used `rundizoauth_option` to be current option name defined in `main_option_name` property.
+            // @todo[rundiz] Delete this block of code on v 1.7+.
             $pre1_6_5_options = get_option('rundizoauth_options');// this option name will not be renamed.
             if (
                 'rundizoauth_options' !== $this->main_option_name && // this option name will not be renamed.
@@ -208,6 +213,8 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Activation')) {
                 delete_option('rundizoauth_options');// this option name will not be renamed.
             }
             unset($pre1_6_5_options);
+            // end rename option name. -----------
+
             unset($current_options);
 
             // add custom rewrite rules.
