@@ -113,7 +113,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Activation')) {
             // add option to site or multisite -----------------------------
             if (is_multisite()) {
                 // this site is multisite. activate on all site.
-                $sites = get_sites();
+                $sites = get_sites(['number' => 0]);
                 if ($sites) {
                     foreach ($sites as $site) {
                         switch_to_blog($site->blog_id);
@@ -330,7 +330,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Activation')) {
             // delete options.
             if (is_multisite()) {
                 // this is multi site, delete options in all sites.
-                $sites = get_sites();
+                $sites = get_sites(['number' => 0]);
                 if ($sites) {
                     foreach ($sites as $site) {
                         switch_to_blog($site->blog_id);
@@ -379,7 +379,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Activation')) {
                         // add option to site or multisite -----------------------------
                         if (is_multisite()) {
                             // this site is multisite. activate on all site.
-                            $sites = get_sites();
+                            $sites = get_sites(['number' => 0]);
                             if ($sites) {
                                 foreach ($sites as $site) {
                                     switch_to_blog($site->blog_id);
