@@ -4,7 +4,7 @@ Tags: oauth, google, social login, social connect
 Tested up to: 7.0
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.7.1
+Stable tag: 1.7.2
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -57,6 +57,14 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.7.2 =
+2026-04-06
+
+* Move assets files into folder.
+* Rename asset handles to use `okv-oauth-` prefix.
+* Update widget to use `okv_oauth` prefix.
+* Minor update.
+
 = 1.7.1 =
 2026-04-04
 
