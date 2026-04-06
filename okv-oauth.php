@@ -29,10 +29,13 @@ if (!defined('OKVOAUTH_FILE')) {
 
 
 if (!defined('OKVOAUTH_VERSION')) {
+    // if not defined constant version.
     $okv_oauth_pluginData = (function_exists('get_file_data') ? get_file_data(__FILE__, ['Version' => 'Version']) : null);
     $okv_oauth_pluginVersion = (isset($okv_oauth_pluginData['Version']) ? $okv_oauth_pluginData['Version'] : date('Ym'));// phpcs:ignore WordPress.DateTime.RestrictedFunctions.date_date
     unset($okv_oauth_pluginData);
+
     define('OKVOAUTH_VERSION', $okv_oauth_pluginVersion);
+
     unset($okv_oauth_pluginVersion);
 }
 

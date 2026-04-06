@@ -4,12 +4,13 @@
 
     <!-- What to scan -->
     <file>.</file>
-    <exclude-pattern>/.dev-notes/</exclude-pattern>
-    <exclude-pattern>/.phpunit.cache/</exclude-pattern>
+    <exclude-pattern>/\.backup/</exclude-pattern>
+    <exclude-pattern>/\.dev-notes/</exclude-pattern>
+    <exclude-pattern>/\.phpunit.cache/</exclude-pattern>
     <exclude-pattern>/blocks/</exclude-pattern>
+    <exclude-pattern>/node_modules/</exclude-pattern>
     <exclude-pattern>/tests/</exclude-pattern>
     <exclude-pattern>/vendor/</exclude-pattern>
-    <exclude-pattern>/node_modules/</exclude-pattern>
 
     <!-- How to scan -->
     <!-- Usage instructions: https://github.com/PHPCSStandards/PHP_CodeSniffer/wiki/Usage -->
