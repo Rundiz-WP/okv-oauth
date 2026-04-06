@@ -43,9 +43,7 @@
                     "destination": "."
                 }
             ]
-        },
-        "customTasks": [
-        ]
+        }
     },
     "watch": {
         "watcher": [
@@ -56,6 +54,10 @@
             {
                 "patterns": "assets/**",
                 "destination": "assets"
+            },
+            {
+                "patterns": "blocks/**",
+                "destination": "blocks"
             },
             {
                 "patterns": "languages/**",
@@ -69,12 +71,8 @@
                 "patterns": "*.php",
                 "destination": "."
             }
-        ],
-        "customWatches": [
         ]
     },
-    "writeVersions": [
-    ],
     "pack": {
         "versionHeaderFile": "readme.txt",
         "versionPattern": "Stable tag(\\s?)(:?)(\\s?)(?<version>([\\d\\.]+)([-+\\.0-9a-z]*))",
@@ -125,9 +123,9 @@
                 }
             }
         },
-        "zipFilePrefix": "okv-oauth",
+        "zipFilePrefix": "$folderName$",
         "zipOptions": {
-            "zipPrefix": "okv-oauth"
+            "zipPrefix": "$folderName$"
         }
     }
 }
