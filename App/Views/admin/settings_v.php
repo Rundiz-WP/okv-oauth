@@ -10,10 +10,8 @@ if (!defined('ABSPATH')) {
     exit();
 }
 
-$okv_oauth_kses_file = dirname(OKVOAUTH_FILE) . '/App/config/kses_data.php';
-
 ?>
-<div class="wrap">
+<div class="wrap rd-settings-page">
     <h1><?php esc_html_e('Rundiz OAuth settings', 'okv-oauth'); ?></h1>
 
     <?php 
@@ -27,6 +25,7 @@ $okv_oauth_kses_file = dirname(OKVOAUTH_FILE) . '/App/config/kses_data.php';
         wp_admin_notice($form_result_msg, $args);
         unset($args);
         */
+        // The function `wp_admin_notice()` requires WordPress 6.4.
         // Use normal HTML below is no need `.notice-dismiss` button because it will be append automatically by WordPress's JS.
         // phpcs:ignore Generic.WhiteSpace.ScopeIndent.IncorrectExact
     ?> 
@@ -40,15 +39,29 @@ $okv_oauth_kses_file = dirname(OKVOAUTH_FILE) . '/App/config/kses_data.php';
     <form method="post">
         <?php 
         wp_nonce_field(); 
+        echo PHP_EOL;
+
         if (isset($settings_page)) {
-            if (!is_file($okv_oauth_kses_file)) {
-                // if not found custom kses data. use custom kses data to make sure it is up to date with modern HTML elements and attributes that will work.
-                // if not found then it should shown the error message, without translation because If this happens to a user from an unknown language, assistance may not be possible.
-                throw new \Exception(esc_html('The file ' . str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $okv_oauth_kses_file) . ' could not be found.'));
+            $okv_oauth_kses_data_file = dirname(OKVOAUTH_FILE) . '/App/config/kses_data.php';
+            // Use custom kses data to make sure it is up to date with modern HTML elements and attributes that will work.
+            if (!is_file($okv_oauth_kses_data_file)) {
+                // If not found custom kses data.
+                // Throw the exception to notice the developers. Without translation.
+                // Because If this happens to a user from an unknown language, assistance may not be possible.
+                throw new \Exception(
+                    esc_html(
+                        sprintf(
+                            'The file %1$s could not be found.',
+                            str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $okv_oauth_kses_data_file)
+                        )
+                    )
+                );
             }
-            echo wp_kses($settings_page, include $okv_oauth_kses_file);
-        }
+            echo wp_kses($settings_page, include $okv_oauth_kses_data_file);
+        } 
+
+        echo PHP_EOL;
         submit_button(); 
         ?> 
     </form>
-</div><!--.wrap-->
+</div><!--.wrap .rd-settings-page-->

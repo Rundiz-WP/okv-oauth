@@ -1,12 +1,17 @@
 <?php
 /**
  * Loader class. This class will load anything for example: views, template, configuration file.
- * 
+ *
  * @package okv-oauth
  */
 
 
 namespace OKVOauth\App\Libraries;
+
+
+if (!defined('ABSPATH')) {
+    exit();
+}
 
 
 if (!class_exists('\\OKVOauth\\App\\Libraries\\Loader')) {
@@ -24,29 +29,62 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\Loader')) {
         public function autoRegisterControllers()
         {
             $this_plugin_dir = dirname(OKVOAUTH_FILE);
-            $di = new \RecursiveDirectoryIterator($this_plugin_dir . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Controllers', \RecursiveDirectoryIterator::SKIP_DOTS);
-            $it = new \RecursiveIteratorIterator($di);
-            unset($di);
+            $file_list = $this->getClassFileList($this_plugin_dir . DIRECTORY_SEPARATOR . 'App' . DIRECTORY_SEPARATOR . 'Controllers');
 
-            foreach ($it as $file) {
-                $this_file_classname = '\\OKVOauth' . str_replace([$this_plugin_dir, '.php', '/'], ['', '', '\\'], $file);
-                if (class_exists($this_file_classname)) {
-                    $ControllerClass = new $this_file_classname();
-                    if (method_exists($ControllerClass, 'registerHooks')) {
-                        $ControllerClass->registerHooks();
+            if (is_array($file_list)) {
+                foreach ($file_list as $file) {
+                    $this_file_classname = '\\OKVOauth' . str_replace([$this_plugin_dir, '.php', '/'], ['', '', '\\'], $file);
+                    if (class_exists($this_file_classname)) {
+                        $TestClass = new \ReflectionClass($this_file_classname);
+                        if (
+                            !$TestClass->isAbstract() && 
+                            !$TestClass->isTrait() && 
+                            $TestClass->implementsInterface('\\OKVOauth\\App\\Controllers\\ControllerInterface')
+                        ) {
+                            $ControllerClass = new $this_file_classname();
+                            if (method_exists($ControllerClass, 'registerHooks')) {
+                                $ControllerClass->registerHooks();
+                            }
+                            unset($ControllerClass);
+                        }
+                        unset($TestClass);
                     }
-                    unset($ControllerClass);
-                }
-                unset($this_file_classname);
-            }// endforeach;
+                    unset($this_file_classname);
+                }// endforeach;
+                unset($file);
+            }
 
-            unset($file, $it, $this_plugin_dir);
+            unset($file_list, $this_plugin_dir);
         }// autoRegisterControllers
 
 
         /**
+         * Get file list that may contain class in specific path.
+         *
+         * @since 1.7.2
+         * @param string $path The full path without trailing slash.
+         * @return array Return indexed array of file list.
+         */
+        protected function getClassFileList($path)
+        {
+            $Di = new \RecursiveDirectoryIterator($path, \RecursiveDirectoryIterator::SKIP_DOTS);
+            $It = new \RecursiveIteratorIterator($Di);
+            unset($Di);
+
+            $file_list = [];
+            foreach ($It as $file) {
+                $file_list[] = $file;
+            }// endforeach;
+            unset($file, $It);
+            natsort($file_list);
+
+            return $file_list;
+        }// getClassFileList
+
+
+        /**
          * Load config file and return its values.
-         * 
+         *
          * @param string $config_file_name The configuration file name only without extension.
          * @param bool $require_once Mark as `true` to use `require_once`, otherwise use `require`.
          * @return mixed Return config file content if success. Return `false` if failed.
@@ -73,12 +111,12 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\Loader')) {
 
         /**
          * Load the template by looking at the theme first, if not found then load it from the plugin itself.
-         * 
+         *
          * Example: If the <code>$view_name</code> is <code>mydir/mypage</code>.<br>
          * It will look up in <code>wp-content/themes/%your theme%/okv-oauth/templates/mydir/mypage.php</code> first.<br>
          * If not found then it will look up in <code>wp-content/plugins/okv-oauth/templates/mydir/mypage.php</code>.<br>
          * If it is still not found then the error will be thrown.
-         * 
+         *
          * @link https://codex.wordpress.org/Function_Reference/locate_template Reference.
          * @link https://codex.wordpress.org/Function_Reference/load_template Reference.
          * @global \WP_Query $wp_query
@@ -102,9 +140,12 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\Loader')) {
                     // if not found the template file in plugin itself.
                     // remove the variable.
                     unset($pluginFolderName);
-                    // throw the error to notice the developers.
-                    /* translators: %s: Template path. */
-                    throw new \Exception(esc_html(sprintf(__('The template file was not found. (%s)', 'okv-oauth'), $template_path)));
+                    // Throw the error to notice the developers. Without translation.
+                    throw new \Exception(
+                        esc_html(
+                            sprintf('The template file was not found. (%s)', $templatePath)
+                        )
+                    );
                 }
             }
 
@@ -151,12 +192,13 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\Loader')) {
                 return true;
             } else {
                 // if views file was not found.
-                // throw the exception to notice the developers.
+                // Throw the exception to notice the developers. Without translation.
                 throw new \Exception(
-                    sprintf(
-                        // translators: %s: Template path.
-                        esc_html(__('The views file was not found (%s).', 'okv-oauth')), 
-                        str_replace(['\\', '/'], '/', $templateFile)// phpcs:ignore WordPress.Security.EscapeOutput
+                    esc_html(
+                        sprintf(
+                            'The views file was not found (%s).', 
+                            str_replace(['\\', '/'], '/', $templateFile)
+                        )
                     )
                 );
             }

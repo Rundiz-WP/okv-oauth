@@ -1,8 +1,12 @@
 <?php
 /**
- * Rundiz Settings class.
+ * Rundiz Settings class for render pre-setup values. This will render tabs, form fields and content in each tabs.
+ * 
+ * Last update: 2026-04-04
  * 
  * @package okv-oauth
+ * 
+ * phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralDomain
  */
 
 
@@ -14,9 +18,6 @@ if (!defined('ABSPATH')) {
 }
 
 
-/**
- * Rundiz Settings class for render pre-setup values. This will render tabs, form fields and content in each tabs.
- */
 if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
     /**
      * Rundiz Settings class.
@@ -32,6 +33,13 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
 
 
         /**
+         * @var string Translation text domain.
+         * @since 2026-04-04
+         */
+        private $tranlsation_text_domain = 'okv-oauth';
+
+
+        /**
          * Get settings config file and its data.
          * 
          * @return array|false Return settings config data. Return `false` if failed.
@@ -41,7 +49,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
             $setting_file = $this->settings_config_file;
 
             if ('' === $setting_file || !is_string($setting_file)) {
-                wp_die('Settings configuration file was not set.');
+                wp_die(
+                    esc_html__('Settings configuration file was not set.', $this->tranlsation_text_domain)
+                );
             }
 
             $loader = new \OKVOauth\App\Libraries\Loader();
@@ -52,7 +62,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
         /**
          * Get settings fields data.
          * 
-         * @since 1.8.4
+         * @since 2025-08-28
          * @return array Return associative array where key is field `id` and value is `\stdClass` of field item.
          */
         protected function getSettingsFields()
@@ -174,7 +184,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
         /**
          * Get settings page. This is not include form and nonce. You have to write it yourself.
          * 
-         * @param array $options_values Options values.
+         * @param array $options_values The options values that is already un-slashed, and maybe sanitized by the method `getSubmittedData()` in App/Controllers/Admin/Settings.php file.
          * @return string Return settings tabbed page. Not include form tag and nonce.
          */
         public function getSettingsPage(array $options_values = [])
@@ -202,9 +212,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
             if (is_array($settings_config) && array_key_exists('setting_tabs', $settings_config)) {
                 foreach ($settings_config['setting_tabs'] as $tab_key => $tabs) {
                     $output .= "\t\t" . '<li>';
-                    $output .= '<a href="#tabs-' . $tab_key . '">';
+                    $output .= '<a href="#tabs-' . esc_attr($tab_key) . '">';
                     if (is_array($tabs) && array_key_exists('icon', $tabs)) {
-                        $output .= '<i class="tab-icon ' . $tabs['icon'] . '"></i> ';
+                        $output .= '<i class="tab-icon ' . esc_attr($tabs['icon']) . '"></i> ';
                     }
                     $output .= '<span class="tab-text">' . (is_array($tabs) && array_key_exists('title', $tabs) ? $tabs['title'] : '') . '</span>';
                     $output .= '</a>';
@@ -219,9 +229,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
             $output .= "\t" . '<div class="tab-content">' . "\n";
             if (is_array($settings_config) && array_key_exists('setting_tabs', $settings_config)) {
                 foreach ($settings_config['setting_tabs'] as $tab_key => $tabs) {
-                    $output .= "\t\t" . '<div id="tabs-' . $tab_key . '">' . "\n";
+                    $output .= "\t\t" . '<div id="tabs-' . esc_attr($tab_key) . '">' . "\n";
                     if (is_array($tabs) && array_key_exists('fields', $tabs) && is_array($tabs['fields'])) {
-                        $output .= $this->renderFields($tabs['fields'], stripslashes_deep($options_values));
+                        $output .= $this->renderFields($tabs['fields'], $options_values);
                     }
                     // #tabs-xx
                     $output .= "\t\t" . '</div>' . "\n";
@@ -256,11 +266,17 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
 
                     // phpcs:ignore WordPress.Security.NonceVerification
                     if (isset($_REQUEST) && is_array($_REQUEST) && isset($_REQUEST[$nameNoSb])) {
+                        // The nonce is already verify in the controller. See App/Controllers/Settings.php method `pluginSettingsPage()`.
                         if (isset($field->sanitize_callback) && is_callable($field->sanitize_callback)) {
+                            // The sanitize is already did in the config's callback under array key named `sanitize_callback`.
                             // phpcs:ignore WordPress.Security.NonceVerification, WordPress.Security.ValidatedSanitizedInput
                             $value = call_user_func($field->sanitize_callback, wp_unslash($_REQUEST[$nameNoSb]));
                         } else {
-                            $value = wp_unslash($_REQUEST[$nameNoSb]);// phpcs:ignore
+                            // In this case it is not possible to sanitize because in the config and setting, it is allowed to edit HTML, JS, CSS, or any programming languages.
+                            // It's already safe to escape them in the method `renderFormCodeEditor()` and any `renderFormXXX()` methods.
+                            // The way the data stored in the database is used depends on the plugin that uses this class, and how they escape or filter it.
+                            // phpcs:ignore WordPress.Security.NonceVerification, WordPress.Security.ValidatedSanitizedInput
+                            $value = wp_unslash($_REQUEST[$nameNoSb]);
                         }
                         $output[$name] = $value;
                         unset($value);
@@ -277,6 +293,67 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
 
 
         /**
+         * Check that is configuration file has editor field in it or not.
+         * 
+         * @since 2026-03-28
+         * @return bool Return `true` if yes, `false` if no.
+         */
+        public function hasEditor()
+        {
+            return $this->hasField(['editor', 'editor_full']);
+        }// hasEditor
+
+
+        /**
+         * Check that is configuration has certain form field type(s) or not.
+         * 
+         * @since 2026-03-28
+         * @param array|string $type The field type to check. Use array to check multiple field type at once. The field type must match configuration `['fields']['type']`.
+         * @return bool Return `true` if yes, `false` if no.
+         * @throws \InvalidArgumentException Throw exception if argument type is invalid.
+         */
+        public function hasField($type)
+        {
+            if (!is_string($type) && !is_array($type)) {
+                throw new \InvalidArgumentException('The argument `$type` must be string or array.');
+            }
+
+            $settings_config = $this->getConfigFile();
+            if (is_array($settings_config) && array_key_exists('setting_tabs', $settings_config) && is_array($settings_config['setting_tabs'])) {
+                foreach ($settings_config['setting_tabs'] as $tab_key => $tabs) {
+                    if (is_array($tabs) && array_key_exists('fields', $tabs) && is_array($tabs['fields'])) {
+                        foreach ($tabs['fields'] as $field_key => $fields) {
+                            if (is_array($fields) && array_key_exists('type', $fields)) {
+                                if (is_string($type) && $fields['type'] === $type) {
+                                    return true;
+                                } elseif (is_array($type) && in_array($fields['type'], $type, true)) {
+                                    return true;
+                                }
+                            }
+                        }// endforeach;
+                        unset($field_key, $fields);
+                    }
+                }// endforeach;
+                unset($tab_key, $tabs);
+            }// endif;
+
+            return false;
+        }// hasField
+
+
+        /**
+         * Check that is configuration file has media field in it or not.
+         * 
+         * @since 2026-03-28
+         * @return bool Return `true` if yes, `false` if no.
+         */
+        public function hasMedia()
+        {
+            return $this->hasField('media');
+        }// hasMedia
+
+
+        /**
          * Render tab content input fields.
          * 
          * @param array $tab_fields Tab fields in settings config.
@@ -285,6 +362,8 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
          */
         private function renderFields(array $tab_fields, array $options_values = [])
         {
+            $kses_data_file = dirname(OKVOAUTH_FILE) . '/App/config/kses_data.php';
+
             $output = "\t\t\t" . '<table class="form-table">' . "\n";
             $output .= "\t\t\t\t" . '<tbody>' . "\n";
 
@@ -345,12 +424,28 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
                             $output .= '</label>' . "\n";
                             $output .= "\t\t\t\t\t\t" . '</th>' . "\n";
                             $output .= "\t\t\t\t\t\t" . '<td>' . "\n";
-                            $output .= "\t\t\t\t\t\t\t" . (array_key_exists('content', $fields) ? $fields['content'] : '') . "\n";
+                            $output .= "\t\t\t\t\t\t\t";
+                            if (array_key_exists('content', $fields)) {
+                                if (is_file($kses_data_file)) {
+                                    $output .= wp_kses($fields['content'], include $kses_data_file);
+                                } else {
+                                    $output .= wp_kses_post($fields['content']);
+                                }
+                            }
+                            $output .= "\n";
                             $output .= "\t\t\t\t\t\t" . '</td>' . "\n";
                             break;
                         case 'html_full':
                             $output .= "\t\t\t\t\t\t" . '<td colspan="2" style="padding-left: 0;">' . "\n";
-                            $output .= "\t\t\t\t\t\t\t" . (array_key_exists('content', $fields) ? $fields['content'] : '') . "\n";
+                            $output .= "\t\t\t\t\t\t\t";
+                            if (array_key_exists('content', $fields)) {
+                                if (is_file($kses_data_file)) {
+                                    $output .= wp_kses($fields['content'], include $kses_data_file);
+                                } else {
+                                    $output .= wp_kses_post($fields['content']);
+                                }
+                            }
+                            $output .= "\n";
                             $output .= "\t\t\t\t\t\t" . '</td>' . "\n";
                             break;
 
@@ -414,13 +509,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
          * @param array $fields Fields array.
          * @param array $options_values Options values.
          * @return string Return rendered input.
-         * @throws \InvalidArgumentException Throw exception if provided argument type is invalid.
          */
         private function renderFormCodeEditor($field_key, array $fields, array $options_values = [])
         {
-            if (!is_numeric($field_key)) {
-                throw new \InvalidArgumentException('The argument `$field_key` must be integer.');
-            }
             $field_name = (array_key_exists('id', $fields) ? $fields['id'] : $field_key);
             if (is_array($options_values) && array_key_exists($field_name, $options_values)) {
                 $field_value = $options_values[$field_name];
@@ -428,12 +519,12 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
                 $field_value = (array_key_exists('default', $fields) ? $fields['default'] : '');
             }
 
-            $output = '<textarea name="' . $field_name . '" id="textarea-editor-' . $field_name . '">' . esc_textarea($field_value) . '</textarea>' . "\n";
-            $output .= '<div id="editor-' . $field_name . '"';
+            $output = '<textarea name="' . esc_attr($field_name) . '" id="textarea-editor-' . esc_attr($field_name) . '">' . esc_textarea($field_value) . '</textarea>' . "\n";
+            $output .= '<div id="editor-' . esc_attr($field_name) . '"';
             $output .= ' class="ace-editor ace-editor-display-element"';
-            $output .= ' data-target_textarea="#textarea-editor-' . $field_name . '"';
+            $output .= ' data-target_textarea="#textarea-editor-' . esc_attr($field_name) . '"';
             if (array_key_exists('mode', $fields)) {
-                $output .= ' data-editor_mode="' . $fields['mode'] . '"';
+                $output .= ' data-editor_mode="' . esc_attr($fields['mode']) . '"';
             }
             $output .= '>';
             $output .= '</div>' . "\n";
@@ -450,13 +541,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
          * @param array $fields Fields array.
          * @param array $options_values Options values.
          * @return string Return rendered input.
-         * @throws \InvalidArgumentException Throw exception if provided argument type is invalid.
          */
         private function renderFormEditor($field_key, array $fields, array $options_values = [])
         {
-            if (!is_numeric($field_key)) {
-                throw new \InvalidArgumentException('The argument `$field_key` must be integer.');
-            }
             $field_name = (array_key_exists('id', $fields) ? $fields['id'] : $field_key);
             if (is_array($options_values) && array_key_exists($field_name, $options_values)) {
                 $field_value = $options_values[$field_name];
@@ -469,10 +556,12 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
                 $settings = $fields['editor_settings'];
             }
 
+            $output = '<!-- start output editor ' . esc_html($field_name) . ' -->' . "\n";
             ob_start();
             wp_editor($field_value, $field_name, $settings);
-            $output = ob_get_contents();
+            $output .= ob_get_contents();
             ob_end_clean();
+            $output .= "\t\t\t\t\t\t\t" . '<!-- end output editor ' . esc_html($field_name) . ' -->' . "\n";
 
             unset($field_name, $field_value, $settings);
             return $output;
@@ -486,13 +575,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
          * @param array $fields Fields array.
          * @param array $options_values Options values.
          * @return string Return rendered input.
-         * @throws \InvalidArgumentException Throw exception if provided argument type is invalid.
          */
         private function renderFormInput($field_key, array $fields, array $options_values = [])
         {
-            if (!is_numeric($field_key)) {
-                throw new \InvalidArgumentException('The argument `$field_key` must be integer.');
-            }
             $field_type = (array_key_exists('type', $fields) ? $fields['type'] : 'text');
 
             if ('checkbox' === $field_type) {
@@ -547,13 +632,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
          * @param array $fields Fields array.
          * @param array $options_values Options values.
          * @return string Return rendered input.
-         * @throws \InvalidArgumentException Throw exception if provided argument type is invalid.
          */
         private function renderFormInputCheckbox($field_key, array $fields, array $options_values = [])
         {
-            if (!is_numeric($field_key)) {
-                throw new \InvalidArgumentException('The argument `$field_key` must be integer.');
-            }
             // get default values. (for array check box only).
             if (array_key_exists('default', $fields)) {
                 $field_value_array = (array) $fields['default'];
@@ -645,13 +726,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
          * @param array $fields Fields array.
          * @param array $options_values Options values.
          * @return string Return rendered input.
-         * @throws \InvalidArgumentException Throw exception if provided argument type is invalid.
          */
         private function renderFormInputRadio($field_key, array $fields, array $options_values = [])
         {
-            if (!is_numeric($field_key)) {
-                throw new \InvalidArgumentException('The argument `$field_key` must be integer.');
-            }
             $field_name = (array_key_exists('id', $fields) ? $fields['id'] : '');
             // check values
             if (is_array($options_values) && array_key_exists($field_name, $options_values)) {
@@ -718,16 +795,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
          * @param array $fields Fields array.
          * @param array $options_values Options values.
          * @return string Return rendered input.
-         * @throws \InvalidArgumentException Throw exception if provided argument type is invalid.
          */
         private function renderFormMedia($field_key, array $fields, array $options_values = [])
         {
-            if (!is_numeric($field_key)) {
-                throw new \InvalidArgumentException('The argument `$field_key` must be integer.');
-            }
-            wp_enqueue_script('jquery');
-            wp_enqueue_media();
-
             $field_name = (array_key_exists('id', $fields) ? $fields['id'] : $field_key);
             // check values
             $field_values = [];
@@ -761,8 +831,8 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
                 }
                 $output .= '</div>' . "\n";
             }
-            $output .= '<input type="button" class="button-secondary upload-media-button" value="' . __('Upload', 'okv-oauth') . '" data-input_target="' . esc_attr($field_name) . '">' . "\n";
-            $output .= '<input type="button" class="button-secondary remove-media-button" value="' . __('Remove', 'okv-oauth') . '" data-input_target="' . esc_attr($field_name) . '">' . "\n";
+            $output .= '<input type="button" class="button-secondary upload-media-button" value="' . esc_attr__('Upload', $this->tranlsation_text_domain) . '" data-input-target="' . esc_attr($field_name) . '">' . "\n";
+            $output .= '<input type="button" class="button-secondary remove-media-button" value="' . esc_attr__('Remove', $this->tranlsation_text_domain) . '" data-input-target="' . esc_attr($field_name) . '">' . "\n";
 
             unset($field_name, $field_values, $preview_mode);
             return $output;
@@ -776,13 +846,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
          * @param array $fields Fields array.
          * @param array $options_values Options values.
          * @return string Return rendered input.
-         * @throws \InvalidArgumentException Throw exception if provided argument type is invalid.
          */
         private function renderFormSelectbox($field_key, array $fields, array $options_values = [])
         {
-            if (!is_numeric($field_key)) {
-                throw new \InvalidArgumentException('The argument `$field_key` must be integer.');
-            }
             $field_type = (array_key_exists('type', $fields) ? $fields['type'] : 'text');
             $field_name = (array_key_exists('id', $fields) ? $fields['id'] : $field_key);
             // check values
@@ -848,13 +914,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
          * @param array $fields Fields array.
          * @param array $options_values Options values.
          * @return string Return rendered input.
-         * @throws \InvalidArgumentException Throw exception if provided argument type is invalid.
          */
         private function renderFormTextarea($field_key, array $fields, array $options_values = [])
         {
-            if (!is_numeric($field_key)) {
-                throw new \InvalidArgumentException('The argument `$field_key` must be integer.');
-            }
             $field_type = (array_key_exists('type', $fields) ? $fields['type'] : 'text');
             $field_name = (array_key_exists('id', $fields) ? $fields['id'] : $field_key);
             // check values
