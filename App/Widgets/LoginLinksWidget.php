@@ -28,7 +28,7 @@ if (!class_exists('\\OKVOauth\\App\\Widgets\\LoginLinksWidget')) {
         public function __construct()
         {
             parent::__construct(
-                'rdoauth_loginlinks_widget', // base ID
+                'okv_oauth_loginlinks_widget', // base ID
                 __('Login links widget', 'okv-oauth'), 
                 [
                     'description' => __('Display links to login, logout, and other (depend on settings).', 'okv-oauth'),
