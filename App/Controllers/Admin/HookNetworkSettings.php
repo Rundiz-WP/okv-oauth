@@ -27,9 +27,9 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\HookNetworkSettings')) {
             if (is_admin() && is_multisite() && 'settings.php' === $hook) {
                 $this->init();
 
-                wp_enqueue_script('rd-oauth-adminnetworksettings', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/Admin/rd-oauth-adminnetworksettings.js', ['jquery'], OKVOAUTH_VERSION, true);
+                wp_enqueue_script('okv-oauth-admin-network-settings', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/Admin/rd-oauth-adminnetworksettings.js', ['jquery'], OKVOAUTH_VERSION, true);
                 wp_localize_script(
-                    'rd-oauth-adminnetworksettings',
+                    'okv-oauth-admin-network-settings',
                     'RdOauthAdminNetworkSettings',
                     [
                         'loginMethod' => $this->loginMethod,

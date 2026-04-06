@@ -33,8 +33,8 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\StylesAndScripts')) {
          */
         public function registerStylesAndScripts()
         {
-            wp_register_style('rd-oauth-login', plugin_dir_url(OKVOAUTH_FILE) . 'assets/css/rd-oauth-login.css', [], OKVOAUTH_VERSION);
-            wp_register_style('rd-oauth-font-awesome6', plugin_dir_url(OKVOAUTH_FILE) . 'assets/vendor/fontawesome/css/all.min.css', [], '6.7.2');
+            wp_register_style('okv-oauth-login-css', plugin_dir_url(OKVOAUTH_FILE) . 'assets/css/rd-oauth-login.css', [], OKVOAUTH_VERSION);
+            wp_register_style('okv-oauth-font-awesome6', plugin_dir_url(OKVOAUTH_FILE) . 'assets/vendor/fontawesome/css/all.min.css', [], '6.7.2');
         }// registerStylesAndScripts
 
 

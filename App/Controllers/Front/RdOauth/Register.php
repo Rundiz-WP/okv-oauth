@@ -107,13 +107,13 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\RdOauth\\Register')) {
          */
         public function registerScripts()
         {
-            if (!wp_script_is('rd-oauth-login', 'registered')) {
+            if (!wp_script_is('okv-oauth-login-js', 'registered')) {
                 $StylesAndScripts = new \OKVOauth\App\Libraries\StylesAndScripts();
                 $StylesAndScripts->registerStylesAndScripts();
                 unset($StylesAndScripts);
             }
 
-            wp_enqueue_style('rd-oauth-login');
+            wp_enqueue_style('okv-oauth-login-css');
         }// registerScripts
 
 

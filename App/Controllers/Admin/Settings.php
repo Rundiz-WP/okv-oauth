@@ -102,18 +102,18 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Settings')) {
          */
         public function registerScripts()
         {
-            if (!wp_script_is('rd-oauth-font-awesome6', 'registered')) {
+            if (!wp_script_is('okv-oauth-font-awesome6', 'registered')) {
                 $StylesAndScripts = new \OKVOauth\App\Libraries\StylesAndScripts();
                 $StylesAndScripts->registerStylesAndScripts();
                 unset($StylesAndScripts);
             }
 
             // to name fontawesome handle as `plugin-name-prefix-font-awesome6` is to prevent conflict with other plugins that maybe use older version but same handle that cause some newer icons in this plugin disappears.
-            wp_enqueue_style('rd-oauth-font-awesome6');
-            wp_enqueue_style('rd-oauth-rd-settings-tabs-css', plugin_dir_url(OKVOAUTH_FILE) . 'assets/css/Admin/rd-settings-tabs.css', [], OKVOAUTH_VERSION);
-            wp_enqueue_script('rd-oauth-rd-settings-tabs-js', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/Admin/rd-settings-tabs.js', [], OKVOAUTH_VERSION, true);
+            wp_enqueue_style('okv-oauth-font-awesome6');
+            wp_enqueue_style('okv-oauth-rd-settings-tabs-css', plugin_dir_url(OKVOAUTH_FILE) . 'assets/css/Admin/rd-settings-tabs.css', [], OKVOAUTH_VERSION);
+            wp_enqueue_script('okv-oauth-rd-settings-tabs-js', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/Admin/rd-settings-tabs.js', [], OKVOAUTH_VERSION, true);
 
-            wp_enqueue_style('rd-oauth-rd-settings-customstyle-css', plugin_dir_url(OKVOAUTH_FILE) . 'assets/css/Admin/rd-settings-customstyle.css', [], OKVOAUTH_VERSION);
+            wp_enqueue_style('okv-oauth-rd-settings-customstyle-css', plugin_dir_url(OKVOAUTH_FILE) . 'assets/css/Admin/rd-settings-customstyle.css', [], OKVOAUTH_VERSION);
         }// registerScripts
 
 

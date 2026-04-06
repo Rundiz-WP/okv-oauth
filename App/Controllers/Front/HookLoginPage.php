@@ -26,8 +26,8 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         public function adminEnqueueScripts($hook)
         {
             if (is_admin() && 'profile.php' === $hook) {
-                wp_enqueue_style('rd-oauth-login');
-                wp_enqueue_style('rd-oauth-font-awesome6');
+                wp_enqueue_style('okv-oauth-login-css');
+                wp_enqueue_style('okv-oauth-font-awesome6');
             }
         }// adminEnqueueScripts
 
@@ -254,7 +254,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if (!wp_script_is('rd-oauth-font-awesome6', 'registered')) {
+            if (!wp_script_is('okv-oauth-font-awesome6', 'registered')) {
                 $StylesAndScripts = new \OKVOauth\App\Libraries\StylesAndScripts();
                 $StylesAndScripts->registerStylesAndScripts();
                 unset($StylesAndScripts);
@@ -274,9 +274,9 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     case 'logout':
                     case 'lostpassword':
                         if (2 === $this->loginMethod) {
-                            wp_enqueue_script('rd-oauth-lostpassword', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-lostpassword.js', ['jquery'], OKVOAUTH_VERSION, true);
+                            wp_enqueue_script('okv-oauth-lostpassword', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-lostpassword.js', ['jquery'], OKVOAUTH_VERSION, true);
                             wp_localize_script(
-                                'rd-oauth-lostpassword', 
+                                'okv-oauth-lostpassword', 
                                 'RdOauthLostPassword', 
                                 [
                                     'loginMethod' => $this->loginMethod,
@@ -291,15 +291,15 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     case 'register':
                     case 'login':
                     default:
-                        wp_enqueue_style('rd-oauth-login');
-                        wp_enqueue_style('rd-oauth-font-awesome6');
+                        wp_enqueue_style('okv-oauth-login-css');
+                        wp_enqueue_style('okv-oauth-font-awesome6');
                 }
 
                 if (isset($action) && 'register' === $action) {
                     // if in register page.
-                    wp_enqueue_script('rd-oauth-register', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-register.js', ['jquery'], OKVOAUTH_VERSION, true);
+                    wp_enqueue_script('okv-oauth-register', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-register.js', ['jquery'], OKVOAUTH_VERSION, true);
                     wp_localize_script(
-                        'rd-oauth-register', 
+                        'okv-oauth-register', 
                         'RdOauthRegister', 
                         [
                             'loginMethod' => $this->loginMethod,
@@ -307,9 +307,9 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     );
                 } elseif (isset($action) && 'login' === $action) {
                     // if in login page.
-                    wp_enqueue_script('rd-oauth-login', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-login.js', ['jquery'], OKVOAUTH_VERSION, true);
+                    wp_enqueue_script('okv-oauth-login-js', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-login.js', ['jquery'], OKVOAUTH_VERSION, true);
                     wp_localize_script(
-                        'rd-oauth-login', 
+                        'okv-oauth-login-js', 
                         'RdOauthLogin', 
                         [
                             'loginMethod' => $this->loginMethod,
@@ -715,18 +715,18 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
         {
             $this->init();
 
-            if (!wp_script_is('rd-oauth-font-awesome6', 'registered')) {
+            if (!wp_script_is('okv-oauth-font-awesome6', 'registered')) {
                 $StylesAndScripts = new \OKVOauth\App\Libraries\StylesAndScripts();
                 $StylesAndScripts->registerStylesAndScripts();
                 unset($StylesAndScripts);
             }
 
-            wp_enqueue_style('rd-oauth-login');
-            wp_enqueue_style('rd-oauth-font-awesome6');
-            wp_enqueue_script('rd-oauth-wpsignup', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-wpsignup.js', ['jquery'], OKVOAUTH_VERSION, true);
+            wp_enqueue_style('okv-oauth-login-css');
+            wp_enqueue_style('okv-oauth-font-awesome6');
+            wp_enqueue_script('okv-oauth-wpsignup', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-wpsignup.js', ['jquery'], OKVOAUTH_VERSION, true);
             $active_signup = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
             wp_localize_script(
-                'rd-oauth-wpsignup', 
+                'okv-oauth-wpsignup', 
                 'RdOauthRegister', 
                 [
                     'active_signup' => $active_signup,

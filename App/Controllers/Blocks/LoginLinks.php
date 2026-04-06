@@ -24,7 +24,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Blocks\\LoginLinks')) {
             );
 
             if (function_exists('wp_set_script_translations')) {
-                wp_set_script_translations('rd-oauth-loginlinks-block-script', 'okv-oauth', str_replace([DIRECTORY_SEPARATOR], '/', plugin_dir_path(OKVOAUTH_FILE)) . 'languages');
+                wp_set_script_translations('okv-oauth-loginlinks-block-script', 'okv-oauth', str_replace([DIRECTORY_SEPARATOR], '/', plugin_dir_path(OKVOAUTH_FILE)) . 'languages');
             }
         }// registerBlock
 
