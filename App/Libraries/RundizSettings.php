@@ -2,7 +2,7 @@
 /**
  * Rundiz Settings class for render pre-setup values. This will render tabs, form fields and content in each tabs.
  * 
- * Last update: 2026-04-04
+ * Last update: 2026-04-08
  * 
  * @package okv-oauth
  * 
@@ -827,7 +827,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
             if ('preview_all' === $preview_mode || 'preview_img' === $preview_mode || 'no_preview_url' === $preview_mode) {
                 $output .= '<div class="image-preview image-preview-' . esc_attr($field_name) . '">';
                 if (is_array($field_values) && array_key_exists('thumbnail', $field_values) && '' !== $field_values['thumbnail']) {
-                    $output .= '<img src="' . esc_attr($field_values['thumbnail']) . '" alt="">';
+                    $output .= '<img src="' . esc_url($field_values['thumbnail']) . '" alt="">';
                 }
                 $output .= '</div>' . "\n";
             }
