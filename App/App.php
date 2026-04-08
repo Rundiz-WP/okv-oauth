@@ -18,12 +18,6 @@ if (!class_exists('\\OKVOauth\\App\\App')) {
 
 
         /**
-         * @var \OKVOauth\App\Libraries\Loader
-         */
-        public $Loader;
-
-
-        /**
          * Run the WP plugin app.
          */
         public function run()
@@ -34,8 +28,9 @@ if (!class_exists('\\OKVOauth\\App\\App')) {
             unset($StylesAndScripts);
 
             // Initialize the loader class.
-            $this->Loader = new \OKVOauth\App\Libraries\Loader();
-            $this->Loader->autoRegisterControllers();
+            $Loader = new \OKVOauth\App\Libraries\Loader();
+            $Loader->autoRegisterControllers();
+            unset($Loader);
 
             // Register all widgets.
             $WidgetAutoRegister = new Widgets\AutoRegisterWidgets();
