@@ -10,6 +10,11 @@
 namespace OKVOauth\App\Controllers\Admin\Plugins;
 
 
+if (!defined('ABSPATH')) {
+    exit();
+}
+
+
 if (!class_exists('\\OKVOauth\App\Controllers\Admin\Plugins\\Deactivation')) {
     /**
      * Plugin deactivation hook class.

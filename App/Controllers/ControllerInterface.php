@@ -10,6 +10,7 @@
 
 namespace OKVOauth\App\Controllers;
 
+
 if (!interface_exists('\\OKVOauth\\App\\Controllers\\ControllerInterface')) {
     /**
      * The controller interface that have required methods to register hooks, and more.<br>

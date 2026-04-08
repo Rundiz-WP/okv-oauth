@@ -9,6 +9,9 @@
 namespace OKVOauth\App;
 
 if (!trait_exists('\\OKVOauth\\App\\AppTrait')) {
+    /**
+     * Main application trait.
+     */
     trait AppTrait
     {
 
@@ -16,16 +19,21 @@ if (!trait_exists('\\OKVOauth\\App\\AppTrait')) {
         /**
          * Main option name.
          * 
-         * @var string set main option name of this plugin. the name should be english, number, underscore, or anycharacters that can be set to variable. for example: 'okv_oauth_options' will be set to $okv_oauth_options
-         * @uses call this trait method $this->getOptions(); before access $okv_oauth_options in global variable.
+         * @var string Set main option name of this plugin. the name should be english, number, underscore, 
+         *              or any characters that can be set to variable. 
+         *              For example: `'okv_oauth_options'` will be set to `$okv_oauth_options`
+         * @uses Call the trait method `getOptions();` before access `$okv_oauth_options` in global variable.
          */
         public $main_option_name = 'okv_oauth_options';
 
         /**
          * All available options.
-         * these options will be accessible via main option name variable. for example: options name 'the_name' can call from $okv_oauth_options['the_name'];.
          * 
-         * @var array set all options available for this plugin. it must be 2d array (key => default value, key2 => default value, ...)
+         * These options will be accessible via main option name variable. 
+         * For example: options name `'the_name'` can call from `$okv_oauth_options['the_name'];`.
+         * If you want to access this property, please call to `setupAllOptions()` method first.
+         * 
+         * @var array Set all options available for this plugin. it must be 2D array (`key => default value, key2 => default value, ...`)
          */
         public $all_options = [
             'okv_oauth_db_version' => '1.0',
@@ -35,7 +43,7 @@ if (!trait_exists('\\OKVOauth\\App\\AppTrait')) {
         /**
          * Get all options of this plugin.
          * 
-         * @return array return array value of all options.
+         * @return array Return associative array value of all options where the key is option name.
          */
         public function getOptions()
         {
@@ -59,8 +67,8 @@ if (!trait_exists('\\OKVOauth\\App\\AppTrait')) {
         /**
          * Save options.
          * 
-         * @param array $data array of submitted data in key => value
-         * @return bool return true if saved successfully. return false if not updated.
+         * @param array $data The associative array of submitted data in key => value
+         * @return bool Return `true` if saved successfully. return `false` if not updated.
          */
         public function saveOptions(array $data)
         {
@@ -76,7 +84,11 @@ if (!trait_exists('\\OKVOauth\\App\\AppTrait')) {
 
         /**
          * Setup all options from settings config file.
-         * you have to call this method in activation, settings controller
+         * 
+         * This will be set all config settings into `all_options` property.
+         * You have to call this method if you want to call to `all_options` property.
+         * 
+         * This method will not load saved settings data from DB. The value in settings fields are all default value.
          */
         public function setupAllOptions()
         {
@@ -84,6 +96,7 @@ if (!trait_exists('\\OKVOauth\\App\\AppTrait')) {
             $loader = new \OKVOauth\App\Libraries\Loader();
             $config_values = $loader->loadConfig();
             if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
+                // if there is config value about config file.
                 $settings_config_file = $config_values['rundiz_settings_config_file'];
             } else {
                 echo 'Settings configuration file was not set.';
