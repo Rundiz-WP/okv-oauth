@@ -2,14 +2,14 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rundiz OAuth 1.7.2\n"
+"Project-Id-Version: Rundiz OAuth 1.7.3\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-04-08T22:24:21+07:00\n"
+"POT-Creation-Date: 2026-07-20T16:04:54+07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: okv-oauth\n"
@@ -362,10 +362,10 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#. translators: %s The DB version of this plugin.
+#. translators: %s The DB settings version of this plugin.
 #: App/Controllers/Admin/Plugins.php:98
 #, php-format
-msgid "DB version %s"
+msgid "DB settings version %s"
 msgstr ""
 
 #: App/Controllers/Admin/Plugins.php:102
@@ -373,28 +373,28 @@ msgid "Donate"
 msgstr ""
 
 #. translators: %1$s current PHP version.
-#: App/Controllers/Admin/Plugins/Activation.php:67
+#: App/Controllers/Admin/Plugins/Activation.php:84
 #, php-format
 msgid "You are using PHP %1$s which does not meet minimum requirement. Please consider upgrade PHP version or contact plugin author for this help."
 msgstr ""
 
 #. translators: %1$s minimum PHP version required.
-#: App/Controllers/Admin/Plugins/Activation.php:75
+#: App/Controllers/Admin/Plugins/Activation.php:92
 #, php-format
 msgid "Minimum PHP requirement: %1$s."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Activation.php:79
+#: App/Controllers/Admin/Plugins/Activation.php:96
 msgid "Minimum requirement of PHP version does not meet."
 msgstr ""
 
 #. translators: %1$s Current WordPress version, %2$s Required WordPress version.
-#: App/Controllers/Admin/Plugins/Activation.php:88
+#: App/Controllers/Admin/Plugins/Activation.php:105
 #, php-format
 msgid "Your WordPress version does not meet the requirement. (%1$s < %2$s)."
 msgstr ""
 
-#: App/Controllers/Admin/Plugins/Activation.php:93
+#: App/Controllers/Admin/Plugins/Activation.php:110
 msgid "Minimum requirement of WordPress version does not meet."
 msgstr ""
 
@@ -407,11 +407,11 @@ msgstr ""
 msgid "You do not have permission to access this page."
 msgstr ""
 
-#: App/Controllers/Admin/Settings.php:85
+#: App/Controllers/Admin/Settings.php:84
 msgid "Settings configuration file was not set."
 msgstr ""
 
-#: App/Controllers/Admin/Settings.php:116
+#: App/Controllers/Admin/Settings.php:115
 msgid "Settings saved."
 msgstr ""
 
