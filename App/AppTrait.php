@@ -80,9 +80,13 @@ if (!trait_exists('\\OKVOauth\\App\\AppTrait')) {
          * 
          * This method is in main AppTrait.
          * 
+         * @param array $options The method options:  
+         *      `process_display_cb` (bool) Set to `true` to process the option `display_callback`. Set to `false` to skip it. Default is `true`.  
+         *          This is in some cases, the class may call this method from inside `__construct()` unavoidable. 
+         *          It may cause translation function trigger error calling it too early. Set to `false` will not process it, but it can be done manually later.  
          * @return array Return associative array value of all options where the key is option name.
          */
-        public function getOptions()
+        public function getOptions(array $options = [])
         {
             $option_name = $this->main_option_name;
             global ${$option_name};// phpcs:ignore PHPCompatibility.Variables.ForbiddenGlobalVariableVariable.NonBareVariableFound
@@ -101,20 +105,23 @@ if (!trait_exists('\\OKVOauth\\App\\AppTrait')) {
                     }
                 }
 
-                // process data before save with `save_callback` option. -----------------------------
-                $config_values = $this->getLoader()->loadConfig();
-                $settings_config_file = '';
-                if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
-                    // if there is config value about config file.
-                    $settings_config_file = $config_values['rundiz_settings_config_file'];
-                }
-                unset($config_values);
+                if (!isset($options['process_display_cb']) || true === $options['process_display_cb']) {
+                    // if there is option `process_display_cb` was set to `true` or default (unset).
+                    // process data before use with `display_callback` option. -----------------------------
+                    $config_values = $this->getLoader()->loadConfig();
+                    $settings_config_file = '';
+                    if (is_array($config_values) && array_key_exists('rundiz_settings_config_file', $config_values)) {
+                        // if there is config value about config file.
+                        $settings_config_file = $config_values['rundiz_settings_config_file'];
+                    }
+                    unset($config_values);
 
-                $RundizSettings = new \OKVOauth\App\Libraries\RundizSettings();
-                $RundizSettings->settings_config_file = $settings_config_file;
-                $get_option = $RundizSettings->processDisplayCallback($get_option);
-                unset($RundizSettings, $settings_config_file);
-                // end process data before save with `save_callback` option. -------------------------
+                    $RundizSettings = new \OKVOauth\App\Libraries\RundizSettings();
+                    $RundizSettings->settings_config_file = $settings_config_file;
+                    $get_option = $RundizSettings->processDisplayCallback($get_option);
+                    unset($RundizSettings, $settings_config_file);
+                    // end process data before use with `display_callback` option. -------------------------
+                }// endif; $options['process_display_cb']
 
                 ${$option_name} = (array) $get_option;// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
             }
