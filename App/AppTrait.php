@@ -94,6 +94,7 @@ if (!trait_exists('\\OKVOauth\\App\\AppTrait')) {
                 // `get_option()` already unserializes internally - no need to re-run `maybe_unserialize()`.
                 if (is_string($get_option)) {
                     // if older version of this plugin may still use manual serialize/unserialize.
+                    // @todo[rundiz] delete this `if` block on version 2.0+
                     $get_option = maybe_unserialize($get_option);
                     if (!is_array($get_option)) {
                         $get_option = [];
