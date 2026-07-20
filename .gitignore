@@ -3,3 +3,11 @@
 /.phpunit.cache
 /.phpunit.result.cache
 /node_modules/
+
+# Eclipse ignore files.
+/.settings/
+/.buildpath
+/.project
+
+# Visual Studio Code file.
+/.vscode/

@@ -44,6 +44,12 @@ if (!class_exists('\\OKVOauth\App\Controllers\Admin\Plugins\\Upgrader')) {
          */
         public function detectPluginUpdate()
         {
+            if (!is_admin()) {
+                // if not admin pages.
+                // no need to work here.
+                return;
+            }
+
             if (get_transient(static::PLUGIN_UPDATED_TRANSIENT_NAME) && current_user_can('update_plugins')) {
                 // if there is updated transient and current user can update plugins.
                 // trigger activate to make things up to date.

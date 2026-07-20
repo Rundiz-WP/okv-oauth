@@ -7,7 +7,6 @@
 *.inc text
 *.ini text
 *.txt text
-*.xml text
 
 # Declare files that will always have LF line endings on checkout.
 .htaccess text eol=lf
@@ -20,6 +19,7 @@
 *.map text eol=lf
 *.md text eol=lf
 *.mjs text eol=lf
+*.mo text eol=lf
 *.php text eol=lf
 *.po text eol=lf
 *.pot text eol=lf
@@ -27,7 +27,6 @@
 *.scss text eol=lf
 *.sql text eol=lf
 *.svg text eol=lf
-*.txt text eol=lf
 *.xml text eol=lf
 *.yml text eol=lf
 
@@ -52,11 +51,11 @@
 # End line ending normalization. ----------------------
 
 # Export ignore folders, files.
-.dev-notes export-ignore
+/.dev-notes export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
 .phpcs.xml.dist export-ignore
-node_tasks export-ignore
-package-lock.json export-ignore
-phpunit.xml.dist export-ignore
-tests export-ignore
+/node_tasks export-ignore
+/package-lock.json export-ignore
+/phpunit.xml.dist export-ignore
+/tests export-ignore

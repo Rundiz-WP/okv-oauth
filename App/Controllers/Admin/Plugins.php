@@ -46,7 +46,7 @@ if (!class_exists('\\OKVOauth\App\Controllers\Admin\\Plugins')) {
             
             if ($plugin === $plugin_file) {
                 $link = [];
-                $link['settings'] = '<a href="' . esc_url(get_admin_url(null, 'options-general.php?page=' . Settings::SETTING_MENU_SLUG)) . '">' . __('Settings', 'okv-oauth') . '</a>';
+                $link['settings'] = '<a href="' . esc_url(get_admin_url(null, 'options-general.php?page=' . Settings::MENU_SLUG)) . '">' . __('Settings', 'okv-oauth') . '</a>';
                 $actions = array_merge($link, $actions);
                 unset($link);
                 //$actions['after_actions'] = '<a href="#" onclick="return false;">' . __('After Actions', 'okv-oauth') . '</a>';
@@ -90,12 +90,12 @@ if (!class_exists('\\OKVOauth\App\Controllers\Admin\\Plugins')) {
                 $configValues = $this->getOptions();
                 if (
                     is_array($configValues) && 
-                    array_key_exists('rdsfw_plugin_db_version', $configValues) && 
-                    is_scalar($configValues['rdsfw_plugin_db_version']) && 
-                    !empty($configValues['rdsfw_plugin_db_version'])
+                    array_key_exists('db_settings_version', $configValues) && 
+                    is_scalar($configValues['db_settings_version']) && 
+                    !empty($configValues['db_settings_version'])
                 ) {
-                    /* translators: %s The DB version of this plugin. */
-                    $after_link[] = sprintf(__('DB version %s', 'okv-oauth'), $configValues['rdsfw_plugin_db_version']);
+                    /* translators: %s The DB settings version of this plugin. */
+                    $after_link[] = sprintf(__('DB settings version %s', 'okv-oauth'), $configValues['db_settings_version']);
                 }
                 unset($configValues);
 

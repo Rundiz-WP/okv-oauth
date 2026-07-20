@@ -9,6 +9,11 @@
 namespace OKVOauth\App;
 
 
+if (!defined('ABSPATH')) {
+    exit();
+}
+
+
 if (!class_exists('\\OKVOauth\\App\\App')) {
     /**
      * Plugin application main entry class.
