@@ -301,7 +301,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\Plugins\\Activation')) {
             } else {
                 // if there is no config value about config file.
                 wp_die(
-                    esc_html__('Settings configuration file was not set.', 'plugin-template')
+                    esc_html__('Settings configuration file was not set.', 'okv-oauth')
                 );
                 exit(1);
             }
