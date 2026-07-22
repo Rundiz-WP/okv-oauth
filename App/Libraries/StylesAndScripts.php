@@ -1,7 +1,7 @@
 <?php
 /**
  * Common styles (CSS) and scripts (JS).
- *
+ * 
  * @package okv-oauth
  */
 
@@ -37,7 +37,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\StylesAndScripts')) {
          * Register admin styles and scripts.
          * 
          * Use for register only, do not enqueue here.
-         *
+         * 
          * The asset handle name will be added more specific name related to this plugin only to prevent the situation as the example below.  
          * Example:  
          * User has plugin AAA installed with this plugin.  
@@ -46,7 +46,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\StylesAndScripts')) {
          * This plugin is using `.sattellite-dish-icon` class but this plugin was loaded after plugin AAA, that means the CSS asset from this plugin will not be loaded.  
          * The asset class that this plugin is using will never work.  
          * To prevent this situation, the asset handle name **must** be more specific to the plugin.
-         *
+         * 
          * @since 1.7.2
          * @link https://developer.wordpress.org/reference/functions/wp_register_style/ Function reference.
          * @link https://github.com/WordPress/WordPress/blob/master/wp-includes/functions.wp-scripts.php The register style function `wp_add_inline_script` make a called to `_wp_scripts_maybe_doing_it_wrong()`.  
@@ -69,9 +69,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\StylesAndScripts')) {
          * Register front-end & admin stylesheets and scripts for common use later.
          * 
          * Use for register only, do not enqueue here.
-         *
+         * 
          * Use more specific asset handle name. To see more description please read on `registerAdminStylesAndScripts()` method.
-         *
+         * 
          * @see \OKVOauth\App\Libraries\StylesAndScripts::registerAdminStylesAndScripts() For more details.
          */
         public function registerStylesAndScripts()

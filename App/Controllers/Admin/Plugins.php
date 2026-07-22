@@ -39,19 +39,19 @@ if (!class_exists('\\OKVOauth\App\Controllers\Admin\\Plugins')) {
         public function actionLinks(array $actions, $plugin_file)
         {
             static $plugin;
-            
+
             if (!isset($plugin)) {
                 $plugin = plugin_basename(OKVOAUTH_FILE);
             }
-            
+
             if ($plugin === $plugin_file) {
                 $link = [];
-                $link['settings'] = '<a href="' . esc_url(get_admin_url(null, 'options-general.php?page=' . Settings::MENU_SLUG)) . '">' . __('Settings', 'okv-oauth') . '</a>';
+                $link['settings'] = '<a href="' . esc_url(get_admin_url(null, 'options-general.php?page=' . rawurlencode(Settings::MENU_SLUG))) . '">' . __('Settings', 'okv-oauth') . '</a>';
                 $actions = array_merge($link, $actions);
                 unset($link);
                 //$actions['after_actions'] = '<a href="#" onclick="return false;">' . __('After Actions', 'okv-oauth') . '</a>';
             }
-            
+
             return $actions;
         }// actionLinks
 
@@ -79,11 +79,11 @@ if (!class_exists('\\OKVOauth\App\Controllers\Admin\\Plugins')) {
         public function rowMeta(array $links, $file)
         {
             static $plugin;
-            
+
             if (!isset($plugin)) {
                 $plugin = plugin_basename(OKVOAUTH_FILE);
             }
-            
+
             if ($plugin === $file) {
                 $after_link = [];
 
@@ -104,7 +104,7 @@ if (!class_exists('\\OKVOauth\App\Controllers\Admin\\Plugins')) {
                 $links = array_merge($links, $after_link);
                 unset($after_link);
             }
-            
+
             return $links;
         }// rowMeta
 

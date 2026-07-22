@@ -1,7 +1,7 @@
 <?php
 /**
  * Upgrade or update the plugin action.
- *
+ * 
  * @package okv-oauth
  * @since 1.7.2
  */
@@ -36,10 +36,10 @@ if (!class_exists('\\OKVOauth\App\Controllers\Admin\Plugins\\Upgrader')) {
 
         /**
          * Detect this plugin updated and display link or maybe redirect to manual update page.
-         *
+         * 
          * This method will be run as new version of code.<br>
          * To understand more about new version of code, please read more on `updateProcessComplete()` method.
-         *
+         * 
          * @link https://codex.wordpress.org/Plugin_API/Action_Reference/admin_notices Reference.
          */
         public function detectPluginUpdate()
@@ -54,7 +54,7 @@ if (!class_exists('\\OKVOauth\App\Controllers\Admin\Plugins\\Upgrader')) {
                 // if there is updated transient and current user can update plugins.
                 // trigger activate to make things up to date.
                 $Activation = new Activation();
-                $okv_oauth_options = $this->getOptions();
+                $okv_oauth_options = $this->getOptions(['process_display_cb' => false]);
 
                 if (is_multisite()) {
                     // this site is multisite. activate on all site.
@@ -92,13 +92,13 @@ if (!class_exists('\\OKVOauth\App\Controllers\Admin\Plugins\\Upgrader')) {
 
         /**
          * After update plugin completed.
-         *
+         * 
          * This method will be called while running the current version of this plugin, not the new one that just updated.
          * For example: You are running 1.0 and just updated to 2.0. The 2.0 version will not working here yet but 1.0 is working.
          * So, any code here will not work as the new version. Please be aware!
-         *
+         * 
          * This method will add the transient to be able to detect updated and run the manual update in `detectPluginUpdate()` method.
-         *
+         * 
          * @link https://developer.wordpress.org/reference/hooks/upgrader_process_complete/ Reference.
          * @link https://developer.wordpress.org/reference/classes/wp_upgrader/ Reference.
          * @param \WP_Upgrader $upgrader The `\WP_Upgrader` class.

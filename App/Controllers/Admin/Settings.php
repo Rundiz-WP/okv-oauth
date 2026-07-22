@@ -1,7 +1,7 @@
 <?php
 /**
  * Add settings sub menu and page into the Settings menu.
- *
+ * 
  * Original source last update: 2026-04-11
  * 
  * @package okv-oauth

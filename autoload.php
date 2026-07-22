@@ -3,6 +3,7 @@
  * Auto loader file.
  * 
  * @package okv-oauth
+ * @link http://www.php-fig.org/psr/psr-4/examples/ copy from here.
  */
 
 
@@ -19,10 +20,9 @@ if (!defined('ABSPATH')) {
  * from /path/to/project/src/Baz/Qux.php:
  * 
  *      new \Foo\Bar\Baz\Qux;
- *      
+ * 
  * @param string $class The fully-qualified class name.
  * @return void
- * @link http://www.php-fig.org/psr/psr-4/examples/ copy from here.
  */
 spl_autoload_register(function ($class) {// phpcs:ignore Universal.NamingConventions.NoReservedKeywordParameterNames.classFound
 

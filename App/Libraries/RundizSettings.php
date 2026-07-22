@@ -269,7 +269,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
             }
             // .tab-content
             $output .= "\t" . '</div>' . "\n";
-            
+
             // .rd-settings-tabs
             $output .= '</div><!--.rd-settings-tabs-->' . "\n";
 
@@ -748,7 +748,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
                                 if (is_array($options_values) && array_key_exists($checkbox_id, $options_values)) {
                                     $field_value = $options_values[$checkbox_id];
                                 }
-                                
+
                                 if (isset($field_value) && strval($checkboxes['value']) === strval($field_value)) {
                                     $output .= ' checked="checked"';
                                 }

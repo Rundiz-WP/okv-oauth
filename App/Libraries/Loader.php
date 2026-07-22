@@ -1,7 +1,7 @@
 <?php
 /**
  * Loader class. This class will load anything for example: views, template, configuration file.
- *
+ * 
  * @package okv-oauth
  */
 
@@ -42,9 +42,10 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\Loader')) {
                             $TestClass->implementsInterface('\\OKVOauth\\App\\Controllers\\ControllerInterface')
                         ) {
                             $ControllerClass = new $this_file_classname();
-                            if (method_exists($ControllerClass, 'registerHooks')) {
-                                $ControllerClass->registerHooks();
+                            if (method_exists($ControllerClass, 'setLoader')) {
+                                $ControllerClass->setLoader($this);
                             }
+                            $ControllerClass->registerHooks();
                             unset($ControllerClass);
                         }
                         unset($TestClass);
@@ -60,7 +61,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\Loader')) {
 
         /**
          * Get file list that may contain class in specific path.
-         *
+         * 
          * @since 1.7.2
          * @param string $path The full path without trailing slash.
          * @return array Return indexed array of file list.
@@ -85,12 +86,21 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\Loader')) {
         /**
          * Load config file and return its values.
          *
+         * The result is cached in a static array keyed by `$config_file_name` so that
+         * repeated calls within the same request do not re-execute the config file.
+         *
          * @param string $config_file_name The configuration file name only without extension.
-         * @param bool $require_once Mark as `true` to use `require_once`, otherwise use `require`.
+         * @param bool $require_once Mark as `true` to use `require_once`, otherwise use `require`. Ignored on cache hit.
          * @return mixed Return config file content if success. Return `false` if failed.
          */
         public function loadConfig($config_file_name = 'config', $require_once = false)
         {
+            static $cache = [];
+
+            if (array_key_exists($config_file_name, $cache)) {
+                return $cache[$config_file_name];
+            }
+
             $config_dir = dirname(__DIR__) . '/config/';
 
             if (file_exists($config_dir) && is_file($config_dir . $config_file_name . '.php')) {
@@ -103,20 +113,23 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\Loader')) {
 
             unset($config_dir);
             if (isset($config_values)) {
+                $cache[$config_file_name] = $config_values;
                 return $config_values;
             }
+            $cache[$config_file_name] = false;
+
             return false;
         }// loadConfig
 
 
         /**
          * Load the template by looking at the theme first, if not found then load it from the plugin itself.
-         *
+         * 
          * Example: If the <code>$view_name</code> is <code>mydir/mypage</code>.<br>
          * It will look up in <code>wp-content/themes/%your theme%/okv-oauth/templates/mydir/mypage.php</code> first.<br>
          * If not found then it will look up in <code>wp-content/plugins/okv-oauth/templates/mydir/mypage.php</code>.<br>
          * If it is still not found then the error will be thrown.
-         *
+         * 
          * @link https://codex.wordpress.org/Function_Reference/locate_template Reference.
          * @link https://codex.wordpress.org/Function_Reference/load_template Reference.
          * @global \WP_Query $wp_query
@@ -163,7 +176,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\Loader')) {
 
         /**
          * Load views.
-         *
+         * 
          * @param string $view_name View file name, refer from app/Views folder.
          * @param array $data For send data variable to view.
          * @param bool $require_once Set to `true` to use `include_once`, `false` to use `include`. Default is `false`.

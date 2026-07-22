@@ -1,7 +1,7 @@
 <?php
 /**
  * Activate the plugin action.
- *
+ * 
  * @package okv-oauth
  * @since 1.7.2 Moved from App/Controllers/Admin/Activation.php
  */
@@ -49,7 +49,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\Plugins\\Activation')) {
 
         /**
          * Activate the plugin by admin on WP plugin page.
-         *
+         * 
          * @link https://developer.wordpress.org/reference/functions/register_activation_hook/ The function `register_activation_hook()` reference.
          * @link https://developer.wordpress.org/reference/hooks/activate_plugin/ The reference about what will be pass to callback of function `register_activation_hook()`.
          * @since 1.7.0 Renamed from `activation`.
@@ -115,9 +115,6 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\Plugins\\Activation')) {
             global $wpdb;
             $wpdb->show_errors();
 
-            // get current options for use incase it is update.
-            $okv_oauth_options = $this->getOptions();
-
             // Add option to site or multisite -----------------------------
             if (is_multisite()) {
                 // This site is multisite. Add/update options, create/alter tables on all sites.
@@ -126,7 +123,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\Plugins\\Activation')) {
                 if ($blog_ids) {
                     foreach ($blog_ids as $blog_id) {
                         switch_to_blog($blog_id);
-                        $this->activateAddUpdateOption($okv_oauth_options);
+                        $this->activateAddUpdateOption();
                         restore_current_blog();
                     }
                 }
@@ -134,20 +131,18 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\Plugins\\Activation')) {
                 unset($blog_id, $blog_ids, $original_blog_id);
             } else {
                 // This site is single site. Add/update options, create/alter tables on current site.
-                $this->activateAddUpdateOption($okv_oauth_options);
+                $this->activateAddUpdateOption();
             }
-
-            unset($okv_oauth_options);
         }// activate
 
 
         /**
-         * Check for option on current site and add if not exists, or update if option is older.
+         * Check if the options was added before or not, if not then add the options otherwise update them.
          * 
          * @since 1.7.0 Renamed from `activationAddUpdateOption`.
          * @param array $current_options current options values for check and use in case of update options.
          */
-        public function activateAddUpdateOption(array $current_options = [])
+        public function activateAddUpdateOption()
         {
             if (false === $this->alreadySetupAllOptions) {
                 $this->setupAllOptions();
@@ -156,7 +151,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\Plugins\\Activation')) {
 
             if (defined('WP_DEBUG') && WP_DEBUG === true) {
                 // for debug.
-                error_log('plugin activate or updated for site ' . get_current_blog_id());// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+                error_log('okv-oauth plugin is activating or updating for site ' . get_current_blog_id());// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
             }
 
             // check current option exists or not.

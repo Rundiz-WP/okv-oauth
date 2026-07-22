@@ -1,6 +1,6 @@
 <?php
 /**
- * Main app class. extend this class if you want to use any method of this class.
+ * Main app class. Extend this class if you want to use any method of this class.
  * 
  * @package okv-oauth
  */
@@ -22,6 +22,9 @@ if (!class_exists('\\OKVOauth\\App\\App')) {
     {
 
 
+        use AppTrait;
+
+
         /**
          * Run the WP plugin app.
          */
@@ -33,9 +36,8 @@ if (!class_exists('\\OKVOauth\\App\\App')) {
             unset($StylesAndScripts);
 
             // Initialize the loader class.
-            $Loader = new \OKVOauth\App\Libraries\Loader();
-            $Loader->autoRegisterControllers();
-            unset($Loader);
+            $this->Loader = new \OKVOauth\App\Libraries\Loader();
+            $this->Loader->autoRegisterControllers();
 
             // Register all widgets.
             $WidgetAutoRegister = new Widgets\AutoRegisterWidgets();
