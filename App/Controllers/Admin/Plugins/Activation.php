@@ -116,7 +116,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\Plugins\\Activation')) {
             $wpdb->show_errors();
 
             // Add option to site or multisite -----------------------------
-            if (is_multisite()) {
+            if (is_multisite() && $network_wide) {
                 // This site is multisite. Add/update options, create/alter tables on all sites.
                 $blog_ids = get_sites(['fields' => 'ids', 'number' => 0]);
                 $original_blog_id = get_current_blog_id();
