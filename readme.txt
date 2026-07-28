@@ -4,7 +4,7 @@ Tags: oauth, google, social login, social connect
 Tested up to: 7.0
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.7.5
+Stable tag: 1.7.6
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -57,6 +57,13 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.7.6 =
+2026-07-28
+
+* Fix incorrect views folder name (wrong case `a`, `A`) cause serious error in settings page.
+* Fix text domain from variable can't create .pot file.
+* Update Thai translation.
+
 = 1.7.5 =
 2026-07-23
 
