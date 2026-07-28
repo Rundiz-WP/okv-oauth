@@ -45,7 +45,7 @@ class LoaderTest extends  TestCase
     {
         $Loader = new \OKVOauth\App\Libraries\Loader();
         ob_start();
-        $result = $Loader->loadView('admin/settings_v');
+        $result = $Loader->loadView('Admin/settings_v');
         $contents = ob_get_contents();
         ob_end_clean();
 

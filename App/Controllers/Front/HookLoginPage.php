@@ -68,7 +68,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
                 if (is_array($output) && array_key_exists('class', $output) && array_key_exists('message', $output)) {
                     $Loader = new \OKVOauth\App\Libraries\Loader();
-                    $Loader->loadView('admin/adminNotice_v', $output);
+                    $Loader->loadView('Admin/adminNotice_v', $output);
                     unset($Loader);
                 }
             }
@@ -182,7 +182,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                 global $okv_oauth_options;
 
                 $Loader = new \OKVOauth\App\Libraries\Loader();
-                $Loader->loadView('admin/editOwnProfilePersonalOptions_v', ['okv_oauth_options' => $okv_oauth_options]);
+                $Loader->loadView('Admin/editOwnProfilePersonalOptions_v', ['okv_oauth_options' => $okv_oauth_options]);
                 unset($Loader);
             } else {
                 return false;

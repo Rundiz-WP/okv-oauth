@@ -199,7 +199,7 @@ if (!class_exists('\\OKVOauth\\App\\Widgets\\LoginLinksWidget')) {
             list($openWrapper, $closeWrapper, $openLine, $closeLine) = $this->generateOpenCloseLineAndWrapper($useElement, $wrapperClasses, $lineClasses);
             unset($lineClasses, $useElement, $wrapperClasses);
 
-            // list site-admin/register/login/edit profile/logout links
+            // list site-admin, register, login, edit profile, logout links
             $output .= $openWrapper;
             // apply filters after open the wrapper.
             // @since 1.5.2
