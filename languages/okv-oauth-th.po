@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okv-oauth 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
-"POT-Creation-Date: 2026-07-23T05:47:07+07:00\n"
-"PO-Revision-Date: 2026-07-23 05:47+0700\n"
+"POT-Creation-Date: 2026-07-28T21:50:30+07:00\n"
+"PO-Revision-Date: 2026-07-28 21:51+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: <>\n"
 "Language: th\n"
@@ -20,7 +20,7 @@ msgstr ""
 
 #. Plugin Name of the plugin
 #: okv-oauth.php App/Controllers/Admin/Settings.php:60 App/Controllers/Front/RdOauth/Index.php:74
-#: App/Controllers/Front/RdOauth/Register.php:88 App/Views/admin/editOwnProfilePersonalOptions_v.php:23
+#: App/Controllers/Front/RdOauth/Register.php:88 App/Views/Admin/editOwnProfilePersonalOptions_v.php:23
 #: templates/okv-oauth/index_v.php:19
 msgid "Rundiz OAuth"
 msgstr "Rundiz OAuth"
@@ -396,10 +396,11 @@ msgid "Minimum requirement of WordPress version does not meet."
 msgstr "รุ่นของ WordPress  ไม่ตรงตามความต้องการขั้นต่ำ."
 
 #: App/Controllers/Admin/Plugins/Activation.php:298 App/Controllers/Admin/Settings.php:84
+#: App/Libraries/RundizSettings.php:53
 msgid "Settings configuration file was not set."
 msgstr "ไฟล์การกำหนดค่าการตั้งค่าไม่ได้ถูกตั้งค่าไว้."
 
-#: App/Controllers/Admin/Settings.php:60 App/Views/admin/settings_v.php:16
+#: App/Controllers/Admin/Settings.php:60 App/Views/Admin/settings_v.php:16
 msgid "Rundiz OAuth settings"
 msgstr "การตั้งค่า Rundiz OAuth"
 
@@ -521,18 +522,26 @@ msgid ""
 "continue."
 msgstr "บัญชีไลน์ของคุณไม่มีอีเมล. โปรดลงทะเบียนและยืนยันอีเมลของคุณกับไลน์ก่อนดำเนินการต่อไป."
 
-#: App/Views/admin/editOwnProfilePersonalOptions_v.php:24
+#: App/Libraries/RundizSettings.php:914
+msgid "Upload"
+msgstr "อัพโหลด"
+
+#: App/Libraries/RundizSettings.php:915
+msgid "Remove"
+msgstr "เอาออก"
+
+#: App/Views/Admin/editOwnProfilePersonalOptions_v.php:24
 #: templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:25
 #: templates/okv-oauth/partials/loginForm_v.php:17 templates/okv-oauth/partials/registerForm_v.php:23
 msgid "Please enable javascript."
 msgstr "โปรดเปิดใช้งานจาวาสคริปต์."
 
-#: App/Views/admin/editOwnProfilePersonalOptions_v.php:48
+#: App/Views/Admin/editOwnProfilePersonalOptions_v.php:48
 #: templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:57
 msgid "Change email"
 msgstr "เปลี่ยนอีเมล"
 
-#: App/Views/admin/editOwnProfilePersonalOptions_v.php:61
+#: App/Views/Admin/editOwnProfilePersonalOptions_v.php:61
 #: templates/okv-oauth/partials/editAccountChangeEmailButton_v.php:70
 #: templates/okv-oauth/partials/loginForm_v.php:42 templates/okv-oauth/partials/registerForm_v.php:58
 msgid "OR"
@@ -608,17 +617,3 @@ msgstr "แสดงลิ้งค์เข้าสู่ระบบ, ลง�
 msgctxt "block title"
 msgid "Login links"
 msgstr "ลิ้งค์เข้าสู่ระบบ"
-
-#, php-format
-#~ msgid "The template file was not found. (%s)"
-#~ msgstr "ไม่พบเท็มเพลท. (%s)"
-
-#, php-format
-#~ msgid "The views file was not found (%s)."
-#~ msgstr "ไม่พบไฟล์ views (%s)."
-
-#~ msgid "Upload"
-#~ msgstr "อัพโหลด"
-
-#~ msgid "Remove"
-#~ msgstr "เอาออก"
