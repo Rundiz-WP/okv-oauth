@@ -5,8 +5,6 @@
  * Original source last update: 2026-07-20
  * 
  * @package okv-oauth
- * 
- * phpcs:disable WordPress.WP.I18n.NonSingularStringLiteralDomain
  */
 
 
