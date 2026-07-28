@@ -40,13 +40,6 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
 
 
         /**
-         * @var string Translation text domain.
-         * @since 2026-04-04
-         */
-        private $tranlsation_text_domain = 'okv-oauth';
-
-
-        /**
          * Get settings config file and its data.
          * 
          * @return array|false Return settings config data. Return `false` if failed.
@@ -57,7 +50,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
 
             if ('' === $setting_file || !is_string($setting_file)) {
                 wp_die(
-                    esc_html__('Settings configuration file was not set.', $this->tranlsation_text_domain)
+                    esc_html__('Settings configuration file was not set.', 'okv-oauth')
                 );
             }
 
@@ -918,8 +911,8 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
                 }
                 $output .= '</div>' . "\n";
             }
-            $output .= '<input type="button" class="button-secondary upload-media-button" value="' . esc_attr__('Upload', $this->tranlsation_text_domain) . '" data-input-target="' . esc_attr($field_name) . '">' . "\n";
-            $output .= '<input type="button" class="button-secondary remove-media-button" value="' . esc_attr__('Remove', $this->tranlsation_text_domain) . '" data-input-target="' . esc_attr($field_name) . '">' . "\n";
+            $output .= '<input type="button" class="button-secondary upload-media-button" value="' . esc_attr__('Upload', 'okv-oauth') . '" data-input-target="' . esc_attr($field_name) . '">' . "\n";
+            $output .= '<input type="button" class="button-secondary remove-media-button" value="' . esc_attr__('Remove', 'okv-oauth') . '" data-input-target="' . esc_attr($field_name) . '">' . "\n";
 
             unset($field_name, $field_values, $preview_mode);
             return $output;
