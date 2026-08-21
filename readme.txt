@@ -1,10 +1,10 @@
 === Rundiz OAuth ===
 Contributors: okvee
 Tags: oauth, google, social login, social connect
-Tested up to: 7.0
+Tested up to: 7.1
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.7.6
+Stable tag: 1.7.7
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -19,7 +19,7 @@ So, instead of implementing the 2FA (2 factor authentication) into your WordPres
 It is very easy and much secure for your users on your WordPress website. (Depends on your user security settings on those providers).  
 Since v 1.0 your users can register using OAuth in one click from your website and one click to allow/continue on OAuth provider website.
 
-You can also change login expiration by using remember login.  
+You can also change login expiration of users who is using remember login.  
 You can set how your user login use OAuth with normal login form, or OAuth only, or disable OAuth login from Rundiz OAuth settings page.
 
 This project is maintain by <a href="https://rundiz.com" target="author_site">Rundiz.com</a>. Feel free to rate and comments.  
@@ -57,6 +57,11 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.7.7 =
+2026-08-21
+
+* Fix translation bug in multi-site enabled. ( https://core.trac.wordpress.org/ticket/64249 ).
+
 = 1.7.6 =
 2026-07-28
 
