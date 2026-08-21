@@ -138,7 +138,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\Plugins\\Activation')) {
 
         /**
          * Check if the options was added before or not, if not then add the options otherwise update them.
-         * 
+         *
          * @since 1.7.0 Renamed from `activationAddUpdateOption`.
          */
         public function activateAddUpdateOption()

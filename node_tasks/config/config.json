@@ -23,10 +23,6 @@
                     "destination": "blocks"
                 },
                 {
-                    "patterns": "languages/**",
-                    "destination": "languages"
-                },
-                {
                     "patterns": "templates/**",
                     "destination": "templates"
                 },
@@ -60,10 +56,6 @@
                 "destination": "blocks"
             },
             {
-                "patterns": "languages/**",
-                "destination": "languages"
-            },
-            {
                 "patterns": "templates/**",
                 "destination": "templates"
             },
@@ -91,9 +83,7 @@
                         ".phpdoc",
                         ".phpunit*",
                         ".phpunit.cache",
-                        "composer.lock",
-                        "node_modules",
-                        "package-*.json"
+                        "node_modules"
                     ]
                 }
             },
@@ -111,6 +101,7 @@
                         ".phpdoc",
                         ".phpunit*",
                         ".phpunit.cache",
+                        ".vscode",
                         "assets-src",
                         "blocks-src",
                         "composer.lock",

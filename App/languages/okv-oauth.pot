@@ -2,14 +2,14 @@
 # This file is distributed under the MIT.
 msgid ""
 msgstr ""
-"Project-Id-Version: Rundiz OAuth 1.7.5\n"
+"Project-Id-Version: Rundiz OAuth 1.7.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-07-28T21:50:30+07:00\n"
+"POT-Creation-Date: 2026-08-21T23:39:56+07:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: okv-oauth\n"
@@ -358,17 +358,17 @@ msgstr ""
 msgid "Design pages"
 msgstr ""
 
-#: App/Controllers/Admin/Plugins.php:49
+#: App/Controllers/Admin/Plugins.php:52
 msgid "Settings"
 msgstr ""
 
 #. translators: %s The DB settings version of this plugin.
-#: App/Controllers/Admin/Plugins.php:98
+#: App/Controllers/Admin/Plugins.php:104
 #, php-format
 msgid "DB settings version %s"
 msgstr ""
 
-#: App/Controllers/Admin/Plugins.php:102
+#: App/Controllers/Admin/Plugins.php:108
 msgid "Donate"
 msgstr ""
 
@@ -400,7 +400,7 @@ msgstr ""
 
 #: App/Controllers/Admin/Plugins/Activation.php:298
 #: App/Controllers/Admin/Settings.php:84
-#: App/Libraries/RundizSettings.php:53
+#: App/Libraries/RundizSettings.php:59
 msgid "Settings configuration file was not set."
 msgstr ""
 
@@ -517,11 +517,11 @@ msgstr ""
 msgid "Your LINE account have no email available. Please register and confirm your email with LINE before continue."
 msgstr ""
 
-#: App/Libraries/RundizSettings.php:914
+#: App/Libraries/RundizSettings.php:985
 msgid "Upload"
 msgstr ""
 
-#: App/Libraries/RundizSettings.php:915
+#: App/Libraries/RundizSettings.php:986
 msgid "Remove"
 msgstr ""
 

@@ -11,7 +11,7 @@
  * License: MIT
  * License URI: https://opensource.org/licenses/MIT
  * Text Domain: okv-oauth
- * Domain Path: /languages/
+ * Domain Path: /App/languages/
  * 
  * @package okv-oauth
  */

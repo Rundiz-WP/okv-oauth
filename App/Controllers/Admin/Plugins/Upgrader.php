@@ -57,19 +57,21 @@ if (!class_exists('\\OKVOauth\App\Controllers\Admin\Plugins\\Upgrader')) {
                 $okv_oauth_options = $this->getOptions(['process_display_cb' => false]);
 
                 if (is_multisite()) {
-                    // this site is multisite. activate on all site.
+                    // this site is multisite. activate on all sites that has this plugin activated.
                     $sites = get_sites(['number' => 0]);
                     if ($sites) {
                         foreach ($sites as $site) {
                             switch_to_blog($site->blog_id);
-                            $Activation->activateAddUpdateOption($okv_oauth_options);
+                            if (is_plugin_active(plugin_basename(OKVOAUTH_FILE))) {
+                                $Activation->activateAddUpdateOption();
+                            }
                             restore_current_blog();
                         }
                     }
                     unset($site, $sites);
                 } else {
                     // this site is single site. activate on single site.
-                    $Activation->activateAddUpdateOption($okv_oauth_options);
+                    $Activation->activateAddUpdateOption();
                 }
 
                 unset($Activation, $okv_oauth_options);

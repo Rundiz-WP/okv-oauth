@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okv-oauth 1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/okv-oauth\n"
-"POT-Creation-Date: 2026-07-28T21:50:30+07:00\n"
-"PO-Revision-Date: 2026-07-28 21:51+0700\n"
+"POT-Creation-Date: 2026-08-21T23:39:56+07:00\n"
+"PO-Revision-Date: 2026-08-21 23:40+0700\n"
 "Last-Translator: Vee W.\n"
 "Language-Team: <>\n"
 "Language: th\n"
@@ -352,17 +352,17 @@ msgstr "Channel secret"
 msgid "Design pages"
 msgstr "ออกแบบหน้า"
 
-#: App/Controllers/Admin/Plugins.php:49
+#: App/Controllers/Admin/Plugins.php:52
 msgid "Settings"
 msgstr "ตั้งค่า"
 
 #. translators: %s The DB settings version of this plugin.
-#: App/Controllers/Admin/Plugins.php:98
+#: App/Controllers/Admin/Plugins.php:104
 #, php-format
 msgid "DB settings version %s"
 msgstr "รุ่นการตั้งค่าฐานข้อมูล %s"
 
-#: App/Controllers/Admin/Plugins.php:102
+#: App/Controllers/Admin/Plugins.php:108
 msgid "Donate"
 msgstr "บริจาค"
 
@@ -396,7 +396,7 @@ msgid "Minimum requirement of WordPress version does not meet."
 msgstr "รุ่นของ WordPress  ไม่ตรงตามความต้องการขั้นต่ำ."
 
 #: App/Controllers/Admin/Plugins/Activation.php:298 App/Controllers/Admin/Settings.php:84
-#: App/Libraries/RundizSettings.php:53
+#: App/Libraries/RundizSettings.php:59
 msgid "Settings configuration file was not set."
 msgstr "ไฟล์การกำหนดค่าการตั้งค่าไม่ได้ถูกตั้งค่าไว้."
 
@@ -522,11 +522,11 @@ msgid ""
 "continue."
 msgstr "บัญชีไลน์ของคุณไม่มีอีเมล. โปรดลงทะเบียนและยืนยันอีเมลของคุณกับไลน์ก่อนดำเนินการต่อไป."
 
-#: App/Libraries/RundizSettings.php:914
+#: App/Libraries/RundizSettings.php:985
 msgid "Upload"
 msgstr "อัพโหลด"
 
-#: App/Libraries/RundizSettings.php:915
+#: App/Libraries/RundizSettings.php:986
 msgid "Remove"
 msgstr "เอาออก"
 

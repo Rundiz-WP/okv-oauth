@@ -2,7 +2,7 @@
 /**
  * Rundiz Settings class for render pre-setup values. This will render tabs, form fields and content in each tabs.
  * 
- * Original source last update: 2026-07-20
+ * Original source last update: 2026-08-15
  * 
  * @package okv-oauth
  */
@@ -25,8 +25,16 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
 
 
         /**
-         * @var array<string, array|false> Per-request cache, keyed by config file name.
+         * @since 2026-07-28
+         * @var array|null Cached default values from settings configuration file. Indexed by field `id`. 
+         *              `null` means not loaded yet.
+         */
+        private $defaults = null;
+
+
+        /**
          * @since 2026-04-20
+         * @var array<string, array|false> Per-request cache, keyed by config file name.
          */
         private static $loadedConfig = [];
 
@@ -56,10 +64,73 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
                 return self::$loadedConfig[$setting_file];
             }
 
-            $loader = new \OKVOauth\App\Libraries\Loader();
-            self::$loadedConfig[$setting_file] = $loader->loadConfig($setting_file);
+            $Loader = new \OKVOauth\App\Libraries\Loader();
+            self::$loadedConfig[$setting_file] = $Loader->loadConfig($setting_file);
             return self::$loadedConfig[$setting_file];
         }// getConfigFile
+
+
+        /**
+         * Get all default values from settings configuration file into `defaults` property.
+         *
+         * The settings configuration file name is resolved from main config file (`App/config/config.php`)
+         * via `rundiz_settings_config_file` key. Both files are loaded through `Loader::loadConfig()` which has
+         * its own static cache per request, so each file is read from disk at most once.
+         * 
+         * @since 2026-07-28
+         * @param \OKVOauth\App\Libraries\Loader $Loader The `Loader` class.
+         * @return array|null Return default values from settings configuration file, or `null` if failed.
+         */
+        public function getDefaults(Loader $Loader)
+        {
+            if (!is_null($this->defaults)) {
+                return $this->defaults;
+            }
+            $this->defaults = [];
+
+            $main_config = $Loader->loadConfig();
+
+            if (!is_array($main_config) || !isset($main_config['rundiz_settings_config_file'])) {
+                unset($main_config, $Loader);
+                return null;
+            }
+
+            $settings_config_file = (string) $main_config['rundiz_settings_config_file'];
+            unset($main_config);
+
+            $config = $Loader->loadConfig($settings_config_file);
+            unset($settings_config_file, $Loader);
+
+            if (!is_array($config) || !isset($config['setting_tabs']) || !is_array($config['setting_tabs'])) {
+                unset($config);
+                return null;
+            }
+
+            foreach ($config['setting_tabs'] as $tab) {
+                if (!isset($tab['fields']) || !is_array($tab['fields'])) {
+                    continue;
+                }
+
+                foreach ($tab['fields'] as $field) {
+                    if (isset($field['id'])) {
+                        $this->defaults[$field['id']] = (array_key_exists('default', $field) ? $field['default'] : '');
+                    }
+
+                    if (isset($field['options']) && is_array($field['options'])) {
+                        foreach ($field['options'] as $opt) {
+                            if (isset($opt['id'])) {
+                                $this->defaults[$opt['id']] = (array_key_exists('default', $opt) ? $opt['default'] : '');
+                            }
+                        }// endforeach;
+                        unset($opt);
+                    }
+                }// endforeach;
+                unset($field);
+            }// endforeach;
+            unset($tab, $config);
+
+            return $this->defaults;
+        }// getDefaults
 
 
         /**
@@ -905,7 +976,9 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizSettings')) {
             if ('preview_all' === $preview_mode || 'preview_img' === $preview_mode || 'no_preview_url' === $preview_mode) {
                 $output .= '<div class="image-preview image-preview-' . esc_attr($field_name) . '">';
                 if (is_array($field_values) && array_key_exists('thumbnail', $field_values) && '' !== $field_values['thumbnail']) {
+                    $output .= '<a class="image-preview-link" href="' . esc_url((is_array($field_values) && array_key_exists('url', $field_values) ? esc_url($field_values['url']) : '')) . '">';
                     $output .= '<img src="' . esc_url($field_values['thumbnail']) . '" alt="">';
+                    $output .= '</a>';
                 }
                 $output .= '</div>' . "\n";
             }

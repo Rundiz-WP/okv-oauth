@@ -33,7 +33,7 @@
     <!-- https://github.com/WordPress/WordPress-Coding-Standards -->
     <!-- https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties -->
     <!-- https://github.com/WordPress/WordPress-Coding-Standards/wiki/Customizable-sniff-properties#various-sniffs-set-the-minimum-supported-wp-version -->
-    <config name="minimum_supported_wp_version" value="5.0"/><!-- set minimum WordPress version using major.minor only -->
+    <config name="minimum_wp_version" value="5.0"/><!-- set minimum WordPress version using major.minor only -->
     <rule ref="WordPress">
         <exclude name="Generic.Classes.OpeningBraceSameLine.BraceOnNewLine"></exclude>
         <exclude name="Generic.CodeAnalysis.EmptyStatement.DetectedIf"></exclude>

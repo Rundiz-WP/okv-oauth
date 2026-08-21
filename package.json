@@ -8,11 +8,18 @@
     "devDependencies": {
         "@wordpress/scripts": "^32.4.1"
     },
+    "_scripts_comment": [
+        "wpdev command is from https://github.com/Rundiz-WP/tool_wpdev"
+    ],
     "scripts": {
+        "build": "wpdev build",
         "buildBlocks": "wp-scripts build --webpack-src-dir=\"./blocks-src\" --output-path=\"./blocks\"",
-        "langJson": "wp i18n make-json languages/okv-oauth-th.po --no-purge --pretty-print",
-        "langPot": "wp i18n make-pot . --exclude=\"assets/vendor,blocks-src,languages,node_modules,node_tasks,*.css,*.svg,*.eot,*.woff,*.woff2,*.ttf,*.html,*.txt,*.pot\"",
+        "langJson": "wp i18n make-json App/languages/okv-oauth-th.po --no-purge --pretty-print",
+        "langPot": "wp i18n make-pot . --exclude=\"assets/vendor,blocks-src,App/languages,node_modules,node_tasks,*.css,*.svg,*.eot,*.woff,*.woff2,*.ttf,*.html,*.txt,*.pot\"",
+        "pack": "wpdev pack --packtype=dev prod",
+        "watch": "wpdev watch",
         "watchBlocks": "wp-scripts start --webpack-src-dir=\"./blocks-src\" --output-path=\"./blocks\"",
-        "test": "echo \"Error: no test specified\" && exit 1"
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "tests": "npm run test"
     }
 }
