@@ -6,7 +6,13 @@
     "license": "MIT",
     "private": true,
     "devDependencies": {
-        "@wordpress/scripts": "^32.4.1"
+        "@wordpress/scripts": "^34.1.0"
+    },
+    "allowScripts": {
+        "core-js@3.50.0": true,
+        "core-js-pure@3.50.0": true,
+        "@parcel/watcher@2.6.0": true,
+        "unrs-resolver@1.12.2": true
     },
     "_scripts_comment": [
         "wpdev command is from https://github.com/Rundiz-WP/tool_wpdev"
