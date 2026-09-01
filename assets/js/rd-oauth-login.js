@@ -3,14 +3,19 @@
  */
 
 
-function rdOauthGetParameterByName(name, url) {
-    if (!url) url = window.location.href;
-    name = name.replace(/[\[\]]/g, "\\$&");
-    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-        results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return '';
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
+/**
+ * Get the value of a query string parameter by name from the current page URL.
+ *
+ * @since 1.0.0
+ * @param {string} name The query parameter name to look for.
+ * @returns {string|null} The decoded parameter value, an empty string if the name is present without a value, or null if not found.
+ */
+function rdOauthGetParameterByName(name) {
+    const params = new URLSearchParams(window.location.search);
+    if (!params.has(name)) {
+        return null;
+    }
+    return params.get(name);
 }// rdOauthGetParameterByName
 
 
