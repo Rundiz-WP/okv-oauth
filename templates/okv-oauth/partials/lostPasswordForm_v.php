@@ -17,7 +17,7 @@ if (!is_file($okv_oauth_kses_file)) {
     error_log(esc_html('The file ' . str_replace(['\\', '/'], DIRECTORY_SEPARATOR, $okv_oauth_kses_file) . ' could not be found.'));
 }
 ?>
-<div class="error-message" id="login_error"><p><?php 
+<div id="login_error" class="error-message notice notice-info"><p><?php 
 echo wp_kses(
     \OKVOauth\App\Libraries\ErrorsCollection::getErrorMessage('originalforgotpwdisabled'),
     include $okv_oauth_kses_file// phpcs:ignore PEAR.Files.IncludingFile.UseRequire

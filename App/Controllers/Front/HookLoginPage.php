@@ -274,14 +274,22 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     case 'logout':
                     case 'lostpassword':
                         if (2 === $this->loginMethod) {
-                            wp_enqueue_script('okv-oauth-lostpassword', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-lostpassword.js', ['jquery'], OKVOAUTH_VERSION, true);
+                            $lost_password_handle = 'okv-oauth-lostpassword';
+                            wp_enqueue_script(
+                                $lost_password_handle, 
+                                plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-lostpassword.js', 
+                                [], 
+                                OKVOAUTH_VERSION, 
+                                true
+                            );
                             wp_localize_script(
-                                'okv-oauth-lostpassword', 
+                                $lost_password_handle, 
                                 'RdOauthLostPassword', 
                                 [
                                     'loginMethod' => $this->loginMethod,
                                 ]
                             );
+                            unset($lost_password_handle);
                         }
                         break;
                     case 'retrievepassword':
