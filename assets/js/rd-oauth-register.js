@@ -3,33 +3,57 @@
  */
 
 
-jQuery(function($) {
-    // move those social login btn to top.
-    $('#registerform').find('.rd-oauth-form').prependTo('#registerform');
-    // move error message to below generic message.
-    $('#registerform').find('.error-message').insertAfter($('.message'));
+document.addEventListener('DOMContentLoaded', () => {
+    const registerForm = document.getElementById('registerform');
 
-    if (RdOauthRegister.loginMethod === '1') {
-        // use wp login + oauth.
-    } else if (RdOauthRegister.loginMethod === '2') {
-        // use oauth only.
-        $('#registerform').addClass('oauth-only');
-        // remove register form
-        $('#registerform').find('p:has(label)').remove();
-        // remove register message (register confirmation will be ...), button.
-        $('#registerform').find('#reg_passmail, .clear, .submit').remove();
-
-        // remove forgot password link.
-        $('#nav a').each(function() {
-            if (this.href && this.href.indexOf('lostpassword') !== -1) {
-                this.remove();
-            }
+    if (registerForm) {
+        // move those social login btn to top.
+        registerForm.querySelectorAll('.rd-oauth-form').forEach((form) => {
+            registerForm.prepend(form);
         });
-        // trim last character.
-        // example: "Login |" will be "Login"
-        // https://stackoverflow.com/a/32516190/128761 original source code.
-        let navHtml = ($('#nav').html()).trim();
-        let trimLastSep = navHtml.replace(/^\|+|\|+$/g, '');
-        $('#nav').html(trimLastSep);
-    }
+        // move error message to below generic message.
+        const registerMessage = document.querySelector('.message');
+        if (registerMessage) {
+            registerForm.querySelectorAll('.error-message').forEach((error) => {
+                registerMessage.after(error);
+            });
+        }
+        const navElement = document.getElementById('nav');
+
+        if (RdOauthRegister.loginMethod === '1') {
+            // use wp login + oauth.
+        } else if (RdOauthRegister.loginMethod === '2') {
+            // use oauth only.
+            if (registerForm) {
+                // use oauth only.
+                registerForm.classList.add('oauth-only');
+                // remove register form
+                registerForm.querySelectorAll('p:has(label)')?.forEach((item) => {
+                    item.remove();
+                });
+                // remove register message (register confirmation will be ...), button.
+                registerForm.querySelectorAll('#reg_passmail, .clear, .submit').forEach((item) => {
+                    item.remove();
+                });
+
+                // remove forgot password link.
+                document.querySelectorAll('.wp-login-lost-password')?.forEach((item) => {
+                    item.remove();
+                });
+                // remove forgot password link same as above but for fallback on older WP version.
+                navElement?.querySelectorAll('a')?.forEach((item) => {
+                    if (item.href && item.href.indexOf('lostpassword') !== -1) {
+                        item.remove();
+                    }
+                });
+
+                // after remove forgot password link, there may have the last character as `|`. 
+                // example: `Login | Forgot password` becomes => `Login |`.
+                // remove the last character.
+                const navHtmlString = navElement.innerHTML.trim();
+                const trimLastSep = navHtmlString.replace(/^\|+|\|+$/g, '');
+                navElement.innerHTML = trimLastSep;
+            }
+        }// endif; oauth only.
+    }// endif; registerform
 });
