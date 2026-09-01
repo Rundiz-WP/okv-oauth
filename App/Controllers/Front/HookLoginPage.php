@@ -323,14 +323,22 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     unset($register_handle);
                 } elseif (isset($action) && 'login' === $action) {
                     // if in login page.
-                    wp_enqueue_script('okv-oauth-login-js', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-login.js', ['jquery'], OKVOAUTH_VERSION, true);
+                    $login_handle = 'okv-oauth-login-js';
+                    wp_enqueue_script(
+                        $login_handle, 
+                        plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-login.js', 
+                        [], 
+                        OKVOAUTH_VERSION, 
+                        true
+                    );
                     wp_localize_script(
-                        'okv-oauth-login-js', 
+                        $login_handle, 
                         'RdOauthLogin', 
                         [
                             'loginMethod' => $this->loginMethod,
                         ]
                     );
+                    unset($login_handle);
                 }
             }
         }// loginEnqueueScripts
