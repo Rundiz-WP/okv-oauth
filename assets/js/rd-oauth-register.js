@@ -50,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // after remove forgot password link, there may have the last character as `|`. 
                 // example: `Login | Forgot password` becomes => `Login |`.
                 // remove the last character.
+                // @link https://stackoverflow.com/a/32516190/128761 Original source code.
                 const navHtmlString = navElement.innerHTML.trim();
                 const trimLastSep = navHtmlString.replace(/^\|+|\|+$/g, '');
                 navElement.innerHTML = trimLastSep;
