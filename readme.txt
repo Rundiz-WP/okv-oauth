@@ -4,7 +4,7 @@ Tags: oauth, google, social login, social connect
 Tested up to: 7.1
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.7.7
+Stable tag: 1.7.8dev-20260901
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -57,6 +57,12 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 7. Login use OAuth only
 
 == Changelog ==
+= 1.7.8 =
+2026-xx-xx
+
+* Removed hook to change login header URL. There is no setting about this so it should not work by force.
+* Modernize JavaScript to not depend on jQuery.
+
 = 1.7.7 =
 2026-08-21
 
