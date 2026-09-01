@@ -27,14 +27,22 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\HookNetworkSettings')) {
             if (is_admin() && is_multisite() && 'settings.php' === $hook) {
                 $this->init();
 
-                wp_enqueue_script('okv-oauth-admin-network-settings', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/Admin/rd-oauth-adminnetworksettings.js', ['jquery'], OKVOAUTH_VERSION, true);
+                $admin_network_settings_handle = 'okv-oauth-admin-network-settings';
+                wp_enqueue_script(
+                    $admin_network_settings_handle, 
+                    plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/Admin/rd-oauth-adminnetworksettings.js', 
+                    [], 
+                    OKVOAUTH_VERSION, 
+                    true
+                );
                 wp_localize_script(
-                    'okv-oauth-admin-network-settings',
+                    $admin_network_settings_handle,
                     'RdOauthAdminNetworkSettings',
                     [
                         'loginMethod' => $this->loginMethod,
                     ]
                 );
+                unset($admin_network_settings_handle);
             }
         }// adminEnqueueScripts
 
@@ -50,14 +58,21 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Admin\\HookNetworkSettings')) {
          */
         public function FilterUpdateSiteRegistration($value, $old_value, $option, $network_id)
         {
+            if ('registration' !== $option) {
+                return $value;
+            }
+
             $this->init();
 
             if (2 === $this->loginMethod) {
                 // if settings was set to use oauth only.
-                // cannot allow register form to register user and blog 
-                // because user can register any email that is not oauth user 
+                // cannot allow register form to **register user and blog**
+                // because oauth registration button will not work with site register and
+                // if user email field is allowed, users can register any email that is not oauth user 
                 // but cannot login with [oauth only login form].
-                $value = 'blog';
+                if ('all' === $value) {
+                    $value = 'user';
+                }
             }
 
             return $value;
