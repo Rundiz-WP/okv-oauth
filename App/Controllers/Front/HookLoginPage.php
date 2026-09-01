@@ -707,16 +707,23 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             wp_enqueue_style('okv-oauth-login-css');
             wp_enqueue_style('okv-oauth-font-awesome6');
-            wp_enqueue_script('okv-oauth-wpsignup', plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-wpsignup.js', ['jquery'], OKVOAUTH_VERSION, true);
-            $active_signup = get_site_option('registration', 'none');// 'all', 'none', 'blog', or 'user'
+            $handle_signup = 'okv-oauth-wpsignup';
+            wp_enqueue_script(
+                $handle_signup, 
+                plugin_dir_url(OKVOAUTH_FILE) . 'assets/js/rd-oauth-wpsignup.js', 
+                [], 
+                OKVOAUTH_VERSION, 
+                true
+            );
             wp_localize_script(
-                'okv-oauth-wpsignup', 
+                $handle_signup, 
                 'RdOauthRegister', 
                 [
-                    'active_signup' => $active_signup,
+                    'active_signup' => get_site_option('registration', 'none'),// 'all', 'none', 'blog', or 'user'
                     'loginMethod' => $this->loginMethod,
                 ]
             );
+            unset($handle_signup);
         }// wpSignupEnqueueScripts
 
 
