@@ -8,9 +8,13 @@
  */
 
 
+/** @var array $okv_oauth_options The app main options that have values stored in the DB. */
+
+
 if (!defined('ABSPATH')) {
     exit();
 }
+
 
 $okv_oauth_kses_file = dirname(OKVOAUTH_FILE) . '/App/config/kses_data.php';
 if (!is_file($okv_oauth_kses_file)) {
@@ -37,7 +41,7 @@ if (!is_file($okv_oauth_kses_file)) {
         $okv_oauth_OauthProviders = new \OKVOauth\App\Libraries\OAuthProviders();
         $okv_oauth_classes = $okv_oauth_OauthProviders->getClasses($okv_oauth_options);
         unset($okv_oauth_OauthProviders);
-        if (is_iterable($okv_oauth_classes)) {
+        if (is_array($okv_oauth_classes)) {
             foreach ($okv_oauth_classes as $okv_oauth_providerKey => $okv_oauth_OAuthClass) {
         ?> 
         <div class="rd-oauth-link oauth-<?= esc_attr($okv_oauth_providerKey); ?>">
@@ -48,7 +52,7 @@ if (!is_file($okv_oauth_kses_file)) {
         <?php
             }// endforeach;
             unset($okv_oauth_providerKey, $okv_oauth_OAuthClass);
-        }// endif; is_iterable
+        }// endif; is_array
         unset($okv_oauth_classes);
         ?> 
         <?php
