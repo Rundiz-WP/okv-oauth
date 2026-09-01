@@ -343,18 +343,6 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
 
         /**
-         * Change URL of login logo.
-         * 
-         * @link https://codex.wordpress.org/Plugin_API/Filter_Reference/login_headerurl Reference.
-         * @return string
-         */
-        public function loginHeaderUrl()
-        {
-            return home_url();
-        }// loginHeaderUrl
-
-
-        /**
          * Display lost password form disabled if settings is using OAuth only.
          * 
          * @link https://developer.wordpress.org/reference/hooks/lostpassword_form/ Reference.
@@ -408,8 +396,6 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
                     'okv-oauth/partials/registerForm_v', 
                     [
                         'okv_oauth_options' => $okv_oauth_options, 
-                        'oauthProviders' => $this->oauthProviders,
-                        'active_signup' => $active_signup,
                     ]
                 );
                 unset($Loader);
@@ -429,8 +415,6 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
 
             // add css to login page.
             add_action('login_enqueue_scripts', [$this, 'loginEnqueueScripts']);
-            // change login url on the logo.
-            add_filter('login_headerurl', [$this, 'loginHeaderUrl']);
 
             // register page. -------------------------------------------------------------------
             // add buttons to register page.
@@ -674,7 +658,7 @@ if (!class_exists('\\OKVOauth\\App\\Controllers\\Front\\HookLoginPage')) {
             $OAuthProviders = new \OKVOauth\App\Libraries\OAuthProviders();
             $providers = $OAuthProviders->getAllClasses();
             unset($OAuthProviders);
-            if (is_iterable($providers)) {
+            if (is_array($providers)) {
                 foreach ($providers as $providerKey => $OAuthClass) {
                     /* @var $OAuthClass \OKVOauth\App\Libraries\MyOauth\Interfaces\MyOAuthInterface */
                     $OAuthClass->wpLogoutUseOAuth();

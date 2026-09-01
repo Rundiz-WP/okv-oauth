@@ -27,12 +27,6 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizOauth')) {
 
 
         /**
-         * @var array The oAuth providers that was enabled in the settings will appears here in the array value. Example: array('google', 'facebook');
-         */
-        public $oauthProviders = [];
-
-
-        /**
          * @var bool If settings to use wp login with oauth or oauth only then this value will be true.
          */
         public $useOauth = false;
@@ -54,6 +48,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizOauth')) {
             $this->getOptions();
 
             global $okv_oauth_options;
+            $oauthProviders = [];
 
             if (is_array($okv_oauth_options)) {
                 if (
@@ -76,7 +71,7 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizOauth')) {
                         !empty($okv_oauth_options['google_client_id']) &&
                         !empty($okv_oauth_options['google_client_secret'])
                     ) {
-                        $this->oauthProviders[] = 'google';
+                        $oauthProviders[] = 'google';
                     }
                     if (
                         array_key_exists('facebook_login_enable', $okv_oauth_options) &&
@@ -86,11 +81,21 @@ if (!class_exists('\\OKVOauth\\App\\Libraries\\RundizOauth')) {
                         !empty($okv_oauth_options['facebook_app_id']) &&
                         !empty($okv_oauth_options['facebook_app_secret'])
                     ) {
-                        $this->oauthProviders[] = 'facebook';
+                        $oauthProviders[] = 'facebook';
+                    }
+                    if (
+                        array_key_exists('linenaver_login_enable', $okv_oauth_options) &&
+                        array_key_exists('linenaver_channel_id', $okv_oauth_options) &&
+                        array_key_exists('linenaver_channel_secret', $okv_oauth_options) &&
+                        '1' === strval($okv_oauth_options['linenaver_login_enable']) &&
+                        !empty($okv_oauth_options['linenaver_channel_id']) &&
+                        !empty($okv_oauth_options['linenaver_channel_secret'])
+                    ) {
+                        $oauthProviders[] = 'linenaver';
                     }
 
                     // at last, verify that if login method is set to use oauth only and providers was set.
-                    if (2 === $this->loginMethod && empty($this->oauthProviders)) {
+                    if (2 === $this->loginMethod && empty($oauthProviders)) {
                         // if login method is using oauth only and providers was not set (maybe not enabled or missed config values).
                         // change login method to 1
                         $this->loginMethod = 1;
