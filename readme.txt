@@ -1,10 +1,10 @@
 === Rundiz OAuth ===
 Contributors: okvee
 Tags: oauth, google, social login, social connect
-Tested up to: 7.1
+Tested up to: 7.2
 Requires at least: 5.0
 Requires PHP: 5.4
-Stable tag: 1.7.8dev-20260901
+Stable tag: 1.7.8
 License: MIT
 License URI: https://opensource.org/licenses/MIT
 
@@ -25,7 +25,7 @@ You can set how your user login use OAuth with normal login form, or OAuth only,
 This project is maintain by <a href="https://rundiz.com" target="author_site">Rundiz.com</a>. Feel free to rate and comments.  
 Please <a href="https://rundiz.com/en/donate" target="donate">donate</a> to support the developer.
 
-Tested up to PHP 8.5.
+Tested up to PHP 8.6.
 
 Original source of the block(s) is on GitHub. ( https://github.com/Rundiz-WP/okv-oauth )
 
@@ -58,7 +58,7 @@ Yes, this is new feature since 1.3.3. However, please enter your settings in **O
 
 == Changelog ==
 = 1.7.8 =
-2026-xx-xx
+2026-11-27
 
 * Removed hook to change login header URL. There is no setting about this so it should not work by force.
 * Modernize JavaScript to not depend on jQuery.
